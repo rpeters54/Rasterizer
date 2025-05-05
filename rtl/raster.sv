@@ -39,6 +39,7 @@ module raster(
 );
 
 // Treat v as an array of vertices
+coord_3d_t v [0:`NUM_VERTICES-1];
 assign v = '{v0, v1, v2};
 
 // valid signal set once tile is read from input
@@ -86,13 +87,11 @@ always_ff @(posedge clk) begin
 
     if (!rst_n) begin
         // Reset logic
-        current = '{ default: '0 };
         d       = '{ default: '0 };
         edges   = '{ default: '0 };
         abs_pos = '{ default: '0 };
         rel_pos = '0;
         vld_0   = '0;
-        vld_1   = '0;
         
     end else if (clk_accum == 0) begin  
         /* Only run this logic for each new tile */
@@ -114,7 +113,10 @@ always_ff @(posedge clk) begin
 
         // Compute the edges using the current values
         // Note: We use the immediate value of temp_start instead of the not-yet-updated start
-        edge_compute_base(edges, temp_start, temp_d, v);
+        for (int i = 0; i < `NUM_VERTICES; i++) begin
+            edges[i] <= (temp_start.x - v[i].x) * temp_d[i].y +
+                        (temp_start.y - v[i].y) * temp_d[i].x;
+        end
 
         // Compute the z-depth value
         // Note: This is a placeholder and should be replaced with the actual z-depth calculation
@@ -126,11 +128,11 @@ end
 // Process each pixel in the tile
 always_ff @(posedge clk) begin
 
-    if (!rst_n == 0) begin
+    if (!rst_n) begin
         // Reset should freeze this logic
     end else begin
         // edge and depth check
-        if (vld_0 && $signed(edge_0) > 0 && $signed(edge_1) > 0 && $signed(edge_2) > 0 /* && z-depth check */) begin
+        if (vld_0 && $signed(edges[0]) > 0 && $signed(edges[1]) > 0 && $signed(edges[2]) > 0 /* && z-depth check */) begin
             // Update the z-buffer
             /* ... */
             // Write to the color buffer
@@ -152,7 +154,9 @@ always_ff @(posedge clk) begin
             rel_pos <= rel_pos + 1;
 
             // Update the edge values
-            edge_row_step(edges, d);
+            for (int i = 0; i < `NUM_VERTICES; i++) begin
+                edges[i] <= edges[i] - {d[i].y, 5'd0} - d[i].x;
+            end
 
             // Update the z-depth value
             // Note: This is a placeholder and should be replaced with the actual z-depth calculation
@@ -165,7 +169,9 @@ always_ff @(posedge clk) begin
             rel_pos <= rel_pos + 1;
 
             // Update the edge values
-            edge_column_step(edges, d);
+            for (int i = 0; i < `NUM_VERTICES; i++) begin
+                edges[i] <= edges[i] + d[i].y;
+            end
 
             // Update the z-depth value
             // Note: This is a placeholder and should be replaced with the actual z-depth calculation
@@ -192,41 +198,5 @@ function void deltas(
     end
 
 endfunction
-
-// Compute the edge functions from the start position
-function void edge_compute_base(
-    logic [$clog2(`TILE_WIDTH*`TILE_WIDTH)*2-1:0] edges [0:`NUM_VERTICES-1], 
-    coord_2d_t start,
-    coord_2d_t d [0:`NUM_VERTICES-1],
-    coord_3d_t v [0:`NUM_VERTICES-1]
-    );
-    for (int i = 0; i < `NUM_VERTICES; i++) begin
-        edges[i] <= (start.x - v[i].x) * d[i].y +
-                    (start.y - v[i].y) * d[i].x;
-    end
-endfunction
-
-// Update the edge functions for a step in the column direction
-function void edge_column_step(
-    logic [$clog2(`TILE_WIDTH*`TILE_WIDTH)*2-1:0] edges [0:`NUM_VERTICES-1], 
-    coord_2d_t d [0:`NUM_VERTICES-1]
-    );
-
-    for (int i = 0; i < `NUM_VERTICES; i++) begin
-        edges[i] <= edges[i] + d[i];
-    end
-endfunction
-
-// Update the edge functions for a step in the row direction
-function void edge_row_step(
-    logic [$clog2(`TILE_WIDTH*`TILE_WIDTH)*2-1:0] edges [0:`NUM_VERTICES-1], 
-    coord_2d_t d [0:`NUM_VERTICES-1]
-    );
-
-    for (int i = 0; i < `NUM_VERTICES; i++) begin
-        edges[i] <= edges[i] - {d[i].y, 5'd0} - d[i].x;
-    end
-endfunction
-
 
 endmodule
