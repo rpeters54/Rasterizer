@@ -1,0 +1,4 @@
+VCD info: dumpfile tb_fib.vcd opened for output.
+Testing Base Case...
+SUCCESS
+tb_fib.sv:43: $finish called at 45 (1s)
