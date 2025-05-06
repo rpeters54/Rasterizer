@@ -12,17 +12,14 @@
 `define TILE_ROWS      (480/`TILE_WIDTH)
 `define NUM_VERTICES   (3)
 
+`define PIPELINE_STAGES (4)
+
 // Note: values for the coord structs are in fixed point
 typedef struct packed {
     logic signed [`FX_TOTAL_BITS-1:0] x;
     logic signed [`FX_TOTAL_BITS-1:0] y;
     logic signed [`FX_TOTAL_BITS-1:0] z;
 } coord_3d_t;
-
-typedef struct packed {
-    logic signed [`FX_TOTAL_BITS-1:0] x;
-    logic signed [`FX_TOTAL_BITS-1:0] y;
-} coord_2d_t;
 
 typedef struct packed {
     logic [3:0]  color;     // 4-bit color (bits 15:12)
@@ -52,31 +49,14 @@ coord_3d_t v [0:`NUM_VERTICES-1];
 assign v = '{v0, v1, v2};
 
 // valid signal set once tile is read from input
-logic        vld_0, vld_1;
-
-// absolute position of the pixel in the tile
-coord_2d_t   abs_pos;
-
-// relative position of the pixel in the tile
-logic [`TILE_BIT_WIDTH-1:0] rel_pos;
-
-// delta values used to update the edge functions
-coord_2d_t   d [0:`NUM_VERTICES-1];
-
-// current edge values
-logic signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1];
-
-// color of the polygon
-logic [3:0]  color;
+logic  vld[0:`PIPELINE_STAGES-1];
 
 logic signed [`FX_TOTAL_BITS*2-1:0] z_buffer     [0:`TILE_AREA-1];
 logic [3:0]                         color_buffer [0:`TILE_AREA-1];
 
-logic [`FX_TOTAL_BITS*2-1:0] det, dzdx, dzdy, z_intercept, z_current;
 
-
-coord_2d_t temp_start;
-coord_2d_t temp_d [0:`NUM_VERTICES-1];
+coord_3d_t temp_start;
+coord_3d_t temp_d [0:`NUM_VERTICES-1];
 always_comb begin
     // convert from tile number to pixel coordinates
     tile_to_coord(temp_start, metadata);
@@ -90,22 +70,28 @@ always_ff @(posedge clk) begin
     clk_accum <= clk_accum + 1;
 end
 
-// load in the vertices and compute the edges
-always_ff @(posedge clk) begin 
 
+coord_3d_t   abs_pos;
+coord_3d_t   d [0:`NUM_VERTICES-1];
+
+logic        [`TILE_BIT_WIDTH-1:0]  rel_pos;
+logic signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1];
+logic [3:0]                         color;
+// Cycle 1: Calculate differences and edges (no division)
+always_ff @(posedge clk) begin 
     if (!rst_n) begin
         // Reset logic
-        d       = '{ default: '0 };
-        edges   = '{ default: '0 };
-        abs_pos = '{ default: '0 };
-        rel_pos = '0;
-        vld_0   = '0;
-        
+        vld[0]  <= '0;
+        color   <= '0;
+        d       <= '{ default: '0 };
+        edges   <= '{ default: '0 };
+        abs_pos <= '{ default: '0 };
+        rel_pos <= '0;
     end else if (clk_accum == 0) begin  
         /* Only run this logic for each new tile */
 
         // Mark validity based on the input
-        vld_0 <= vld_in;
+        vld[0] <= vld_in;
 
         // Store the color
         color <= metadata.color;
@@ -120,31 +106,64 @@ always_ff @(posedge clk) begin
         end
 
         // Compute the edges using the current values
-        // Note: We use the immediate value of temp_start instead of the not-yet-updated start
         for (int i = 0; i < `NUM_VERTICES; i++) begin
             edges[i] <= (temp_start.x - v[i].x) * temp_d[i].y +
                         (temp_start.y - v[i].y) * temp_d[i].x;
         end
-
-        // Compute planar equations
-        det <=  ((edges[1].x - edges[0].x) * (edges[2].y - edges[0].y) - 
-                 (edges[2].x - edges[0].x) * (edges[1].y - edges[0].y));
-        dzdx <= ((edges[1].z - edges[0].z) * (edges[2].y - edges[0].y) - 
-                 (edges[2].z - edges[0].z) * (edges[1].y - edges[0].y));
-        dzdy <= ((edges[1].x - edges[0].x) * (edges[2].z - edges[0].z) - 
-                 (edges[2].x - edges[0].x) * (edges[1].z - edges[0].z));
-
-        z_intercept = edges[0].z * det - dzdx * edges[0].x - dzdy * edges[0].y;
     end
 end
 
+
+logic [`FX_TOTAL_BITS*2-1:0] det, dzdx, dzdy;
+always_ff @(posedge clk) begin 
+    if (!rst_n) begin
+        vld[1]    <= '0;
+        det       <= '0;
+        dzdx      <= '0;
+        dzdy      <= '0;
+    end else if (clk_accum == 1) begin  
+        // Propagate the valid signal
+        vld[1] <= vld[0];
+
+        // Compute the determinant
+        det <= (d[0].x * d[2].y - d[2].x * d[0].y);
+        
+        // Prepare dzdx and dzdy but don't divide yet
+        dzdx <= (d[0].z * d[2].y - d[2].z * d[0].y);
+        dzdy <= (d[0].x * d[2].z - d[2].x * d[0].z);
+    end
+end
+
+logic [`FX_TOTAL_BITS*2-1:0] z_intercept;
+// Cycle 3: Perform division for dzdx, dzdy and compute z_intercept
+always_ff @(posedge clk) begin 
+    if (!rst_n) begin
+        vld[2]      <= '0;
+        z_intercept <= '0;
+    end else if (clk_accum == 2) begin  
+        // Propagate the valid signal
+        vld[2] <= vld[1];
+
+        // Perform division for dzdx and dzdy (avoid division in earlier cycles)
+        dzdx <= dzdx / det;
+        dzdy <= dzdy / det;
+
+        // Compute the z_intercept using the edges and dz values
+        z_intercept <= edges[0].z * det - dzdx * edges[0].x - dzdy * edges[0].y;
+    end
+end
+
+logic [`FX_TOTAL_BITS*2-1:0] z_current;
 // Compute the z value for the current pixel
 always_ff @(posedge clk) begin
     if (!rst_n) begin
-        // do nothing
+        vld[3]    <= '0;
+        z_current <= '0;
     end else begin
+        // Propagate the valid signal
+        vld[3] <= vld[2];
+        // Compute the z value for the current pixel
         z_current <= dzdx * abs_pos.x + dzdy * abs_pos.y + z_intercept
-        vld_1 <= vld_0;
     end
 end
 
@@ -154,7 +173,7 @@ always_ff @(posedge clk) begin
         // do nothing
     end else begin
         // edge and depth check
-        if (vld_1 && inside_polygon(edges) > 0 && depth_test(rel_pos, z_current, z_buffer)) begin
+        if (vld[3] && inside_polygon(edges) > 0 && depth_test(rel_pos, z_current, z_buffer)) begin
             z_buffer[rel_pos]     <= z_current;
             color_buffer[rel_pos] <= color;
         end 
@@ -218,16 +237,17 @@ function logic depth_test(
 endfunction
 
 function void tile_to_coord(
-    coord_2d_t out,
+    coord_3d_t out,
     polygon_t  in
     );
     out.x = (in.tile_x << 5) << `FX_FRAC_BITS;
     out.y = (in.tile_y << 5) << `FX_FRAC_BITS;
+    out.z = 0;
 endfunction
 
 // Compute the deltas between two sets of vertices
 function void deltas(
-    coord_2d_t out [0:`NUM_VERTICES-1], 
+    coord_3d_t out [0:`NUM_VERTICES-1], 
     coord_3d_t a   [0:`NUM_VERTICES-1], 
     coord_3d_t b   [0:`NUM_VERTICES-1]
     );
@@ -235,21 +255,9 @@ function void deltas(
     for (int i = 0; i < `NUM_VERTICES; i++) begin
         out[i].x = a[i].x - b[i].x;
         out[i].y = a[i].y - b[i].y;
+        out[i].z = a[i].z - b[i].z;
     end
 endfunction
 
-/*
-function [`FX_FRAC_BITS-1:0] fx_frac(
-    logic signed [`FX_TOTAL_BITS-1:0] x
-    );
-    return x[`FX_FRAC_BITS-1:0];
-endfunction
-
-function logic signed [`FX_INT_BITS-1:0] fx_int(
-    logic signed [`FX_TOTAL_BITS-1:0] x
-    );
-    return x[`FX_TOTAL_BITS-1:`FX_FRAC_BITS];
-endfunction
-*/
 
 endmodule
