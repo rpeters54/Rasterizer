@@ -22,6 +22,11 @@ typedef struct packed {
 } coord_3d_t;
 
 typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+} coord_2d_t;
+
+typedef struct packed {
     logic [3:0]  color;     // 4-bit color (bits 15:12)
     logic [2:0]  padding;   // 3-bit padding (bits 11:9)
     logic [3:0]  tile_y;  
@@ -115,6 +120,7 @@ end
 
 
 logic [`FX_TOTAL_BITS*2-1:0] det, dzdx, dzdy;
+// Cycle 2: Compute the determinant and unregularized dzdx, dzdy 
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         vld[1]    <= '0;
