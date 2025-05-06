@@ -26,7 +26,7 @@ typedef struct packed {
     logic [2:0]  padding;   // 3-bit padding (bits 11:9)
     logic [3:0]  tile_y;  
     logic [4:0]  tile_x;
-} polygon_t;
+} metadata_t;
 
 module raster(
     input             clk,
@@ -36,7 +36,7 @@ module raster(
     input  coord_3d_t v0,
     input  coord_3d_t v1,
     input  coord_3d_t v2,
-    input  polygon_t  metadata,
+    input  metadata_t metadata,
 
     output logic        rdy_out,
     output logic        vld_out,
@@ -54,7 +54,6 @@ logic  vld[0:`PIPELINE_STAGES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] z_buffer     [0:`TILE_AREA-1];
 logic [3:0]                         color_buffer [0:`TILE_AREA-1];
 
-
 coord_3d_t temp_start;
 coord_3d_t temp_d [0:`NUM_VERTICES-1];
 always_comb begin
@@ -71,22 +70,23 @@ always_ff @(posedge clk) begin
 end
 
 
-coord_3d_t   abs_pos;
-coord_3d_t   d [0:`NUM_VERTICES-1];
-
+coord_3d_t                          abs_pos;
 logic        [`TILE_BIT_WIDTH-1:0]  rel_pos;
+coord_3d_t                          d     [0:`NUM_VERTICES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1];
 logic [3:0]                         color;
 // Cycle 1: Calculate differences and edges (no division)
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         // Reset logic
-        vld[0]  <= '0;
-        color   <= '0;
-        d       <= '{ default: '0 };
-        edges   <= '{ default: '0 };
-        abs_pos <= '{ default: '0 };
-        rel_pos <= '0;
+        vld[0]       <= '0;
+        abs_pos      <= '{ default: '0 };
+        rel_pos      <= '0;
+        d            <= '{ default: '0 };
+        edges        <= '{ default: '0 };
+        color        <= '0;
+        z_buffer     <= '{ default: '0 };
+        color_buffer <= '{ default: '0 };
     end else if (clk_accum == 0) begin  
         /* Only run this logic for each new tile */
 
@@ -238,7 +238,7 @@ endfunction
 
 function void tile_to_coord(
     coord_3d_t out,
-    polygon_t  in
+    metadata_t in
     );
     out.x = (in.tile_x << 5) << `FX_FRAC_BITS;
     out.y = (in.tile_y << 5) << `FX_FRAC_BITS;
