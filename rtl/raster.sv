@@ -1,18 +1,19 @@
 
 // Fixed point macros
-`define FX_INT_BITS   (12)
-`define FX_FRAC_BITS  (4)
-`define FX_TOTAL_BITS (`FX_INT_BITS + `FX_FRAC_BITS)
+`define FX_INT_BITS     (12)
+`define FX_FRAC_BITS    (4)
+`define FX_TOTAL_BITS   (`FX_INT_BITS + `FX_FRAC_BITS)
 
 // Tile macros
-`define TILE_WIDTH     (16)
-`define TILE_AREA      (`TILE_WIDTH*`TILE_WIDTH)
-`define TILE_BIT_WIDTH ($clog2(`TILE_AREA))
-`define TILE_COLUMNS   (640/`TILE_WIDTH)
-`define TILE_ROWS      (480/`TILE_WIDTH)
-`define NUM_VERTICES   (3)
+`define TILE_WIDTH      (16)
+`define TILE_AREA       (`TILE_WIDTH*`TILE_WIDTH)
+`define TILE_BIT_WIDTH  ($clog2(`TILE_AREA))
+`define TILE_COLUMNS    (640/`TILE_WIDTH)
+`define TILE_ROWS       (480/`TILE_WIDTH)
+`define NUM_VERTICES    (3)
+`define NUM_COLORS      (8)
 
-`define PIPELINE_STAGES (4)
+`define PIPELINE_STAGES (5)
 
 // Note: values for the coord structs are in fixed point
 typedef struct packed {
@@ -45,7 +46,7 @@ module raster(
 
     output logic        rdy_out,
     output logic        vld_out,
-    output logic [3:0]  color_out,
+    output logic [`NUM_COLORS-1:0]  color_out,
     output coord_2d_t   pixel_out
 );
 
@@ -68,108 +69,97 @@ always_comb begin
     deltas(temp_d, {v[1:2], v[0]}, v);
 end
 
-// Clock divider for multi-cycle path
-logic [`TILE_BIT_WIDTH-1:0] clk_accum = '0;
-always_ff @(posedge clk) begin
-    clk_accum <= clk_accum + 1;
-end
-
 
 coord_3d_t                          abs_pos;
 logic        [`TILE_BIT_WIDTH-1:0]  rel_pos;
-coord_3d_t                          d     [0:`NUM_VERTICES-1];
-logic signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1];
+coord_3d_t                          deltas  [0:`NUM_VERTICES-1];
+logic signed [`FX_TOTAL_BITS*2-1:0] edges   [0:`NUM_VERTICES-1];
 logic [3:0]                         color;
+
+logic                               lock;
 // Cycle 1: Calculate differences and edges (no division)
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         // Reset logic
-        vld[0]       <= '0;
-        abs_pos      <= '{ default: '0 };
-        rel_pos      <= '0;
-        d            <= '{ default: '0 };
-        edges        <= '{ default: '0 };
-        color        <= '0;
-        z_buffer     <= '{ default: '0 };
-        color_buffer <= '{ default: '0 };
-    end else if (clk_accum == 0) begin  
-        /* Only run this logic for each new tile */
+        vld[0]          <= '0;
+        abs_pos         <= '{ default: '0 };
+        rel_pos         <= '0;
+        d               <= '{ default: '0 };
+        edges           <= '{ default: '0 };
+        color           <= '0;
+        z_buffer        <= '{ default: '0 };
+        color_buffer    <= '{ default: '0 };
+        lock            <= '0;
+    end else begin
+        vld[0] <= lock ? '0 : vld_in;
 
-        // Mark validity based on the input
-        vld[0] <= vld_in;
-
-        // Store the color
-        color <= metadata.color;
-        
-        // Store the start position for the next cycle
-        abs_pos <= temp_start;
-        rel_pos <= '0;
-
-        // Store the differences for the next cycle
-        for (int i = 0; i < `NUM_VERTICES; i++) begin
-            d[i] <= temp_d[i];
+        if (vld_in) begin
+            lock <= '1;
         end
+        if (vld_in & !lock) begin
+            color <= metadata.color;
+            
+            // Store the start position for the next cycle
+            abs_pos <= temp_start;
+            rel_pos <= '0;
 
-        // Compute the edges using the current values
-        for (int i = 0; i < `NUM_VERTICES; i++) begin
-            edges[i] <= (temp_start.x - v[i].x) * temp_d[i].y +
-                        (temp_start.y - v[i].y) * temp_d[i].x;
+            // Store the differences for the next cycle
+            for (int i = 0; i < `NUM_VERTICES; i++) begin
+                deltas[i] <= temp_d[i];
+            end
+
+            // Compute the edges using the current tile's top-left pixel
+            for (int i = 0; i < `NUM_VERTICES; i++) begin
+                edges[i] <= (temp_start.x - v[i].x) * temp_d[i].y +
+                            (temp_start.y - v[i].y) * temp_d[i].x;
+            end
         end
     end
 end
 
 
-logic [`FX_TOTAL_BITS*2-1:0] det, dzdx, dzdy;
-// Cycle 2: Compute the determinant and unregularized dzdx, dzdy 
+logic [`FX_TOTAL_BITS*2-1:0] tri_area_2,dzdx_undiv,dzdy_undiv;  
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
-        vld[1]    <= '0;
-        det       <= '0;
-        dzdx      <= '0;
-        dzdy      <= '0;
-    end else if (clk_accum == 1) begin  
+        vld[1]     <= '0;
+        tri_area_2 <= '0;
+        dzdx_undiv <= '0;
+        dzdy_undiv <= '0;
+    end else begin
         // Propagate the valid signal
         vld[1] <= vld[0];
 
-        // Compute the determinant
-        det <= (d[0].x * d[2].y - d[2].x * d[0].y);
-        
-        // Prepare dzdx and dzdy but don't divide yet
-        dzdx <= (d[0].z * d[2].y - d[2].z * d[0].y);
-        dzdy <= (d[0].x * d[2].z - d[2].x * d[0].z);
+        // Compute the determinant, and unnormalized dz
+        tri_area_2  <= (deltas[0].x * deltas[2].y - deltas[2].x * deltas[0].y);
+        dzdx_undiv  <= (deltas[1].y * v[0].z + deltas[2].y * v[1].z + deltas[0].y * v[2].z);
+        dzdy_undiv  <= -(deltas[0].x * v[0].z + deltas[1].x * v[1].z + deltas[2].x * v[2].z);
     end
 end
 
-logic [`FX_TOTAL_BITS*2-1:0] z_intercept;
-// Cycle 3: Perform division for dzdx, dzdy and compute z_intercept
+logic [`FX_TOTAL_BITS*2-1:0] dzdx,dzdy;
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         vld[2]      <= '0;
-        z_intercept <= '0;
-    end else if (clk_accum == 2) begin  
+    end else begin
         // Propagate the valid signal
-        vld[2] <= vld[1];
+        vld[2]  <= vld[1];
 
-        // Perform division for dzdx and dzdy (avoid division in earlier cycles)
-        dzdx <= dzdx / det;
-        dzdy <= dzdy / det;
-
-        // Compute the z_intercept using the edges and dz values
-        z_intercept <= edges[0].z * det - dzdx * edges[0].x - dzdy * edges[0].y;
+        // normalize dz
+        dzdx    <= (dzdx_undiv/tri_area_2);
+        dzdy    <= (dzdy_undiv/tri_area_2);
     end
 end
 
-logic [`FX_TOTAL_BITS*2-1:0] z_current;
-// Compute the z value for the current pixel
+logic [`FX_TOTAL_BITS*2-1:0] current_z;
 always_ff @(posedge clk) begin
     if (!rst_n) begin
-        vld[3]    <= '0;
-        z_current <= '0;
+        vld[3]  <= '0;
     end else begin
         // Propagate the valid signal
-        vld[3] <= vld[2];
-        // Compute the z value for the current pixel
-        z_current <= dzdx * abs_pos.x + dzdy * abs_pos.y + z_intercept
+        vld[3]  <= vld[2];
+
+        // calculate z-value of the top-left pixel in the tile
+        current_z <= v[0].z + (v[0].x - abs_pos.x) * dzdx + (v[0].y - abs_pos.y) * dzdy
     end
 end
 
@@ -185,12 +175,13 @@ always_ff @(posedge clk) begin
         end 
 
         // Update next position and the edge values
-        if ((abs_pos.y & `TILE_WIDTH-1) == (`TILE_WIDTH-1) 
-         && (abs_pos.x & `TILE_WIDTH-1) == (`TILE_WIDTH-1)) begin
+        if ((abs_pos.y >> `FX_FRAC_BITS) >= (`TILE_WIDTH-1) && 
+            (abs_pos.x >> `FX_FRAC_BITS) >= (`TILE_WIDTH-1)) begin
 
             // At the end of a tile, do nothing until tile is updated
 
-        end else if ((abs_pos.x & `TILE_WIDTH-1) == (`TILE_WIDTH-1)) begin
+        end 
+        else if ((abs_pos.x >> `FX_FRAC_BITS) >= (`TILE_WIDTH-1)) begin
             // Update the absolute position
             abs_pos.x <= abs_pos.x - (`TILE_WIDTH-1);
             abs_pos.y <= abs_pos.y + 1;
@@ -203,7 +194,8 @@ always_ff @(posedge clk) begin
                 edges[i] <= edges[i] - {d[i].y, 5'd0} - d[i].x;
             end
 
-        end else begin
+        end 
+        else begin
             // Update the absolute position
             abs_pos.x <= abs_pos.x + 1;
 
