@@ -13,33 +13,34 @@ module tile_processor(
 
     output logic                                rdy_in,
     output logic                                vld_out,
-    output coord_3d_t                           out_abs_pos;
-    output coord_3d_t                           out_delta_0;
-    output coord_3d_t                           out_delta_1;
-    output coord_3d_t                           out_delta_2;
-    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_0;
-    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_1;
-    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_2;
-    output logic        [3:0]                   out_color;
-    output logic        [`FX_TOTAL_BITS-1:0]    out_dzdx;
-    output logic        [`FX_TOTAL_BITS-1:0]    out_dzdy;
-    output logic        [`FX_TOTAL_BITS*2-1:0]  out_z_current;
+    output coord_3d_t                           out_abs_pos,
+    output coord_3d_t                           out_delta_0,
+    output coord_3d_t                           out_delta_1,
+    output coord_3d_t                           out_delta_2,
+    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_0,
+    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_1,
+    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_2,
+    output logic        [3:0]                   out_color,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdx,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdy,
+    output logic        [`FX_TOTAL_BITS*2-1:0]  out_z_current
 );
-
-// Treat v as an array of vertices
-coord_3d_t v [0:`NUM_VERTICES-1];
-v = '{v0, v1, v2};
 
 tile_state_t present_state, next_state;
 
+coord_3d_t v           [0:`NUM_VERTICES-1];
+coord_3d_t rotated_v   [0:`NUM_VERTICES-1];
 coord_3d_t temp_start;
 coord_3d_t temp_deltas [0:`NUM_VERTICES-1];
 
 always_comb begin
+    // put vertices in an array for clarity during the computations
+    v =         '{v0, v1, v2};
+    rotated_v = '{v1, v2, v0};
     // convert from tile number to pixel coordinates
-    tile_to_coord(temp_start, in_metadata);
+    temp_start = tile_to_coord(in_metadata);
     // compute the deltas between all vertices in clockwise order
-    compute_deltas(temp_deltas, {v[1:2], v[0]}, v);
+    compute_deltas(rotated_v, v, temp_deltas);
 end
 
 always_comb begin
@@ -113,7 +114,7 @@ always_ff @(posedge clk) begin
                 rdy_in <= vld_in ? '0 : rdy_in;
 
                 // Store the color
-                color <= in_metadata;
+                metadata <= in_metadata;
             
                 // Store the start position for the next cycle
                 abs_pos <= temp_start;
@@ -125,27 +126,22 @@ always_ff @(posedge clk) begin
 
                 // Compute the edges using the current tile's top-left pixel
                 for (int i = 0; i < `NUM_VERTICES; i++) begin
-                    edges[i] <= (temp_start.x - v[i].x) * temp_deltas[i].y +
-                                (temp_start.y - v[i].y) * temp_deltas[i].x;
+                    edges[i] <= compute_edge(temp_start, v[i], temp_deltas[i]);
                 end
             end
             DETERMINANT: begin
                 // Compute the determinant of the triangle and unscaled dzdx and dzdy
-                determinant  <= (deltas[0].x * deltas[2].y - deltas[2].x * deltas[0].y);
-                dzdx_undiv  <=  (deltas[1].y * v[0].z + deltas[2].y * v[1].z + deltas[0].y * v[2].z);
-                dzdy_undiv  <= -(deltas[0].x * v[0].z + deltas[1].x * v[1].z + deltas[2].x * v[2].z);
+                determinant <= compute_det(deltas);
+                dzdx_undiv  <= compute_dzdx_undiv(deltas, v);
+                dzdy_undiv  <= compute_dzdy_undiv(deltas, v);
             end
             SCALING: begin
-                // Compute the scaled dzdx and dzdy
-                // Scale up the dzdx and dzdy to 48_16 fixed point
-                // This results in a 24_8 fixed point result when divided by 24_8 determinant
-                // We extract the middle 16 bits of the result, to get the 12_4 fixed point result
-                dzdx    <= ({{32{dzdx_undiv[31]}}, dzdx_undiv, 8'b0} / determinant)[(`FX_TOTAL_BITS-1)+4:4];
-                dzdy    <= ({{32{dzdy_undiv[31]}}, dzdy_undiv, 8'b0} / determinant)[(`FX_TOTAL_BITS-1)+4:4];
+                dzdx <= scale_dz(dzdx_undiv, determinant);
+                dzdy <= scale_dz(dzdy_undiv, determinant);
             end
             Z_VALUE: begin
                 // Compute the z for the top left pixel
-                z_current <= {v[0].z, `FX_FRAC_BITS} + (v[0].x - abs_pos.x) * dzdx + (v[0].y - abs_pos.y) * dzdy
+                z_current <= compute_z(v[0], abs_pos, dzdx, dzdy);
             end
             PASS_ONWARD: begin
                 // if output is open, write the data to the output
@@ -164,6 +160,8 @@ always_ff @(posedge clk) begin
                 out_z_current <= z_current;
             end
             AWAIT_RESPONSE: begin
+                // once output has been read
+                // set output invalid, mark ready to read
                 if (rdy_out) begin
                     vld_out <= 0;
                     rdy_in  <= 1;
@@ -174,27 +172,133 @@ always_ff @(posedge clk) begin
 end
 
 
-function void tile_to_coord(
-    ref input coord_3d_t out,
+function coord_3d_t tile_to_coord(
     input metadata_t in
     );
-    out.x = (in.tile_x << 5) << `FX_FRAC_BITS;
-    out.y = (in.tile_y << 5) << `FX_FRAC_BITS;
+
+    coord_3d_t out;
+
+    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - 5){1'b0}}, in.tile_x, 5'b0, {`FX_FRAC_BITS{1'b0}}};
+    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS - 5){1'b0}}, in.tile_y, 5'b0, {`FX_FRAC_BITS{1'b0}}};
     out.z = 0;
+
+    return out;
 endfunction
 
 // Compute the deltas between two sets of vertices
-function void compute_deltas(
-    ref input coord_3d_t out [0:`NUM_VERTICES-1], 
-    input coord_3d_t a   [0:`NUM_VERTICES-1], 
-    input coord_3d_t b   [0:`NUM_VERTICES-1]
+function automatic void compute_deltas(
+    input  coord_3d_t a      [0:`NUM_VERTICES-1], 
+    input  coord_3d_t b      [0:`NUM_VERTICES-1],
+    output coord_3d_t deltas [0:`NUM_VERTICES-1]
     );
 
-    for (int i = 0; i < `NUM_VERTICES; i++) begin
-        out[i].x = a[i].x - b[i].x;
-        out[i].y = a[i].y - b[i].y;
-        out[i].z = a[i].z - b[i].z;
+    coord_3d_t out [0:`NUM_VERTICES-1];
+
+    int i;
+    for (i = 0; i < `NUM_VERTICES; i++) begin
+        deltas[i].x = a[i].x - b[i].x;
+        deltas[i].y = a[i].y - b[i].y;
+        deltas[i].z = a[i].z - b[i].z;
     end
+
+endfunction
+
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_edge(
+    input coord_3d_t start,
+    input coord_3d_t v_i,
+    input coord_3d_t delta_i
+);
+
+logic signed [`FX_TOTAL_BITS-1:0]   temp_x_sub, temp_y_sub;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_x_mult, temp_y_mult;
+
+temp_x_sub  = (start.x - v_i.x);
+temp_y_sub  = (start.y - v_i.y);
+temp_x_mult = temp_x_sub * delta_i.y;
+temp_y_mult = temp_y_sub * delta_i.x;
+return temp_x_mult + temp_y_mult;
+
+endfunction
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_det(
+    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_x2y0_mult;
+
+temp_x0y2_mult = deltas[0].x * deltas[2].y;
+temp_x2y0_mult = deltas[2].x * deltas[0].y;
+return temp_x0y2_mult - temp_x2y0_mult;
+
+endfunction
+
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_dzdx_undiv(
+    input coord_3d_t deltas [0:`NUM_VERTICES-1],
+    input coord_3d_t v      [0:`NUM_VERTICES-1]
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_dy1vz0_mult, temp_dy2vz1_mult, temp_dy0vz2_mult;
+
+temp_dy1vz0_mult = deltas[1].y * v[0].z;
+temp_dy2vz1_mult = deltas[2].y * v[1].z;
+temp_dy0vz2_mult = deltas[0].y * v[2].z;
+return temp_dy1vz0_mult + temp_dy2vz1_mult + temp_dy0vz2_mult;
+
+endfunction
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_dzdy_undiv(
+    input coord_3d_t deltas [0:`NUM_VERTICES-1],
+    input coord_3d_t v      [0:`NUM_VERTICES-1]
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_dx0vz0_mult, temp_dx1vz1_mult, temp_dx2vz2_mult;
+
+temp_dx0vz0_mult = deltas[0].x * v[0].z;
+temp_dx1vz1_mult = deltas[1].x * v[1].z;
+temp_dx2vz2_mult = deltas[2].x * v[2].z;
+return -(temp_dx0vz0_mult + temp_dx1vz1_mult + temp_dx2vz2_mult);
+
+endfunction
+
+
+// Compute the scaled dzdx and dzdy
+// Scale up the dzdx and dzdy to 48_16 fixed point
+// This results in a 24_8 fixed point result when divided by 24_8 determinant
+// We extract the middle 16 bits of the result, to get the 12_4 fixed point result
+function signed [`FX_TOTAL_BITS-1:0] scale_dz(
+    input signed [`FX_TOTAL_BITS*2-1:0] dz_undiv,
+    input signed [`FX_TOTAL_BITS*2-1:0] determinant
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] div_result_dz;
+
+div_result_dz = dzdx_undiv / determinant;
+
+return div_result_dz[(`FX_TOTAL_BITS-1+`FX_FRAC_BITS):`FX_FRAC_BITS];
+
+endfunction
+
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_z(
+    input coord_3d_t                  v_0,
+    input coord_3d_t                  abs_pos,
+    input signed [`FX_TOTAL_BITS-1:0] dzdx,
+    input signed [`FX_TOTAL_BITS-1:0] dzdy,
+);
+
+logic signed [`FX_TOTAL_BITS-1:0]   delta_x, delta_y;
+logic signed [`FX_TOTAL_BITS*2-1:0] x_component, y_component, z_component;
+
+delta_x = (v_0.x - abs_pos.x);
+delta_y = (v_0.y - abs_pos.y);
+x_component = delta_x * dzdx;
+y_component = delta_y * dzdy;
+z_component = {{`FX_INT_BITS{v_0.z[`FX_TOTAL_BITS-1]}}, v_0.z, {`FX_FRAC_BITS{1'b0}}};
+
+return x_component + y_component + z_component;
+
 endfunction
 
 endmodule

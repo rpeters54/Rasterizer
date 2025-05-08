@@ -9,6 +9,8 @@
 `define TILE_BIT_WIDTH  ($clog2(`TILE_AREA))
 `define TILE_COLUMNS    (640/`TILE_WIDTH)
 `define TILE_ROWS       (480/`TILE_WIDTH)
+`define TILE_COLUMNS_BITS ($clog2(`TILE_COLUMNS))
+`define TILE_ROWS_BITS    ($clog2(`TILE_ROWS))
 `define NUM_VERTICES    (3)
 `define NUM_COLORS      (8)
 
@@ -28,9 +30,8 @@ typedef struct packed {
 
 typedef struct packed {
     logic [3:0]  color;     // 4-bit color (bits 15:12)
-    logic [2:0]  padding;   // 3-bit padding (bits 11:9)
-    logic [3:0]  tile_y;  
-    logic [4:0]  tile_x;
+    logic [`TILE_ROWS_BITS-1:0]     tile_y;  
+    logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
 } metadata_t;
 
 typedef enum {
