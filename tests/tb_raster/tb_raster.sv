@@ -1,21 +1,33 @@
+`include "../../rtl/raster_defines.svh"
+
 module tb_fib;
 
 // Declare test variables
-logic clk, rst_n, vld_in, rdy_out, rdy_in, vld_out;
-logic [7:0] fib_in;
-logic [31:0] fib_out;
+logic                                   clk,
+logic                                   rst_n,
+logic                                   rdy_out,
+logic                                   vld_in,
+coord_3d_t                              v0,
+coord_3d_t                              v1,
+coord_3d_t                              v2,
+metadata_t                              in_metadata,
+
+logic                                   rdy_in,
+logic                                   vld_out,
+coord_3d_t                              out_abs_pos;
+coord_3d_t                              out_delta_0;
+coord_3d_t                              out_delta_1;
+coord_3d_t                              out_delta_2;
+logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_0;
+logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_1;
+logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_2;
+logic        [3:0]                      out_color;
+logic        [`FX_TOTAL_BITS-1:0]       out_dzdx;
+logic        [`FX_TOTAL_BITS-1:0]       out_dzdy;
+logic        [`FX_TOTAL_BITS*2-1:0]     out_z_current;
 
 // Instantiate Design 
-fib Fib (
-	.clk(clk),
-	.rst_n(rst_n),
-	.fib_in(fib_in),
-	.vld_in(vld_in),
-	.rdy_out(rdy_out),
-	.rdy_in(rdy_in),
-	.fib_out(fib_out),
-	.vld_out(vld_out)
-	);
+tile_processor tile_proc (.*);
 
 // Sample to drive clock
 localparam CLK_PERIOD = 10;
@@ -27,36 +39,42 @@ end
 // Necessary to create Waveform
 initial begin
     // Name as needed
-    $dumpfile("tb_fib.vcd");
+    $dumpfile("tb_raster.vcd");
     $dumpvars(0);
 end
 
 initial begin
-    // Test Goes Here
-    rst_n = 1; vld_in = 0; rdy_out = 0;
-    fib_in = 0; clk = 0;
+
+    clk=0;
+    rst_n=0;
+    rdy_out=0;
+    vld_in=0;
+
+    v0='{ default: '0 };
+    v1='{ default: '0 };
+    v2='{ default: '0 };
+    in_metadata='{ default: '0 };
     
-    $display("Testing Base Case...");
-    test_base();
-    $display("SUCCESS");
-    // Make sure to call finish so test exits
+    #CLK_PERIOD
+    v0.x = (1 << `FX_FRAC_BITS);
+    v0.y = (14 << `FX_FRAC_BITS);
+    v0.z = (512 << `FX_FRAC_BITS);
+
+    v1.x = (7 << `FX_FRAC_BITS);
+    v1.y = (2 << `FX_FRAC_BITS);
+    v1.z = (512 << `FX_FRAC_BITS);
+
+    v2.x = (12 << `FX_FRAC_BITS);
+    v2.y = (15 << `FX_FRAC_BITS);
+    v2.z = (512 << `FX_FRAC_BITS);
+
+    in_metadata.color = 1;
+    in_metadata.tile_y = 0;
+    in_metadata.tile_x = 0;
+
+    #CLK_PERIOD rst_n = 1;
+    wait(rdy_in == 1)
     $finish();
 end
-
-// task to ensure the device is in the reset state
-task reset();
-    rst_n = 0;
-    for (int i = 0; i < 5; i++) begin
-        @(posedge clk);	    
-    end
-    rst_n = 1;
-endtask
-
-task test_base();
-    reset();
-    assert (rdy_in == 1) else $error("rdy_in not set by default");
-    assert (fib_out == 0) else $error("fib_out not zero by default");
-    assert (vld_out == 0) else $error("vld_out not zero by default");
-endtask
 
 endmodule
