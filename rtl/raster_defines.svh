@@ -38,7 +38,8 @@ typedef enum {
     DETERMINANT,
     SCALING,
     Z_VALUE,
-    PASS_ONWARD
+    PASS_ONWARD,
+    AWAIT_RESPONSE
 } tile_state_t;
 
 typedef enum {

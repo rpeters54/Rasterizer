@@ -76,6 +76,7 @@ end
 
 // Process each pixel in the tile
 always_ff @(posedge clk) begin
+
     if (!rst_n) begin
         // Reset logic
         abs_pos      <= '{ default: '0 };
@@ -94,7 +95,11 @@ always_ff @(posedge clk) begin
         current_z    <= '0;
 
         rdy_in       <= '1;
+
+        present_state <= IDLE;
     end else begin
+        present_state <= next_state;
+
         case (present_state)
             IDLE: begin
                 // Get tile-scale data if available
@@ -198,7 +203,7 @@ end
 
 
 function logic inside_polygon(
-    logic signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1]
+    input signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1]
     );
     logic result = 1'b1;
     for (int i = 0; i < `NUM_VERTICES; i++) begin
@@ -208,9 +213,9 @@ function logic inside_polygon(
 endfunction
 
 function logic depth_test(
-    logic        [`TILE_BIT_WIDTH-1:0]  rel_pos,
-    logic signed [`FX_TOTAL_BITS*2-1:0] z_current,
-    logic signed [`FX_TOTAL_BITS*2-1:0] z_buffer  [0:`TILE_AREA-1]
+    input        [`TILE_BIT_WIDTH-1:0]  rel_pos,
+    input signed [`FX_TOTAL_BITS*2-1:0] z_current,
+    input signed [`FX_TOTAL_BITS*2-1:0] z_buffer  [0:`TILE_AREA-1]
     );
     return (z_current < z_buffer[rel_pos]);
 endfunction

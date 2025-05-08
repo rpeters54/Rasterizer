@@ -61,10 +61,13 @@ always_comb begin
             next_state = PASS_ONWARD;
         end
         PASS_ONWARD: begin
-            if (!vld_out) begin
-                next_state = INPUT;
+            next_state = AWAIT_RESPONSE;
+        end
+        AWAIT_RESPONSE: begin
+            if (!rdy_out) begin
+                next_state = AWAIT_RESPONSE;
             end else begin
-                next_state = PASS_ONWARD;
+                next_state = INPUT;
             end
         end
         default: begin
@@ -142,38 +145,38 @@ always_ff @(posedge clk) begin
             end
             Z_VALUE: begin
                 // Compute the z for the top left pixel
-                z_current <= v[0].z + (v[0].x - abs_pos.x) * dzdx + (v[0].y - abs_pos.y) * dzdy
+                z_current <= {v[0].z, `FX_FRAC_BITS} + (v[0].x - abs_pos.x) * dzdx + (v[0].y - abs_pos.y) * dzdy
             end
             PASS_ONWARD: begin
                 // if output is open, write the data to the output
-                if (!vld_out) begin
-                    vld_out <= '1;
+                vld_out <= '1;
 
-                    out_abs_pos   <= abs_pos;
-                    out_delta_0   <= deltas[0];
-                    out_delta_1   <= deltas[1];
-                    out_delta_2   <= deltas[2];
-                    out_edge_0    <= edges[0];
-                    out_edge_1    <= edges[1];
-                    out_edge_2    <= edges[2];
-                    out_color     <= metadata.color;
-                    out_dzdx      <= dzdx;
-                    out_dzdy      <= dzdy;
-                    out_z_current <= z_current;
+                out_abs_pos   <= abs_pos;
+                out_delta_0   <= deltas[0];
+                out_delta_1   <= deltas[1];
+                out_delta_2   <= deltas[2];
+                out_edge_0    <= edges[0];
+                out_edge_1    <= edges[1];
+                out_edge_2    <= edges[2];
+                out_color     <= metadata.color;
+                out_dzdx      <= dzdx;
+                out_dzdy      <= dzdy;
+                out_z_current <= z_current;
+            end
+            AWAIT_RESPONSE: begin
+                if (rdy_out) begin
+                    vld_out <= 0;
+                    rdy_in  <= 1;
                 end 
             end
         endcase
     end
 end
 
-// Deassert the valid signal when the ready signal is asserted
-always_ff @(posedge rdy_out) begin
-    vld_out <= '0;
-end
 
 function void tile_to_coord(
-    coord_3d_t out,
-    metadata_t in
+    ref input coord_3d_t out,
+    input metadata_t in
     );
     out.x = (in.tile_x << 5) << `FX_FRAC_BITS;
     out.y = (in.tile_y << 5) << `FX_FRAC_BITS;
@@ -182,9 +185,9 @@ endfunction
 
 // Compute the deltas between two sets of vertices
 function void compute_deltas(
-    coord_3d_t out [0:`NUM_VERTICES-1], 
-    coord_3d_t a   [0:`NUM_VERTICES-1], 
-    coord_3d_t b   [0:`NUM_VERTICES-1]
+    ref input coord_3d_t out [0:`NUM_VERTICES-1], 
+    input coord_3d_t a   [0:`NUM_VERTICES-1], 
+    input coord_3d_t b   [0:`NUM_VERTICES-1]
     );
 
     for (int i = 0; i < `NUM_VERTICES; i++) begin
