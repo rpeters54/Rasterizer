@@ -10,17 +10,19 @@ module axi_fifo
     input                           rst_n,
     input                           rdy_out,
     input                           vld_in,
-    input        [WIDTH-1:0]   data_in,
-    output logic [WIDTH-1:0]   data_out,
+    input        [WIDTH-1:0]        data_in,
+    output logic [WIDTH-1:0]        data_out,
     output                          rdy_in,
     output                          vld_out
 );
+
+parameter COUNT_WIDTH = ($clog2(DEPTH)-1 > 3) ? $clog2(DEPTH)-1 : 3;
 
 logic [WIDTH-1:0]      buffer [0:DEPTH-1];
 logic [PTR_WIDTH:0]  write_ptr;
 logic [PTR_WIDTH:0]  read_ptr;
 
-logic [$clog2(DEPTH)-1:0]  count;
+logic [COUNT_WIDTH:0]  count;
 
 initial begin
     write_ptr    = '0;
@@ -54,10 +56,11 @@ always_ff @(posedge clk) begin
     end else begin 
         if (vld_in && rdy_in) begin
             buffer[write_ptr[PTR_WIDTH-1:0]] <= data_in;
-            write_ptr         <= next_ptr_index(write_ptr);
+            data_out                         <= buffer[read_ptr[PTR_WIDTH-1:0]];
+            write_ptr                        <= next_ptr_index(write_ptr);
         end
         if (rdy_out) begin
-            data_out  <= buffer[read_ptr[PTR_WIDTH-1:0]];
+            data_out  <= buffer[next_ptr_index(read_ptr)[PTR_WIDTH-1:0]];
             read_ptr  <= next_ptr_index(read_ptr);
         end
         if (vld_in && rdy_in && vld_out && rdy_out) begin
@@ -75,9 +78,9 @@ function [PTR_WIDTH:0] next_ptr_index(
 );
 
 if (ptr >= (DEPTH-1)) begin
-    return '0;
+    return 0;
 end else begin
-    return ptr + '1;
+    return ptr + 1;
 end
 
 endfunction
