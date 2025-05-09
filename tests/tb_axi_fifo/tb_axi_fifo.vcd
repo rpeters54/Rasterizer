@@ -1,5 +1,5 @@
 $date
-	Fri May  9 21:12:02 2025
+	Fri May  9 22:41:00 2025
 $end
 $version
 	Icarus Verilog
@@ -96,11 +96,11 @@ $var reg 4 Y ptr [3:0] $end
 $upscope $end
 $upscope $end
 $scope task pop_and_check $end
-$scope begin $unm_blk_81 $end
+$scope begin $unm_blk_79 $end
 $upscope $end
 $upscope $end
 $scope task push_words $end
-$scope begin $unm_blk_76 $end
+$scope begin $unm_blk_74 $end
 $upscope $end
 $upscope $end
 $upscope $end

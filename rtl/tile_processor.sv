@@ -32,18 +32,30 @@ coord_3d_t v           [0:`NUM_VERTICES-1];
 coord_3d_t rotated_v   [0:`NUM_VERTICES-1];
 coord_3d_t temp_start;
 coord_3d_t temp_deltas [0:`NUM_VERTICES-1];
+coord_3d_t zero;
+assign zero.x = 0;
+assign zero.y = 0;
+assign zero.z = 0;
+
+// put vertices in an array for clarity during the computations
+assign v[0] = v0;
+assign v[1] = v1;
+assign v[2] = v2;
+
+assign rotated_v[0] = v1;
+assign rotated_v[1] = v2;
+assign rotated_v[2] = v0;
+
+// compute the deltas between all vertices in clockwise order
+assign temp_deltas[0] = compute_delta(rotated_v[0], v[0]);   
+assign temp_deltas[1] = compute_delta(rotated_v[1], v[1]);   
+assign temp_deltas[2] = compute_delta(rotated_v[2], v[2]);   
+
 
 always_comb begin
-    // put vertices in an array for clarity during the computations
-    v =         '{v0, v1, v2};
-    rotated_v = '{v1, v2, v0};
     // convert from tile number to pixel coordinates
     temp_start = tile_to_coord(in_metadata);
-    // compute the deltas between all vertices in clockwise order
-    compute_deltas(rotated_v, v, temp_deltas);
-end
 
-always_comb begin
     case (present_state)
         INPUT : begin
             if (vld_in && rdy_in) begin
@@ -88,29 +100,38 @@ logic [`FX_TOTAL_BITS*2-1:0]        z_current;
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         // Reset logic
-        abs_pos.x        <= 0;
-        abs_pos.y        <= 0;
-        abs_pos.z        <= 0;
+        abs_pos.x       <= 0;
+        abs_pos.y       <= 0;
+        abs_pos.z       <= 0;
         for (int i = 0; i < `NUM_VERTICES; i++) begin
-            deltas[i].x  <= 0;
-            deltas[i].y  <= 0;
-            deltas[i].z  <= 0;
-            edges[i]     <= 0;
+            deltas[i]   <= zero;
+            edges[i]    <= 0;
         end
-        metadata.color   <= 0;
-        metadata.tile_x  <= 0;
-        metadata.tile_y  <= 0;
-
-        coeff_A  <= '0;
-        coeff_B   <= '0;
-        coeff_C   <= '0;
-
-        dzdx         <= '0;
-        dzdy         <= '0;
-
-        z_current    <= '0;
+        metadata.color  <= 0;
+        metadata.tile_x <= 0;
+        metadata.tile_y <= 0;
+        coeff_A         <= '0;
+        coeff_B         <= '0;
+        coeff_C         <= '0;
+        dzdx            <= '0;
+        dzdy            <= '0;
+        z_current       <= '0;
 
         rdy_in       <= '1;
+        vld_out <= 0;
+        out_abs_pos <= 0;
+        out_delta_0 <= zero;
+        out_delta_1 <= zero;
+        out_delta_2 <= zero;
+        out_edge_0 <= 0;
+        out_edge_1 <= 1;
+        out_edge_2 <= 2;
+        out_metadata.color   <= 0;
+        out_metadata.tile_x  <= 0;
+        out_metadata.tile_y  <= 0;
+        out_dzdx <= 0;
+        out_dzdy <= 0;
+        out_z_current <= 0;
 
         present_state <= INPUT;
     end else begin
@@ -139,9 +160,9 @@ always_ff @(posedge clk) begin
             end
             DETERMINANT: begin
                 // Compute the planar coefficients of the triangle A, B, C
-                coeff_A <= compute_plane_coeff_a(deltas);
-                coeff_B <= compute_plane_coeff_b(deltas);
-                coeff_C <= compute_plane_coeff_c(deltas);
+                coeff_A <= compute_plane_coeff_a(deltas[0], deltas[2]);
+                coeff_B <= compute_plane_coeff_b(deltas[0], deltas[2]);
+                coeff_C <= compute_plane_coeff_c(deltas[0], deltas[2]);
             end
             SCALING: begin
                 // Scale the planar coefficients to calculate dz/dx and dy/dx
@@ -196,20 +217,18 @@ function coord_3d_t tile_to_coord(
 endfunction
 
 // Compute the deltas between two sets of vertices
-function automatic void compute_deltas(
-    input  coord_3d_t a      [0:`NUM_VERTICES-1], 
-    input  coord_3d_t b      [0:`NUM_VERTICES-1],
-    output coord_3d_t deltas [0:`NUM_VERTICES-1]
+function coord_3d_t compute_delta(
+    input  coord_3d_t a,
+    input  coord_3d_t b
     );
 
-    coord_3d_t out [0:`NUM_VERTICES-1];
+    coord_3d_t out;
 
-    int i;
-    for (i = 0; i < `NUM_VERTICES; i++) begin
-        deltas[i].x = a[i].x - b[i].x;
-        deltas[i].y = a[i].y - b[i].y;
-        deltas[i].z = a[i].z - b[i].z;
-    end
+    out.x = a.x - b.x;
+    out.y = a.y - b.y;
+    out.z = a.z - b.z;
+
+    return out;
 
 endfunction
 
@@ -233,13 +252,14 @@ endfunction
 
 
 function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_a(
-    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+    input coord_3d_t delta_0,
+    input coord_3d_t delta_2
 );
 
 logic signed [`FX_TOTAL_BITS*2-1:0] temp_y0z2_mult, temp_z0y2_mult;
 
-temp_y0z2_mult = deltas[0].y * deltas[2].z;
-temp_z0y2_mult = deltas[0].z * deltas[2].y;
+temp_y0z2_mult = delta_0.y * delta_2.z;
+temp_z0y2_mult = delta_0.z * delta_2.y;
 // return temp_y0z2_mult - temp_z0y2_mult;
 
 // negate to account for V02 = -delta[2]
@@ -248,13 +268,14 @@ return temp_z0y2_mult - temp_y0z2_mult;
 endfunction
 
 function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_b(
-    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+    input coord_3d_t delta_0,
+    input coord_3d_t delta_2
 );
 
 logic signed [`FX_TOTAL_BITS*2-1:0] temp_z0x2_mult, temp_x0z2_mult;
 
-temp_z0x2_mult = deltas[0].z * deltas[2].x;
-temp_x0z2_mult = deltas[0].x * deltas[2].z;
+temp_z0x2_mult = delta_0.z * delta_2.x;
+temp_x0z2_mult = delta_0.x * delta_2.z;
 // return temp_z0x2_mult - temp_x0z2_mult;
 
 // negate to account for V02 = -delta[2]
@@ -264,13 +285,14 @@ endfunction
 
 
 function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_c(
-    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+    input coord_3d_t delta_0,
+    input coord_3d_t delta_2
 );
 
 logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_y0x2_mult;
 
-temp_x0y2_mult = deltas[0].x * deltas[2].y;
-temp_y0x2_mult = deltas[0].y * deltas[2].x;
+temp_x0y2_mult = delta_0.x * delta_2.y;
+temp_y0x2_mult = delta_0.y * delta_2.x;
 // return temp_x0y2_mult - temp_y0x2_mult;
 
 // negate to account for V02 = -delta[2]

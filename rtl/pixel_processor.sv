@@ -45,7 +45,10 @@ logic        [`FX_TOTAL_BITS*2-1:0] z_current;
 coord_2d_t out_coord;
 logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] current_tile_coord;
 logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] new_tile_coord;
-coord_3d_t temp_delta;
+coord_3d_t zero;
+assign zero.x = 0;
+assign zero.y = 0;
+assign zero.z = 0;
 
 assign out_coord.x = flush_abs_pos.x;
 assign out_coord.y = flush_abs_pos.y;
@@ -53,10 +56,6 @@ assign current_tile_coord = {metadata.tile_y, metadata.tile_x};
 assign new_tile_coord = {in_metadata.tile_y, in_metadata.tile_x};
 
 always_comb begin
-
-    temp_delta.x = 0;
-    temp_delta.y = 0;
-    temp_delta.z = 0;
 
     case (present_state)
         IDLE: begin
@@ -105,7 +104,7 @@ always_ff @(posedge clk) begin
         flush_rel_pos    <= '0;
 
         for (int i = 0; i < `NUM_VERTICES; i++) begin
-            deltas[i] <= temp_delta;
+            deltas[i] <= zero;
             edges[i]  <= '0;
         end
         metadata.color   <= '0;

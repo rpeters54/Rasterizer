@@ -52,10 +52,10 @@ tile_processor tile_proc (
 );
 
 // Sample to drive clock
-localparam CLK_PERIOD = 10;
-always begin
-    #(CLK_PERIOD/2) 
-    clk<=~clk;
+localparam PERIOD = 10;
+initial begin
+clk = 0;
+forever #(PERIOD/2) clk = ~clk;
 end
 
 // Necessary to create Waveform
@@ -71,10 +71,18 @@ end
     rst_n       = 0;
     rdy_out     = 0;
     vld_in      = 0;
-    v0          = '{default:'0};
-    v1          = '{default:'0};
-    v2          = '{default:'0};
-    in_metadata = '{default:'0};
+    v0.x        = 0;
+    v0.y        = 0;
+    v0.z        = 0;
+    v1.x        = 0;
+    v1.y        = 0;
+    v1.z        = 0;
+    v2.x        = 0;
+    v2.y        = 0;
+    v2.z        = 0;
+    in_metadata.color   = 0;
+    in_metadata.tile_x  = 0;
+    in_metadata.tile_y  = 0;
 
     // Release reset after a few cycles
     repeat (2) @(posedge clk);
@@ -125,8 +133,12 @@ task automatic simulate_expected_output(
     input coord_3d_t gv2,
     input metadata_t gmeta,
     output coord_3d_t exp_abs_pos,
-    output coord_3d_t exp_deltas [0:2],
-    output logic signed [`FX_TOTAL_BITS*2-1:0] exp_edges [0:2],
+    output coord_3d_t exp_delta_0,
+    output coord_3d_t exp_delta_1,
+    output coord_3d_t exp_delta_2,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] exp_edge_0,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] exp_edge_1,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] exp_edge_2,
     output metadata_t exp_metadata,
     output logic signed [`FX_TOTAL_BITS-1:0] exp_dzdx,
     output logic signed [`FX_TOTAL_BITS-1:0] exp_dzdy,
@@ -138,11 +150,15 @@ task automatic simulate_expected_output(
     // Intermediate variables for calculations
     coord_3d_t v[0:2];
     coord_3d_t rotated_v[0:2];
+
+    coord_3d_t temp_delta, temp_rv, temp_v, temp_d0, temp_d2;
     
     
     // Variables to detect overflow
     logic overflow_detected;
     logic signed [`FX_TOTAL_BITS*2:0] overflow_check; // Extra bit for overflow detection
+    logic signed [`FX_TOTAL_BITS*2-1:0] exp_edges [0:2];
+    coord_3d_t exp_deltas [0:2];
     
     // Set up vertex arrays for easier calculations
     v =         '{gv0, gv1, gv2};
@@ -155,36 +171,54 @@ task automatic simulate_expected_output(
     
     // Step 2: Compute deltas between vertices (in clockwise order)
     for (int i = 0; i < `NUM_VERTICES; i++) begin
-        exp_deltas[i].x = rotated_v[i].x - v[i].x;
-        exp_deltas[i].y = rotated_v[i].y - v[i].y;
-        exp_deltas[i].z = rotated_v[i].z - v[i].z;
+        temp_delta = exp_deltas[i];
+        temp_rv = rotated_v[i];
+        temp_v = v[i];
+        temp_delta.x = temp_rv.x - temp_v.x;
+        temp_delta.y = temp_rv.y - temp_v.y;
+        temp_delta.z = temp_rv.z - temp_v.z;
+
+        exp_deltas[i] = temp_delta;
     end
-    
+
+    exp_delta_0 = exp_deltas[0];
+    exp_delta_1 = exp_deltas[1];
+    exp_delta_2 = exp_deltas[2];
+
     // Step 3: Compute edge values
     for (int i = 0; i < `NUM_VERTICES; i++) begin
         logic signed [`FX_TOTAL_BITS-1:0] temp_x_sub, temp_y_sub;
         logic signed [`FX_TOTAL_BITS*2-1:0] temp_x_mult, temp_y_mult;
         
-        temp_x_sub = (exp_abs_pos.x - v[i].x);
-        temp_y_sub = (exp_abs_pos.y - v[i].y); 
+        temp_delta = exp_deltas[i];
+        temp_v = v[i];
+
+        temp_x_sub = (exp_abs_pos.x - temp_v.x);
+        temp_y_sub = (exp_abs_pos.y - temp_v.y); 
         
         // Compute multiplication
-        temp_x_mult = temp_x_sub * exp_deltas[i].y;
-        temp_y_mult = temp_y_sub * exp_deltas[i].x;
+        temp_x_mult = temp_x_sub * temp_delta.y;
+        temp_y_mult = temp_y_sub * temp_delta.x;
     
         exp_edges[i] = temp_x_mult - temp_y_mult;
     end
     
+    exp_edge_0 = exp_edges[0];
+    exp_edge_1 = exp_edges[1];
+    exp_edge_2 = exp_edges[2];
+
     // Step 4: Pass metadata
     exp_metadata = gmeta;
     
+    temp_d2 = exp_deltas[2];
+    temp_d0 = exp_deltas[0];
     // Step 5: Compute plane coefficients (A, B, C)
     // Coefficient A = y0*z2 - z0*y2
     begin
         logic signed [`FX_TOTAL_BITS*2-1:0] temp_y0z2_mult, temp_z0y2_mult;
         
-        temp_y0z2_mult = exp_deltas[0].y * exp_deltas[2].z;
-        temp_z0y2_mult = exp_deltas[0].z * exp_deltas[2].y;
+        temp_y0z2_mult = temp_d0.y * temp_d2.z;
+        temp_z0y2_mult = temp_d0.z * temp_d2.y;
         exp_coeff_A = temp_y0z2_mult - temp_z0y2_mult;
     end
     
@@ -192,8 +226,8 @@ task automatic simulate_expected_output(
     begin
         logic signed [`FX_TOTAL_BITS*2-1:0] temp_z0x2_mult, temp_x0z2_mult;
         
-        temp_z0x2_mult = exp_deltas[0].z * exp_deltas[2].x;
-        temp_x0z2_mult = exp_deltas[0].x * exp_deltas[2].z;
+        temp_z0x2_mult = temp_d0.z * temp_d2.x;
+        temp_x0z2_mult = temp_d0.x * temp_d2.z;
         exp_coeff_B = temp_z0x2_mult - temp_x0z2_mult;
     end
     
@@ -201,8 +235,8 @@ task automatic simulate_expected_output(
     begin
         logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_y0x2_mult;
         
-        temp_x0y2_mult = exp_deltas[0].x * exp_deltas[2].y;
-        temp_y0x2_mult = exp_deltas[0].y * exp_deltas[2].x;
+        temp_x0y2_mult = temp_d0.x * temp_d2.y;
+        temp_y0x2_mult = temp_d0.y * temp_d2.x;
         exp_coeff_C = temp_x0y2_mult - temp_y0x2_mult;
     end
     
@@ -228,24 +262,20 @@ task automatic simulate_expected_output(
     begin
         logic signed [`FX_TOTAL_BITS-1:0] delta_x, delta_y;
         logic signed [`FX_TOTAL_BITS*2-1:0] x_component, y_component, z_component;
+
+        temp_v = v[0];
         
-        delta_x = (v[0].x - exp_abs_pos.x);
-        delta_y = (v[0].y - exp_abs_pos.y);
+        delta_x = (temp_v.x - exp_abs_pos.x);
+        delta_y = (temp_v.y - exp_abs_pos.y);
 
         x_component = delta_x * exp_dzdx;
         y_component = delta_y * exp_dzdy;
         
         // Z component with sign extension
-        z_component = {{`FX_INT_BITS{v[0].z[`FX_TOTAL_BITS-1]}}, v[0].z, {`FX_FRAC_BITS{1'b0}}};
+        z_component = {{`FX_INT_BITS{temp_v.z[`FX_TOTAL_BITS-1]}}, temp_v.z, {`FX_FRAC_BITS{1'b0}}};
         exp_z_current = z_component - x_component - y_component;
     end
     
-    // Special case check for flat triangles
-    if (v[0].z == v[1].z && v[1].z == v[2].z) begin
-        if (exp_dzdx != 0 || exp_dzdy != 0) begin
-            $warning("For flat triangle, expected dzdx and dzdy to be 0, but got dzdx=%0d, dzdy=%0d", exp_dzdx, exp_dzdy);
-        end
-    end
 endtask
 
 
@@ -255,8 +285,9 @@ task automatic run_triangle_test(
     input coord_3d_t tv0,
     input coord_3d_t tv1,
     input coord_3d_t tv2,
-    input metadata_t tmeta,
+    input metadata_t tmeta
 );
+    coord_3d_t temp_delta;
     coord_3d_t exp_abs_pos;
     coord_3d_t exp_deltas [0:2];
     logic signed [`FX_TOTAL_BITS*2-1:0] exp_edges [0:2];
@@ -269,7 +300,8 @@ task automatic run_triangle_test(
 
     // Compute expected outputs
     simulate_expected_output(tv0, tv1, tv2, tmeta,
-                 exp_abs_pos, exp_deltas, exp_edges,
+                 exp_abs_pos, exp_deltas[0], exp_deltas[1], exp_deltas[2],
+                 exp_edges[0], exp_edges[1], exp_edges[2],
                  exp_metadata, exp_dzdx, exp_dzdy, exp_z_current,
                  exp_coeff_A, exp_coeff_B, exp_coeff_C);
 
@@ -284,6 +316,7 @@ task automatic run_triangle_test(
     in_metadata = tmeta;
 
     // Start transaction
+    @(negedge clk);
     vld_in = 1;
     @(negedge clk);
     vld_in = 0;
@@ -300,7 +333,8 @@ task automatic run_triangle_test(
     $display("coeff_C: %0d", exp_coeff_C >>> 8);
 
     for (int i = 0; i < 3; i++) begin
-        $display("delta_%0d: x= %0d, y=%0d, z=%0d", i, exp_deltas[i].x >>> 4, exp_deltas[i].y >>> 4, exp_deltas[i].z >>> 4);
+        temp_delta = exp_deltas[i];
+        $display("delta_%0d: x= %0d, y=%0d, z=%0d", i, temp_delta.x >>> 4, temp_delta.y >>> 4, temp_delta.z >>> 4);
     end
     for (int i = 0; i < 3; i++) begin
         $display("edge_%0d: %0d", i, exp_edges[i] >>> 8);
@@ -320,32 +354,36 @@ task automatic run_triangle_test(
 
     // Assertions 
     // Assertions for all outputs
+
+    temp_delta = exp_deltas[0];
     assert (out_abs_pos == exp_abs_pos)
         else $error("abs_pos mismatch: %p vs %p", out_abs_pos, exp_abs_pos);
-    assert (out_delta_0.x == exp_deltas[0].x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 0, out_delta_0.x, exp_deltas[0].x);
-    assert (out_delta_0.y == exp_deltas[0].y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 0, out_delta_0.y, exp_deltas[0].y);
-    assert (out_delta_0.z == exp_deltas[0].z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 0, out_delta_0.z, exp_deltas[0].z);
+    assert (out_delta_0.x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 0, out_delta_0.x, temp_delta.x);
+    assert (out_delta_0.y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 0, out_delta_0.y, temp_delta.y);
+    assert (out_delta_0.z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 0, out_delta_0.z, temp_delta.z);
     assert (out_edge_0 == exp_edges[0])
-        else $error("edge_%0d mismatch: %0d vs %0d", 0, out_edge_0, exp_edges[0]);
+        else $error("edge_%0d mismatch: %0d vs %0d", 0, out_edge_0, temp_delta);
 
-    assert (out_delta_1.x == exp_deltas[1].x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 1, out_delta_1.x, exp_deltas[1].x);
-    assert (out_delta_1.y == exp_deltas[1].y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 1, out_delta_1.y, exp_deltas[1].y);
-    assert (out_delta_1.z == exp_deltas[1].z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 1, out_delta_1.z, exp_deltas[1].z);
+    temp_delta = exp_deltas[1];
+    assert (out_delta_1.x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 1, out_delta_1.x, temp_delta.x);
+    assert (out_delta_1.y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 1, out_delta_1.y, temp_delta.y);
+    assert (out_delta_1.z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 1, out_delta_1.z, temp_delta.z);
     assert (out_edge_1 == exp_edges[1])
         else $error("edge_%0d mismatch: %0d vs %0d", 1, out_edge_1, exp_edges[1]);
 
-    assert (out_delta_2.x == exp_deltas[2].x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 2, out_delta_2.x, exp_deltas[2].x);
-    assert (out_delta_2.y == exp_deltas[2].y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 2, out_delta_2.y, exp_deltas[2].y);
-    assert (out_delta_2.z == exp_deltas[2].z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 2, out_delta_2.z, exp_deltas[2].z);
+    temp_delta = exp_deltas[2];
+    assert (out_delta_2.x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 2, out_delta_2.x, temp_delta.x);
+    assert (out_delta_2.y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 2, out_delta_2.y, temp_delta.y);
+    assert (out_delta_2.z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 2, out_delta_2.z, temp_delta.z);
     assert (out_edge_2 == exp_edges[2])
         else $error("edge_%0d mismatch: %0d vs %0d", 2, out_edge_2, exp_edges[2]);        
 
@@ -373,7 +411,12 @@ function coord_3d_t make_coord(
     input signed [`FX_TOTAL_BITS-1:0] z_in
 );
 
-return '{x:(x_in<<`FX_FRAC_BITS), y:(y_in<<`FX_FRAC_BITS), z:(z_in<<`FX_FRAC_BITS)};
+coord_3d_t point;
+point.x = (x_in<<`FX_FRAC_BITS);
+point.y = (y_in<<`FX_FRAC_BITS);
+point.z = (z_in<<`FX_FRAC_BITS);
+
+return point;
 
 endfunction
 
@@ -385,16 +428,12 @@ function metadata_t make_meta(
     input signed [`TILE_ROWS_BITS-1:0]    tile_y_in
 );
 
-return '{color:colors_in, tile_x:tile_x_in, tile_y:tile_y_in};
+metadata_t meta;
+meta.color  = colors_in;
+meta.tile_x = tile_x_in;
+meta.tile_y = tile_y_in;
 
-endfunction
-
-// sign extend a 16-bit fixed-point number to 32 bits
-function [`FX_TOTAL_BITS*2-1:0] sext_f16_f32(
-    input [`FX_TOTAL_BITS-1:0] in,
-);
-
-return {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
+return meta;
 
 endfunction
 

@@ -1,5 +1,5 @@
 $date
-	Fri May  9 21:12:02 2025
+	Fri May  9 22:41:00 2025
 $end
 $version
 	Icarus Verilog
@@ -44,20 +44,20 @@ $var wire 32 ? in_z_current [31:0] $end
 $var wire 1 2 rdy_out $end
 $var wire 1 3 rst_n $end
 $var wire 1 4 vld_in $end
-$var wire 32 @ out_coord [31:0] $end
-$var wire 11 A new_tile_coord [10:0] $end
-$var wire 11 B current_tile_coord [10:0] $end
-$var reg 48 C abs_pos [47:0] $end
-$var reg 8 D color_out [7:0] $end
-$var reg 16 E dzdx [15:0] $end
-$var reg 16 F dzdy [15:0] $end
-$var reg 48 G flush_abs_pos [47:0] $end
-$var reg 8 H flush_rel_pos [7:0] $end
-$var reg 19 I metadata [18:0] $end
-$var reg 32 J pixel_out [31:0] $end
+$var wire 48 @ zero [47:0] $end
+$var wire 32 A out_coord [31:0] $end
+$var wire 11 B new_tile_coord [10:0] $end
+$var wire 11 C current_tile_coord [10:0] $end
+$var reg 48 D abs_pos [47:0] $end
+$var reg 8 E color_out [7:0] $end
+$var reg 16 F dzdx [15:0] $end
+$var reg 16 G dzdy [15:0] $end
+$var reg 48 H flush_abs_pos [47:0] $end
+$var reg 8 I flush_rel_pos [7:0] $end
+$var reg 19 J metadata [18:0] $end
+$var reg 32 K pixel_out [31:0] $end
 $var reg 1 " rdy_in $end
-$var reg 8 K rel_pos [7:0] $end
-$var reg 48 L temp_delta [47:0] $end
+$var reg 8 L rel_pos [7:0] $end
 $var reg 1 ! vld_out $end
 $var reg 32 M z_current [31:0] $end
 $var integer 32 N next_state [31:0] $end
@@ -108,7 +108,7 @@ bx P
 b0 O
 b0 N
 bx M
-b0 L
+bx L
 bx K
 bx J
 bx I
@@ -120,7 +120,7 @@ bx D
 bx C
 bx B
 bx A
-bx @
+b0 @
 bx ?
 bx >
 bx =
@@ -153,17 +153,17 @@ x"
 x!
 $end
 #5
-b0 B
-b0 @
+b0 C
+b0 A
 1"
 b0 M
-b0 F
-b0 E
-b0 I
-b0 H
-b0 K
 b0 G
-b0 C
+b0 F
+b0 J
+b0 I
+b0 L
+b0 H
+b0 D
 b100000000 W
 b11 V
 1&

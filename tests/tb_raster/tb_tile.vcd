@@ -1,0 +1,720 @@
+$date
+	Fri May  9 22:41:00 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_tile $end
+$var wire 1 ! vld_out $end
+$var wire 1 " rdy_in $end
+$var wire 32 # out_z_current [31:0] $end
+$var wire 19 $ out_metadata [18:0] $end
+$var wire 32 % out_edge_2 [31:0] $end
+$var wire 32 & out_edge_1 [31:0] $end
+$var wire 32 ' out_edge_0 [31:0] $end
+$var wire 16 ( out_dzdy [15:0] $end
+$var wire 16 ) out_dzdx [15:0] $end
+$var wire 48 * out_delta_2 [47:0] $end
+$var wire 48 + out_delta_1 [47:0] $end
+$var wire 48 , out_delta_0 [47:0] $end
+$var wire 48 - out_abs_pos [47:0] $end
+$var parameter 32 . PERIOD $end
+$var reg 1 / clk $end
+$var reg 19 0 in_metadata [18:0] $end
+$var reg 1 1 rdy_out $end
+$var reg 1 2 rst_n $end
+$var reg 48 3 v0 [47:0] $end
+$var reg 48 4 v1 [47:0] $end
+$var reg 48 5 v2 [47:0] $end
+$var reg 1 6 vld_in $end
+$scope function make_coord $end
+$var reg 48 7 point [47:0] $end
+$var reg 16 8 x_in [15:0] $end
+$var reg 16 9 y_in [15:0] $end
+$var reg 16 : z_in [15:0] $end
+$upscope $end
+$scope function make_meta $end
+$var reg 8 ; colors_in [7:0] $end
+$var reg 19 < meta [18:0] $end
+$var reg 6 = tile_x_in [5:0] $end
+$var reg 5 > tile_y_in [4:0] $end
+$upscope $end
+$scope module tile_proc $end
+$var wire 1 / clk $end
+$var wire 19 ? in_metadata [18:0] $end
+$var wire 1 1 rdy_out $end
+$var wire 1 2 rst_n $end
+$var wire 48 @ v0 [47:0] $end
+$var wire 48 A v1 [47:0] $end
+$var wire 48 B v2 [47:0] $end
+$var wire 1 6 vld_in $end
+$var wire 48 C zero [47:0] $end
+$var reg 48 D abs_pos [47:0] $end
+$var reg 32 E coeff_A [31:0] $end
+$var reg 32 F coeff_B [31:0] $end
+$var reg 32 G coeff_C [31:0] $end
+$var reg 16 H dzdx [15:0] $end
+$var reg 16 I dzdy [15:0] $end
+$var reg 19 J metadata [18:0] $end
+$var reg 48 K out_abs_pos [47:0] $end
+$var reg 48 L out_delta_0 [47:0] $end
+$var reg 48 M out_delta_1 [47:0] $end
+$var reg 48 N out_delta_2 [47:0] $end
+$var reg 16 O out_dzdx [15:0] $end
+$var reg 16 P out_dzdy [15:0] $end
+$var reg 32 Q out_edge_0 [31:0] $end
+$var reg 32 R out_edge_1 [31:0] $end
+$var reg 32 S out_edge_2 [31:0] $end
+$var reg 19 T out_metadata [18:0] $end
+$var reg 32 U out_z_current [31:0] $end
+$var reg 1 " rdy_in $end
+$var reg 48 V temp_start [47:0] $end
+$var reg 1 ! vld_out $end
+$var reg 32 W z_current [31:0] $end
+$var integer 32 X next_state [31:0] $end
+$var integer 32 Y present_state [31:0] $end
+$scope function compute_delta $end
+$var reg 48 Z a [47:0] $end
+$var reg 48 [ b [47:0] $end
+$var reg 48 \ out [47:0] $end
+$upscope $end
+$scope function compute_edge $end
+$var reg 48 ] delta_i [47:0] $end
+$var reg 48 ^ start [47:0] $end
+$var reg 32 _ temp_x_mult [31:0] $end
+$var reg 16 ` temp_x_sub [15:0] $end
+$var reg 32 a temp_y_mult [31:0] $end
+$var reg 16 b temp_y_sub [15:0] $end
+$var reg 48 c v_i [47:0] $end
+$upscope $end
+$scope function compute_plane_coeff_a $end
+$var reg 48 d delta_0 [47:0] $end
+$var reg 48 e delta_2 [47:0] $end
+$var reg 32 f temp_y0z2_mult [31:0] $end
+$var reg 32 g temp_z0y2_mult [31:0] $end
+$upscope $end
+$scope function compute_plane_coeff_b $end
+$var reg 48 h delta_0 [47:0] $end
+$var reg 48 i delta_2 [47:0] $end
+$var reg 32 j temp_x0z2_mult [31:0] $end
+$var reg 32 k temp_z0x2_mult [31:0] $end
+$upscope $end
+$scope function compute_plane_coeff_c $end
+$var reg 48 l delta_0 [47:0] $end
+$var reg 48 m delta_2 [47:0] $end
+$var reg 32 n temp_x0y2_mult [31:0] $end
+$var reg 32 o temp_y0x2_mult [31:0] $end
+$upscope $end
+$scope function compute_z $end
+$var reg 48 p abs_pos [47:0] $end
+$var reg 16 q delta_x [15:0] $end
+$var reg 16 r delta_y [15:0] $end
+$var reg 16 s dzdx [15:0] $end
+$var reg 16 t dzdy [15:0] $end
+$var reg 48 u v_0 [47:0] $end
+$var reg 32 v x_component [31:0] $end
+$var reg 32 w y_component [31:0] $end
+$var reg 32 x z_component [31:0] $end
+$upscope $end
+$scope function scale_dz $end
+$var reg 32 y c [31:0] $end
+$var reg 32 z div_result_dz [31:0] $end
+$var reg 32 { dz_undiv [31:0] $end
+$upscope $end
+$scope function tile_to_coord $end
+$var reg 19 | in [18:0] $end
+$var reg 48 } out [47:0] $end
+$upscope $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 ~ i [31:0] $end
+$upscope $end
+$scope begin $ivl_for_loop1 $end
+$var integer 32 !" i [31:0] $end
+$upscope $end
+$scope begin $ivl_for_loop2 $end
+$var integer 32 "" i [31:0] $end
+$upscope $end
+$upscope $end
+$scope task check_sub_overflow $end
+$upscope $end
+$scope task run_triangle_test $end
+$scope begin $ivl_for_loop10 $end
+$upscope $end
+$scope begin $ivl_for_loop9 $end
+$upscope $end
+$upscope $end
+$scope task simulate_expected_output $end
+$scope begin $ivl_for_loop7 $end
+$upscope $end
+$scope begin $ivl_for_loop8 $end
+$scope begin $unm_blk_75 $end
+$upscope $end
+$upscope $end
+$scope begin $unm_blk_76 $end
+$upscope $end
+$scope begin $unm_blk_77 $end
+$upscope $end
+$scope begin $unm_blk_78 $end
+$upscope $end
+$scope begin $unm_blk_80 $end
+$upscope $end
+$scope begin $unm_blk_81 $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 .
+$end
+#0
+$dumpvars
+b0 ""
+b0 !"
+b0 ~
+b0 }
+b0 |
+bx {
+bx z
+bx y
+bx x
+bx w
+bx v
+bx u
+bx t
+bx s
+bx r
+bx q
+bx p
+bx o
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+bx f
+bx e
+bx d
+bx c
+bx b
+bx a
+bx `
+bx _
+bx ^
+bx ]
+b0 \
+b0 [
+b0 Z
+b0 Y
+b0 X
+bx W
+b0 V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+b0 C
+b0 B
+b0 A
+b0 @
+b0 ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+06
+b0 5
+b0 4
+b0 3
+02
+01
+b0 0
+0/
+bx -
+bx ,
+bx +
+bx *
+bx )
+bx (
+bx '
+bx &
+bx %
+bx $
+bx #
+x"
+x!
+$end
+#5
+b0 #
+b0 U
+b0 (
+b0 P
+b0 )
+b0 O
+b0 $
+b0 T
+b10 %
+b10 S
+b1 &
+b1 R
+b0 '
+b0 Q
+b0 *
+b0 N
+b0 +
+b0 M
+b0 ,
+b0 L
+b0 -
+b0 K
+0!
+1"
+b0 W
+b0 I
+b0 H
+b0 G
+b0 F
+b0 E
+b0 J
+b0 D
+b11 ~
+1/
+#10
+0/
+#15
+b100000000000 |
+b101000000000000110100000000000000000000 \
+b111000000000000001000000010000000000000 [
+b1100000000000000111100000010000000000000 Z
+b11 ~
+b100000000000 0
+b100000000000 ?
+b1100000000000000111100000010000000000000 5
+b1100000000000000111100000010000000000000 B
+b111000000000000001000000010000000000000 4
+b111000000000000001000000010000000000000 A
+b1000000000000111000000010000000000000 3
+b1000000000000111000000010000000000000 @
+b100000000000 <
+b1 ;
+b0 =
+b0 >
+b1100000000000000111100000010000000000000 7
+b1100 8
+b1111 9
+b1000000000 :
+12
+1/
+#20
+b1 X
+16
+0/
+#25
+b10 X
+b100000000000 J
+0"
+b1 Y
+b11 ""
+b1010010100000000 a
+b110000000000 _
+b1111111100010000 b
+b1111111101000000 `
+b0 ^
+b1100000000000000111100000010000000000000 c
+b111111110101000011111111111100000000000000000000 ]
+b11 !"
+1/
+#30
+06
+0/
+#35
+b11 X
+b1000101000000000 G
+b10 Y
+b1000010000000000 o
+b11111111111111111111101000000000 n
+b110000011111111010000000000000000000000 l
+b111111110101000011111111111100000000000000000000 m
+b0 j
+b0 k
+b110000011111111010000000000000000000000 h
+b111111110101000011111111111100000000000000000000 i
+b0 g
+b0 f
+b110000011111111010000000000000000000000 d
+b111111110101000011111111111100000000000000000000 e
+1/
+#40
+0/
+#45
+b100 X
+b11 Y
+b0 z
+b0 {
+b1000101000000000 y
+1/
+#50
+0/
+#55
+b101 X
+b100000000000000000 W
+b100 Y
+b100000000000000000 x
+b0 w
+b0 v
+b11100000 r
+b10000 q
+b1000000000000111000000010000000000000 u
+b0 p
+b0 s
+b0 t
+1/
+#60
+0/
+#65
+b0 X
+11
+b100000000000000000 #
+b100000000000000000 U
+b100000000000 $
+b100000000000 T
+b11111111111111110110011100000000 %
+b11111111111111110110011100000000 S
+b11111111111111111010111100000000 &
+b11111111111111111010111100000000 R
+b110000000000000 '
+b110000000000000 Q
+b111111110101000011111111111100000000000000000000 *
+b111111110101000011111111111100000000000000000000 N
+b101000000000000110100000000000000000000 +
+b101000000000000110100000000000000000000 M
+b110000011111111010000000000000000000000 ,
+b110000011111111010000000000000000000000 L
+1!
+b101 Y
+1/
+#70
+0/
+#75
+01
+1"
+0!
+b0 Y
+1/
+#80
+b111111101101000000000000000100001101000000000000 \
+b10100000000000000000100000100000000000000 [
+b1000000000000001000000001000000000000 Z
+b1000000000000001000000001000000000000 5
+b1000000000000001000000001000000000000 B
+b10100000000000000000100000100000000000000 4
+b10100000000000000000100000100000000000000 A
+b1000000000000000100000001000000000000 3
+b1000000000000000100000001000000000000 @
+b1000000000000001000000001000000000000 7
+b1 8
+b10 9
+b100000000 :
+0/
+#85
+b0 a
+b100000000 _
+b1111111111100000 b
+b1111111111110000 `
+b1000000000000001000000001000000000000 c
+b11111111111100000000000000000000 ]
+b11 ""
+b11 !"
+1/
+#90
+b1 X
+16
+0/
+#95
+b10 X
+0"
+b1 Y
+b1111111111110000 `
+b0 a
+b100000000 _
+b1111111111100000 b
+b1000000000000001000000001000000000000 c
+b11111111111100000000000000000000 ]
+b11 ""
+b11 !"
+1/
+#100
+06
+0/
+#105
+b11 X
+b1001100000000 G
+b11111111111111010000000000000000 E
+b10 Y
+b0 o
+b11111111111111111110110100000000 n
+b10011000000000000000000000011000000000000 l
+b11111111111100000000000000000000 m
+b10011000000000000000000000011000000000000 h
+b11111111111100000000000000000000 i
+b11111111111111010000000000000000 g
+b10011000000000000000000000011000000000000 d
+b11111111111100000000000000000000 e
+1/
+#110
+0/
+#115
+b100 X
+b1010000110 H
+b11 Y
+b0 z
+b0 {
+b1001100000000 y
+1/
+#120
+0/
+#125
+b101 X
+b1101011110100000 W
+b100 Y
+b10000000000000000 x
+b10100001100000 v
+b10000 r
+b1000000000000000100000001000000000000 u
+b1010000110 s
+1/
+#130
+0/
+#135
+b0 X
+11
+b1101011110100000 #
+b1101011110100000 U
+b1010000110 )
+b1010000110 O
+b100000000 %
+b100000000 S
+b11111111111111111101100100000000 &
+b11111111111111111101100100000000 R
+b1001100000000 '
+b1001100000000 Q
+b11111111111100000000000000000000 *
+b11111111111100000000000000000000 N
+b111111101101000000000000000100001101000000000000 +
+b111111101101000000000000000100001101000000000000 M
+b10011000000000000000000000011000000000000 ,
+b10011000000000000000000000011000000000000 L
+1!
+b101 Y
+1/
+#140
+0/
+#145
+01
+1"
+0!
+b0 Y
+1/
+#150
+b11111110110100001101000000000000 \
+b1000000000001010000000100000000000000 [
+b1000000000000000100000001000000000000 Z
+b1000000000001010000000100000000000000 5
+b1000000000001010000000100000000000000 B
+b10000000000000000100000001000000000000 4
+b10000000000000000100000001000000000000 A
+b10000000000 :
+b1 8
+b1000000000001010000000100000000000000 7
+b10100 9
+0/
+#155
+b1111111111110000 `
+b0 a
+b1001100000000 _
+b1111111011000000 b
+b1000000000001010000000100000000000000 c
+b11111110110100001101000000000000 ]
+b11 ""
+b11 !"
+1/
+#160
+b1 X
+16
+0/
+#165
+b10 X
+0"
+b1 Y
+b1111111111110000 `
+b0 a
+b1001100000000 _
+b1111111011000000 b
+b1000000000001010000000100000000000000 c
+b11111110110100001101000000000000 ]
+b11 ""
+b11 !"
+1/
+#170
+06
+0/
+#175
+b11 X
+b11111111111111010000000000000000 F
+b0 E
+b10 Y
+b1000000000000000000000000000000000000 l
+b11111110110100001101000000000000 m
+b11111111111111010000000000000000 j
+b1000000000000000000000000000000000000 h
+b11111110110100001101000000000000 i
+b0 g
+b1000000000000000000000000000000000000 d
+b11111110110100001101000000000000 e
+1/
+#180
+0/
+#185
+b100 X
+b1010000110 I
+b0 H
+b11 Y
+b10100001101011 z
+b11111111111111010000000000000000 {
+1/
+#190
+0/
+#195
+b101 X
+b100 Y
+b10100001100000 w
+b0 v
+b0 s
+b1010000110 t
+1/
+#200
+0/
+#205
+b0 X
+11
+b1010000110 (
+b1010000110 P
+b0 )
+b0 O
+b1001100000000 %
+b1001100000000 S
+b100000000 '
+b100000000 Q
+b11111110110100001101000000000000 *
+b11111110110100001101000000000000 N
+b111111111111000000000001001100000011000000000000 +
+b111111111111000000000001001100000011000000000000 M
+b1000000000000000000000000000000000000 ,
+b1000000000000000000000000000000000000 L
+1!
+b101 Y
+1/
+#210
+0/
+#215
+01
+1"
+0!
+b0 Y
+1/
+#220
+b1 8
+b1000000000001010000000100000000000000 7
+b10100 9
+b10000000000 :
+0/
+#225
+b1111111111110000 `
+b0 a
+b1001100000000 _
+b1111111011000000 b
+b1000000000001010000000100000000000000 c
+b11111110110100001101000000000000 ]
+b11 ""
+b11 !"
+1/
+#230
+b1 X
+16
+0/
+#235
+b10 X
+0"
+b1 Y
+b1111111111110000 `
+b0 a
+b1001100000000 _
+b1111111011000000 b
+b1000000000001010000000100000000000000 c
+b11111110110100001101000000000000 ]
+b11 ""
+b11 !"
+1/
+#240
+06
+0/
+#245
+b11 X
+b10 Y
+1/
+#250
+0/
+#255
+b100 X
+b11 Y
+b10100001101011 z
+b11111111111111010000000000000000 {
+1/
+#260
+0/
+#265
+b101 X
+b100 Y
+1/
+#270
+0/
+#275
+b0 X
+11
+1!
+b101 Y
+1/
+#280
+0/
+#285
+01
+1"
+0!
+b0 Y
+1/
+#290
+0/
