@@ -13,7 +13,7 @@ module raster(
 
     output logic        rdy_in,
     output logic        vld_out,
-    output logic [`NUM_COLORS-1:0]  color_out,
+    output logic [`COLOR_BITS-1:0]  color_out,
     output coord_2d_t   pixel_out
 );
 
@@ -21,7 +21,7 @@ module raster(
 coord_3d_t                          inter_abs_pos;
 coord_3d_t                          inter_deltas  [0:`NUM_VERTICES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges   [0:`NUM_VERTICES-1];
-logic        [3:0]                  inter_color;
+metadata_t                          inter_metadata;
 logic        [`FX_TOTAL_BITS-1:0]   inter_dzdx, inter_dzdy;
 logic        [`FX_TOTAL_BITS*2-1:0] inter_z_current;
 logic                               inter_vld, inter_rdy;
@@ -46,7 +46,7 @@ tile_processor tile_proc (
     .out_edge_0(inter_edges[0]),
     .out_edge_1(inter_edges[1]),
     .out_edge_2(inter_edges[2]),
-    .out_color(inter_color),
+    .out_metadata(inter_metadata),
     .out_dzdx(inter_dzdx),
     .out_dzdy(inter_dzdy),
     .out_z_current(inter_z_current)
@@ -65,7 +65,7 @@ pixel_processor pixel_proc (
     .in_edge_0(inter_edges[0]),
     .in_edge_1(inter_edges[1]),
     .in_edge_2(inter_edges[2]),
-    .in_color(inter_color),
+    .in_metadata(inter_metadata),
     .in_dzdx(inter_dzdx),
     .in_dzdy(inter_dzdy),
     .in_z_current(inter_z_current),

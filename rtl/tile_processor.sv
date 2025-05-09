@@ -20,7 +20,7 @@ module tile_processor(
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_0,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_1,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_2,
-    output logic        [3:0]                   out_color,
+    output metadata_t                           out_metadata,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdx,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdy,
     output logic        [`FX_TOTAL_BITS*2-1:0]  out_z_current
@@ -113,7 +113,7 @@ always_ff @(posedge clk) begin
                 // Deassert ready signal if valid input is received
                 rdy_in <= vld_in ? '0 : rdy_in;
 
-                // Store the color
+                // Store the metadata
                 metadata <= in_metadata;
             
                 // Store the start position for the next cycle
@@ -154,7 +154,7 @@ always_ff @(posedge clk) begin
                 out_edge_0    <= edges[0];
                 out_edge_1    <= edges[1];
                 out_edge_2    <= edges[2];
-                out_color     <= metadata.color;
+                out_metadata  <= metadata;
                 out_dzdx      <= dzdx;
                 out_dzdy      <= dzdy;
                 out_z_current <= z_current;

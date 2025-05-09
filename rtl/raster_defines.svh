@@ -1,20 +1,22 @@
+`ifndef RASTER_DEFINES
+`define RASTER_DEFINES
+
 // Fixed point macros
-`define FX_INT_BITS     (12)
-`define FX_FRAC_BITS    (4)
-`define FX_TOTAL_BITS   (`FX_INT_BITS + `FX_FRAC_BITS)
+`define FX_INT_BITS         (12)
+`define FX_FRAC_BITS        (4)
+`define FX_TOTAL_BITS       (`FX_INT_BITS + `FX_FRAC_BITS)
 
 // Tile macros
-`define TILE_WIDTH      (16)
-`define TILE_AREA       (`TILE_WIDTH*`TILE_WIDTH)
-`define TILE_BIT_WIDTH  ($clog2(`TILE_AREA))
-`define TILE_COLUMNS    (640/`TILE_WIDTH)
-`define TILE_ROWS       (480/`TILE_WIDTH)
-`define TILE_COLUMNS_BITS ($clog2(`TILE_COLUMNS))
-`define TILE_ROWS_BITS    ($clog2(`TILE_ROWS))
-`define NUM_VERTICES    (3)
-`define NUM_COLORS      (8)
-
-`define PIPELINE_STAGES (5)
+`define TILE_WIDTH          (16)
+`define TILE_AREA           (`TILE_WIDTH*`TILE_WIDTH)
+`define TILE_WIDTH_BITS     ($clog2(`TILE_WIDTH))
+`define TILE_AREA_BITS      ($clog2(`TILE_AREA))
+`define TILE_COLUMNS        (640/`TILE_WIDTH)
+`define TILE_ROWS           (480/`TILE_WIDTH)
+`define TILE_COLUMNS_BITS   ($clog2(`TILE_COLUMNS))
+`define TILE_ROWS_BITS      ($clog2(`TILE_ROWS))
+`define NUM_VERTICES        (3)
+`define COLOR_BITS          (8)
 
 // Note: values for the coord structs are in fixed point
 typedef struct packed {
@@ -29,7 +31,7 @@ typedef struct packed {
 } coord_2d_t;
 
 typedef struct packed {
-    logic [3:0]  color;     // 4-bit color (bits 15:12)
+    logic [`COLOR_BITS-1:0]         color;
     logic [`TILE_ROWS_BITS-1:0]     tile_y;  
     logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
 } metadata_t;
@@ -48,3 +50,5 @@ typedef enum {
     FLUSHING,
     PROCESS
 } pixel_state_t;
+
+`endif
