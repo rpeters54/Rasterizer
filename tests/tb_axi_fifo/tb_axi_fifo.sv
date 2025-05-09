@@ -97,14 +97,16 @@ end
     input  int          n;
     begin
         logic  [63:0] big_rand;
+        logic  [7:0]  small_rand;
+        logic  [15:0] med_rand;
         int i;
         for (i=0; i<n; i++) begin
-        unique case (id)
+        case (id)
           1: begin
                 // generate a pattern for FIFO1
                 wait (rdy_in1); // ensure ready
                 big_rand = {$urandom, $urandom};
-                fifo_64 = {fifo_64, big_rand};
+                fifo_64.push_back(big_rand);
                 @(posedge clk);
                 data_in1 = fifo_64[$];
                 vld_in1  = 1;
@@ -114,7 +116,8 @@ end
 
           2: begin
                 wait (rdy_in2);
-                fifo_8 = {fifo_8, $urandom[7:0]};
+                small_rand = big_rand[7:0];
+                fifo_8.push_back(small_rand);
                 @(posedge clk);
                 data_in2 = fifo_8[$];
                 vld_in2  = 1;
@@ -124,7 +127,8 @@ end
 
           3: begin
                 wait (rdy_in3);
-                fifo_16 = {fifo_16, $urandom[15:0]};
+                med_rand = big_rand[15:0];
+                fifo_16.push_back(med_rand);
                 @(posedge clk);
                 data_in3 = fifo_16[$];
                 vld_in3  = 1;
@@ -144,7 +148,7 @@ end
 
         int i;
         for (i=0; i<n; i++) begin
-        unique case (id)
+        case (id)
           1: begin
                 // check valid and data
                 assert (vld_out1) else $error("FIFO1 underflow on pop #%0d", i);

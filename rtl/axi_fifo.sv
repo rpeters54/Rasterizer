@@ -12,8 +12,8 @@ module axi_fifo
     input                           vld_in,
     input        [WIDTH-1:0]        data_in,
     output logic [WIDTH-1:0]        data_out,
-    output                          rdy_in,
-    output                          vld_out
+    output logic                    rdy_in,
+    output logic                    vld_out
 );
 
 parameter COUNT_WIDTH = ($clog2(DEPTH)-1 > 3) ? $clog2(DEPTH)-1 : 3;
@@ -47,6 +47,8 @@ always_comb begin
     rdy_in         =  (count < DEPTH);
 end
 
+logic [PTR_WIDTH:0] next_read_ptr;
+
 always_ff @(posedge clk) begin
     if (!rst_n) begin
         write_ptr    <= '0;
@@ -60,8 +62,9 @@ always_ff @(posedge clk) begin
             write_ptr                        <= next_ptr_index(write_ptr);
         end
         if (rdy_out) begin
-            data_out  <= buffer[next_ptr_index(read_ptr)[PTR_WIDTH-1:0]];
-            read_ptr  <= next_ptr_index(read_ptr);
+            next_read_ptr = next_ptr_index(read_ptr);
+            data_out  <= buffer[next_read_ptr[PTR_WIDTH-1:0]];
+            read_ptr  <= next_read_ptr;
         end
         if (vld_in && rdy_in && vld_out && rdy_out) begin
             count <= count; 

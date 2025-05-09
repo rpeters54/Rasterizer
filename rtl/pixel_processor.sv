@@ -41,6 +41,11 @@ metadata_t                          metadata;
 logic        [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
 logic        [`FX_TOTAL_BITS*2-1:0] z_current;
 
+coord_2d_t out_coord;
+
+assign out_coord.x = flush_abs_pos.x;
+assign out_coord.y = flush_abs_pos.y;
+
 always_comb begin
     case (present_state)
         IDLE: begin
@@ -79,21 +84,31 @@ always_ff @(posedge clk) begin
 
     if (!rst_n) begin
         // Reset logic
-        abs_pos      <= '{ default: '0 };
-        flush_abs_pos <= '{ default: '0 };
-        rel_pos      <= '0;
-        flush_rel_pos <= '0;
-        deltas       <= '{ default: '0 };
-        edges        <= '{ default: '0 };
-        metadata     <= '{ default: '0 };
-        z_buffer     <= '{default: {2*`FX_TOTAL_BITS{1'b1}}};
-        color_buffer <= '{ default: '0 };
+        abs_pos.x        <= 0;
+        abs_pos.y        <= 0;
+        abs_pos.z        <= 0;
+        flush_abs_pos.x  <= 0;
+        flush_abs_pos.y  <= 0;
+        flush_abs_pos.z  <= 0;
+        rel_pos          <= 0;
+        flush_rel_pos    <= 0;
+        for (int i = 0; i < `NUM_VERTICES; i++) begin
+            deltas[i].x  <= 0;
+            deltas[i].y  <= 0;
+            deltas[i].z  <= 0;
+            edges[i]     <= 0;
+        end
+        metadata.color   <= 0;
+        metadata.tile_x  <= 0;
+        metadata.tile_y  <= 0;
+        for (int i = 0; i < `TILE_AREA; i++) begin
+            z_buffer     <= {2*`FX_TOTAL_BITS{1'b1}};
+            color_buffer <= 0;
+        end
 
         dzdx         <= '0;
         dzdy         <= '0;
-
         z_current    <= '0;
-
         rdy_in       <= '1;
 
         present_state <= IDLE;
@@ -171,10 +186,7 @@ always_ff @(posedge clk) begin
                     
                     // Output the color and pixel coordinates
                     color_out <= color_buffer[flush_rel_pos];
-                    pixel_out <= '{
-                        x: flush_abs_pos.x,
-                        y: flush_abs_pos.y
-                    };
+                    pixel_out <= out_coord;
                     
                     // Clear the buffers at this position
                     z_buffer[flush_rel_pos]     <= {2*`FX_TOTAL_BITS{1'b1}}; 
@@ -224,7 +236,7 @@ endfunction
 
 // sign extend a 16-bit fixed-point number to 32 bits
 function [`FX_TOTAL_BITS*2-1:0] sext_f16_f32(
-    input [`FX_TOTAL_BITS-1:0] in,
+    input [`FX_TOTAL_BITS-1:0] in
 );
 
 return {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};

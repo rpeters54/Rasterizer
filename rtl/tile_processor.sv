@@ -45,26 +45,26 @@ end
 
 always_comb begin
     case (present_state)
-        INPUT: begin
+        INPUT : begin
             if (vld_in && rdy_in) begin
                 next_state = DETERMINANT;
             end else begin
                 next_state = INPUT;
             end
         end
-        DETERMINANT: begin
+        DETERMINANT : begin
             next_state = SCALING;
         end
-        SCALING: begin
+        SCALING : begin
             next_state = Z_VALUE;
         end
-        Z_VALUE: begin
+        Z_VALUE : begin
             next_state = PASS_ONWARD;
         end
-        PASS_ONWARD: begin
+        PASS_ONWARD : begin
             next_state = AWAIT_RESPONSE;
         end
-        AWAIT_RESPONSE: begin
+        AWAIT_RESPONSE : begin
             if (!rdy_out) begin
                 next_state = AWAIT_RESPONSE;
             end else begin
@@ -88,10 +88,18 @@ logic [`FX_TOTAL_BITS*2-1:0]        z_current;
 always_ff @(posedge clk) begin 
     if (!rst_n) begin
         // Reset logic
-        abs_pos      <= '{ default: '0 };
-        deltas       <= '{ default: '0 };
-        edges        <= '{ default: '0 };
-        metadata     <= '{ default: '0 };
+        abs_pos.x        <= 0;
+        abs_pos.y        <= 0;
+        abs_pos.z        <= 0;
+        for (int i = 0; i < `NUM_VERTICES; i++) begin
+            deltas[i].x  <= 0;
+            deltas[i].y  <= 0;
+            deltas[i].z  <= 0;
+            edges[i]     <= 0;
+        end
+        metadata.color   <= 0;
+        metadata.tile_x  <= 0;
+        metadata.tile_y  <= 0;
 
         coeff_A  <= '0;
         coeff_B   <= '0;
@@ -180,8 +188,8 @@ function coord_3d_t tile_to_coord(
 
     coord_3d_t out;
 
-    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_x, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
-    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_y, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
+    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, in.tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, in.tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
     out.z = 0;
 
     return out;
@@ -279,7 +287,7 @@ function signed [`FX_TOTAL_BITS-1:0] scale_dz(
 
 logic signed [`FX_TOTAL_BITS*2-1:0] div_result_dz;
 
-div_result_dz = -(dz_undiv / c);
+div_result_dz = -((dz_undiv << `FX_FRAC_BITS*2) / c);
 
 return div_result_dz[(`FX_TOTAL_BITS-1+`FX_FRAC_BITS):`FX_FRAC_BITS];
 
@@ -290,7 +298,7 @@ function signed [`FX_TOTAL_BITS*2-1:0] compute_z(
     input coord_3d_t                  v_0,
     input coord_3d_t                  abs_pos,
     input signed [`FX_TOTAL_BITS-1:0] dzdx,
-    input signed [`FX_TOTAL_BITS-1:0] dzdy,
+    input signed [`FX_TOTAL_BITS-1:0] dzdy
 );
 
 logic signed [`FX_TOTAL_BITS-1:0]   delta_x, delta_y;
@@ -302,7 +310,7 @@ x_component = delta_x * dzdx;
 y_component = delta_y * dzdy;
 z_component = {{`FX_INT_BITS{v_0.z[`FX_TOTAL_BITS-1]}}, v_0.z, {`FX_FRAC_BITS{1'b0}}};
 
-return x_component + y_component + z_component;
+return z_component - x_component - y_component;
 
 endfunction
 
