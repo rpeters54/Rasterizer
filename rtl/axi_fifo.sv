@@ -58,10 +58,12 @@ always_ff @(posedge clk) begin
     end else begin 
         if (vld_in && rdy_in) begin
             buffer[write_ptr[PTR_WIDTH-1:0]] <= data_in;
-            data_out                         <= buffer[read_ptr[PTR_WIDTH-1:0]];
+            if (count == 0) begin
+                data_out <= data_in;
+            end
             write_ptr                        <= next_ptr_index(write_ptr);
         end
-        if (rdy_out) begin
+        if (vld_out && rdy_out) begin
             next_read_ptr = next_ptr_index(read_ptr);
             data_out  <= buffer[next_read_ptr[PTR_WIDTH-1:0]];
             read_ptr  <= next_read_ptr;

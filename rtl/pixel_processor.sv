@@ -70,14 +70,14 @@ always_comb begin
             end
         end
         FLUSHING : begin
-            if (flush_rel_pos > `TILE_AREA) begin
-                next_state = PROCESS;
-            end else begin
+            if (flush_rel_pos < `TILE_AREA-1) begin
                 next_state = FLUSHING;
+            end else begin
+                next_state = PROCESS;
             end
         end
         PROCESS: begin
-            if (rel_pos < `TILE_AREA) begin
+            if (rel_pos < `TILE_AREA-1) begin
                 next_state = PROCESS;
             end else begin
                 next_state = IDLE;
@@ -126,10 +126,12 @@ always_ff @(posedge clk) begin
 
         case (present_state)
             IDLE: begin
+                rdy_in       <= '0;
+                vld_out       <= '0;
                 // Get tile-scale data if available
                 if (vld_in) begin
                     abs_pos       <= in_abs_pos;
-                    flush_abs_pos <= in_abs_pos;
+                    flush_abs_pos <= tile_to_coord(metadata);
                     rel_pos       <= '0;
                     flush_rel_pos <= '0;
                     deltas[0]     <= in_delta_0;
@@ -142,12 +144,11 @@ always_ff @(posedge clk) begin
                     dzdx          <= in_dzdx;
                     dzdy          <= in_dzdy;
                     z_current     <= in_z_current;
-
-                    rdy_in        <= '1;
                 end
             end
             PROCESS: begin
                 rdy_in       <= '0;
+                vld_out      <= '0;
 
                 // edge and depth check
                 if ((edges[0] > 0) && (edges[1] > 0) &&  (edges[2] > 0) && (z_current < z_buffer[rel_pos])) begin
@@ -157,11 +158,11 @@ always_ff @(posedge clk) begin
 
                 if ((rel_pos & (`TILE_WIDTH-1)) == (`TILE_WIDTH-1)) begin
                     // Update the absolute position
-                    abs_pos.x <= abs_pos.x - (`TILE_WIDTH-1) << `FX_FRAC_BITS;
-                    abs_pos.y <= abs_pos.y + 1 << `FX_FRAC_BITS;
+                    abs_pos.x <= abs_pos.x - ((`TILE_WIDTH-1) << `FX_FRAC_BITS);
+                    abs_pos.y <= abs_pos.y + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
-                    z_current <= z_current + sext_f16_f32(dzdy) - sext_f16_f32(dzdx) << `TILE_WIDTH_BITS;
+                    z_current <= z_current + sext_f16_f32(dzdy) - (sext_f16_f32(dzdx) << `TILE_WIDTH_BITS);
 
                     // Update the edge values
                     for (int i = 0; i < `NUM_VERTICES; i++) begin
@@ -170,7 +171,7 @@ always_ff @(posedge clk) begin
 
                 end else begin
                     // Update the absolute position
-                    abs_pos.x <= abs_pos.x + 1 << `FX_FRAC_BITS;
+                    abs_pos.x <= abs_pos.x + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
                     z_current <= z_current + sext_f16_f32(dzdx);
@@ -183,6 +184,9 @@ always_ff @(posedge clk) begin
 
                 // Update the relative position
                 rel_pos <= rel_pos + 1;
+                if (rel_pos >= `TILE_AREA-1) begin
+                    rdy_in  <= '1;
+                end
             end
             FLUSHING: begin
                 rdy_in       <= '0;
@@ -203,14 +207,17 @@ always_ff @(posedge clk) begin
                 
                     // Update the absolute position
                     if ((flush_rel_pos & (`TILE_WIDTH-1)) == (`TILE_WIDTH-1)) begin
-                        flush_abs_pos.x <= flush_abs_pos.x - (`TILE_WIDTH-1) << `FX_FRAC_BITS;
-                        flush_abs_pos.y <= flush_abs_pos.y + 1 << `FX_FRAC_BITS;
+                        flush_abs_pos.x <= flush_abs_pos.x - ((`TILE_WIDTH-1) << `FX_FRAC_BITS);
+                        flush_abs_pos.y <= flush_abs_pos.y + (1 << `FX_FRAC_BITS);
                     end else begin
-                        flush_abs_pos.x <= flush_abs_pos.x + 1 << `FX_FRAC_BITS;
+                        flush_abs_pos.x <= flush_abs_pos.x + (1 << `FX_FRAC_BITS);
                     end
 
                     // Update the relative position
                     flush_rel_pos <= flush_rel_pos + 1;
+                    if (flush_rel_pos >= `TILE_AREA-1) begin
+                        rdy_in  <= '1;
+                    end
 
                 end else begin
                     // Deassert valid output signal
@@ -237,10 +244,10 @@ function [`FX_TOTAL_BITS*2-1:0] edge_row_offset(
 
 logic [`FX_TOTAL_BITS*2-1:0] s_dy, s_dx;
 
-s_dy = delta_i.y;
-s_dx = delta_i.x;
+s_dy = sext_f16_f32(delta_i.y);
+s_dx = sext_f16_f32(delta_i.x);
 
-return sext_f16_f32(s_dy) << `TILE_WIDTH_BITS + sext_f16_f32(s_dx);
+return (s_dy << `TILE_WIDTH_BITS) + s_dx;
 
 endfunction
 
@@ -250,10 +257,23 @@ function [`FX_TOTAL_BITS*2-1:0] edge_column_offset(
 
 logic [`FX_TOTAL_BITS*2-1:0] s_dy;
 
-s_dy = delta_i.y;
+s_dy = sext_f16_f32(delta_i.y);
 
-return sext_f16_f32(s_dy);
+return s_dy;
 
+endfunction
+
+function coord_3d_t tile_to_coord(
+    input metadata_t in
+    );
+
+    coord_3d_t out;
+
+    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, in.tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, in.tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+    out.z = 0;
+
+    return out;
 endfunction
 
 endmodule

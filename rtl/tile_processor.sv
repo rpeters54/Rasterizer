@@ -124,8 +124,8 @@ always_ff @(posedge clk) begin
         out_delta_1 <= zero;
         out_delta_2 <= zero;
         out_edge_0 <= 0;
-        out_edge_1 <= 1;
-        out_edge_2 <= 2;
+        out_edge_1 <= 0;
+        out_edge_2 <= 0;
         out_metadata.color   <= 0;
         out_metadata.tile_x  <= 0;
         out_metadata.tile_y  <= 0;
