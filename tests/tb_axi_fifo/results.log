@@ -1,0 +1,5 @@
+All tests passed.
+- tb_axi_fifo.sv:233: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: $finish at 1us; walltime 0.004 s; speed 261.486 us/s
+- Verilator: cpu 0.005 s on 1 threads; alloced 89 MB
