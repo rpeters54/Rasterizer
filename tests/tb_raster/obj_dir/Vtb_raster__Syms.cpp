@@ -1,24 +1,25 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtb_fib__pch.h"
-#include "Vtb_fib.h"
-#include "Vtb_fib___024root.h"
+#include "Vtb_raster__pch.h"
+#include "Vtb_raster.h"
+#include "Vtb_raster___024root.h"
+#include "Vtb_raster___024unit.h"
 
 // FUNCTIONS
-Vtb_fib__Syms::~Vtb_fib__Syms()
+Vtb_raster__Syms::~Vtb_raster__Syms()
 {
 #ifdef VM_TRACE
     if (__Vm_dumping) _traceDumpClose();
 #endif  // VM_TRACE
 }
 
-void Vtb_fib__Syms::_traceDump() {
+void Vtb_raster__Syms::_traceDump() {
     const VerilatedLockGuard lock(__Vm_dumperMutex);
     __Vm_dumperp->dump(VL_TIME_Q());
 }
 
-void Vtb_fib__Syms::_traceDumpOpen() {
+void Vtb_raster__Syms::_traceDumpOpen() {
     const VerilatedLockGuard lock(__Vm_dumperMutex);
     if (VL_UNLIKELY(!__Vm_dumperp)) {
         __Vm_dumperp = new VerilatedVcdC();
@@ -29,13 +30,13 @@ void Vtb_fib__Syms::_traceDumpOpen() {
     }
 }
 
-void Vtb_fib__Syms::_traceDumpClose() {
+void Vtb_raster__Syms::_traceDumpClose() {
     const VerilatedLockGuard lock(__Vm_dumperMutex);
     __Vm_dumping = false;
     VL_DO_CLEAR(delete __Vm_dumperp, __Vm_dumperp = nullptr);
 }
 
-Vtb_fib__Syms::Vtb_fib__Syms(VerilatedContext* contextp, const char* namep, Vtb_fib* modelp)
+Vtb_raster__Syms::Vtb_raster__Syms(VerilatedContext* contextp, const char* namep, Vtb_raster* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp{modelp}
@@ -43,7 +44,7 @@ Vtb_fib__Syms::Vtb_fib__Syms(VerilatedContext* contextp, const char* namep, Vtb_
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(48);
+        Verilated::stackCheck(702);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-9);
     _vm_contextp__->timeprecision(-12);

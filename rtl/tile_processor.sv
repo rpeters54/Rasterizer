@@ -81,7 +81,7 @@ coord_3d_t                          abs_pos;
 coord_3d_t                          deltas  [0:`NUM_VERTICES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] edges   [0:`NUM_VERTICES-1];
 metadata_t                          metadata;
-logic [`FX_TOTAL_BITS*2-1:0]        determinant, dzdx_undiv, dzdy_undiv;  
+logic [`FX_TOTAL_BITS*2-1:0]        coeff_A, coeff_B, coeff_C;  
 logic [`FX_TOTAL_BITS-1:0]          dzdx, dzdy;
 logic [`FX_TOTAL_BITS*2-1:0]        z_current;
 
@@ -93,9 +93,9 @@ always_ff @(posedge clk) begin
         edges        <= '{ default: '0 };
         metadata     <= '{ default: '0 };
 
-        determinant  <= '0;
-        dzdx_undiv   <= '0;
-        dzdy_undiv   <= '0;
+        coeff_A  <= '0;
+        coeff_B   <= '0;
+        coeff_C   <= '0;
 
         dzdx         <= '0;
         dzdy         <= '0;
@@ -130,14 +130,16 @@ always_ff @(posedge clk) begin
                 end
             end
             DETERMINANT: begin
-                // Compute the determinant of the triangle and unscaled dzdx and dzdy
-                determinant <= compute_det(deltas);
-                dzdx_undiv  <= compute_dzdx_undiv(deltas, v);
-                dzdy_undiv  <= compute_dzdy_undiv(deltas, v);
+                // Compute the planar coefficients of the triangle A, B, C
+                coeff_A <= compute_plane_coeff_a(deltas);
+                coeff_B <= compute_plane_coeff_b(deltas);
+                coeff_C <= compute_plane_coeff_c(deltas);
             end
             SCALING: begin
-                dzdx <= scale_dz(dzdx_undiv, determinant);
-                dzdy <= scale_dz(dzdy_undiv, determinant);
+                // Scale the planar coefficients to calculate dz/dx and dy/dx
+                // dz/dx = - a / c; dy/dx = - b / c
+                dzdx <= scale_dz(coeff_A, coeff_C);
+                dzdy <= scale_dz(coeff_B, coeff_C);
             end
             Z_VALUE: begin
                 // Compute the z for the top left pixel
@@ -217,64 +219,58 @@ temp_x_sub  = (start.x - v_i.x);
 temp_y_sub  = (start.y - v_i.y);
 temp_x_mult = temp_x_sub * delta_i.y;
 temp_y_mult = temp_y_sub * delta_i.x;
-return temp_x_mult + temp_y_mult;
+return temp_x_mult - temp_y_mult;
 
 endfunction
 
-function signed [`FX_TOTAL_BITS*2-1:0] compute_det(
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_a(
     input coord_3d_t deltas [0:`NUM_VERTICES-1]
 );
 
-logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_x2y0_mult;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_y0z2_mult, temp_z0y2_mult;
+
+temp_y0z2_mult = deltas[0].y * deltas[2].z;
+temp_z0y2_mult = deltas[0].z * deltas[2].y;
+return temp_y0z2_mult - temp_z0y2_mult;
+
+endfunction
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_b(
+    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_z0x2_mult, temp_x0z2_mult;
+
+temp_z0x2_mult = deltas[0].z * deltas[2].x;
+temp_x0z2_mult = deltas[0].x * deltas[2].z;
+return temp_z0x2_mult - temp_x0z2_mult;
+
+endfunction
+
+
+function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_c(
+    input coord_3d_t deltas [0:`NUM_VERTICES-1]
+);
+
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_y0x2mult;
 
 temp_x0y2_mult = deltas[0].x * deltas[2].y;
-temp_x2y0_mult = deltas[2].x * deltas[0].y;
-return temp_x0y2_mult - temp_x2y0_mult;
+temp_y0x2mult = deltas[0].y * deltas[2].x;
+return temp_x0y2_mult - temp_y0x2mult;
 
 endfunction
-
-
-function signed [`FX_TOTAL_BITS*2-1:0] compute_dzdx_undiv(
-    input coord_3d_t deltas [0:`NUM_VERTICES-1],
-    input coord_3d_t v      [0:`NUM_VERTICES-1]
-);
-
-logic signed [`FX_TOTAL_BITS*2-1:0] temp_dy1vz0_mult, temp_dy2vz1_mult, temp_dy0vz2_mult;
-
-temp_dy1vz0_mult = deltas[1].y * v[0].z;
-temp_dy2vz1_mult = deltas[2].y * v[1].z;
-temp_dy0vz2_mult = deltas[0].y * v[2].z;
-return temp_dy1vz0_mult + temp_dy2vz1_mult + temp_dy0vz2_mult;
-
-endfunction
-
-function signed [`FX_TOTAL_BITS*2-1:0] compute_dzdy_undiv(
-    input coord_3d_t deltas [0:`NUM_VERTICES-1],
-    input coord_3d_t v      [0:`NUM_VERTICES-1]
-);
-
-logic signed [`FX_TOTAL_BITS*2-1:0] temp_dx0vz0_mult, temp_dx1vz1_mult, temp_dx2vz2_mult;
-
-temp_dx0vz0_mult = deltas[0].x * v[0].z;
-temp_dx1vz1_mult = deltas[1].x * v[1].z;
-temp_dx2vz2_mult = deltas[2].x * v[2].z;
-return -(temp_dx0vz0_mult + temp_dx1vz1_mult + temp_dx2vz2_mult);
-
-endfunction
-
 
 // Compute the scaled dzdx and dzdy
-// Scale up the dzdx and dzdy to 48_16 fixed point
-// This results in a 24_8 fixed point result when divided by 24_8 determinant
 // We extract the middle 16 bits of the result, to get the 12_4 fixed point result
 function signed [`FX_TOTAL_BITS-1:0] scale_dz(
     input signed [`FX_TOTAL_BITS*2-1:0] dz_undiv,
-    input signed [`FX_TOTAL_BITS*2-1:0] determinant
+    input signed [`FX_TOTAL_BITS*2-1:0] c
 );
 
 logic signed [`FX_TOTAL_BITS*2-1:0] div_result_dz;
 
-div_result_dz = dzdx_undiv / determinant;
+div_result_dz = -(dz_undiv / c);
 
 return div_result_dz[(`FX_TOTAL_BITS-1+`FX_FRAC_BITS):`FX_FRAC_BITS];
 

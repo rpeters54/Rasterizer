@@ -1,4 +1,6 @@
-VCD info: dumpfile tb_fib.vcd opened for output.
-Testing Base Case...
-SUCCESS
-tb_fib.sv:43: $finish called at 45 (1s)
+abs_pos = 0,0
+dzdx = 0, dzdy = 0
+- tb_raster.sv:98: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
+- Verilator: $finish at 140ns; walltime 0.003 s; speed 55.658 us/s
+- Verilator: cpu 0.003 s on 1 threads; alloced 89 MB

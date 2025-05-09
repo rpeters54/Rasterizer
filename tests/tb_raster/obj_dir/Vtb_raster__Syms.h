@@ -4,24 +4,25 @@
 // Internal details; most calling programs do not need this header,
 // unless using verilator public meta comments.
 
-#ifndef VERILATED_VTB_FIB__SYMS_H_
-#define VERILATED_VTB_FIB__SYMS_H_  // guard
+#ifndef VERILATED_VTB_RASTER__SYMS_H_
+#define VERILATED_VTB_RASTER__SYMS_H_  // guard
 
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
 // INCLUDE MODEL CLASS
 
-#include "Vtb_fib.h"
+#include "Vtb_raster.h"
 
 // INCLUDE MODULE CLASSES
-#include "Vtb_fib___024root.h"
+#include "Vtb_raster___024root.h"
+#include "Vtb_raster___024unit.h"
 
 // SYMS CLASS (contains all model state)
-class alignas(VL_CACHE_LINE_BYTES)Vtb_fib__Syms final : public VerilatedSyms {
+class alignas(VL_CACHE_LINE_BYTES)Vtb_raster__Syms final : public VerilatedSyms {
   public:
     // INTERNAL STATE
-    Vtb_fib* const __Vm_modelp;
+    Vtb_raster* const __Vm_modelp;
     bool __Vm_dumping = false;  // Dumping is active
     VerilatedMutex __Vm_dumperMutex;  // Protect __Vm_dumperp
     VerilatedVcdC* __Vm_dumperp VL_GUARDED_BY(__Vm_dumperMutex) = nullptr;  /// Trace class for $dump*
@@ -31,11 +32,11 @@ class alignas(VL_CACHE_LINE_BYTES)Vtb_fib__Syms final : public VerilatedSyms {
     bool __Vm_didInit = false;
 
     // MODULE INSTANCE STATE
-    Vtb_fib___024root              TOP;
+    Vtb_raster___024root           TOP;
 
     // CONSTRUCTORS
-    Vtb_fib__Syms(VerilatedContext* contextp, const char* namep, Vtb_fib* modelp);
-    ~Vtb_fib__Syms();
+    Vtb_raster__Syms(VerilatedContext* contextp, const char* namep, Vtb_raster* modelp);
+    ~Vtb_raster__Syms();
 
     // METHODS
     const char* name() { return TOP.name(); }

@@ -2,7 +2,7 @@
 // DESCRIPTION: main() calling loop, created with Verilator --main
 
 #include "verilated.h"
-#include "Vtb_fib.h"
+#include "Vtb_raster.h"
 
 //======================
 
@@ -14,7 +14,7 @@ int main(int argc, char** argv, char**) {
     contextp->commandArgs(argc, argv);
 
     // Construct the Verilated model, from Vtop.h generated from Verilating
-    const std::unique_ptr<Vtb_fib> topp{new Vtb_fib{contextp.get(), ""}};
+    const std::unique_ptr<Vtb_raster> topp{new Vtb_raster{contextp.get(), ""}};
 
     // Simulate until $finish
     while (!contextp->gotFinish()) {
