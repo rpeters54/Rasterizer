@@ -259,9 +259,9 @@ void Vtb_raster___024root__trace_chg_0_sub_0(Vtb_raster___024root* vlSelf, Veril
         bufp->chgCData(oldp+88,((0x1fU & (vlSelfRef.tb_raster__DOT__tile_proc__DOT__metadata 
                                           >> 6U))),5);
         bufp->chgCData(oldp+89,((0x3fU & vlSelfRef.tb_raster__DOT__tile_proc__DOT__metadata)),6);
-        bufp->chgIData(oldp+90,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant),32);
-        bufp->chgIData(oldp+91,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx_undiv),32);
-        bufp->chgIData(oldp+92,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy_undiv),32);
+        bufp->chgIData(oldp+90,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_A),32);
+        bufp->chgIData(oldp+91,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_B),32);
+        bufp->chgIData(oldp+92,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C),32);
         bufp->chgSData(oldp+93,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx),16);
         bufp->chgSData(oldp+94,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy),16);
         bufp->chgIData(oldp+95,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__z_current),32);
@@ -269,25 +269,23 @@ void Vtb_raster___024root__trace_chg_0_sub_0(Vtb_raster___024root* vlSelf, Veril
         bufp->chgSData(oldp+97,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub),16);
         bufp->chgIData(oldp+98,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult),32);
         bufp->chgIData(oldp+99,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult),32);
-        bufp->chgIData(oldp+100,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x0y2_mult),32);
-        bufp->chgIData(oldp+101,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x2y0_mult),32);
-        bufp->chgIData(oldp+102,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult),32);
-        bufp->chgIData(oldp+103,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult),32);
-        bufp->chgIData(oldp+104,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult),32);
-        bufp->chgIData(oldp+105,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult),32);
-        bufp->chgIData(oldp+106,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult),32);
-        bufp->chgIData(oldp+107,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult),32);
-        bufp->chgIData(oldp+108,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz),32);
-        bufp->chgSData(oldp+109,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x),16);
-        bufp->chgSData(oldp+110,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y),16);
-        bufp->chgIData(oldp+111,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component),32);
-        bufp->chgIData(oldp+112,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component),32);
-        bufp->chgIData(oldp+113,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component),32);
-        bufp->chgIData(oldp+114,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
-        bufp->chgIData(oldp+115,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk2__DOT__i),32);
+        bufp->chgIData(oldp+100,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult),32);
+        bufp->chgIData(oldp+101,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult),32);
+        bufp->chgIData(oldp+102,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult),32);
+        bufp->chgIData(oldp+103,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult),32);
+        bufp->chgIData(oldp+104,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult),32);
+        bufp->chgIData(oldp+105,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2mult),32);
+        bufp->chgIData(oldp+106,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz),32);
+        bufp->chgSData(oldp+107,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x),16);
+        bufp->chgSData(oldp+108,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y),16);
+        bufp->chgIData(oldp+109,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component),32);
+        bufp->chgIData(oldp+110,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component),32);
+        bufp->chgIData(oldp+111,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component),32);
+        bufp->chgIData(oldp+112,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
+        bufp->chgIData(oldp+113,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk2__DOT__i),32);
     }
-    bufp->chgBit(oldp+116,(vlSelfRef.tb_raster__DOT__clk));
-    bufp->chgIData(oldp+117,(((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
+    bufp->chgBit(oldp+114,(vlSelfRef.tb_raster__DOT__clk));
+    bufp->chgIData(oldp+115,(((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
                                ? (((IData)(vlSelfRef.tb_raster__DOT__vld_in) 
                                    & (IData)(vlSelfRef.tb_raster__DOT__rdy_in))
                                    ? 1U : 0U) : ((1U 

@@ -114,7 +114,13 @@ VL_ATTR_COLD void Vtb_raster___024root___dump_triggers__act(Vtb_raster___024root
         VL_DBG_MSGF("         'act' region trigger index 2 is active: @( tb_raster.rdy_in)\n");
     }
     if ((8ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @( tb_raster.vld_out)\n");
+        VL_DBG_MSGF("         'act' region trigger index 3 is active: @(negedge tb_raster.clk)\n");
+    }
+    if ((0x10ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 4 is active: @(posedge tb_raster.vld_out)\n");
+    }
+    if ((0x20ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 5 is active: @(negedge tb_raster.vld_out)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -138,7 +144,13 @@ VL_ATTR_COLD void Vtb_raster___024root___dump_triggers__nba(Vtb_raster___024root
         VL_DBG_MSGF("         'nba' region trigger index 2 is active: @( tb_raster.rdy_in)\n");
     }
     if ((8ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @( tb_raster.vld_out)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @(negedge tb_raster.clk)\n");
+    }
+    if ((0x10ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 4 is active: @(posedge tb_raster.vld_out)\n");
+    }
+    if ((0x20ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 5 is active: @(negedge tb_raster.vld_out)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -202,9 +214,9 @@ VL_ATTR_COLD void Vtb_raster___024root___ctor_var_reset(Vtb_raster___024root* vl
         vlSelf->tb_raster__DOT__tile_proc__DOT__edges[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->tb_raster__DOT__tile_proc__DOT__metadata = VL_RAND_RESET_I(19);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__determinant = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__dzdx_undiv = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__dzdy_undiv = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__coeff_A = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__coeff_B = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__coeff_C = VL_RAND_RESET_I(32);
     vlSelf->tb_raster__DOT__tile_proc__DOT__dzdx = VL_RAND_RESET_I(16);
     vlSelf->tb_raster__DOT__tile_proc__DOT__dzdy = VL_RAND_RESET_I(16);
     vlSelf->tb_raster__DOT__tile_proc__DOT__z_current = VL_RAND_RESET_I(32);
@@ -213,14 +225,12 @@ VL_ATTR_COLD void Vtb_raster___024root___ctor_var_reset(Vtb_raster___024root* vl
     vlSelf->tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub = VL_RAND_RESET_I(16);
     vlSelf->tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult = VL_RAND_RESET_I(32);
     vlSelf->tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x0y2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x2y0_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult = VL_RAND_RESET_I(32);
+    vlSelf->tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2mult = VL_RAND_RESET_I(32);
     vlSelf->tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz = VL_RAND_RESET_I(32);
     vlSelf->tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x = VL_RAND_RESET_I(16);
     vlSelf->tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y = VL_RAND_RESET_I(16);
@@ -232,13 +242,13 @@ VL_ATTR_COLD void Vtb_raster___024root___ctor_var_reset(Vtb_raster___024root* vl
     vlSelf->tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0 = VL_RAND_RESET_Q(48);
     vlSelf->tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0 = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[__Vi0] = VL_RAND_RESET_Q(48);
+        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[__Vi0] = VL_RAND_RESET_Q(48);
     }
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[__Vi0] = VL_RAND_RESET_Q(48);
+        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[__Vi0] = VL_RAND_RESET_Q(48);
     }
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[__Vi0] = VL_RAND_RESET_Q(48);
+        vlSelf->__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[__Vi0] = VL_RAND_RESET_Q(48);
     }
     vlSelf->__VdlyVal__tb_raster__DOT__clk__v0 = VL_RAND_RESET_I(1);
     vlSelf->__VdlySet__tb_raster__DOT__clk__v0 = 0;

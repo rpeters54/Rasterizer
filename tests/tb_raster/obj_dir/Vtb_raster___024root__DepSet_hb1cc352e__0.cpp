@@ -26,92 +26,6 @@ void Vtb_raster___024root___eval_initial(Vtb_raster___024root* vlSelf) {
         = vlSelfRef.tb_raster__DOT__vld_out;
 }
 
-VL_INLINE_OPT VlCoroutine Vtb_raster___024root___eval_initial__TOP__Vtiming__0(Vtb_raster___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_raster___024root___eval_initial__TOP__Vtiming__0\n"); );
-    Vtb_raster__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.tb_raster__DOT__rst_n = 0U;
-    vlSelfRef.tb_raster__DOT__rdy_out = 0U;
-    vlSelfRef.tb_raster__DOT__vld_in = 0U;
-    vlSelfRef.tb_raster__DOT__v0 = 0ULL;
-    vlSelfRef.tb_raster__DOT__v1 = 0ULL;
-    vlSelfRef.tb_raster__DOT__v2 = 0ULL;
-    vlSelfRef.tb_raster__DOT__in_metadata = 0U;
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         58);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         58);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    vlSelfRef.tb_raster__DOT__rst_n = 1U;
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         62);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    while ((1U & (~ (IData)(vlSelfRef.tb_raster__DOT__rdy_in)))) {
-        co_await vlSelfRef.__VtrigSched_hca70bb26__0.trigger(1U, 
-                                                             nullptr, 
-                                                             "@( tb_raster.rdy_in)", 
-                                                             "tb_raster.sv", 
-                                                             63);
-        vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    }
-    vlSelfRef.tb_raster__DOT__v0 = 0x1000e02000ULL;
-    vlSelfRef.tb_raster__DOT__v1 = 0x7000202000ULL;
-    vlSelfRef.tb_raster__DOT__v2 = 0xc000f02000ULL;
-    vlSelfRef.tb_raster__DOT__in_metadata = 0x800U;
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         80);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    vlSelfRef.tb_raster__DOT__vld_in = 1U;
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         84);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    vlSelfRef.tb_raster__DOT__vld_in = 0U;
-    while ((1U & (~ (IData)(vlSelfRef.tb_raster__DOT__vld_out)))) {
-        co_await vlSelfRef.__VtrigSched_h43a42aa4__0.trigger(1U, 
-                                                             nullptr, 
-                                                             "@( tb_raster.vld_out)", 
-                                                             "tb_raster.sv", 
-                                                             88);
-        vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    }
-    co_await vlSelfRef.__VtrigSched_hc1c78806__0.trigger(0U, 
-                                                         nullptr, 
-                                                         "@(posedge tb_raster.clk)", 
-                                                         "tb_raster.sv", 
-                                                         89);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    VL_WRITEF_NX("abs_pos = %0d,%0d\ndzdx = %0#, dzdy = %0#\n",0,
-                 16,(0xffffU & (IData)((vlSelfRef.tb_raster__DOT__out_abs_pos 
-                                        >> 0x20U))),
-                 16,(0xffffU & (IData)((vlSelfRef.tb_raster__DOT__out_abs_pos 
-                                        >> 0x10U))),
-                 16,(IData)(vlSelfRef.tb_raster__DOT__out_dzdx),
-                 16,vlSelfRef.tb_raster__DOT__out_dzdy);
-    co_await vlSelfRef.__VdlySched.delay(0xc350ULL, 
-                                         nullptr, "tb_raster.sv", 
-                                         97);
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    VL_FINISH_MT("tb_raster.sv", 98, "");
-    vlSelfRef.__Vm_traceActivity[2U] = 1U;
-}
-
 VL_INLINE_OPT VlCoroutine Vtb_raster___024root___eval_initial__TOP__Vtiming__1(Vtb_raster___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_raster___024root___eval_initial__TOP__Vtiming__1\n"); );
     Vtb_raster__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -121,7 +35,7 @@ VL_INLINE_OPT VlCoroutine Vtb_raster___024root___eval_initial__TOP__Vtiming__1(V
         co_await vlSelfRef.__VdlySched.delay(0x1388ULL, 
                                              nullptr, 
                                              "tb_raster.sv", 
-                                             35);
+                                             57);
         vlSelfRef.__VdlyVal__tb_raster__DOT__clk__v0 
             = (1U & (~ (IData)(vlSelfRef.tb_raster__DOT__clk)));
         vlSelfRef.__VdlySet__tb_raster__DOT__clk__v0 = 1U;
@@ -135,7 +49,7 @@ void Vtb_raster___024root___eval_act(Vtb_raster___024root* vlSelf) {
     Vtb_raster__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    if ((0xfULL & vlSelfRef.__VactTriggered.word(0U))) {
+    if ((0x3dULL & vlSelfRef.__VactTriggered.word(0U))) {
         Vtb_raster___024root___act_comb__TOP__0(vlSelf);
         vlSelfRef.__Vm_traceActivity[3U] = 1U;
     }
@@ -152,10 +66,10 @@ VL_INLINE_OPT void Vtb_raster___024root___act_comb__TOP__0(Vtb_raster___024root*
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 = 0;
     SData/*15:0*/ tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0;
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout = 0;
-    IData/*18:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout = 0;
+    IData/*18:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in = 0;
     // Body
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__next_state 
         = ((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
@@ -178,24 +92,24 @@ VL_INLINE_OPT void Vtb_raster___024root___act_comb__TOP__0(Vtb_raster___024root*
                                                     ? 0U
                                                     : 5U)
                                                    : 0U))))));
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
         = vlSelfRef.tb_raster__DOT__in_metadata;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = ((0xffffffffULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out) 
-           | ((QData)((IData)((0x7e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+           | ((QData)((IData)((0x7e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
                                           << 9U)))) 
               << 0x20U));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = ((0xffff0000ffffULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out) 
-           | ((QData)((IData)((0x3e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+           | ((QData)((IData)((0x3e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
                                           << 3U)))) 
               << 0x10U));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = (0xffffffff0000ULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out);
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout 
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_start 
-        = __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout;
+        = __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__v[0U] 
         = vlSelfRef.tb_raster__DOT__v0;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__v[1U] 
@@ -208,113 +122,113 @@ VL_INLINE_OPT void Vtb_raster___024root___act_comb__TOP__0(Vtb_raster___024root*
         = vlSelfRef.tb_raster__DOT__v2;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v[2U] 
         = vlSelfRef.tb_raster__DOT__v0;
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[0U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[0U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [0U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[1U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[1U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [1U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[2U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[2U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [2U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[0U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[0U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [0U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[1U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[1U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [1U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[2U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[2U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [2U];
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [0U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [0U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [0U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [0U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [0U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [0U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [0U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [1U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [1U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [1U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [1U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [1U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [1U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [1U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [2U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [2U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [2U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [2U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [2U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [2U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [2U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[0U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [0U];
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[1U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [1U];
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[2U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [2U];
 }
 
@@ -334,7 +248,7 @@ void Vtb_raster___024root___eval_nba(Vtb_raster___024root* vlSelf) {
     if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         Vtb_raster___024root___nba_sequent__TOP__1(vlSelf);
     }
-    if ((0xfULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+    if ((0x3dULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         Vtb_raster___024root___nba_comb__TOP__0(vlSelf);
         vlSelfRef.__Vm_traceActivity[5U] = 1U;
     }
@@ -345,72 +259,64 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
     Vtb_raster__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__Vfuncout = 0;
-    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__Vfuncout = 0;
+    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas;
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas[__Vi0] = 0;
+        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas[__Vi0] = 0;
     }
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__Vfuncout = 0;
-    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__Vfuncout = 0;
+    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas;
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas[__Vi0] = 0;
+        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas[__Vi0] = 0;
     }
-    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__Vfuncout = 0;
+    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas;
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v[__Vi0] = 0;
+        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas[__Vi0] = 0;
     }
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__Vfuncout = 0;
-    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas;
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas[__Vi0] = 0;
-    }
-    VlUnpacked<QData/*47:0*/, 3> __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v;
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v[__Vi0] = 0;
-    }
-    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__Vfuncout = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__dz_undiv;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__dz_undiv = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__determinant;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__determinant = 0;
-    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__Vfuncout = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__dz_undiv;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__dz_undiv = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__determinant;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__determinant = 0;
-    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__Vfuncout = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0 = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__abs_pos;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__abs_pos = 0;
-    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdx;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdx = 0;
-    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdy;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdy = 0;
+    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__Vfuncout = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__dz_undiv;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__dz_undiv = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__c;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__c = 0;
+    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__Vfuncout = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__dz_undiv;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__dz_undiv = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__c;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__c = 0;
+    IData/*31:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__Vfuncout = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0 = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__abs_pos;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__abs_pos = 0;
+    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdx;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdx = 0;
+    SData/*15:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdy;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdy = 0;
     IData/*18:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__metadata;
     __Vdly__tb_raster__DOT__tile_proc__DOT__metadata = 0;
     QData/*47:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__abs_pos;
     __Vdly__tb_raster__DOT__tile_proc__DOT__abs_pos = 0;
-    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__determinant;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__determinant = 0;
-    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv = 0;
-    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv = 0;
+    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A = 0;
+    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B = 0;
+    IData/*31:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C = 0;
     SData/*15:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx;
     __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx = 0;
     SData/*15:0*/ __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy;
@@ -450,12 +356,12 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__metadata;
     __Vdly__tb_raster__DOT__tile_proc__DOT__abs_pos 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__abs_pos;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__determinant 
-        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv 
-        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx_undiv;
-    __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv 
-        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy_undiv;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A 
+        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_A;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B 
+        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_B;
+    __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C 
+        = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C;
     __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx;
     __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy;
     __Vdly__tb_raster__DOT__tile_proc__DOT__z_current 
@@ -476,7 +382,7 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [0U];
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk1__DOT__i = 3U;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [0U];
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk2__DOT__i = 3U;
@@ -487,29 +393,29 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__deltas__v0 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0;
             __VdlySet__tb_raster__DOT__tile_proc__DOT__deltas__v0 = 1U;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
                 [0U];
             vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_start;
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__deltas__v1 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0;
             __VdlySet__tb_raster__DOT__tile_proc__DOT__deltas__v1 = 1U;
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x20U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x20U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [2U];
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x10U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x10U))));
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__deltas__v2 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_hf68aa2bc__0;
@@ -519,324 +425,280 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x10U)))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub)), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x20U)))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout 
                 = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult 
                    - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult);
             vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout;
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__edges__v0 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0;
             __VdlySet__tb_raster__DOT__tile_proc__DOT__edges__v0 = 1U;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
                 [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_start;
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x20U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x20U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x10U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x10U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub)), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x10U)))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub)), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x20U)))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout 
                 = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult 
                    - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult);
             vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout;
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__edges__v1 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0;
             __VdlySet__tb_raster__DOT__tile_proc__DOT__edges__v1 = 1U;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas
                 [2U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
                 [2U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_start;
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x20U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x20U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__start 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__start 
                                        >> 0x10U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__v_i 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__v_i 
                                                              >> 0x10U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub)), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x10U)))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub)), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__delta_i 
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__delta_i 
                                                         >> 0x20U)))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout 
                 = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult 
                    - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult);
             vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__2__Vfuncout;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_edge__80__Vfuncout;
             __VdlyVal__tb_raster__DOT__tile_proc__DOT__edges__v2 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT____Vlvbound_h788d9ebb__0;
             __VdlySet__tb_raster__DOT__tile_proc__DOT__edges__v2 = 1U;
         } else if ((1U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)) {
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas[0U] 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas[0U] 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
                 [0U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas[1U] 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas[1U] 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
                 [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas[2U] 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas[2U] 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
                 [2U];
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x0y2_mult 
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
                                                 (0xffffU 
                                                  & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas
+                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas
                                                             [0U] 
-                                                            >> 0x20U)))), 
+                                                            >> 0x10U)))), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas
+                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas
+                                                       [2U]))));
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult 
+                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
+                                                (0xffffU 
+                                                 & (IData)(
+                                                           __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas
+                                                           [0U]))), 
+                              VL_EXTENDS_II(32,16, 
+                                            (0xffffU 
+                                             & (IData)(
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__deltas
                                                         [2U] 
                                                         >> 0x10U)))));
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x2y0_mult 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__Vfuncout 
+                = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult 
+                   - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult);
+            __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A 
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__81__Vfuncout;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas[0U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [0U];
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas[1U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [1U];
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas[2U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [2U];
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
                                                 (0xffffU 
                                                  & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas
-                                                            [2U] 
+                                                           __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas
+                                                           [0U]))), 
+                              VL_EXTENDS_II(32,16, 
+                                            (0xffffU 
+                                             & (IData)(
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas
+                                                        [2U] 
+                                                        >> 0x20U)))));
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult 
+                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
+                                                (0xffffU 
+                                                 & (IData)(
+                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas
+                                                            [0U] 
                                                             >> 0x20U)))), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__deltas
-                                                        [0U] 
+                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__deltas
+                                                       [2U]))));
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__Vfuncout 
+                = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult 
+                   - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult);
+            __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B 
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__82__Vfuncout;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas[0U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [0U];
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas[1U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [1U];
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas[2U] 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
+                [2U];
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult 
+                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
+                                                (0xffffU 
+                                                 & (IData)(
+                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas
+                                                            [0U] 
+                                                            >> 0x20U)))), 
+                              VL_EXTENDS_II(32,16, 
+                                            (0xffffU 
+                                             & (IData)(
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas
+                                                        [2U] 
                                                         >> 0x10U)))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__Vfuncout 
-                = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x0y2_mult 
-                   - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x2y0_mult);
-            __Vdly__tb_raster__DOT__tile_proc__DOT__determinant 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_det__3__Vfuncout;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v[0U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [0U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v[1U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v[2U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [2U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas[0U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [0U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas[1U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas[2U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [2U];
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult 
+            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2mult 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
                                                 (0xffffU 
                                                  & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas
-                                                            [1U] 
-                                                            >> 0x10U)))), 
-                              VL_EXTENDS_II(32,16, 
-                                            (0xffffU 
-                                             & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v
-                                                       [0U]))));
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult 
-                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
-                                                (0xffffU 
-                                                 & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas
-                                                            [2U] 
-                                                            >> 0x10U)))), 
-                              VL_EXTENDS_II(32,16, 
-                                            (0xffffU 
-                                             & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v
-                                                       [1U]))));
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult 
-                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
-                                                (0xffffU 
-                                                 & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__deltas
+                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas
                                                             [0U] 
                                                             >> 0x10U)))), 
                               VL_EXTENDS_II(32,16, 
                                             (0xffffU 
                                              & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__v
-                                                       [2U]))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__Vfuncout 
-                = ((vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult 
-                    + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult) 
-                   + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult);
-            __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__4__Vfuncout;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v[0U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [0U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v[1U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v[2U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
-                [2U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas[0U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [0U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas[1U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [1U];
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas[2U] 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__deltas
-                [2U];
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult 
-                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
-                                                (0xffffU 
-                                                 & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas
-                                                            [0U] 
-                                                            >> 0x20U)))), 
-                              VL_EXTENDS_II(32,16, 
-                                            (0xffffU 
-                                             & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v
-                                                       [0U]))));
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult 
-                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
-                                                (0xffffU 
-                                                 & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas
-                                                            [1U] 
-                                                            >> 0x20U)))), 
-                              VL_EXTENDS_II(32,16, 
-                                            (0xffffU 
-                                             & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v
-                                                       [1U]))));
-            vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult 
-                = VL_MULS_III(32, VL_EXTENDS_II(32,16, 
-                                                (0xffffU 
-                                                 & (IData)(
-                                                           (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__deltas
-                                                            [2U] 
-                                                            >> 0x20U)))), 
-                              VL_EXTENDS_II(32,16, 
-                                            (0xffffU 
-                                             & (IData)(
-                                                       __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__v
-                                                       [2U]))));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__Vfuncout 
-                = (- ((vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult 
-                       + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult) 
-                      + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult));
-            __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__5__Vfuncout;
+                                                       (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__deltas
+                                                        [2U] 
+                                                        >> 0x20U)))));
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__Vfuncout 
+                = (vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult 
+                   - vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2mult);
+            __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C 
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__83__Vfuncout;
         } else if ((2U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)) {
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__determinant 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__dz_undiv 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx_undiv;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__c 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__dz_undiv 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_A;
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz 
-                = VL_DIVS_III(32, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__dz_undiv, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__determinant);
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__Vfuncout 
+                = (- VL_DIVS_III(32, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__dz_undiv, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__c));
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__Vfuncout 
                 = (0xffffU & (vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz 
                               >> 4U));
             __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__6__Vfuncout;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__determinant 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__dz_undiv 
-                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy_undiv;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__84__Vfuncout;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__c 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C;
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__dz_undiv 
+                = vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_B;
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz 
-                = VL_DIVS_III(32, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__dz_undiv, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__determinant);
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__Vfuncout 
+                = (- VL_DIVS_III(32, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__dz_undiv, __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__c));
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__Vfuncout 
                 = (0xffffU & (vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz 
                               >> 4U));
             __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__7__Vfuncout;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__scale_dz__85__Vfuncout;
         } else if ((3U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)) {
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdy 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdy 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdx 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdx 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__abs_pos 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__abs_pos 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__abs_pos;
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0 
                 = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
                 [0U];
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0 
                                        >> 0x20U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__abs_pos 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__abs_pos 
                                                              >> 0x20U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y 
-                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0 
+                = (0xffffU & ((IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0 
                                        >> 0x10U)) - (IData)(
-                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__abs_pos 
+                                                            (__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__abs_pos 
                                                              >> 0x10U))));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x)), 
-                              VL_EXTENDS_II(32,16, (IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdx)));
+                              VL_EXTENDS_II(32,16, (IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdx)));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component 
                 = VL_MULS_III(32, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y)), 
-                              VL_EXTENDS_II(32,16, (IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__dzdy)));
+                              VL_EXTENDS_II(32,16, (IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__dzdy)));
             vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component 
-                = (((- (IData)((1U & (IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0 
+                = (((- (IData)((1U & (IData)((__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0 
                                               >> 0xfU))))) 
-                    << 0x14U) | (0xffff0U & ((IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__v_0) 
+                    << 0x14U) | (0xffff0U & ((IData)(__Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__v_0) 
                                              << 4U)));
-            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__Vfuncout 
+            __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__Vfuncout 
                 = ((vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component 
                     + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component) 
                    + vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component);
             __Vdly__tb_raster__DOT__tile_proc__DOT__z_current 
-                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__8__Vfuncout;
+                = __Vfunc_tb_raster__DOT__tile_proc__DOT__compute_z__86__Vfuncout;
         } else if ((4U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)) {
             vlSelfRef.tb_raster__DOT__vld_out = 1U;
             vlSelfRef.tb_raster__DOT__out_abs_pos = vlSelfRef.tb_raster__DOT__tile_proc__DOT__abs_pos;
@@ -877,9 +739,9 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
         __Vdly__tb_raster__DOT__tile_proc__DOT__abs_pos = 0ULL;
         __VdlySet__tb_raster__DOT__tile_proc__DOT__deltas__v3 = 1U;
         __Vdly__tb_raster__DOT__tile_proc__DOT__metadata = 0U;
-        __Vdly__tb_raster__DOT__tile_proc__DOT__determinant = 0U;
-        __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv = 0U;
-        __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv = 0U;
+        __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A = 0U;
+        __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B = 0U;
+        __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C = 0U;
         __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx = 0U;
         __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy = 0U;
         __Vdly__tb_raster__DOT__tile_proc__DOT__z_current = 0U;
@@ -890,12 +752,12 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_sequent__TOP__0(Vtb_raster___024ro
         = __Vdly__tb_raster__DOT__tile_proc__DOT__metadata;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__abs_pos 
         = __Vdly__tb_raster__DOT__tile_proc__DOT__abs_pos;
-    vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant 
-        = __Vdly__tb_raster__DOT__tile_proc__DOT__determinant;
-    vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx_undiv 
-        = __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx_undiv;
-    vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy_undiv 
-        = __Vdly__tb_raster__DOT__tile_proc__DOT__dzdy_undiv;
+    vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_A 
+        = __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_A;
+    vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_B 
+        = __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_B;
+    vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C 
+        = __Vdly__tb_raster__DOT__tile_proc__DOT__coeff_C;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx 
         = __Vdly__tb_raster__DOT__tile_proc__DOT__dzdx;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy 
@@ -960,29 +822,29 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_comb__TOP__0(Vtb_raster___024root*
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 = 0;
     SData/*15:0*/ tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0;
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 = 0;
-    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout = 0;
-    IData/*18:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in;
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in = 0;
+    QData/*47:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout = 0;
+    IData/*18:0*/ __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in;
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in = 0;
     // Body
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
         = vlSelfRef.tb_raster__DOT__in_metadata;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = ((0xffffffffULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out) 
-           | ((QData)((IData)((0x7e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+           | ((QData)((IData)((0x7e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
                                           << 9U)))) 
               << 0x20U));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = ((0xffff0000ffffULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out) 
-           | ((QData)((IData)((0x3e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__in 
+           | ((QData)((IData)((0x3e00U & (__Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__in 
                                           << 3U)))) 
               << 0x10U));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
         = (0xffffffff0000ULL & vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out);
-    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout 
+    __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_start 
-        = __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__0__Vfuncout;
+        = __Vfunc_tb_raster__DOT__tile_proc__DOT__tile_to_coord__78__Vfuncout;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__v[0U] 
         = vlSelfRef.tb_raster__DOT__v0;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__v[1U] 
@@ -995,113 +857,113 @@ VL_INLINE_OPT void Vtb_raster___024root___nba_comb__TOP__0(Vtb_raster___024root*
         = vlSelfRef.tb_raster__DOT__v2;
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v[2U] 
         = vlSelfRef.tb_raster__DOT__v0;
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[0U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[0U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [0U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[1U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[1U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [1U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b[2U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b[2U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__v
         [2U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[0U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[0U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [0U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[1U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[1U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [1U];
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a[2U] 
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a[2U] 
         = vlSelfRef.tb_raster__DOT__tile_proc__DOT__rotated_v
         [2U];
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [0U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [0U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [0U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [0U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [0U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [0U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [0U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[0U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[0U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [0U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [1U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [1U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [1U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [1U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [1U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [1U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [1U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[1U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[1U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [1U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [2U] >> 0x20U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [2U] 
                                                           >> 0x20U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8b895015__0)) 
                      << 0x20U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0 
-        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
+        = (0xffffU & ((IData)((vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
                                [2U] >> 0x10U)) - (IData)(
-                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+                                                         (vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                                           [2U] 
                                                           >> 0x10U))));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | ((QData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ac395a0__0)) 
                      << 0x10U));
     tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0 
-        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__a
-                              [2U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__b
+        = (0xffffU & ((IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__a
+                              [2U]) - (IData)(vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__b
                                               [2U])));
-    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas[2U] 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+    vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas[2U] 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
             [2U]) | (IData)((IData)(tb_raster__DOT__tile_proc__DOT____Vlvbound_h8ae37423__0)));
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[0U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [0U];
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[1U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [1U];
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__temp_deltas[2U] 
-        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__1__deltas
+        = vlSelfRef.__Vtask_tb_raster__DOT__tile_proc__DOT__compute_deltas__79__deltas
         [2U];
     vlSelfRef.tb_raster__DOT__tile_proc__DOT__next_state 
         = ((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
@@ -1140,8 +1002,16 @@ void Vtb_raster___024root___timing_resume(Vtb_raster___024root* vlSelf) {
                                                    "@( tb_raster.rdy_in)");
     }
     if ((8ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        vlSelfRef.__VtrigSched_h43a42aa4__0.resume(
-                                                   "@( tb_raster.vld_out)");
+        vlSelfRef.__VtrigSched_hc1c788c7__0.resume(
+                                                   "@(negedge tb_raster.clk)");
+    }
+    if ((0x10ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        vlSelfRef.__VtrigSched_h43a42b1b__0.resume(
+                                                   "@(posedge tb_raster.vld_out)");
+    }
+    if ((0x20ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        vlSelfRef.__VtrigSched_h43a42bda__0.resume(
+                                                   "@(negedge tb_raster.vld_out)");
     }
     if ((2ULL & vlSelfRef.__VactTriggered.word(0U))) {
         vlSelfRef.__VdlySched.resume();
@@ -1162,8 +1032,16 @@ void Vtb_raster___024root___timing_commit(Vtb_raster___024root* vlSelf) {
                                                    "@( tb_raster.rdy_in)");
     }
     if ((! (8ULL & vlSelfRef.__VactTriggered.word(0U)))) {
-        vlSelfRef.__VtrigSched_h43a42aa4__0.commit(
-                                                   "@( tb_raster.vld_out)");
+        vlSelfRef.__VtrigSched_hc1c788c7__0.commit(
+                                                   "@(negedge tb_raster.clk)");
+    }
+    if ((! (0x10ULL & vlSelfRef.__VactTriggered.word(0U)))) {
+        vlSelfRef.__VtrigSched_h43a42b1b__0.commit(
+                                                   "@(posedge tb_raster.vld_out)");
+    }
+    if ((! (0x20ULL & vlSelfRef.__VactTriggered.word(0U)))) {
+        vlSelfRef.__VtrigSched_h43a42bda__0.commit(
+                                                   "@(negedge tb_raster.vld_out)");
     }
 }
 
@@ -1174,7 +1052,7 @@ bool Vtb_raster___024root___eval_phase__act(Vtb_raster___024root* vlSelf) {
     Vtb_raster__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    VlTriggerVec<4> __VpreTriggered;
+    VlTriggerVec<6> __VpreTriggered;
     CData/*0:0*/ __VactExecute;
     // Body
     Vtb_raster___024root___eval_triggers__act(vlSelf);

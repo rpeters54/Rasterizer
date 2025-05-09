@@ -12,7 +12,7 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_init_sub__TOP__0(Vtb_raster___024r
     const int c = vlSymsp->__Vm_baseCode;
     // Body
     tracep->pushPrefix("tb_raster", VerilatedTracePrefixType::SCOPE_MODULE);
-    tracep->declBit(c+117,0,"clk",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1);
+    tracep->declBit(c+115,0,"clk",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+1,0,"rst_n",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+2,0,"rdy_out",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+3,0,"vld_in",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1);
@@ -69,9 +69,9 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_init_sub__TOP__0(Vtb_raster___024r
     tracep->declBus(c+69,0,"out_dzdx",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+70,0,"out_dzdy",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+71,0,"out_z_current",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+119,0,"CLK_PERIOD",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::PARAMETER, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+117,0,"CLK_PERIOD",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::PARAMETER, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
     tracep->pushPrefix("tile_proc", VerilatedTracePrefixType::SCOPE_MODULE);
-    tracep->declBit(c+117,0,"clk",-1, VerilatedTraceSigDirection::INPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1);
+    tracep->declBit(c+115,0,"clk",-1, VerilatedTraceSigDirection::INPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+1,0,"rst_n",-1, VerilatedTraceSigDirection::INPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+2,0,"rdy_out",-1, VerilatedTraceSigDirection::INPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1);
     tracep->declBit(c+3,0,"vld_in",-1, VerilatedTraceSigDirection::INPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1);
@@ -129,7 +129,7 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_init_sub__TOP__0(Vtb_raster___024r
     tracep->declBus(c+70,0,"out_dzdy",-1, VerilatedTraceSigDirection::OUTPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+71,0,"out_z_current",-1, VerilatedTraceSigDirection::OUTPUT, VerilatedTraceSigKind::WIRE, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
     tracep->declBus(c+72,0,"present_state",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
-    tracep->declBus(c+118,0,"next_state",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
+    tracep->declBus(c+116,0,"next_state",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
     tracep->pushPrefix("v", VerilatedTracePrefixType::ARRAY_UNPACKED);
     tracep->pushPrefix("[0]", VerilatedTracePrefixType::STRUCT_PACKED);
     tracep->declBus(c+16,0,"x",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
@@ -218,9 +218,9 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_init_sub__TOP__0(Vtb_raster___024r
     tracep->declBus(c+89,0,"tile_y",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 4,0);
     tracep->declBus(c+90,0,"tile_x",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 5,0);
     tracep->popPrefix();
-    tracep->declBus(c+91,0,"determinant",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+92,0,"dzdx_undiv",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+93,0,"dzdy_undiv",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+91,0,"coeff_A",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+92,0,"coeff_B",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+93,0,"coeff_C",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
     tracep->declBus(c+94,0,"dzdx",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+95,0,"dzdy",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+96,0,"z_current",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
@@ -233,25 +233,23 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_init_sub__TOP__0(Vtb_raster___024r
     tracep->declBus(c+98,0,"compute_edge__Vstatic__temp_y_sub",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
     tracep->declBus(c+99,0,"compute_edge__Vstatic__temp_x_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
     tracep->declBus(c+100,0,"compute_edge__Vstatic__temp_y_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+101,0,"compute_det__Vstatic__temp_x0y2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+102,0,"compute_det__Vstatic__temp_x2y0_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+103,0,"compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+104,0,"compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+105,0,"compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+106,0,"compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+107,0,"compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+108,0,"compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+109,0,"scale_dz__Vstatic__div_result_dz",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+110,0,"compute_z__Vstatic__delta_x",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
-    tracep->declBus(c+111,0,"compute_z__Vstatic__delta_y",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
-    tracep->declBus(c+112,0,"compute_z__Vstatic__x_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+113,0,"compute_z__Vstatic__y_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
-    tracep->declBus(c+114,0,"compute_z__Vstatic__z_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+101,0,"compute_plane_coeff_a__Vstatic__temp_y0z2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+102,0,"compute_plane_coeff_a__Vstatic__temp_z0y2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+103,0,"compute_plane_coeff_b__Vstatic__temp_z0x2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+104,0,"compute_plane_coeff_b__Vstatic__temp_x0z2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+105,0,"compute_plane_coeff_c__Vstatic__temp_x0y2_mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+106,0,"compute_plane_coeff_c__Vstatic__temp_y0x2mult",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+107,0,"scale_dz__Vstatic__div_result_dz",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+108,0,"compute_z__Vstatic__delta_x",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
+    tracep->declBus(c+109,0,"compute_z__Vstatic__delta_y",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 15,0);
+    tracep->declBus(c+110,0,"compute_z__Vstatic__x_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+111,0,"compute_z__Vstatic__y_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
+    tracep->declBus(c+112,0,"compute_z__Vstatic__z_component",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::LOGIC, false,-1, 31,0);
     tracep->pushPrefix("unnamedblk1", VerilatedTracePrefixType::SCOPE_MODULE);
-    tracep->declBus(c+115,0,"i",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
+    tracep->declBus(c+113,0,"i",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
     tracep->popPrefix();
     tracep->pushPrefix("unnamedblk2", VerilatedTracePrefixType::SCOPE_MODULE);
-    tracep->declBus(c+116,0,"i",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
+    tracep->declBus(c+114,0,"i",-1, VerilatedTraceSigDirection::NONE, VerilatedTraceSigKind::VAR, VerilatedTraceSigType::INT, false,-1, 31,0);
     tracep->popPrefix();
     tracep->popPrefix();
     tracep->popPrefix();
@@ -299,7 +297,7 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_const_0_sub_0(Vtb_raster___024root
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
-    bufp->fullIData(oldp+119,(0xaU),32);
+    bufp->fullIData(oldp+117,(0xaU),32);
 }
 
 VL_ATTR_COLD void Vtb_raster___024root__trace_full_0_sub_0(Vtb_raster___024root* vlSelf, VerilatedVcd::Buffer* bufp);
@@ -496,9 +494,9 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_full_0_sub_0(Vtb_raster___024root*
     bufp->fullCData(oldp+89,((0x1fU & (vlSelfRef.tb_raster__DOT__tile_proc__DOT__metadata 
                                        >> 6U))),5);
     bufp->fullCData(oldp+90,((0x3fU & vlSelfRef.tb_raster__DOT__tile_proc__DOT__metadata)),6);
-    bufp->fullIData(oldp+91,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__determinant),32);
-    bufp->fullIData(oldp+92,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx_undiv),32);
-    bufp->fullIData(oldp+93,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy_undiv),32);
+    bufp->fullIData(oldp+91,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_A),32);
+    bufp->fullIData(oldp+92,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_B),32);
+    bufp->fullIData(oldp+93,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__coeff_C),32);
     bufp->fullSData(oldp+94,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdx),16);
     bufp->fullSData(oldp+95,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__dzdy),16);
     bufp->fullIData(oldp+96,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__z_current),32);
@@ -506,24 +504,22 @@ VL_ATTR_COLD void Vtb_raster___024root__trace_full_0_sub_0(Vtb_raster___024root*
     bufp->fullSData(oldp+98,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub),16);
     bufp->fullIData(oldp+99,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult),32);
     bufp->fullIData(oldp+100,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult),32);
-    bufp->fullIData(oldp+101,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x0y2_mult),32);
-    bufp->fullIData(oldp+102,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_det__Vstatic__temp_x2y0_mult),32);
-    bufp->fullIData(oldp+103,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy1vz0_mult),32);
-    bufp->fullIData(oldp+104,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy2vz1_mult),32);
-    bufp->fullIData(oldp+105,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdx_undiv__Vstatic__temp_dy0vz2_mult),32);
-    bufp->fullIData(oldp+106,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx0vz0_mult),32);
-    bufp->fullIData(oldp+107,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx1vz1_mult),32);
-    bufp->fullIData(oldp+108,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_dzdy_undiv__Vstatic__temp_dx2vz2_mult),32);
-    bufp->fullIData(oldp+109,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz),32);
-    bufp->fullSData(oldp+110,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x),16);
-    bufp->fullSData(oldp+111,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y),16);
-    bufp->fullIData(oldp+112,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component),32);
-    bufp->fullIData(oldp+113,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component),32);
-    bufp->fullIData(oldp+114,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component),32);
-    bufp->fullIData(oldp+115,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
-    bufp->fullIData(oldp+116,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk2__DOT__i),32);
-    bufp->fullBit(oldp+117,(vlSelfRef.tb_raster__DOT__clk));
-    bufp->fullIData(oldp+118,(((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
+    bufp->fullIData(oldp+101,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult),32);
+    bufp->fullIData(oldp+102,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult),32);
+    bufp->fullIData(oldp+103,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult),32);
+    bufp->fullIData(oldp+104,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult),32);
+    bufp->fullIData(oldp+105,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult),32);
+    bufp->fullIData(oldp+106,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2mult),32);
+    bufp->fullIData(oldp+107,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz),32);
+    bufp->fullSData(oldp+108,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x),16);
+    bufp->fullSData(oldp+109,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y),16);
+    bufp->fullIData(oldp+110,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__x_component),32);
+    bufp->fullIData(oldp+111,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__y_component),32);
+    bufp->fullIData(oldp+112,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__compute_z__Vstatic__z_component),32);
+    bufp->fullIData(oldp+113,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
+    bufp->fullIData(oldp+114,(vlSelfRef.tb_raster__DOT__tile_proc__DOT__unnamedblk2__DOT__i),32);
+    bufp->fullBit(oldp+115,(vlSelfRef.tb_raster__DOT__clk));
+    bufp->fullIData(oldp+116,(((0U == vlSelfRef.tb_raster__DOT__tile_proc__DOT__present_state)
                                 ? (((IData)(vlSelfRef.tb_raster__DOT__vld_in) 
                                     & (IData)(vlSelfRef.tb_raster__DOT__rdy_in))
                                     ? 1U : 0U) : ((1U 
