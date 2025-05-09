@@ -1,5 +1,3 @@
 VCD info: dumpfile tb_axi_fifo.vcd opened for output.
-** VVP Stop(0) **
-** Flushing output streams.
-** Current simulation time is 4332265000 ticks.
-[?2004h> [?2004l
+All tests passed.
+tb_axi_fifo.sv:240: $finish called at 1180000 (1ps)

@@ -49,17 +49,17 @@ end
     rdy_out = 0;
     vld_in = 0;
 
-    in_abs_pos =    '{default:'0};
-    in_delta_0 =    '{default:'0};
-    in_delta_1 =    '{default:'0};
-    in_delta_2 =    '{default:'0};
-    in_edge_0 =     '{default:'0};
-    in_edge_1 =     '{default:'0};
-    in_edge_2 =     '{default:'0};
-    in_metadata =   '{default:'0};
-    in_dzdx =       '{default:'0};
-    in_dzdy =       '{default:'0};
-    in_z_current =  '{default:'0};
+    // in_abs_pos =    '{default:'0};
+    // in_delta_0 =    '{default:'0};
+    // in_delta_1 =    '{default:'0};
+    // in_delta_2 =    '{default:'0};
+    // in_edge_0 =     '{default:'0};
+    // in_edge_1 =     '{default:'0};
+    // in_edge_2 =     '{default:'0};
+    // in_metadata =   '{default:'0};
+    // in_dzdx =       '{default:'0};
+    // in_dzdy =       '{default:'0};
+    // in_z_current =  '{default:'0};
 
     // Release reset after a few cycles
     repeat (2) @(posedge clk);

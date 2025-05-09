@@ -1,0 +1,176 @@
+$date
+	Fri May  9 21:12:02 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_pixel $end
+$var wire 1 ! vld_out $end
+$var wire 1 " rdy_in $end
+$var wire 32 # pixel_out [31:0] $end
+$var wire 8 $ color_out [7:0] $end
+$var parameter 32 % CLK_PERIOD $end
+$var reg 1 & clk $end
+$var reg 48 ' in_abs_pos [47:0] $end
+$var reg 48 ( in_delta_0 [47:0] $end
+$var reg 48 ) in_delta_1 [47:0] $end
+$var reg 48 * in_delta_2 [47:0] $end
+$var reg 16 + in_dzdx [15:0] $end
+$var reg 16 , in_dzdy [15:0] $end
+$var reg 32 - in_edge_0 [31:0] $end
+$var reg 32 . in_edge_1 [31:0] $end
+$var reg 32 / in_edge_2 [31:0] $end
+$var reg 19 0 in_metadata [18:0] $end
+$var reg 32 1 in_z_current [31:0] $end
+$var reg 1 2 rdy_out $end
+$var reg 1 3 rst_n $end
+$var reg 1 4 vld_in $end
+$scope module pixel_proc $end
+$var wire 1 & clk $end
+$var wire 48 5 in_abs_pos [47:0] $end
+$var wire 48 6 in_delta_0 [47:0] $end
+$var wire 48 7 in_delta_1 [47:0] $end
+$var wire 48 8 in_delta_2 [47:0] $end
+$var wire 16 9 in_dzdx [15:0] $end
+$var wire 16 : in_dzdy [15:0] $end
+$var wire 32 ; in_edge_0 [31:0] $end
+$var wire 32 < in_edge_1 [31:0] $end
+$var wire 32 = in_edge_2 [31:0] $end
+$var wire 19 > in_metadata [18:0] $end
+$var wire 32 ? in_z_current [31:0] $end
+$var wire 1 2 rdy_out $end
+$var wire 1 3 rst_n $end
+$var wire 1 4 vld_in $end
+$var wire 32 @ out_coord [31:0] $end
+$var wire 11 A new_tile_coord [10:0] $end
+$var wire 11 B current_tile_coord [10:0] $end
+$var reg 48 C abs_pos [47:0] $end
+$var reg 8 D color_out [7:0] $end
+$var reg 16 E dzdx [15:0] $end
+$var reg 16 F dzdy [15:0] $end
+$var reg 48 G flush_abs_pos [47:0] $end
+$var reg 8 H flush_rel_pos [7:0] $end
+$var reg 19 I metadata [18:0] $end
+$var reg 32 J pixel_out [31:0] $end
+$var reg 1 " rdy_in $end
+$var reg 8 K rel_pos [7:0] $end
+$var reg 48 L temp_delta [47:0] $end
+$var reg 1 ! vld_out $end
+$var reg 32 M z_current [31:0] $end
+$var integer 32 N next_state [31:0] $end
+$var integer 32 O present_state [31:0] $end
+$scope function edge_column_offset $end
+$var reg 48 P delta_i [47:0] $end
+$var reg 32 Q s_dy [31:0] $end
+$upscope $end
+$scope function edge_row_offset $end
+$var reg 48 R delta_i [47:0] $end
+$var reg 32 S s_dx [31:0] $end
+$var reg 32 T s_dy [31:0] $end
+$upscope $end
+$scope function sext_f16_f32 $end
+$var reg 16 U in [15:0] $end
+$upscope $end
+$scope begin $ivl_for_loop3 $end
+$var integer 32 V i [31:0] $end
+$upscope $end
+$scope begin $ivl_for_loop4 $end
+$var integer 32 W i [31:0] $end
+$upscope $end
+$scope begin $ivl_for_loop5 $end
+$var integer 32 X i [31:0] $end
+$upscope $end
+$scope begin $ivl_for_loop6 $end
+$var integer 32 Y i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1010 %
+$end
+#0
+$dumpvars
+b0 Y
+b0 X
+b0 W
+b0 V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+b0 O
+b0 N
+bx M
+b0 L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+bx C
+bx B
+bx A
+bx @
+bx ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+bx 5
+04
+03
+02
+bx 1
+bx 0
+bx /
+bx .
+bx -
+bx ,
+bx +
+bx *
+bx )
+bx (
+bx '
+0&
+bx $
+bx #
+x"
+x!
+$end
+#5
+b0 B
+b0 @
+1"
+b0 M
+b0 F
+b0 E
+b0 I
+b0 H
+b0 K
+b0 G
+b0 C
+b100000000 W
+b11 V
+1&
+#10
+0&
+#15
+b100000000 W
+b11 V
+13
+1&

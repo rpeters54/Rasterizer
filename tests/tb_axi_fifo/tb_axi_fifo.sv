@@ -99,6 +99,7 @@ end
         logic  [63:0] big_rand;
         logic  [7:0]  small_rand;
         logic  [15:0] med_rand;
+        logic  [31:0] temp;
         int i;
         for (i=0; i<n; i++) begin
         case (id)
@@ -107,32 +108,34 @@ end
                 wait (rdy_in1); // ensure ready
                 big_rand = {$urandom, $urandom};
                 fifo_64.push_back(big_rand);
-                @(posedge clk);
+                @(negedge clk);
                 data_in1 = fifo_64[$];
                 vld_in1  = 1;
-                @(posedge clk);
+                @(negedge clk);
                 vld_in1  = 0;
              end
 
           2: begin
                 wait (rdy_in2);
-                small_rand = big_rand[7:0];
+                temp = $urandom;
+                small_rand = temp[7:0];
                 fifo_8.push_back(small_rand);
-                @(posedge clk);
+                @(negedge clk);
                 data_in2 = fifo_8[$];
                 vld_in2  = 1;
-                @(posedge clk);
+                @(negedge clk);
                 vld_in2  = 0;
              end
 
           3: begin
                 wait (rdy_in3);
-                med_rand = big_rand[15:0];
+                temp = $urandom;
+                med_rand = temp[15:0];
                 fifo_16.push_back(med_rand);
-                @(posedge clk);
+                @(negedge clk);
                 data_in3 = fifo_16[$];
                 vld_in3  = 1;
-                @(posedge clk);
+                @(negedge clk);
                 vld_in3  = 0;
              end
         endcase
@@ -155,9 +158,9 @@ end
                 assert (data_out1 == fifo_64[count_64])
                     else $error("FIFO1 data mismatch: got %h, expected %h", data_out1, fifo_64[count_64]);
                 count_64 += 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out1 = 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out1 = 0;
              end
 
@@ -167,9 +170,9 @@ end
                 assert (data_out2 == fifo_8[count_8])
                     else $error("FIFO2 data mismatch: got %h, expected %h", data_out2, fifo_8[count_8]);
                 count_8 += 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out2 = 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out2 = 0;
              end
 
@@ -179,9 +182,9 @@ end
                 assert (data_out3 == fifo_16[count_16])
                     else $error("FIFO3 data mismatch: got %h, expected %h", data_out3, fifo_16[count_16]);
                 count_16 += 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out3 = 1;
-                @(posedge clk);
+                @(negedge clk);
                 rdy_out3 = 0;
              end
         endcase
@@ -219,17 +222,17 @@ end
     // Test 3: Full/Empty flag checks
     // Attempt to overfill
     push_words(2, 4);
-    @(posedge clk);
+    @(negedge clk);
     vld_in2 = 1; data_in2 = 8'hFF;
-    @(posedge clk);
+    @(negedge clk);
     vld_in2 = 0;
     assert (!rdy_in2) else $error("FIFO2 allowed write when full");
     pop_and_check(2, 4);
 
     // Attempt to over-empty
-    @(posedge clk);
+    @(negedge clk);
     rdy_out3 = 1;
-    @(posedge clk);
+    @(negedge clk);
     rdy_out3 = 0;
     assert (!vld_out3) else $error("FIFO3 asserted valid when empty");
 

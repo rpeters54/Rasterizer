@@ -41,16 +41,27 @@ metadata_t                          metadata;
 logic        [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
 logic        [`FX_TOTAL_BITS*2-1:0] z_current;
 
+// temps needed to get iverilog working :(
 coord_2d_t out_coord;
+logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] current_tile_coord;
+logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] new_tile_coord;
+coord_3d_t temp_delta;
 
 assign out_coord.x = flush_abs_pos.x;
 assign out_coord.y = flush_abs_pos.y;
+assign current_tile_coord = {metadata.tile_y, metadata.tile_x};
+assign new_tile_coord = {in_metadata.tile_y, in_metadata.tile_x};
 
 always_comb begin
+
+    temp_delta.x = 0;
+    temp_delta.y = 0;
+    temp_delta.z = 0;
+
     case (present_state)
         IDLE: begin
             if (vld_in) begin
-                if ({metadata.tile_y, metadata.tile_x} >= {in_metadata.tile_y, in_metadata.tile_x}) begin
+                if (current_tile_coord >= new_tile_coord) begin
                     next_state = PROCESS;
                 end else begin
                     next_state = FLUSHING;
@@ -84,26 +95,25 @@ always_ff @(posedge clk) begin
 
     if (!rst_n) begin
         // Reset logic
-        abs_pos.x        <= 0;
-        abs_pos.y        <= 0;
-        abs_pos.z        <= 0;
-        flush_abs_pos.x  <= 0;
-        flush_abs_pos.y  <= 0;
-        flush_abs_pos.z  <= 0;
-        rel_pos          <= 0;
-        flush_rel_pos    <= 0;
+        abs_pos.x        <= '0;
+        abs_pos.y        <= '0;
+        abs_pos.z        <= '0;
+        flush_abs_pos.x  <= '0;
+        flush_abs_pos.y  <= '0;
+        flush_abs_pos.z  <= '0;
+        rel_pos          <= '0;
+        flush_rel_pos    <= '0;
+
         for (int i = 0; i < `NUM_VERTICES; i++) begin
-            deltas[i].x  <= 0;
-            deltas[i].y  <= 0;
-            deltas[i].z  <= 0;
-            edges[i]     <= 0;
+            deltas[i] <= temp_delta;
+            edges[i]  <= '0;
         end
-        metadata.color   <= 0;
-        metadata.tile_x  <= 0;
-        metadata.tile_y  <= 0;
+        metadata.color   <= '0;
+        metadata.tile_x  <= '0;
+        metadata.tile_y  <= '0;
         for (int i = 0; i < `TILE_AREA; i++) begin
-            z_buffer     <= {2*`FX_TOTAL_BITS{1'b1}};
-            color_buffer <= 0;
+            z_buffer[i]     <= {2*`FX_TOTAL_BITS{1'b1}};
+            color_buffer[i] <= '0;
         end
 
         dzdx         <= '0;
@@ -119,29 +129,29 @@ always_ff @(posedge clk) begin
             IDLE: begin
                 // Get tile-scale data if available
                 if (vld_in) begin
-                    abs_pos      <= in_abs_pos;
+                    abs_pos       <= in_abs_pos;
                     flush_abs_pos <= in_abs_pos;
-                    rel_pos      <= '0;
+                    rel_pos       <= '0;
                     flush_rel_pos <= '0;
-                    deltas[0]    <= in_delta_0;
-                    deltas[1]    <= in_delta_1;
-                    deltas[2]    <= in_delta_2;
-                    edges[0]     <= in_edge_0;
-                    edges[1]     <= in_edge_1;
-                    edges[2]     <= in_edge_2;
-                    metadata     <= in_metadata;
-                    dzdx         <= in_dzdx;
-                    dzdy         <= in_dzdy;
-                    z_current    <= in_z_current;
+                    deltas[0]     <= in_delta_0;
+                    deltas[1]     <= in_delta_1;
+                    deltas[2]     <= in_delta_2;
+                    edges[0]      <= in_edge_0;
+                    edges[1]      <= in_edge_1;
+                    edges[2]      <= in_edge_2;
+                    metadata      <= in_metadata;
+                    dzdx          <= in_dzdx;
+                    dzdy          <= in_dzdy;
+                    z_current     <= in_z_current;
 
-                    rdy_in       <= '1;
+                    rdy_in        <= '1;
                 end
             end
             PROCESS: begin
                 rdy_in       <= '0;
 
                 // edge and depth check
-                if (inside_polygon(edges) > 0 && depth_test(rel_pos, z_current, z_buffer)) begin
+                if ((edges[0] > 0) && (edges[1] > 0) &&  (edges[2] > 0) && (z_current < z_buffer[rel_pos])) begin
                     z_buffer[rel_pos]     <= z_current;
                     color_buffer[rel_pos] <= metadata.color;
                 end 
@@ -156,7 +166,7 @@ always_ff @(posedge clk) begin
 
                     // Update the edge values
                     for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        edges[i] <= edges[i] - sext_f16_f32(deltas[i].y) << `TILE_WIDTH_BITS - sext_f16_f32(deltas[i].x);
+                        edges[i] <= edges[i] - edge_row_offset(deltas[i]);
                     end
 
                 end else begin
@@ -168,7 +178,7 @@ always_ff @(posedge clk) begin
 
                     // Update the edge values
                     for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        edges[i] <= edges[i] + sext_f16_f32(deltas[i].y);
+                        edges[i] <= edges[i] + edge_column_offset(deltas[i]);
                     end
                 end
 
@@ -213,33 +223,37 @@ always_ff @(posedge clk) begin
 
 end
 
-function logic inside_polygon(
-    input signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1]
-    );
-    logic [`NUM_VERTICES-1:0] temp;
-    
-    for (int i = 0; i < `NUM_VERTICES; i++) begin
-        temp[i] = (edges[i] > 0);
-    end
-    
-    return &temp;
-endfunction
-
-// return true if the new point is visible
-function logic depth_test(
-    input        [`TILE_AREA_BITS-1:0]  rel_pos,
-    input signed [`FX_TOTAL_BITS*2-1:0] z_current,
-    input signed [`FX_TOTAL_BITS*2-1:0] z_buffer  [0:`TILE_AREA-1]
-    );
-    return (z_current < z_buffer[rel_pos]);
-endfunction
-
 // sign extend a 16-bit fixed-point number to 32 bits
 function [`FX_TOTAL_BITS*2-1:0] sext_f16_f32(
     input [`FX_TOTAL_BITS-1:0] in
 );
 
 return {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
+    
+endfunction
+
+function [`FX_TOTAL_BITS*2-1:0] edge_row_offset(
+    input coord_3d_t delta_i
+);
+
+logic [`FX_TOTAL_BITS*2-1:0] s_dy, s_dx;
+
+s_dy = delta_i.y;
+s_dx = delta_i.x;
+
+return sext_f16_f32(s_dy) << `TILE_WIDTH_BITS + sext_f16_f32(s_dx);
+
+endfunction
+
+function [`FX_TOTAL_BITS*2-1:0] edge_column_offset(
+    input coord_3d_t delta_i
+);
+
+logic [`FX_TOTAL_BITS*2-1:0] s_dy;
+
+s_dy = delta_i.y;
+
+return sext_f16_f32(s_dy);
 
 endfunction
 
