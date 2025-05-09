@@ -204,14 +204,13 @@ end
 function logic inside_polygon(
     input signed [`FX_TOTAL_BITS*2-1:0] edges [0:`NUM_VERTICES-1]
     );
-    // Use reduction AND operator to check all edges at once
     logic [`NUM_VERTICES-1:0] temp;
     
     for (int i = 0; i < `NUM_VERTICES; i++) begin
         temp[i] = (edges[i] > 0);
     end
     
-    return &temp; // Reduction AND
+    return &temp;
 endfunction
 
 // return true if the new point is visible
