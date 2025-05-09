@@ -180,8 +180,8 @@ function coord_3d_t tile_to_coord(
 
     coord_3d_t out;
 
-    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - 5){1'b0}}, in.tile_x, 5'b0, {`FX_FRAC_BITS{1'b0}}};
-    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS - 5){1'b0}}, in.tile_y, 5'b0, {`FX_FRAC_BITS{1'b0}}};
+    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_x, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
+    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_y, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
     out.z = 0;
 
     return out;
@@ -232,7 +232,10 @@ logic signed [`FX_TOTAL_BITS*2-1:0] temp_y0z2_mult, temp_z0y2_mult;
 
 temp_y0z2_mult = deltas[0].y * deltas[2].z;
 temp_z0y2_mult = deltas[0].z * deltas[2].y;
-return temp_y0z2_mult - temp_z0y2_mult;
+// return temp_y0z2_mult - temp_z0y2_mult;
+
+// negate to account for V02 = -delta[2]
+return temp_z0y2_mult - temp_y0z2_mult;
 
 endfunction
 
@@ -244,7 +247,10 @@ logic signed [`FX_TOTAL_BITS*2-1:0] temp_z0x2_mult, temp_x0z2_mult;
 
 temp_z0x2_mult = deltas[0].z * deltas[2].x;
 temp_x0z2_mult = deltas[0].x * deltas[2].z;
-return temp_z0x2_mult - temp_x0z2_mult;
+// return temp_z0x2_mult - temp_x0z2_mult;
+
+// negate to account for V02 = -delta[2]
+return temp_x0z2_mult - temp_z0x2_mult;
 
 endfunction
 
@@ -253,11 +259,14 @@ function signed [`FX_TOTAL_BITS*2-1:0] compute_plane_coeff_c(
     input coord_3d_t deltas [0:`NUM_VERTICES-1]
 );
 
-logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_y0x2mult;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_x0y2_mult, temp_y0x2_mult;
 
 temp_x0y2_mult = deltas[0].x * deltas[2].y;
-temp_y0x2mult = deltas[0].y * deltas[2].x;
-return temp_x0y2_mult - temp_y0x2mult;
+temp_y0x2_mult = deltas[0].y * deltas[2].x;
+// return temp_x0y2_mult - temp_y0x2_mult;
+
+// negate to account for V02 = -delta[2]
+return temp_y0x2_mult - temp_x0y2_mult;
 
 endfunction
 

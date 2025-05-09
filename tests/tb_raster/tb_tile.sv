@@ -1,6 +1,6 @@
 `include "../../rtl/raster_defines.svh"
 
-module tb_raster;
+module tb_tile;
 
 // Declare test variables
 logic                                   clk;
@@ -61,7 +61,7 @@ end
 // Necessary to create Waveform
 initial begin
     // Name as needed
-    $dumpfile("tb_raster.vcd");
+    $dumpfile("tb_tile.vcd");
     $dumpvars(0);
 end
 
@@ -135,12 +135,12 @@ task automatic simulate_expected_output(
     logic signed [`FX_TOTAL_BITS*2:0] overflow_check; // Extra bit for overflow detection
     
     // Set up vertex arrays for easier calculations
-    v = '{gv0, gv1, gv2};
+    v =         '{gv0, gv1, gv2};
     rotated_v = '{gv1, gv2, gv0};
     
     // Step 1: Calculate absolute position (tile to pixel coordinates)
-    exp_abs_pos.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - 5){1'b0}}, gmeta.tile_x, 5'b0, {`FX_FRAC_BITS{1'b0}}};
-    exp_abs_pos.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS - 5){1'b0}}, gmeta.tile_y, 5'b0, {`FX_FRAC_BITS{1'b0}}};
+    exp_abs_pos.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_x, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
+    exp_abs_pos.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, gmeta.tile_y, `TILE_WIDTH_BITS'b0, {`FX_FRAC_BITS{1'b0}}};
     exp_abs_pos.z = '0;
     
     // Step 2: Compute deltas between vertices (in clockwise order)
@@ -148,21 +148,36 @@ task automatic simulate_expected_output(
         exp_deltas[i].x = rotated_v[i].x - v[i].x;
         exp_deltas[i].y = rotated_v[i].y - v[i].y;
         exp_deltas[i].z = rotated_v[i].z - v[i].z;
+
+        // Check for potential subtraction overflow
+        check_sub_overflow(rotated_v[i].x, v[i].x, exp_deltas[i].x, "triangle edge x");
+        check_sub_overflow(rotated_v[i].y, v[i].y, exp_deltas[i].y, "triangle edge y");
+        check_sub_overflow(rotated_v[i].z, v[i].z, exp_deltas[i].z, "triangle edge z");
+
+        // if ((rotated_v[i].x < 0 && v[i].x > 0 && exp_deltas[i].x > 0) ||
+        //     (rotated_v[i].x > 0 && v[i].x < 0 && exp_deltas[i].x < 0)) begin
+        //     $warning("Potential overflow in triangle edge x subtraction for vertex %0d", i);
+        // end
         
-        // Check for overflow in delta calculations
-        if ((rotated_v[i].x > 0 && v[i].x < 0 && exp_deltas[i].x < 0) ||
-            (rotated_v[i].x < 0 && v[i].x > 0 && exp_deltas[i].x > 0)) begin
-            $warning("Potential overflow in delta x calculation for vertex %0d", i);
+        // if ((rotated_v[i].y < 0 && v[i].y > 0 && exp_deltas[i].y > 0) ||
+        //     (rotated_v[i].y > 0 && v[i].y < 0 && exp_deltas[i].y < 0)) begin
+        //     $warning("Potential overflow in triangle edge y subtraction for vertex %0d", i);
+        // end
+        
+        // if ((rotated_v[i].z < 0 && v[i].z > 0 && exp_deltas[i].z > 0) ||
+        //     (rotated_v[i].z > 0 && v[i].z < 0 && exp_deltas[i].z < 0)) begin
+        //     $warning("Potential overflow in triangle edge y subtraction for vertex %0d", i);
+        // end
+
+        // Check for out-of-bounds
+        if (((exp_deltas[i].x >> `FX_FRAC_BITS) >  (`SCREEN_WIDTH - 1)) ||
+            ((exp_deltas[i].x >> `FX_FRAC_BITS) < -(`SCREEN_WIDTH - 1))) begin
+            $warning("Potential out-of-bounds in edge x subtraction for vertex %0d", i);
         end
-        
-        if ((rotated_v[i].y > 0 && v[i].y < 0 && exp_deltas[i].y < 0) ||
-            (rotated_v[i].y < 0 && v[i].y > 0 && exp_deltas[i].y > 0)) begin
-            $warning("Potential overflow in delta y calculation for vertex %0d", i);
-        end
-        
-        if ((rotated_v[i].z > 0 && v[i].z < 0 && exp_deltas[i].z < 0) ||
-            (rotated_v[i].z < 0 && v[i].z > 0 && exp_deltas[i].z > 0)) begin
-            $warning("Potential overflow in delta z calculation for vertex %0d", i);
+        // Check for potential subtraction overflow
+        if (((exp_deltas[i].y >> `FX_FRAC_BITS) >  (`SCREEN_HEIGHT - 1)) ||
+            ((exp_deltas[i].y >> `FX_FRAC_BITS) < -(`SCREEN_HEIGHT - 1))) begin
+            $warning("Potential out-of-bounds in edge y subtraction for vertex %0d", i);
         end
     end
     
@@ -172,18 +187,21 @@ task automatic simulate_expected_output(
         logic signed [`FX_TOTAL_BITS*2-1:0] temp_x_mult, temp_y_mult;
         
         temp_x_sub = (exp_abs_pos.x - v[i].x);
-        temp_y_sub = (exp_abs_pos.y - v[i].y);
+        temp_y_sub = (exp_abs_pos.y - v[i].y); 
         
         // Check for potential subtraction overflow
-        if ((exp_abs_pos.x < 0 && v[i].x > 0 && temp_x_sub > 0) ||
-            (exp_abs_pos.x > 0 && v[i].x < 0 && temp_x_sub < 0)) begin
-            $warning("Potential overflow in edge x subtraction for vertex %0d", i);
-        end
+        check_sub_overflow(exp_abs_pos.x, v[i].x, temp_x_sub, "edge function x");
+        check_sub_overflow(exp_abs_pos.y, v[i].y, temp_y_sub, "edge function y");
+
+        // if ((exp_abs_pos.x < 0 && v[i].x > 0 && temp_x_sub > 0) ||
+        //     (exp_abs_pos.x > 0 && v[i].x < 0 && temp_x_sub < 0)) begin
+        //     $warning("Potential overflow in edge x subtraction for vertex %0d", i);
+        // end
         
-        if ((exp_abs_pos.y < 0 && v[i].y > 0 && temp_y_sub > 0) ||
-            (exp_abs_pos.y > 0 && v[i].y < 0 && temp_y_sub < 0)) begin
-            $warning("Potential overflow in edge y subtraction for vertex %0d", i);
-        end
+        // if ((exp_abs_pos.y < 0 && v[i].y > 0 && temp_y_sub > 0) ||
+        //     (exp_abs_pos.y > 0 && v[i].y < 0 && temp_y_sub < 0)) begin
+        //     $warning("Potential overflow in edge y subtraction for vertex %0d", i);
+        // end
         
         // Compute multiplication
         temp_x_mult = temp_x_sub * exp_deltas[i].y;
@@ -337,15 +355,18 @@ task automatic simulate_expected_output(
         delta_y = (v[0].y - exp_abs_pos.y);
         
         // Check for subtraction overflow
-        if ((v[0].x < 0 && exp_abs_pos.x > 0 && delta_x > 0) ||
-            (v[0].x > 0 && exp_abs_pos.x < 0 && delta_x < 0)) begin
-            $warning("Potential overflow in z delta_x calculation");
-        end
+        check_sub_overflow(v[0].x, exp_abs_pos.x, delta_x, "z delta_x");
+        check_sub_overflow(v[0].y, exp_abs_pos.y, delta_y, "z delta_y");
+
+        // if ((v[0].x < 0 && exp_abs_pos.x > 0 && delta_x > 0) ||
+        //     (v[0].x > 0 && exp_abs_pos.x < 0 && delta_x < 0)) begin
+        //     $warning("Potential overflow in z delta_x calculation");
+        // end
         
-        if ((v[0].y < 0 && exp_abs_pos.y > 0 && delta_y > 0) ||
-            (v[0].y > 0 && exp_abs_pos.y < 0 && delta_y < 0)) begin
-            $warning("Potential overflow in z delta_y calculation");
-        end
+        // if ((v[0].y < 0 && exp_abs_pos.y > 0 && delta_y > 0) ||
+        //     (v[0].y > 0 && exp_abs_pos.y < 0 && delta_y < 0)) begin
+        //     $warning("Potential overflow in z delta_y calculation");
+        // end
         
         x_component = delta_x * exp_dzdx;
         y_component = delta_y * exp_dzdy;
@@ -527,6 +548,20 @@ function [`FX_TOTAL_BITS*2-1:0] sext_f16_f32(
 return {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
 
 endfunction
+
+task automatic check_sub_overflow(
+    input signed [`FX_TOTAL_BITS-1:0] a,
+    input signed [`FX_TOTAL_BITS-1:0] b,
+    input signed [`FX_TOTAL_BITS-1:0] res,
+    input string msg
+);
+
+if ((a < 0 && b > 0 && res > 0) ||
+    (a > 0 && b < 0 && res < 0)) begin
+    $warning("Potential overflow in subtraction %s", msg);
+end
+
+endtask
 
 
 
