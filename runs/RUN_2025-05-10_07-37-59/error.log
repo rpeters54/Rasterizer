@@ -1,0 +1,14 @@
+Subprocess had a non-zero exit.
+Last 10 line(s):
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+7. Executing AST frontend in derive mode using pre-parsed AST for module `\raster'.
+Generating RTLIL representation for module `\raster'.
+
+7.1. Analyzing design hierarchy..
+Top module:  \raster
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pixel_processor'.
+ERROR: Assert `!source_offset && !id2ast->range_swapped' failed in frontends/ast/genrtlil.cc:1604.
+
+Full log file: 'runs/RUN_2025-05-10_07-37-59/05-yosys-jsonheader/yosys-jsonheader.log'

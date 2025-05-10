@@ -1,0 +1,36 @@
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:341:39: Declaration of signal hides declaration in upper scope: 'abs_pos'
+  341 |     input coord_3d_t                  abs_pos,
+      |                                       ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:90:37: ... Location of original declaration
+   90 | coord_3d_t                          abs_pos;
+      |                                     ^~~~~~~
+                    ... For warning description see https://verilator.org/warn/VARHIDDEN?v=5.034
+                    ... Use "/* verilator lint_off VARHIDDEN */" and lint_on around source to disable this message.
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:342:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  342 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:95:42: ... Location of original declaration
+   95 | logic signed [((12) + (4))-1:0]          dzdx, dzdy;
+      |                                          ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:343:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  343 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:95:48: ... Location of original declaration
+   95 | logic signed [((12) + (4))-1:0]          dzdx, dzdy;
+      |                                                ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:283:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  283 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:41:35: ... Location of original declaration
+   41 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:284:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  284 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:41:41: ... Location of original declaration
+   41 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:188:40: Can't find definition of variable: 'col_off'
+  188 |                     sext_f16_f32(dzdx, col_off);
+      |                                        ^~~~~~~
+%Error: Exiting due to 1 error(s)

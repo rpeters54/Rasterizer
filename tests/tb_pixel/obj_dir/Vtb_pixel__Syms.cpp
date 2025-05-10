@@ -44,7 +44,7 @@ Vtb_pixel__Syms::Vtb_pixel__Syms(VerilatedContext* contextp, const char* namep, 
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(414);
+        Verilated::stackCheck(576);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-9);
     _vm_contextp__->timeprecision(-12);

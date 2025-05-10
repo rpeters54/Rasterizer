@@ -1,0 +1,73 @@
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:267:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  267 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:37: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+                    ... For warning description see https://verilator.org/warn/VARHIDDEN?v=5.034
+                    ... Use "/* verilator lint_off VARHIDDEN */" and lint_on around source to disable this message.
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:268:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  268 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:55: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:283:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  283 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:37: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:284:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  284 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:55: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:299:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  299 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:37: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:300:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  300 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:96:55: ... Location of original declaration
+   96 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:333:39: Declaration of signal hides declaration in upper scope: 'abs_pos'
+  333 |     input coord_3d_t                  abs_pos,
+      |                                       ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:95:37: ... Location of original declaration
+   95 | coord_3d_t                          abs_pos;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:334:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  334 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:100:42: ... Location of original declaration
+  100 | logic signed [((12) + (4))-1:0]          dzdx, dzdy;
+      |                                          ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:335:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  335 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:100:48: ... Location of original declaration
+  100 | logic signed [((12) + (4))-1:0]          dzdx, dzdy;
+      |                                                ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:298:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  298 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:47:35: ... Location of original declaration
+   47 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:299:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  299 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:47:41: ... Location of original declaration
+   47 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:163:29: Can't find definition of variable: 'edge_i'
+                                                              : ... Suggested alternative: 'edges'
+  163 |                 edges[0] <= edge_i;
+      |                             ^~~~~~
+%Error: Exiting due to 1 error(s)

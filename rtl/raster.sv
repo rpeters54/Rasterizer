@@ -1,5 +1,6 @@
 
 `include "raster_defines.svh"
+`include "struct_defines.svh"
 
 module raster(
     input             clk,
@@ -19,16 +20,16 @@ module raster(
 
 
 coord_3d_t                          inter_abs_pos_0;
-coord_3d_t                          inter_deltas_0  [0:`NUM_VERTICES-1];
-logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_0   [0:`NUM_VERTICES-1];
+coord_3d_t                          inter_deltas_0_0, inter_deltas_0_1, inter_deltas_0_2;
+logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_0_0, inter_edges_0_1, inter_edges_0_2;
 metadata_t                          inter_metadata_0;
 logic        [`FX_TOTAL_BITS-1:0]   inter_dzdx_0, inter_dzdy_0;
 logic        [`FX_TOTAL_BITS*2-1:0] inter_z_current_0;
 logic                               inter_vld_0, inter_rdy_0;
 
 coord_3d_t                          inter_abs_pos_1;
-coord_3d_t                          inter_deltas_1  [0:`NUM_VERTICES-1];
-logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_1   [0:`NUM_VERTICES-1];
+coord_3d_t                          inter_deltas_1_0, inter_deltas_1_1, inter_deltas_1_2;
+logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_1_0, inter_edges_1_1, inter_edges_1_2;
 metadata_t                          inter_metadata_1;
 logic        [`FX_TOTAL_BITS-1:0]   inter_dzdx_1, inter_dzdy_1;
 logic        [`FX_TOTAL_BITS*2-1:0] inter_z_current_1;
@@ -48,12 +49,12 @@ tile_processor tile_proc (
     .rdy_in(rdy_in),
     .vld_out(inter_vld_0),
     .out_abs_pos(inter_abs_pos_0),
-    .out_delta_0(inter_deltas_0[0]),
-    .out_delta_1(inter_deltas_0[1]),
-    .out_delta_2(inter_deltas_0[2]),
-    .out_edge_0(inter_edges_0[0]),
-    .out_edge_1(inter_edges_0[1]),
-    .out_edge_2(inter_edges_0[2]),
+    .out_delta_0(inter_deltas_0_0),
+    .out_delta_1(inter_deltas_0_1),
+    .out_delta_2(inter_deltas_0_2),
+    .out_edge_0(inter_edges_0_0),
+    .out_edge_1(inter_edges_0_1),
+    .out_edge_2(inter_edges_0_2),
     .out_metadata(inter_metadata_0),
     .out_dzdx(inter_dzdx_0),
     .out_dzdy(inter_dzdy_0),
@@ -69,12 +70,12 @@ axi_fifo #( .WIDTH(371), .DEPTH(4) ) axel_f (
     .vld_in(inter_vld_0),
     .data_in({
         inter_abs_pos_0,
-        inter_deltas_0[0],
-        inter_deltas_0[1],
-        inter_deltas_0[2],
-        inter_edges_0[0],
-        inter_edges_0[1],
-        inter_edges_0[2],
+        inter_deltas_0_0,
+        inter_deltas_0_1,
+        inter_deltas_0_2,
+        inter_edges_0_0,
+        inter_edges_0_1,
+        inter_edges_0_2,
         inter_metadata_0,
         inter_dzdx_0,
         inter_dzdy_0,
@@ -82,12 +83,12 @@ axi_fifo #( .WIDTH(371), .DEPTH(4) ) axel_f (
     }),
     .data_out({
         inter_abs_pos_1,
-        inter_deltas_1[0],
-        inter_deltas_1[1],
-        inter_deltas_1[2],
-        inter_edges_1[0],
-        inter_edges_1[1],
-        inter_edges_1[2],
+        inter_deltas_1_0,
+        inter_deltas_1_1,
+        inter_deltas_1_2,
+        inter_edges_1_0,
+        inter_edges_1_1,
+        inter_edges_1_2,
         inter_metadata_1,
         inter_dzdx_1,
         inter_dzdy_1,
@@ -104,12 +105,12 @@ pixel_processor pixel_proc (
     .vld_in(inter_vld_1),
 
     .in_abs_pos(inter_abs_pos_1),
-    .in_delta_0(inter_deltas_1[0]),
-    .in_delta_1(inter_deltas_1[1]),
-    .in_delta_2(inter_deltas_1[2]),
-    .in_edge_0(inter_edges_1[0]),
-    .in_edge_1(inter_edges_1[1]),
-    .in_edge_2(inter_edges_1[2]),
+    .in_delta_0(inter_deltas_1_0),
+    .in_delta_1(inter_deltas_1_1),
+    .in_delta_2(inter_deltas_1_2),
+    .in_edge_0(inter_edges_1_0),
+    .in_edge_1(inter_edges_1_1),
+    .in_edge_2(inter_edges_1_2),
     .in_metadata(inter_metadata_1),
     .in_dzdx(inter_dzdx_1),
     .in_dzdy(inter_dzdy_1),

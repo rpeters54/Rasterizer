@@ -1,0 +1,14 @@
+Subprocess had a non-zero exit.
+Last 10 line(s):
+/home/asic/workspace/lab3/rtl/raster.sv:108: Warning: Range [1:1] select out of bounds on signal `\inter_deltas_1': Setting 1 LSB bits to undef.
+/home/asic/workspace/lab3/rtl/raster.sv:109: Warning: Range select out of bounds on signal `\inter_deltas_1': Setting result bit to undef.
+
+7.1. Analyzing design hierarchy..
+Top module:  \raster
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pixel_processor'.
+Generating RTLIL representation for module `\pixel_processor'.
+Warning: wire '$fordecl_block$11.$for_loop$12[0].$unnamed_block$13.delta_i' is assigned in a block at /home/asic/workspace/lab3/rtl/pixel_processor.sv:199.25-199.44.
+/home/asic/workspace/lab3/rtl/pixel_processor.sv:200: ERROR: Identifier `$fordecl_block$11.$for_loop$12[0].$unnamed_block$13.delta_i.y' is implicitly declared and `default_nettype is set to none.
+
+Full log file: 'runs/RUN_2025-05-10_06-43-04/05-yosys-jsonheader/yosys-jsonheader.log'

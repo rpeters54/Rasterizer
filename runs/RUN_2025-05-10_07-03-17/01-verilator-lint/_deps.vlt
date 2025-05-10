@@ -1,0 +1,5 @@
+`verilator_config
+lint_off -rule DECLFILENAME
+lint_off -rule EOFNEWLINE
+lint_off -rule UNDRIVEN -file "/home/asic/workspace/lab3/runs/RUN_2025-05-10_07-03-17/tmp/0a7feb488e904b588f9d5ac4474c24d9.bb.v"
+lint_off -rule UNUSEDSIGNAL -file "/home/asic/workspace/lab3/runs/RUN_2025-05-10_07-03-17/tmp/0a7feb488e904b588f9d5ac4474c24d9.bb.v"

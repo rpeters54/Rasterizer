@@ -75,58 +75,58 @@ void Vtb_all___024root__trace_chg_0_sub_0(Vtb_all___024root* vlSelf, VerilatedVc
                                                >> 0x13U)))),16);
         bufp->chgSData(oldp+24,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0xaU] 
                                             >> 3U))),16);
-        bufp->chgCData(oldp+25,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
-                                          >> 0xbU))),8);
-        bufp->chgCData(oldp+26,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
-                                          >> 5U))),6);
-        bufp->chgCData(oldp+27,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U])),5);
-        bufp->chgSData(oldp+28,((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U] 
-                                 >> 0x10U)),16);
-        bufp->chgSData(oldp+29,((0xffffU & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U])),16);
-        bufp->chgIData(oldp+30,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0U]),32);
-        bufp->chgBit(oldp+31,((0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count))));
-        bufp->chgWData(oldp+32,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out),371);
-        bufp->chgCData(oldp+44,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__write_ptr),3);
-        bufp->chgCData(oldp+45,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__read_ptr),3);
-        bufp->chgCData(oldp+46,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count),4);
-        bufp->chgSData(oldp+47,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0xaU] 
+        bufp->chgSData(oldp+25,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0xaU] 
                                              << 0xdU) 
                                             | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
                                                >> 0x13U)))),16);
-        bufp->chgSData(oldp+48,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
+        bufp->chgSData(oldp+26,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
                                             >> 3U))),16);
-        bufp->chgSData(oldp+49,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
+        bufp->chgSData(oldp+27,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
                                              << 0xdU) 
                                             | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
                                                >> 0x13U)))),16);
-        bufp->chgSData(oldp+50,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
+        bufp->chgSData(oldp+28,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
                                             >> 3U))),16);
-        bufp->chgSData(oldp+51,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
+        bufp->chgSData(oldp+29,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
                                              << 0xdU) 
                                             | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
                                                >> 0x13U)))),16);
-        bufp->chgSData(oldp+52,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
+        bufp->chgSData(oldp+30,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
                                             >> 3U))),16);
-        bufp->chgSData(oldp+53,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
+        bufp->chgSData(oldp+31,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
                                              << 0xdU) 
                                             | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
                                                >> 0x13U)))),16);
-        bufp->chgSData(oldp+54,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
+        bufp->chgSData(oldp+32,((0xffffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
                                             >> 3U))),16);
-        bufp->chgSData(oldp+55,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
+        bufp->chgSData(oldp+33,((0xffffU & ((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
                                              << 0xdU) 
                                             | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[5U] 
                                                >> 0x13U)))),16);
-        bufp->chgIData(oldp+56,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[5U] 
+        bufp->chgIData(oldp+34,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[5U] 
                                   << 0xdU) | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[4U] 
                                               >> 0x13U))),32);
-        bufp->chgIData(oldp+57,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[4U] 
+        bufp->chgIData(oldp+35,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[4U] 
                                   << 0xdU) | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[3U] 
                                               >> 0x13U))),32);
-        bufp->chgIData(oldp+58,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[3U] 
+        bufp->chgIData(oldp+36,(((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[3U] 
                                   << 0xdU) | (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
                                               >> 0x13U))),32);
-        bufp->chgIData(oldp+59,(((0U == vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state)
+        bufp->chgCData(oldp+37,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
+                                          >> 0xbU))),8);
+        bufp->chgCData(oldp+38,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
+                                          >> 5U))),6);
+        bufp->chgCData(oldp+39,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U])),5);
+        bufp->chgSData(oldp+40,((vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U] 
+                                 >> 0x10U)),16);
+        bufp->chgSData(oldp+41,((0xffffU & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U])),16);
+        bufp->chgIData(oldp+42,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0U]),32);
+        bufp->chgBit(oldp+43,((0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count))));
+        bufp->chgWData(oldp+44,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out),371);
+        bufp->chgCData(oldp+56,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__write_ptr),3);
+        bufp->chgCData(oldp+57,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__read_ptr),3);
+        bufp->chgCData(oldp+58,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count),4);
+        bufp->chgCData(oldp+59,(((0U == (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state))
                                   ? ((0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count))
                                       ? ((((0x7c0U 
                                             & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
@@ -142,7 +142,7 @@ void Vtb_all___024root__trace_chg_0_sub_0(Vtb_all___024root* vlSelf, VerilatedVc
                                                     >> 5U))))
                                           ? 2U : 1U)
                                       : 0U) : ((1U 
-                                                == vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state)
+                                                == (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state))
                                                 ? (
                                                    (0xffU 
                                                     > (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_rel_pos))
@@ -150,13 +150,13 @@ void Vtb_all___024root__trace_chg_0_sub_0(Vtb_all___024root* vlSelf, VerilatedVc
                                                     : 2U)
                                                 : (
                                                    (2U 
-                                                    == vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state)
+                                                    == (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state))
                                                     ? 
                                                    ((0xffU 
                                                      > (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__rel_pos))
                                                      ? 2U
                                                      : 0U)
-                                                    : 0U)))),32);
+                                                    : 0U)))),2);
         bufp->chgSData(oldp+60,(((0x7c0U & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
                                             << 6U)) 
                                  | (0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
@@ -166,418 +166,213 @@ void Vtb_all___024root__trace_chg_0_sub_0(Vtb_all___024root* vlSelf, VerilatedVc
                       | vlSelfRef.__Vm_traceActivity
                       [5U])))) {
         bufp->chgSData(oldp+61,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [0U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
                                                     >> 0x20U)))),16);
         bufp->chgSData(oldp+62,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [0U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+63,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                   [0U]))),16);
+        bufp->chgSData(oldp+63,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start))),16);
         bufp->chgSData(oldp+64,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [1U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0 
                                                     >> 0x20U)))),16);
         bufp->chgSData(oldp+65,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [1U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0 
                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+66,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                   [1U]))),16);
+        bufp->chgSData(oldp+66,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0))),16);
         bufp->chgSData(oldp+67,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [2U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1 
                                                     >> 0x20U)))),16);
         bufp->chgSData(oldp+68,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                    [2U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1 
                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+69,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v
-                                                   [2U]))),16);
+        bufp->chgSData(oldp+69,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1))),16);
         bufp->chgSData(oldp+70,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [0U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_2 
                                                     >> 0x20U)))),16);
         bufp->chgSData(oldp+71,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [0U] 
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_2 
                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+72,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                   [0U]))),16);
-        bufp->chgSData(oldp+73,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [1U] 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+74,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [1U] 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+75,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                   [1U]))),16);
-        bufp->chgSData(oldp+76,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [2U] 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+77,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                    [2U] 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+78,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__rotated_v
-                                                   [2U]))),16);
-        bufp->chgSData(oldp+79,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+80,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+81,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start))),16);
-        bufp->chgSData(oldp+82,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [0U] 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+83,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [0U] 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+84,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                   [0U]))),16);
-        bufp->chgSData(oldp+85,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [1U] 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+86,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [1U] 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+87,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                   [1U]))),16);
-        bufp->chgSData(oldp+88,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [2U] 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+89,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                    [2U] 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+90,((0xffffU & (IData)(
-                                                   vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_deltas
-                                                   [2U]))),16);
-        bufp->chgSData(oldp+91,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+92,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+93,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out))),16);
-        bufp->chgSData(oldp+94,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__Vstatic__out 
-                                                    >> 0x20U)))),16);
-        bufp->chgSData(oldp+95,((0xffffU & (IData)(
-                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__Vstatic__out 
-                                                    >> 0x10U)))),16);
-        bufp->chgSData(oldp+96,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__Vstatic__out))),16);
+        bufp->chgSData(oldp+72,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_2))),16);
     }
     if (VL_UNLIKELY((vlSelfRef.__Vm_traceActivity[4U]))) {
-        bufp->chgBit(oldp+97,(vlSelfRef.tb_all__DOT__rdy_in));
-        bufp->chgBit(oldp+98,(vlSelfRef.tb_all__DOT__vld_out));
-        bufp->chgCData(oldp+99,(vlSelfRef.tb_all__DOT__color_out),8);
-        bufp->chgSData(oldp+100,((vlSelfRef.tb_all__DOT__pixel_out 
-                                  >> 0x10U)),16);
-        bufp->chgSData(oldp+101,((0xffffU & vlSelfRef.tb_all__DOT__pixel_out)),16);
-        bufp->chgSData(oldp+102,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+103,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+104,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0))),16);
-        bufp->chgSData(oldp+105,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [0U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+106,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [0U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+107,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                    [0U]))),16);
-        bufp->chgSData(oldp+108,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [1U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+109,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [1U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+110,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                    [1U]))),16);
-        bufp->chgSData(oldp+111,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [2U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+112,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                     [2U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+113,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0
-                                                    [2U]))),16);
-        bufp->chgIData(oldp+114,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0[0]),32);
-        bufp->chgIData(oldp+115,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0[1]),32);
-        bufp->chgIData(oldp+116,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0[2]),32);
-        bufp->chgCData(oldp+117,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 
-                                           >> 0xbU))),8);
-        bufp->chgCData(oldp+118,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 
-                                           >> 5U))),6);
-        bufp->chgCData(oldp+119,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0)),5);
-        bufp->chgSData(oldp+120,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdx_0),16);
-        bufp->chgSData(oldp+121,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdy_0),16);
-        bufp->chgIData(oldp+122,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_z_current_0),32);
-        bufp->chgBit(oldp+123,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_0));
-        bufp->chgSData(oldp+124,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [0U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+125,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [0U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+126,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                    [0U]))),16);
-        bufp->chgSData(oldp+127,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [1U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+128,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [1U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+129,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                    [1U]))),16);
-        bufp->chgSData(oldp+130,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [2U] 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+131,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                     [2U] 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+132,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_1
-                                                    [2U]))),16);
-        bufp->chgIData(oldp+133,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_1[0]),32);
-        bufp->chgIData(oldp+134,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_1[1]),32);
-        bufp->chgIData(oldp+135,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_1[2]),32);
-        bufp->chgBit(oldp+136,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_rdy_1));
-        bufp->chgWData(oldp+137,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in),371);
-        bufp->chgWData(oldp+149,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[0]),371);
-        bufp->chgWData(oldp+161,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[1]),371);
-        bufp->chgWData(oldp+173,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[2]),371);
-        bufp->chgWData(oldp+185,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[3]),371);
-        bufp->chgCData(oldp+197,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__next_read_ptr),3);
-        bufp->chgIData(oldp+198,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state),32);
-        bufp->chgSData(oldp+199,((0xffffU & (IData)(
+        bufp->chgBit(oldp+73,(vlSelfRef.tb_all__DOT__rdy_in));
+        bufp->chgBit(oldp+74,(vlSelfRef.tb_all__DOT__vld_out));
+        bufp->chgCData(oldp+75,(vlSelfRef.tb_all__DOT__color_out),8);
+        bufp->chgSData(oldp+76,((vlSelfRef.tb_all__DOT__pixel_out 
+                                 >> 0x10U)),16);
+        bufp->chgSData(oldp+77,((0xffffU & vlSelfRef.tb_all__DOT__pixel_out)),16);
+        bufp->chgSData(oldp+78,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
+                                                    >> 0x20U)))),16);
+        bufp->chgSData(oldp+79,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
+                                                    >> 0x10U)))),16);
+        bufp->chgSData(oldp+80,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0))),16);
+        bufp->chgSData(oldp+81,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
+                                                    >> 0x20U)))),16);
+        bufp->chgSData(oldp+82,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
+                                                    >> 0x10U)))),16);
+        bufp->chgSData(oldp+83,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0))),16);
+        bufp->chgSData(oldp+84,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 
+                                                    >> 0x20U)))),16);
+        bufp->chgSData(oldp+85,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 
+                                                    >> 0x10U)))),16);
+        bufp->chgSData(oldp+86,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1))),16);
+        bufp->chgSData(oldp+87,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 
+                                                    >> 0x20U)))),16);
+        bufp->chgSData(oldp+88,((0xffffU & (IData)(
+                                                   (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 
+                                                    >> 0x10U)))),16);
+        bufp->chgSData(oldp+89,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2))),16);
+        bufp->chgIData(oldp+90,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_0),32);
+        bufp->chgIData(oldp+91,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_1),32);
+        bufp->chgIData(oldp+92,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_2),32);
+        bufp->chgCData(oldp+93,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 
+                                          >> 0xbU))),8);
+        bufp->chgCData(oldp+94,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 
+                                          >> 5U))),6);
+        bufp->chgCData(oldp+95,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0)),5);
+        bufp->chgSData(oldp+96,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdx_0),16);
+        bufp->chgSData(oldp+97,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdy_0),16);
+        bufp->chgIData(oldp+98,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_z_current_0),32);
+        bufp->chgBit(oldp+99,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_0));
+        bufp->chgBit(oldp+100,(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_rdy_1));
+        bufp->chgWData(oldp+101,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in),371);
+        bufp->chgWData(oldp+113,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[0]),371);
+        bufp->chgWData(oldp+125,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[1]),371);
+        bufp->chgWData(oldp+137,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[2]),371);
+        bufp->chgWData(oldp+149,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer[3]),371);
+        bufp->chgCData(oldp+161,(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__next_read_ptr),3);
+        bufp->chgCData(oldp+162,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state),2);
+        bufp->chgSData(oldp+163,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__abs_pos 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+200,((0xffffU & (IData)(
+        bufp->chgSData(oldp+164,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__abs_pos 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+201,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__abs_pos))),16);
-        bufp->chgSData(oldp+202,((0xffffU & (IData)(
+        bufp->chgSData(oldp+165,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__abs_pos))),16);
+        bufp->chgSData(oldp+166,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+203,((0xffffU & (IData)(
+        bufp->chgSData(oldp+167,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+204,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos))),16);
-        bufp->chgCData(oldp+205,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__rel_pos),8);
-        bufp->chgCData(oldp+206,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_rel_pos),8);
-        bufp->chgSData(oldp+207,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [0U] 
+        bufp->chgSData(oldp+168,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos))),16);
+        bufp->chgCData(oldp+169,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__rel_pos),8);
+        bufp->chgCData(oldp+170,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_rel_pos),8);
+        bufp->chgSData(oldp+171,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_0 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+208,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [0U] 
+        bufp->chgSData(oldp+172,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_0 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+209,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                    [0U]))),16);
-        bufp->chgSData(oldp+210,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [1U] 
+        bufp->chgSData(oldp+173,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_0))),16);
+        bufp->chgSData(oldp+174,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_1 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+211,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [1U] 
+        bufp->chgSData(oldp+175,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_1 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+212,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                    [1U]))),16);
-        bufp->chgSData(oldp+213,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [2U] 
+        bufp->chgSData(oldp+176,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_1))),16);
+        bufp->chgSData(oldp+177,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_2 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+214,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                     [2U] 
+        bufp->chgSData(oldp+178,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_2 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+215,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__deltas
-                                                    [2U]))),16);
-        bufp->chgIData(oldp+216,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edges[0]),32);
-        bufp->chgIData(oldp+217,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edges[1]),32);
-        bufp->chgIData(oldp+218,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edges[2]),32);
-        bufp->chgCData(oldp+219,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
+        bufp->chgSData(oldp+179,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__delta_2))),16);
+        bufp->chgIData(oldp+180,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_0),32);
+        bufp->chgIData(oldp+181,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_1),32);
+        bufp->chgIData(oldp+182,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_2),32);
+        bufp->chgCData(oldp+183,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
                                            >> 0xbU))),8);
-        bufp->chgCData(oldp+220,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
+        bufp->chgCData(oldp+184,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
                                            >> 5U))),6);
-        bufp->chgCData(oldp+221,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata)),5);
-        bufp->chgSData(oldp+222,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__dzdx),16);
-        bufp->chgSData(oldp+223,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__dzdy),16);
-        bufp->chgIData(oldp+224,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_current),32);
-        bufp->chgSData(oldp+225,((0xffffU & (IData)(
+        bufp->chgCData(oldp+185,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata)),5);
+        bufp->chgSData(oldp+186,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__dzdx),16);
+        bufp->chgSData(oldp+187,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__dzdy),16);
+        bufp->chgIData(oldp+188,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_current),32);
+        bufp->chgSData(oldp+189,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+226,((0xffffU & (IData)(
+        bufp->chgSData(oldp+190,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+227,(((0x7c0U & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
+        bufp->chgSData(oldp+191,(((0x7c0U & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
                                              << 6U)) 
                                   | (0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__metadata 
                                               >> 5U)))),11);
-        bufp->chgIData(oldp+228,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy),32);
-        bufp->chgIData(oldp+229,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx),32);
-        bufp->chgIData(oldp+230,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy),32);
-        bufp->chgIData(oldp+231,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext),32);
-        bufp->chgIData(oldp+232,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdy_ext),32);
-        bufp->chgSData(oldp+233,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out 
+        bufp->chgSData(oldp+192,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_coord 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+234,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out 
+        bufp->chgSData(oldp+193,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_coord 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+235,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out))),16);
-        bufp->chgIData(oldp+236,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk1__DOT__i),32);
-        bufp->chgIData(oldp+237,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk2__DOT__i),32);
-        bufp->chgIData(oldp+238,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk3__DOT__i),32);
-        bufp->chgIData(oldp+239,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off),32);
-        bufp->chgIData(oldp+240,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk5__DOT__dzdx_ext),32);
-        bufp->chgIData(oldp+241,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk6__DOT__i),32);
-        bufp->chgSData(oldp+242,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_0 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+243,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_0 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+244,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_0))),16);
-        bufp->chgSData(oldp+245,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_1 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+246,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_1 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+247,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_1))),16);
-        bufp->chgSData(oldp+248,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_2 
-                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+249,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_2 
-                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+250,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_delta_2))),16);
-        bufp->chgIData(oldp+251,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_edge_0),32);
-        bufp->chgIData(oldp+252,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_edge_1),32);
-        bufp->chgIData(oldp+253,(vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__tile_proc__out_edge_2),32);
-        bufp->chgIData(oldp+254,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state),32);
-        bufp->chgSData(oldp+255,((0xffffU & (IData)(
+        bufp->chgSData(oldp+194,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_coord))),16);
+        bufp->chgIData(oldp+195,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_z_row_off),32);
+        bufp->chgIData(oldp+196,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_edge_row_off),32);
+        bufp->chgIData(oldp+197,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_z_col_off),32);
+        bufp->chgIData(oldp+198,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__temp_edge_col_off),32);
+        bufp->chgIData(oldp+199,(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__unnamedblk1__DOT__i),32);
+        bufp->chgIData(oldp+200,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state),32);
+        bufp->chgIData(oldp+201,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_edge_i),32);
+        bufp->chgIData(oldp+202,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_coeff_a),32);
+        bufp->chgIData(oldp+203,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_coeff_b),32);
+        bufp->chgIData(oldp+204,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_coeff_c),32);
+        bufp->chgIData(oldp+205,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_z),32);
+        bufp->chgSData(oldp+206,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_dzdx),16);
+        bufp->chgSData(oldp+207,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_dzdy),16);
+        bufp->chgSData(oldp+208,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+256,((0xffffU & (IData)(
+        bufp->chgSData(oldp+209,((0xffffU & (IData)(
                                                     (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+257,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos))),16);
-        bufp->chgSData(oldp+258,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [0U] 
+        bufp->chgSData(oldp+210,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos))),16);
+        bufp->chgSData(oldp+211,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+259,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [0U] 
+        bufp->chgSData(oldp+212,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+260,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                    [0U]))),16);
-        bufp->chgSData(oldp+261,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [1U] 
+        bufp->chgSData(oldp+213,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0))),16);
+        bufp->chgSData(oldp+214,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+262,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [1U] 
+        bufp->chgSData(oldp+215,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+263,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                    [1U]))),16);
-        bufp->chgSData(oldp+264,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [2U] 
+        bufp->chgSData(oldp+216,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1))),16);
+        bufp->chgSData(oldp+217,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2 
                                                      >> 0x20U)))),16);
-        bufp->chgSData(oldp+265,((0xffffU & (IData)(
-                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                     [2U] 
+        bufp->chgSData(oldp+218,((0xffffU & (IData)(
+                                                    (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2 
                                                      >> 0x10U)))),16);
-        bufp->chgSData(oldp+266,((0xffffU & (IData)(
-                                                    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__deltas
-                                                    [2U]))),16);
-        bufp->chgIData(oldp+267,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[0]),32);
-        bufp->chgIData(oldp+268,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[1]),32);
-        bufp->chgIData(oldp+269,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[2]),32);
-        bufp->chgCData(oldp+270,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
+        bufp->chgSData(oldp+219,((0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2))),16);
+        bufp->chgIData(oldp+220,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[0]),32);
+        bufp->chgIData(oldp+221,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[1]),32);
+        bufp->chgIData(oldp+222,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges[2]),32);
+        bufp->chgCData(oldp+223,((0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
                                            >> 0xbU))),8);
-        bufp->chgCData(oldp+271,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
+        bufp->chgCData(oldp+224,((0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
                                            >> 5U))),6);
-        bufp->chgCData(oldp+272,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata)),5);
-        bufp->chgIData(oldp+273,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_A),32);
-        bufp->chgIData(oldp+274,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_B),32);
-        bufp->chgIData(oldp+275,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_C),32);
-        bufp->chgSData(oldp+276,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdx),16);
-        bufp->chgSData(oldp+277,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdy),16);
-        bufp->chgIData(oldp+278,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__z_current),32);
-        bufp->chgSData(oldp+279,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub),16);
-        bufp->chgSData(oldp+280,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub),16);
-        bufp->chgIData(oldp+281,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult),32);
-        bufp->chgIData(oldp+282,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult),32);
-        bufp->chgIData(oldp+283,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult),32);
-        bufp->chgIData(oldp+284,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult),32);
-        bufp->chgIData(oldp+285,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult),32);
-        bufp->chgIData(oldp+286,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult),32);
-        bufp->chgIData(oldp+287,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult),32);
-        bufp->chgIData(oldp+288,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2_mult),32);
-        bufp->chgIData(oldp+289,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz),32);
-        bufp->chgSData(oldp+290,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x),16);
-        bufp->chgSData(oldp+291,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y),16);
-        bufp->chgIData(oldp+292,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__Vstatic__x_component),32);
-        bufp->chgIData(oldp+293,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__Vstatic__y_component),32);
-        bufp->chgIData(oldp+294,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__Vstatic__z_component),32);
-        bufp->chgIData(oldp+295,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
-        bufp->chgIData(oldp+296,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__unnamedblk2__DOT__i),32);
-        bufp->chgIData(oldp+297,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__unnamedblk3__DOT__i),32);
+        bufp->chgCData(oldp+225,((0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata)),5);
+        bufp->chgIData(oldp+226,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_A),32);
+        bufp->chgIData(oldp+227,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_B),32);
+        bufp->chgIData(oldp+228,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__coeff_C),32);
+        bufp->chgSData(oldp+229,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdx),16);
+        bufp->chgSData(oldp+230,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdy),16);
+        bufp->chgIData(oldp+231,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__z_current),32);
+        bufp->chgIData(oldp+232,(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__unnamedblk1__DOT__i),32);
     }
-    bufp->chgBit(oldp+298,(vlSelfRef.tb_all__DOT__clk));
-    bufp->chgIData(oldp+299,(((0U == vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state)
+    bufp->chgBit(oldp+233,(vlSelfRef.tb_all__DOT__clk));
+    bufp->chgIData(oldp+234,(((0U == vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state)
                                ? (((IData)(vlSelfRef.tb_all__DOT__vld_in) 
                                    & (IData)(vlSelfRef.tb_all__DOT__rdy_in))
                                    ? 1U : 0U) : ((1U 

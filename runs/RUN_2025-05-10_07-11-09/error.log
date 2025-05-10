@@ -1,0 +1,14 @@
+Subprocess had a non-zero exit.
+Last 10 line(s):
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+7. Executing AST frontend in derive mode using pre-parsed AST for module `\raster'.
+Generating RTLIL representation for module `\raster'.
+
+7.1. Analyzing design hierarchy..
+Top module:  \raster
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pixel_processor'.
+/home/asic/workspace/lab3/rtl/pixel_processor.sv:4: ERROR: enum item \IDLE already exists
+
+Full log file: 'runs/RUN_2025-05-10_07-11-09/05-yosys-jsonheader/yosys-jsonheader.log'

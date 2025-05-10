@@ -1,4 +1,6 @@
 `include "../../rtl/raster_defines.svh"
+`include "../../rtl/struct_defines.svh"
+
 
 module tb_all;
 

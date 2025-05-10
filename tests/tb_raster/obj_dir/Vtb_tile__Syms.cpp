@@ -44,7 +44,7 @@ Vtb_tile__Syms::Vtb_tile__Syms(VerilatedContext* contextp, const char* namep, Vt
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(2694);
+        Verilated::stackCheck(2776);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-9);
     _vm_contextp__->timeprecision(-12);

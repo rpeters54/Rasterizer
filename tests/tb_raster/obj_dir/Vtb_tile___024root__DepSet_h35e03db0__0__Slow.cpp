@@ -38,7 +38,7 @@ VL_ATTR_COLD void Vtb_tile___024root___eval_settle(Vtb_tile___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vtb_tile___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("tb_tile.sv", 3, "", "Settle region did not converge.");
+            VL_FATAL_MT("tb_tile.sv", 4, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;
@@ -198,20 +198,21 @@ VL_ATTR_COLD void Vtb_tile___024root___ctor_var_reset(Vtb_tile___024root* vlSelf
     vlSelf->tb_tile__DOT__make_meta__Vstatic__meta = VL_RAND_RESET_I(19);
     vlSelf->tb_tile__DOT__tile_proc__DOT__present_state = 0;
     vlSelf->tb_tile__DOT__tile_proc__DOT__next_state = 0;
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->tb_tile__DOT__tile_proc__DOT__v[__Vi0] = VL_RAND_RESET_Q(48);
-    }
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->tb_tile__DOT__tile_proc__DOT__rotated_v[__Vi0] = VL_RAND_RESET_Q(48);
-    }
     vlSelf->tb_tile__DOT__tile_proc__DOT__temp_start = VL_RAND_RESET_Q(48);
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->tb_tile__DOT__tile_proc__DOT__temp_deltas[__Vi0] = VL_RAND_RESET_Q(48);
-    }
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_delta_0 = VL_RAND_RESET_Q(48);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_delta_1 = VL_RAND_RESET_Q(48);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_delta_2 = VL_RAND_RESET_Q(48);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_edge_i = VL_RAND_RESET_I(32);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_coeff_a = VL_RAND_RESET_I(32);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_coeff_b = VL_RAND_RESET_I(32);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_coeff_c = VL_RAND_RESET_I(32);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_z = VL_RAND_RESET_I(32);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_dzdx = VL_RAND_RESET_I(16);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__temp_dzdy = VL_RAND_RESET_I(16);
     vlSelf->tb_tile__DOT__tile_proc__DOT__abs_pos = VL_RAND_RESET_Q(48);
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
-        vlSelf->tb_tile__DOT__tile_proc__DOT__deltas[__Vi0] = VL_RAND_RESET_Q(48);
-    }
+    vlSelf->tb_tile__DOT__tile_proc__DOT__delta_0 = VL_RAND_RESET_Q(48);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__delta_1 = VL_RAND_RESET_Q(48);
+    vlSelf->tb_tile__DOT__tile_proc__DOT__delta_2 = VL_RAND_RESET_Q(48);
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
         vlSelf->tb_tile__DOT__tile_proc__DOT__edges[__Vi0] = VL_RAND_RESET_I(32);
     }
@@ -222,29 +223,11 @@ VL_ATTR_COLD void Vtb_tile___024root___ctor_var_reset(Vtb_tile___024root* vlSelf
     vlSelf->tb_tile__DOT__tile_proc__DOT__dzdx = VL_RAND_RESET_I(16);
     vlSelf->tb_tile__DOT__tile_proc__DOT__dzdy = VL_RAND_RESET_I(16);
     vlSelf->tb_tile__DOT__tile_proc__DOT__z_current = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__tile_to_coord__Vstatic__out = VL_RAND_RESET_Q(48);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_delta__Vstatic__out = VL_RAND_RESET_Q(48);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_sub = VL_RAND_RESET_I(16);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_sub = VL_RAND_RESET_I(16);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_x_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_edge__Vstatic__temp_y_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_y0z2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_a__Vstatic__temp_z0y2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_z0x2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_b__Vstatic__temp_x0z2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_x0y2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_plane_coeff_c__Vstatic__temp_y0x2_mult = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__scale_dz__Vstatic__div_result_dz = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_z__Vstatic__delta_x = VL_RAND_RESET_I(16);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_z__Vstatic__delta_y = VL_RAND_RESET_I(16);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_z__Vstatic__x_component = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_z__Vstatic__y_component = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__compute_z__Vstatic__z_component = VL_RAND_RESET_I(32);
-    vlSelf->tb_tile__DOT__tile_proc__DOT__unnamedblk2__DOT__i = 0;
-    vlSelf->tb_tile__DOT__tile_proc__DOT__unnamedblk3__DOT__i = 0;
     vlSelf->tb_tile__DOT__tile_proc__DOT__unnamedblk1__DOT__i = 0;
-    vlSelf->tb_tile__DOT__tile_proc__DOT____Vlvbound_h32313c2c__0 = VL_RAND_RESET_Q(48);
-    vlSelf->tb_tile__DOT__tile_proc__DOT____Vlvbound_h8d56d838__0 = VL_RAND_RESET_I(32);
+    vlSelf->__Vtask_tb_tile__DOT__tile_proc__DOT__tile_to_coord__24__out = VL_RAND_RESET_Q(48);
+    vlSelf->__Vtask_tb_tile__DOT__tile_proc__DOT__compute_delta__25__out = VL_RAND_RESET_Q(48);
+    vlSelf->__Vtask_tb_tile__DOT__tile_proc__DOT__compute_delta__26__out = VL_RAND_RESET_Q(48);
+    vlSelf->__Vtask_tb_tile__DOT__tile_proc__DOT__compute_delta__27__out = VL_RAND_RESET_Q(48);
     vlSelf->__Vtrigprevexpr___TOP__tb_tile__DOT__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_tile__DOT__rdy_in__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_tile__DOT__vld_out__0 = VL_RAND_RESET_I(1);

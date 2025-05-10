@@ -1,5 +1,6 @@
 
 `include "raster_defines.svh"
+`include "struct_defines.svh"
 
 module pixel_processor(
     input             clk,
@@ -25,6 +26,12 @@ module pixel_processor(
     output coord_2d_t               pixel_out
 );
 
+typedef enum logic [1:0] {
+    IDLE      = 2'd0,
+    FLUSHING  = 2'd1,
+    PROCESS   = 2'd2
+} pixel_state_t;
+
 
 pixel_state_t present_state, next_state;
 
@@ -35,8 +42,8 @@ coord_3d_t                          abs_pos;
 coord_3d_t                          flush_abs_pos;
 logic        [`TILE_AREA_BITS-1:0]  rel_pos;
 logic        [`TILE_AREA_BITS-1:0]  flush_rel_pos;
-coord_3d_t                          deltas  [0:`NUM_VERTICES-1];
-logic signed [`FX_TOTAL_BITS*2-1:0] edges   [0:`NUM_VERTICES-1];
+coord_3d_t                          delta_0, delta_1, delta_2;
+logic signed [`FX_TOTAL_BITS*2-1:0] edge_0, edge_1, edge_2;
 metadata_t                          metadata;
 logic signed [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
 logic signed [`FX_TOTAL_BITS*2-1:0] z_current;
@@ -54,6 +61,13 @@ assign out_coord.x = flush_abs_pos.x;
 assign out_coord.y = flush_abs_pos.y;
 assign current_tile_coord = {metadata.tile_y, metadata.tile_x};
 assign new_tile_coord = {in_metadata.tile_y, in_metadata.tile_x};
+
+// temporaries
+coord_3d_t temp_coord;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_z_row_off;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_edge_row_off;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_z_col_off;
+logic signed [`FX_TOTAL_BITS*2-1:0] temp_edge_col_off;
 
 always_comb begin
 
@@ -103,10 +117,12 @@ always_ff @(posedge clk) begin
         rel_pos          <= '0;
         flush_rel_pos    <= '0;
 
-        for (int i = 0; i < `NUM_VERTICES; i++) begin
-            deltas[i] <= zero;
-            edges[i]  <= '0;
-        end
+        edge_0  <= '0;
+        edge_1  <= '0;
+        edge_2  <= '0;
+        delta_0 <= zero;
+        delta_1 <= zero;
+        delta_2 <= zero;
         metadata.color   <= '0;
         metadata.tile_x  <= '0;
         metadata.tile_y  <= '0;
@@ -132,15 +148,16 @@ always_ff @(posedge clk) begin
                     rdy_in       <= '0;
 
                     abs_pos       <= in_abs_pos;
-                    flush_abs_pos <= tile_to_coord(metadata);
+                    tile_to_coord(metadata, temp_coord);
+                    flush_abs_pos <= temp_coord;
                     rel_pos       <= '0;
                     flush_rel_pos <= '0;
-                    deltas[0]     <= in_delta_0;
-                    deltas[1]     <= in_delta_1;
-                    deltas[2]     <= in_delta_2;
-                    edges[0]      <= in_edge_0;
-                    edges[1]      <= in_edge_1;
-                    edges[2]      <= in_edge_2;
+                    delta_0     <= in_delta_0;
+                    delta_1     <= in_delta_1;
+                    delta_2     <= in_delta_2;
+                    edge_0      <= in_edge_0;
+                    edge_1      <= in_edge_1;
+                    edge_2      <= in_edge_2;
                     metadata      <= in_metadata;
                     dzdx          <= in_dzdx;
                     dzdy          <= in_dzdy;
@@ -152,7 +169,7 @@ always_ff @(posedge clk) begin
                 vld_out      <= '0;
 
                 // edge and depth check
-                if ((edges[0] >= 0) && (edges[1] >= 0) && (edges[2] >= 0) && (z_current < z_buffer[rel_pos])) begin
+                if ((edge_0 >= 0) && (edge_1 >= 0) && (edge_2 >= 0) && (z_current < z_buffer[rel_pos])) begin
                     z_buffer[rel_pos]     <= z_current;
                     color_buffer[rel_pos] <= metadata.color;
                 end 
@@ -163,34 +180,32 @@ always_ff @(posedge clk) begin
                     abs_pos.y <= abs_pos.y + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
-                    begin
-                    z_current <= z_current + z_row_offset(dzdx, dzdy);
-                    end
+                    z_row_offset(dzdx, dzdy, temp_z_row_off);
+                    z_current <= z_current + temp_z_row_off; 
 
                     // Update the edge values
-                    for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        logic signed [`FX_TOTAL_BITS*2-1:0] row_off;
-                        edge_row_offset(deltas[i], row_off);
-                        edges[i] <= edges[i] + row_off;
-                    end
+                    edge_row_offset(delta_0, temp_edge_row_off);
+                    edge_0 <= edge_0 + temp_edge_row_off;
+                    edge_row_offset(delta_1, temp_edge_row_off);
+                    edge_1 <= edge_1 + temp_edge_row_off;
+                    edge_row_offset(delta_2, temp_edge_row_off);
+                    edge_2 <= edge_2 + temp_edge_row_off;
 
                 end else begin
                     // Update the absolute position
                     abs_pos.x <= abs_pos.x + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
-                    begin
-                        logic signed [`FX_TOTAL_BITS*2-1:0] dzdx_ext;
-                        sext_f16_f32(dzdx, dzdx_ext);
-                        z_current <= z_current + dzdx_ext;
-                    end
+                    sext_f16_f32(dzdx, temp_z_col_off);
+                    z_current <= z_current + temp_z_col_off;
 
                     // Update the edge values
-                    for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        logic signed [`FX_TOTAL_BITS*2-1:0] col_off;
-                        edge_column_offset(deltas[i], col_off)
-                        edges[i] <= edges[i] + col_off;
-                    end
+                    edge_column_offset(delta_0, temp_edge_col_off);
+                    edge_0 <= edge_0 + temp_edge_col_off;
+                    edge_column_offset(delta_1, temp_edge_col_off);
+                    edge_1 <= edge_1 + temp_edge_col_off;
+                    edge_column_offset(delta_2, temp_edge_col_off);
+                    edge_2 <= edge_2 + temp_edge_col_off;
                 end
 
                 // Update the relative position
@@ -235,13 +250,15 @@ always_ff @(posedge clk) begin
                     vld_out <= 1'b0; 
                 end
             end
+            default : begin
+            end
         endcase
     end
 
 end
 
 // sign extend a 16-bit fixed-point number to 32 bits
-task sext_f16_f32(
+task automatic sext_f16_f32(
     input [`FX_TOTAL_BITS-1:0] in,
     output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
@@ -250,7 +267,8 @@ out = {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
     
 endtask
 
-task edge_row_offset(
+// compute the edge row offset
+task automatic edge_row_offset(
     input coord_3d_t delta_i,
     output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
@@ -264,7 +282,9 @@ out = -((s_dy << `TILE_WIDTH_BITS) - s_dy + s_dx);
 
 endtask
 
-task edge_column_offset(
+
+// compute the edge row offset
+task automatic edge_column_offset(
     input coord_3d_t delta_i,
     output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
@@ -273,7 +293,8 @@ sext_f16_f32(delta_i.y, out);
 
 endtask
 
-task z_row_offset(
+// compute the z row offset
+task automatic z_row_offset(
     input signed [`FX_TOTAL_BITS-1:0] dzdx,
     input signed [`FX_TOTAL_BITS-1:0] dzdy,
     output logic signed [`FX_TOTAL_BITS*2-1:0] out
@@ -285,23 +306,19 @@ logic signed [`FX_TOTAL_BITS*2-1:0] dzdy_ext;
 sext_f16_f32(dzdx, dzdx_ext);
 sext_f16_f32(dzdy, dzdy_ext);
 
-out = dzdy_ext - (dzdx_ext << `TILE_WIDTH_BITS) + dzdx_ext;
+out = (dzdy_ext - (dzdx_ext << `TILE_WIDTH_BITS)) + dzdx_ext;
 
 endtask
 
-
-
-function coord_3d_t tile_to_coord(
-    input metadata_t in
+task automatic tile_to_coord(
+    input metadata_t in,
+    output coord_3d_t out
     );
-
-    coord_3d_t out;
 
     out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, in.tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
     out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, in.tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
     out.z = 0;
 
-    return out;
-endfunction
+endtask
 
 endmodule

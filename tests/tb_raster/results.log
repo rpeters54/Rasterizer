@@ -1,3 +1,4 @@
+VCD info: dumpfile tb_tile.vcd opened for output.
 --- Expected Values ---
 abs_pos: x=0, y=0, z=0
 dzdx: 0, dzdy: 0
@@ -90,7 +91,4 @@ delta_2: x= -1, y=0, z=0
 edge_0: 589
 edge_1: -569
 edge_2: -1
-- tb_tile.sv:127: Verilog $finish
-- S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
-- Verilator: $finish at 295ns; walltime 0.002 s; speed 113.181 us/s
-- Verilator: cpu 0.003 s on 1 threads; alloced 89 MB
+tb_tile.sv:128: $finish called at 290 (1s)
