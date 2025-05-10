@@ -667,21 +667,29 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
     vlSelfRef.tb_tile__DOT__rst_n = 0U;
     vlSelfRef.tb_tile__DOT__rdy_out = 0U;
     vlSelfRef.tb_tile__DOT__vld_in = 0U;
-    vlSelfRef.tb_tile__DOT__v0 = 0ULL;
-    vlSelfRef.tb_tile__DOT__v1 = 0ULL;
-    vlSelfRef.tb_tile__DOT__v2 = 0ULL;
-    vlSelfRef.tb_tile__DOT__in_metadata = 0U;
+    vlSelfRef.tb_tile__DOT__v0_x = 0U;
+    vlSelfRef.tb_tile__DOT__v0_y = 0U;
+    vlSelfRef.tb_tile__DOT__v0_z = 0U;
+    vlSelfRef.tb_tile__DOT__v1_x = 0U;
+    vlSelfRef.tb_tile__DOT__v1_y = 0U;
+    vlSelfRef.tb_tile__DOT__v1_z = 0U;
+    vlSelfRef.tb_tile__DOT__v2_x = 0U;
+    vlSelfRef.tb_tile__DOT__v2_y = 0U;
+    vlSelfRef.tb_tile__DOT__v2_z = 0U;
+    vlSelfRef.tb_tile__DOT__in_color = 0U;
+    vlSelfRef.tb_tile__DOT__in_tile_x = 0U;
+    vlSelfRef.tb_tile__DOT__in_tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h066b40b5__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         89);
+                                                         117);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h066b40b5__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         89);
+                                                         117);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_tile__DOT__rdy_in)))) {
@@ -689,7 +697,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                              nullptr, 
                                                              "@( tb_tile.rdy_in)", 
                                                              "tb_tile.sv", 
-                                                             93);
+                                                             121);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_tile__DOT__make_meta__1__tile_y_in = 0U;
@@ -1038,9 +1046,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = (__Vtask_tb_tile__DOT__simulate_expected_output__5__unnamedblk6__DOT__temp_x0y2_mult 
            - __Vtask_tb_tile__DOT__simulate_expected_output__5__unnamedblk6__DOT__temp_y0x2_mult);
     if (VL_UNLIKELY(((0U == __Vtask_tb_tile__DOT__simulate_expected_output__5__exp_coeff_C)))) {
-        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:248: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
+        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:276: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
                      64,VL_TIME_UNITED_Q(1000),-9,vlSymsp->name());
-        VL_STOP_MT("tb_tile.sv", 248, "");
+        VL_STOP_MT("tb_tile.sv", 276, "");
         __Vtask_tb_tile__DOT__simulate_expected_output__5__exp_dzdx = 0U;
         __Vtask_tb_tile__DOT__simulate_expected_output__5__exp_dzdy = 0U;
     } else {
@@ -1116,38 +1124,60 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                              nullptr, 
                                                              "@( tb_tile.rdy_in)", 
                                                              "tb_tile.sv", 
-                                                             313);
+                                                             341);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_tile__DOT__v0 = __Vtask_tb_tile__DOT__run_triangle_test__0__tv0;
-    vlSelfRef.tb_tile__DOT__v1 = __Vtask_tb_tile__DOT__run_triangle_test__0__tv1;
-    vlSelfRef.tb_tile__DOT__v2 = __Vtask_tb_tile__DOT__run_triangle_test__0__tv2;
-    vlSelfRef.tb_tile__DOT__in_metadata = __Vtask_tb_tile__DOT__run_triangle_test__0__tmeta;
+    vlSelfRef.tb_tile__DOT__v0_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv0 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v0_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv0 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__tv0));
+    vlSelfRef.tb_tile__DOT__v1_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv1 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v1_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv1 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__tv1));
+    vlSelfRef.tb_tile__DOT__v2_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv2 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v2_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__0__tv2 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__tv2));
+    vlSelfRef.tb_tile__DOT__in_color = (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__0__tmeta 
+                                                 >> 0xbU));
+    vlSelfRef.tb_tile__DOT__in_tile_x = (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__0__tmeta 
+                                                  >> 5U));
+    vlSelfRef.tb_tile__DOT__in_tile_y = (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__0__tmeta);
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         322);
+                                                         350);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         324);
+                                                         352);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         326);
+                                                         354);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5a39fa9e__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         327);
+                                                         355);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     VL_WRITEF_NX("--- Expected Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ncoeff_A: %0d\ncoeff_B: %0d\ncoeff_C: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
@@ -1206,7 +1236,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
     __Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__0__exp_deltas
         [2U];
-    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0#, dzdy: %0#\nz_current: %0#\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
+    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
                                               (0xffffU 
                                                & (IData)(
@@ -1226,61 +1256,21 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                                [1U], 8U),
                  32,VL_SHIFTRS_III(32,32,32, __Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                                    [2U], 8U),16,(0xffffU 
-                                                 & VL_SHIFTRS_III(16,16,32, 
-                                                                  (0xffffU 
-                                                                   & (IData)(
-                                                                             (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                                              >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos)), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
-                 32,VL_SHIFTR_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)), 4U)),
+                                                 & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
+                 32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z), 4U)),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_0, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_1, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_2, 8U));
@@ -1288,222 +1278,239 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = __Vtask_tb_tile__DOT__run_triangle_test__0__exp_deltas
         [0U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_abs_pos 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:363: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %15# vs %15#\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos 
+                                                 >> 0x20U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),48,vlSelfRef.tb_tile__DOT__out_abs_pos,
-                         48,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos);
-            VL_STOP_MT("tb_tile.sv", 363, "");
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos 
+                                                >> 0x20U))));
+            VL_STOP_MT("tb_tile.sv", 391, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos 
+                                                 >> 0x10U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:393: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos 
+                                                >> 0x10U))));
+            VL_STOP_MT("tb_tile.sv", 393, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z) 
+                          != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:395: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z),
+                         16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__exp_abs_pos)));
+            VL_STOP_MT("tb_tile.sv", 395, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:365: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:397: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 365, "");
+            VL_STOP_MT("tb_tile.sv", 397, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:367: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:399: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 367, "");
+            VL_STOP_MT("tb_tile.sv", 399, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:369: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:401: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 369, "");
+            VL_STOP_MT("tb_tile.sv", 401, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_0 
                           != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                           [0U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:371: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:403: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_0,
                          48,__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta);
-            VL_STOP_MT("tb_tile.sv", 371, "");
+            VL_STOP_MT("tb_tile.sv", 403, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__0__exp_deltas
         [1U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:375: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:407: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 375, "");
+            VL_STOP_MT("tb_tile.sv", 407, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:377: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:409: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 377, "");
+            VL_STOP_MT("tb_tile.sv", 409, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:379: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:411: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 379, "");
+            VL_STOP_MT("tb_tile.sv", 411, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_1 
                           != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                           [1U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:381: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:413: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_1,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                          [1U]);
-            VL_STOP_MT("tb_tile.sv", 381, "");
+            VL_STOP_MT("tb_tile.sv", 413, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__0__exp_deltas
         [2U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:385: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:417: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 385, "");
+            VL_STOP_MT("tb_tile.sv", 417, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:387: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:419: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 387, "");
+            VL_STOP_MT("tb_tile.sv", 419, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:389: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:421: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 389, "");
+            VL_STOP_MT("tb_tile.sv", 421, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_2 
                           != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                           [2U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:423: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_2,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_edges
                          [2U]);
-            VL_STOP_MT("tb_tile.sv", 391, "");
+            VL_STOP_MT("tb_tile.sv", 423, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_metadata 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_metadata)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:394: Assertion failed in %Ntb_tile.run_triangle_test: metadata mismatch\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_color) 
+                          != (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__0__exp_metadata 
+                                       >> 0xbU)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:426: Assertion failed in %Ntb_tile.run_triangle_test: color mismatch\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name());
-            VL_STOP_MT("tb_tile.sv", 394, "");
+            VL_STOP_MT("tb_tile.sv", 426, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_x) 
+                          != (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__0__exp_metadata 
+                                       >> 5U)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:428: Assertion failed in %Ntb_tile.run_triangle_test: tile_x mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 428, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_y) 
+                          != (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__0__exp_metadata))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:430: Assertion failed in %Ntb_tile.run_triangle_test: tile_y mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 430, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdx) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__exp_dzdx))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:396: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:432: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdx),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_dzdx);
-            VL_STOP_MT("tb_tile.sv", 396, "");
+            VL_STOP_MT("tb_tile.sv", 432, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdy) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__0__exp_dzdy))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:398: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:434: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdy),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_dzdy);
-            VL_STOP_MT("tb_tile.sv", 398, "");
+            VL_STOP_MT("tb_tile.sv", 434, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_z_current 
                           != __Vtask_tb_tile__DOT__run_triangle_test__0__exp_z_current)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:400: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:436: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_z_current,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__0__exp_z_current);
-            VL_STOP_MT("tb_tile.sv", 400, "");
+            VL_STOP_MT("tb_tile.sv", 436, "");
         }
     }
     vlSelfRef.tb_tile__DOT__rdy_out = 1U;
@@ -1511,14 +1518,14 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                          nullptr, 
                                                          "@(negedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         404);
+                                                         440);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__rdy_out = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         406);
+                                                         442);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_tile__DOT__make_meta__7__tile_y_in = 0U;
     __Vfunc_tb_tile__DOT__make_meta__7__tile_x_in = 0U;
@@ -1867,9 +1874,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = (__Vtask_tb_tile__DOT__simulate_expected_output__11__unnamedblk6__DOT__temp_x0y2_mult 
            - __Vtask_tb_tile__DOT__simulate_expected_output__11__unnamedblk6__DOT__temp_y0x2_mult);
     if (VL_UNLIKELY(((0U == __Vtask_tb_tile__DOT__simulate_expected_output__11__exp_coeff_C)))) {
-        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:248: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
+        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:276: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
                      64,VL_TIME_UNITED_Q(1000),-9,vlSymsp->name());
-        VL_STOP_MT("tb_tile.sv", 248, "");
+        VL_STOP_MT("tb_tile.sv", 276, "");
         __Vtask_tb_tile__DOT__simulate_expected_output__11__exp_dzdx = 0U;
         __Vtask_tb_tile__DOT__simulate_expected_output__11__exp_dzdy = 0U;
     } else {
@@ -1945,38 +1952,60 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                              nullptr, 
                                                              "@( tb_tile.rdy_in)", 
                                                              "tb_tile.sv", 
-                                                             313);
+                                                             341);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_tile__DOT__v0 = __Vtask_tb_tile__DOT__run_triangle_test__6__tv0;
-    vlSelfRef.tb_tile__DOT__v1 = __Vtask_tb_tile__DOT__run_triangle_test__6__tv1;
-    vlSelfRef.tb_tile__DOT__v2 = __Vtask_tb_tile__DOT__run_triangle_test__6__tv2;
-    vlSelfRef.tb_tile__DOT__in_metadata = __Vtask_tb_tile__DOT__run_triangle_test__6__tmeta;
+    vlSelfRef.tb_tile__DOT__v0_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv0 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v0_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv0 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__tv0));
+    vlSelfRef.tb_tile__DOT__v1_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv1 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v1_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv1 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__tv1));
+    vlSelfRef.tb_tile__DOT__v2_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv2 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v2_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__6__tv2 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__tv2));
+    vlSelfRef.tb_tile__DOT__in_color = (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__6__tmeta 
+                                                 >> 0xbU));
+    vlSelfRef.tb_tile__DOT__in_tile_x = (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__6__tmeta 
+                                                  >> 5U));
+    vlSelfRef.tb_tile__DOT__in_tile_y = (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__6__tmeta);
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         322);
+                                                         350);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         324);
+                                                         352);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         326);
+                                                         354);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5a39fa9e__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         327);
+                                                         355);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     VL_WRITEF_NX("--- Expected Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ncoeff_A: %0d\ncoeff_B: %0d\ncoeff_C: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
@@ -2035,7 +2064,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
     __Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__6__exp_deltas
         [2U];
-    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0#, dzdy: %0#\nz_current: %0#\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
+    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
                                               (0xffffU 
                                                & (IData)(
@@ -2055,61 +2084,21 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                                [1U], 8U),
                  32,VL_SHIFTRS_III(32,32,32, __Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                                    [2U], 8U),16,(0xffffU 
-                                                 & VL_SHIFTRS_III(16,16,32, 
-                                                                  (0xffffU 
-                                                                   & (IData)(
-                                                                             (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                                              >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos)), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
-                 32,VL_SHIFTR_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)), 4U)),
+                                                 & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
+                 32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z), 4U)),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_0, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_1, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_2, 8U));
@@ -2117,222 +2106,239 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = __Vtask_tb_tile__DOT__run_triangle_test__6__exp_deltas
         [0U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_abs_pos 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:363: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %15# vs %15#\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos 
+                                                 >> 0x20U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),48,vlSelfRef.tb_tile__DOT__out_abs_pos,
-                         48,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos);
-            VL_STOP_MT("tb_tile.sv", 363, "");
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos 
+                                                >> 0x20U))));
+            VL_STOP_MT("tb_tile.sv", 391, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos 
+                                                 >> 0x10U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:393: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos 
+                                                >> 0x10U))));
+            VL_STOP_MT("tb_tile.sv", 393, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z) 
+                          != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:395: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z),
+                         16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__exp_abs_pos)));
+            VL_STOP_MT("tb_tile.sv", 395, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:365: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:397: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 365, "");
+            VL_STOP_MT("tb_tile.sv", 397, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:367: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:399: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 367, "");
+            VL_STOP_MT("tb_tile.sv", 399, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:369: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:401: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 369, "");
+            VL_STOP_MT("tb_tile.sv", 401, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_0 
                           != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                           [0U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:371: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:403: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_0,
                          48,__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta);
-            VL_STOP_MT("tb_tile.sv", 371, "");
+            VL_STOP_MT("tb_tile.sv", 403, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__6__exp_deltas
         [1U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:375: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:407: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 375, "");
+            VL_STOP_MT("tb_tile.sv", 407, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:377: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:409: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 377, "");
+            VL_STOP_MT("tb_tile.sv", 409, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:379: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:411: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 379, "");
+            VL_STOP_MT("tb_tile.sv", 411, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_1 
                           != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                           [1U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:381: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:413: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_1,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                          [1U]);
-            VL_STOP_MT("tb_tile.sv", 381, "");
+            VL_STOP_MT("tb_tile.sv", 413, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__6__exp_deltas
         [2U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:385: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:417: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 385, "");
+            VL_STOP_MT("tb_tile.sv", 417, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:387: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:419: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 387, "");
+            VL_STOP_MT("tb_tile.sv", 419, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:389: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:421: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 389, "");
+            VL_STOP_MT("tb_tile.sv", 421, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_2 
                           != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                           [2U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:423: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_2,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_edges
                          [2U]);
-            VL_STOP_MT("tb_tile.sv", 391, "");
+            VL_STOP_MT("tb_tile.sv", 423, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_metadata 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_metadata)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:394: Assertion failed in %Ntb_tile.run_triangle_test: metadata mismatch\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_color) 
+                          != (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__6__exp_metadata 
+                                       >> 0xbU)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:426: Assertion failed in %Ntb_tile.run_triangle_test: color mismatch\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name());
-            VL_STOP_MT("tb_tile.sv", 394, "");
+            VL_STOP_MT("tb_tile.sv", 426, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_x) 
+                          != (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__6__exp_metadata 
+                                       >> 5U)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:428: Assertion failed in %Ntb_tile.run_triangle_test: tile_x mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 428, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_y) 
+                          != (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__6__exp_metadata))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:430: Assertion failed in %Ntb_tile.run_triangle_test: tile_y mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 430, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdx) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__exp_dzdx))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:396: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:432: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdx),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_dzdx);
-            VL_STOP_MT("tb_tile.sv", 396, "");
+            VL_STOP_MT("tb_tile.sv", 432, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdy) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__6__exp_dzdy))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:398: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:434: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdy),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_dzdy);
-            VL_STOP_MT("tb_tile.sv", 398, "");
+            VL_STOP_MT("tb_tile.sv", 434, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_z_current 
                           != __Vtask_tb_tile__DOT__run_triangle_test__6__exp_z_current)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:400: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:436: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_z_current,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__6__exp_z_current);
-            VL_STOP_MT("tb_tile.sv", 400, "");
+            VL_STOP_MT("tb_tile.sv", 436, "");
         }
     }
     vlSelfRef.tb_tile__DOT__rdy_out = 1U;
@@ -2340,14 +2346,14 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                          nullptr, 
                                                          "@(negedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         404);
+                                                         440);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__rdy_out = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         406);
+                                                         442);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_tile__DOT__make_meta__13__tile_y_in = 0U;
     __Vfunc_tb_tile__DOT__make_meta__13__tile_x_in = 0U;
@@ -2698,9 +2704,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = (__Vtask_tb_tile__DOT__simulate_expected_output__17__unnamedblk6__DOT__temp_x0y2_mult 
            - __Vtask_tb_tile__DOT__simulate_expected_output__17__unnamedblk6__DOT__temp_y0x2_mult);
     if (VL_UNLIKELY(((0U == __Vtask_tb_tile__DOT__simulate_expected_output__17__exp_coeff_C)))) {
-        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:248: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
+        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:276: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
                      64,VL_TIME_UNITED_Q(1000),-9,vlSymsp->name());
-        VL_STOP_MT("tb_tile.sv", 248, "");
+        VL_STOP_MT("tb_tile.sv", 276, "");
         __Vtask_tb_tile__DOT__simulate_expected_output__17__exp_dzdx = 0U;
         __Vtask_tb_tile__DOT__simulate_expected_output__17__exp_dzdy = 0U;
     } else {
@@ -2776,38 +2782,60 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                              nullptr, 
                                                              "@( tb_tile.rdy_in)", 
                                                              "tb_tile.sv", 
-                                                             313);
+                                                             341);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_tile__DOT__v0 = __Vtask_tb_tile__DOT__run_triangle_test__12__tv0;
-    vlSelfRef.tb_tile__DOT__v1 = __Vtask_tb_tile__DOT__run_triangle_test__12__tv1;
-    vlSelfRef.tb_tile__DOT__v2 = __Vtask_tb_tile__DOT__run_triangle_test__12__tv2;
-    vlSelfRef.tb_tile__DOT__in_metadata = __Vtask_tb_tile__DOT__run_triangle_test__12__tmeta;
+    vlSelfRef.tb_tile__DOT__v0_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv0 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v0_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv0 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__tv0));
+    vlSelfRef.tb_tile__DOT__v1_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv1 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v1_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv1 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__tv1));
+    vlSelfRef.tb_tile__DOT__v2_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv2 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v2_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__12__tv2 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__tv2));
+    vlSelfRef.tb_tile__DOT__in_color = (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__12__tmeta 
+                                                 >> 0xbU));
+    vlSelfRef.tb_tile__DOT__in_tile_x = (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__12__tmeta 
+                                                  >> 5U));
+    vlSelfRef.tb_tile__DOT__in_tile_y = (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__12__tmeta);
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         322);
+                                                         350);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         324);
+                                                         352);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         326);
+                                                         354);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5a39fa9e__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         327);
+                                                         355);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     VL_WRITEF_NX("--- Expected Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ncoeff_A: %0d\ncoeff_B: %0d\ncoeff_C: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
@@ -2866,7 +2894,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
     __Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__12__exp_deltas
         [2U];
-    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0#, dzdy: %0#\nz_current: %0#\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
+    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
                                               (0xffffU 
                                                & (IData)(
@@ -2886,61 +2914,21 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                                [1U], 8U),
                  32,VL_SHIFTRS_III(32,32,32, __Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                                    [2U], 8U),16,(0xffffU 
-                                                 & VL_SHIFTRS_III(16,16,32, 
-                                                                  (0xffffU 
-                                                                   & (IData)(
-                                                                             (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                                              >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos)), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
-                 32,VL_SHIFTR_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)), 4U)),
+                                                 & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
+                 32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z), 4U)),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_0, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_1, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_2, 8U));
@@ -2948,222 +2936,239 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = __Vtask_tb_tile__DOT__run_triangle_test__12__exp_deltas
         [0U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_abs_pos 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:363: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %15# vs %15#\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos 
+                                                 >> 0x20U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),48,vlSelfRef.tb_tile__DOT__out_abs_pos,
-                         48,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos);
-            VL_STOP_MT("tb_tile.sv", 363, "");
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos 
+                                                >> 0x20U))));
+            VL_STOP_MT("tb_tile.sv", 391, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos 
+                                                 >> 0x10U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:393: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos 
+                                                >> 0x10U))));
+            VL_STOP_MT("tb_tile.sv", 393, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z) 
+                          != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:395: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z),
+                         16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__exp_abs_pos)));
+            VL_STOP_MT("tb_tile.sv", 395, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:365: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:397: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 365, "");
+            VL_STOP_MT("tb_tile.sv", 397, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:367: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:399: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 367, "");
+            VL_STOP_MT("tb_tile.sv", 399, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:369: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:401: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 369, "");
+            VL_STOP_MT("tb_tile.sv", 401, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_0 
                           != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                           [0U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:371: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:403: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_0,
                          48,__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta);
-            VL_STOP_MT("tb_tile.sv", 371, "");
+            VL_STOP_MT("tb_tile.sv", 403, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__12__exp_deltas
         [1U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:375: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:407: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 375, "");
+            VL_STOP_MT("tb_tile.sv", 407, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:377: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:409: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 377, "");
+            VL_STOP_MT("tb_tile.sv", 409, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:379: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:411: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 379, "");
+            VL_STOP_MT("tb_tile.sv", 411, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_1 
                           != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                           [1U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:381: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:413: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_1,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                          [1U]);
-            VL_STOP_MT("tb_tile.sv", 381, "");
+            VL_STOP_MT("tb_tile.sv", 413, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__12__exp_deltas
         [2U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:385: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:417: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 385, "");
+            VL_STOP_MT("tb_tile.sv", 417, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:387: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:419: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 387, "");
+            VL_STOP_MT("tb_tile.sv", 419, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:389: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:421: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 389, "");
+            VL_STOP_MT("tb_tile.sv", 421, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_2 
                           != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                           [2U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:423: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_2,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_edges
                          [2U]);
-            VL_STOP_MT("tb_tile.sv", 391, "");
+            VL_STOP_MT("tb_tile.sv", 423, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_metadata 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_metadata)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:394: Assertion failed in %Ntb_tile.run_triangle_test: metadata mismatch\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_color) 
+                          != (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__12__exp_metadata 
+                                       >> 0xbU)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:426: Assertion failed in %Ntb_tile.run_triangle_test: color mismatch\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name());
-            VL_STOP_MT("tb_tile.sv", 394, "");
+            VL_STOP_MT("tb_tile.sv", 426, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_x) 
+                          != (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__12__exp_metadata 
+                                       >> 5U)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:428: Assertion failed in %Ntb_tile.run_triangle_test: tile_x mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 428, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_y) 
+                          != (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__12__exp_metadata))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:430: Assertion failed in %Ntb_tile.run_triangle_test: tile_y mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 430, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdx) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__exp_dzdx))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:396: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:432: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdx),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_dzdx);
-            VL_STOP_MT("tb_tile.sv", 396, "");
+            VL_STOP_MT("tb_tile.sv", 432, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdy) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__12__exp_dzdy))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:398: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:434: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdy),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_dzdy);
-            VL_STOP_MT("tb_tile.sv", 398, "");
+            VL_STOP_MT("tb_tile.sv", 434, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_z_current 
                           != __Vtask_tb_tile__DOT__run_triangle_test__12__exp_z_current)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:400: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:436: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_z_current,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__12__exp_z_current);
-            VL_STOP_MT("tb_tile.sv", 400, "");
+            VL_STOP_MT("tb_tile.sv", 436, "");
         }
     }
     vlSelfRef.tb_tile__DOT__rdy_out = 1U;
@@ -3171,14 +3176,14 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                          nullptr, 
                                                          "@(negedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         404);
+                                                         440);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__rdy_out = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         406);
+                                                         442);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_tile__DOT__make_meta__19__tile_y_in = 0U;
     __Vfunc_tb_tile__DOT__make_meta__19__tile_x_in = 2U;
@@ -3529,9 +3534,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = (__Vtask_tb_tile__DOT__simulate_expected_output__23__unnamedblk6__DOT__temp_x0y2_mult 
            - __Vtask_tb_tile__DOT__simulate_expected_output__23__unnamedblk6__DOT__temp_y0x2_mult);
     if (VL_UNLIKELY(((0U == __Vtask_tb_tile__DOT__simulate_expected_output__23__exp_coeff_C)))) {
-        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:248: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
+        VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:276: Assertion failed in %Ntb_tile.simulate_expected_output: Division by zero detected in dz calculations - coefficient C is zero!\n",0,
                      64,VL_TIME_UNITED_Q(1000),-9,vlSymsp->name());
-        VL_STOP_MT("tb_tile.sv", 248, "");
+        VL_STOP_MT("tb_tile.sv", 276, "");
         __Vtask_tb_tile__DOT__simulate_expected_output__23__exp_dzdx = 0U;
         __Vtask_tb_tile__DOT__simulate_expected_output__23__exp_dzdy = 0U;
     } else {
@@ -3607,38 +3612,60 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                              nullptr, 
                                                              "@( tb_tile.rdy_in)", 
                                                              "tb_tile.sv", 
-                                                             313);
+                                                             341);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_tile__DOT__v0 = __Vtask_tb_tile__DOT__run_triangle_test__18__tv0;
-    vlSelfRef.tb_tile__DOT__v1 = __Vtask_tb_tile__DOT__run_triangle_test__18__tv1;
-    vlSelfRef.tb_tile__DOT__v2 = __Vtask_tb_tile__DOT__run_triangle_test__18__tv2;
-    vlSelfRef.tb_tile__DOT__in_metadata = __Vtask_tb_tile__DOT__run_triangle_test__18__tmeta;
+    vlSelfRef.tb_tile__DOT__v0_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv0 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v0_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv0 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__tv0));
+    vlSelfRef.tb_tile__DOT__v1_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv1 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v1_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv1 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__tv1));
+    vlSelfRef.tb_tile__DOT__v2_x = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv2 
+                                                       >> 0x20U)));
+    vlSelfRef.tb_tile__DOT__v2_y = (0xffffU & (IData)(
+                                                      (__Vtask_tb_tile__DOT__run_triangle_test__18__tv2 
+                                                       >> 0x10U)));
+    vlSelfRef.tb_tile__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__tv2));
+    vlSelfRef.tb_tile__DOT__in_color = (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__18__tmeta 
+                                                 >> 0xbU));
+    vlSelfRef.tb_tile__DOT__in_tile_x = (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__18__tmeta 
+                                                  >> 5U));
+    vlSelfRef.tb_tile__DOT__in_tile_y = (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__18__tmeta);
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         322);
+                                                         350);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         324);
+                                                         352);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         326);
+                                                         354);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5a39fa9e__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         327);
+                                                         355);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     VL_WRITEF_NX("--- Expected Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ncoeff_A: %0d\ncoeff_B: %0d\ncoeff_C: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
@@ -3697,7 +3724,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
     __Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__18__exp_deltas
         [2U];
-    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0#, dzdy: %0#\nz_current: %0#\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
+    VL_WRITEF_NX("delta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n--- Real Values ---\nabs_pos: x=%0d, y=%0d, z=%0d\ndzdx: %0d, dzdy: %0d\nz_current: %0d\ndelta_0: x= %0d, y=%0d, z=%0d\ndelta_1: x= %0d, y=%0d, z=%0d\ndelta_2: x= %0d, y=%0d, z=%0d\nedge_0: %0d\nedge_1: %0d\nedge_2: %0d\n",0,
                  16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
                                               (0xffffU 
                                                & (IData)(
@@ -3717,61 +3744,21 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                                [1U], 8U),
                  32,VL_SHIFTRS_III(32,32,32, __Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                                    [2U], 8U),16,(0xffffU 
-                                                 & VL_SHIFTRS_III(16,16,32, 
-                                                                  (0xffffU 
-                                                                   & (IData)(
-                                                                             (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                                              >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_abs_pos 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos)), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
-                 16,(0xffffU & VL_SHIFTR_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
-                 32,VL_SHIFTR_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x20U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(
-                                                         (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                          >> 0x10U))), 4U)),
-                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, 
-                                              (0xffffU 
-                                               & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)), 4U)),
+                                                 & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdx), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_dzdy), 4U)),
+                 32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_z_current, 8U),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y), 4U)),
+                 16,(0xffffU & VL_SHIFTRS_III(16,16,32, (IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z), 4U)),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_0, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_1, 8U),
                  32,VL_SHIFTRS_III(32,32,32, vlSelfRef.tb_tile__DOT__out_edge_2, 8U));
@@ -3779,222 +3766,239 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
         = __Vtask_tb_tile__DOT__run_triangle_test__18__exp_deltas
         [0U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_abs_pos 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:363: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %15# vs %15#\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos 
+                                                 >> 0x20U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),48,vlSelfRef.tb_tile__DOT__out_abs_pos,
-                         48,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos);
-            VL_STOP_MT("tb_tile.sv", 363, "");
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_x),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos 
+                                                >> 0x20U))));
+            VL_STOP_MT("tb_tile.sv", 391, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y) 
+                          != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos 
+                                                 >> 0x10U))))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:393: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_y),
+                         16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos 
+                                                >> 0x10U))));
+            VL_STOP_MT("tb_tile.sv", 393, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z) 
+                          != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:395: Assertion failed in %Ntb_tile.run_triangle_test: abs_pos mismatch: %5# vs %5#\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_abs_pos_z),
+                         16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__exp_abs_pos)));
+            VL_STOP_MT("tb_tile.sv", 395, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:365: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:397: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 365, "");
+            VL_STOP_MT("tb_tile.sv", 397, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_0 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:367: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:399: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_0 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 367, "");
+            VL_STOP_MT("tb_tile.sv", 399, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:369: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:401: Assertion failed in %Ntb_tile.run_triangle_test: delta_0.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_0)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_0_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 369, "");
+            VL_STOP_MT("tb_tile.sv", 401, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_0 
                           != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                           [0U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:371: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:403: Assertion failed in %Ntb_tile.run_triangle_test: edge_0 mismatch: %0d vs %0#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_0,
                          48,__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta);
-            VL_STOP_MT("tb_tile.sv", 371, "");
+            VL_STOP_MT("tb_tile.sv", 403, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__18__exp_deltas
         [1U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:375: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:407: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 375, "");
+            VL_STOP_MT("tb_tile.sv", 407, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_1 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:377: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:409: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_1 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 377, "");
+            VL_STOP_MT("tb_tile.sv", 409, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:379: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:411: Assertion failed in %Ntb_tile.run_triangle_test: delta_1.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_1)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_1_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 379, "");
+            VL_STOP_MT("tb_tile.sv", 411, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_1 
                           != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                           [1U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:381: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:413: Assertion failed in %Ntb_tile.run_triangle_test: edge_1 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_1,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                          [1U]);
-            VL_STOP_MT("tb_tile.sv", 381, "");
+            VL_STOP_MT("tb_tile.sv", 413, "");
         }
     }
     __Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
         = __Vtask_tb_tile__DOT__run_triangle_test__18__exp_deltas
         [2U];
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x20U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x20U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:385: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:417: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.x mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x20U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_x),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x20U))));
-            VL_STOP_MT("tb_tile.sv", 385, "");
+            VL_STOP_MT("tb_tile.sv", 417, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)((vlSelfRef.tb_tile__DOT__out_delta_2 
-                                              >> 0x10U))) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y) 
                           != (0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                  >> 0x10U))))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:387: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:419: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.y mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(
-                                                          (vlSelfRef.tb_tile__DOT__out_delta_2 
-                                                           >> 0x10U))),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_y),
                          16,(0xffffU & (IData)((__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta 
                                                 >> 0x10U))));
-            VL_STOP_MT("tb_tile.sv", 387, "");
+            VL_STOP_MT("tb_tile.sv", 419, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY((((0xffffU & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)) 
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z) 
                           != (0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:389: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:421: Assertion failed in %Ntb_tile.run_triangle_test: delta_2.z mismatch: %5# vs %5#\n",0,
                          64,VL_TIME_UNITED_Q(1000),
-                         -9,vlSymsp->name(),16,(0xffffU 
-                                                & (IData)(vlSelfRef.tb_tile__DOT__out_delta_2)),
+                         -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_delta_2_z),
                          16,(0xffffU & (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__temp_delta)));
-            VL_STOP_MT("tb_tile.sv", 389, "");
+            VL_STOP_MT("tb_tile.sv", 421, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_edge_2 
                           != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                           [2U])))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:391: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:423: Assertion failed in %Ntb_tile.run_triangle_test: edge_2 mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_edge_2,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_edges
                          [2U]);
-            VL_STOP_MT("tb_tile.sv", 391, "");
+            VL_STOP_MT("tb_tile.sv", 423, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
-        if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_metadata 
-                          != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_metadata)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:394: Assertion failed in %Ntb_tile.run_triangle_test: metadata mismatch\n",0,
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_color) 
+                          != (0xffU & (__Vtask_tb_tile__DOT__run_triangle_test__18__exp_metadata 
+                                       >> 0xbU)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:426: Assertion failed in %Ntb_tile.run_triangle_test: color mismatch\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name());
-            VL_STOP_MT("tb_tile.sv", 394, "");
+            VL_STOP_MT("tb_tile.sv", 426, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_x) 
+                          != (0x3fU & (__Vtask_tb_tile__DOT__run_triangle_test__18__exp_metadata 
+                                       >> 5U)))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:428: Assertion failed in %Ntb_tile.run_triangle_test: tile_x mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 428, "");
+        }
+    }
+    if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
+        if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_tile_y) 
+                          != (0x1fU & __Vtask_tb_tile__DOT__run_triangle_test__18__exp_metadata))))) {
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:430: Assertion failed in %Ntb_tile.run_triangle_test: tile_y mismatch\n",0,
+                         64,VL_TIME_UNITED_Q(1000),
+                         -9,vlSymsp->name());
+            VL_STOP_MT("tb_tile.sv", 430, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdx) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__exp_dzdx))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:396: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:432: Assertion failed in %Ntb_tile.run_triangle_test: dzdx mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdx),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_dzdx);
-            VL_STOP_MT("tb_tile.sv", 396, "");
+            VL_STOP_MT("tb_tile.sv", 432, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY((((IData)(vlSelfRef.tb_tile__DOT__out_dzdy) 
                           != (IData)(__Vtask_tb_tile__DOT__run_triangle_test__18__exp_dzdy))))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:398: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:434: Assertion failed in %Ntb_tile.run_triangle_test: dzdy mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),16,(IData)(vlSelfRef.tb_tile__DOT__out_dzdy),
                          16,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_dzdy);
-            VL_STOP_MT("tb_tile.sv", 398, "");
+            VL_STOP_MT("tb_tile.sv", 434, "");
         }
     }
     if (vlSymsp->_vm_contextp__->assertOnGet(2, 1)) {
         if (VL_UNLIKELY(((vlSelfRef.tb_tile__DOT__out_z_current 
                           != __Vtask_tb_tile__DOT__run_triangle_test__18__exp_z_current)))) {
-            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:400: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0# vs %0d\n",0,
+            VL_WRITEF_NX("[%0t] %%Error: tb_tile.sv:436: Assertion failed in %Ntb_tile.run_triangle_test: z_current mismatch: %0d vs %0d\n",0,
                          64,VL_TIME_UNITED_Q(1000),
                          -9,vlSymsp->name(),32,vlSelfRef.tb_tile__DOT__out_z_current,
                          32,__Vtask_tb_tile__DOT__run_triangle_test__18__exp_z_current);
-            VL_STOP_MT("tb_tile.sv", 400, "");
+            VL_STOP_MT("tb_tile.sv", 436, "");
         }
     }
     vlSelfRef.tb_tile__DOT__rdy_out = 1U;
@@ -4002,16 +4006,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tile___024root___eval_initial__TOP__Vtiming__1(Vtb
                                                          nullptr, 
                                                          "@(negedge tb_tile.vld_out)", 
                                                          "tb_tile.sv", 
-                                                         404);
+                                                         440);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_tile__DOT__rdy_out = 0U;
     co_await vlSelfRef.__VtrigSched_h066b4174__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_tile.clk)", 
                                                          "tb_tile.sv", 
-                                                         406);
+                                                         442);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
-    VL_FINISH_MT("tb_tile.sv", 128, "");
+    VL_FINISH_MT("tb_tile.sv", 156, "");
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
 }
 

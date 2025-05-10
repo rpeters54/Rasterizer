@@ -1,5 +1,5 @@
 $date
-	Sat May 10 07:49:50 2025
+	Sat May 10 09:56:16 2025
 $end
 $version
 	Icarus Verilog
@@ -117,19 +117,19 @@ $dumpvars
 b0 V
 b0 U
 bx T
-bx S
+b0 S
 b0 R
 bx M
 b0 L
 b0 K
 bx J
-bx I
+b0 I
 b0 H
 bx C
 b0 B
 b0 A
 bx @
-bx ?
+b0 ?
 b0 >
 bx 9
 x8
@@ -146,9 +146,9 @@ b0 .
 b0 -
 b0 ,
 0+
-bx )
-bx (
-bx '
+b0 )
+b0 (
+b0 '
 1&
 1%
 1$
@@ -157,6 +157,12 @@ bx '
 0!
 $end
 #5000
+bx )
+bx ?
+bx (
+bx I
+bx '
+bx S
 1+
 #10000
 15

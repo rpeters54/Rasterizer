@@ -1,0 +1,26 @@
+
+18. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$957dfb21c3f5d0cced99b0b402cf5507bb277cbf\axi_fifo.\rdy_in' from process `$paramod$957dfb21c3f5d0cced99b0b402cf5507bb277cbf\axi_fifo.$proc$/home/asic/workspace/lab3/rtl/axi_fifo.sv:0$1856'.
+No latch inferred for signal `$paramod$957dfb21c3f5d0cced99b0b402cf5507bb277cbf\axi_fifo.\vld_out' from process `$paramod$957dfb21c3f5d0cced99b0b402cf5507bb277cbf\axi_fifo.$proc$/home/asic/workspace/lab3/rtl/axi_fifo.sv:0$1856'.
+No latch inferred for signal `\pixel_processor.\next_state' from process `\pixel_processor.$proc$/home/asic/workspace/lab3/rtl/pixel_processor.sv:0$541'.
+No latch inferred for signal `\tile_processor.\next_state' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\temp_start' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\temp_delta_0' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\temp_delta_1' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\temp_delta_2' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\v0' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\v1' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\v2' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\zero' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\tile_to_coord$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:91$1888.tile_x' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\tile_to_coord$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:91$1888.tile_y' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\tile_to_coord$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:91$1888.out' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:93$1889.a' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:93$1889.b' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:93$1889.out' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:94$1890.a' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:94$1890.b' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:94$1890.out' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:95$1891.a' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:95$1891.b' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.
+No latch inferred for signal `\tile_processor.\compute_delta$func$/home/asic/workspace/lab3/rtl/tile_processor.sv:95$1891.out' from process `\tile_processor.$proc$/home/asic/workspace/lab3/rtl/tile_processor.sv:0$1901'.

@@ -36,7 +36,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__0(Vtb_
         co_await vlSelfRef.__VdlySched.delay(0x1388ULL, 
                                              nullptr, 
                                              "tb_all.sv", 
-                                             31);
+                                             61);
         vlSelfRef.tb_all__DOT__clk = (1U & (~ (IData)(vlSelfRef.tb_all__DOT__clk)));
     }
 }
@@ -874,21 +874,29 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -896,7 +904,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__3__tile_y_in = 0U;
@@ -950,32 +958,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__2__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__2__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__2__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__2__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__2__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__2__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__2__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__2__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__2__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__2__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__2__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__7__j = 5U;
     __Vtask_tb_all__DOT__flush__7__i = 5U;
@@ -1032,58 +1062,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__8__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__8__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__8__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__8__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__8__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__8__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__8__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__8__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__8__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__8__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__8__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -1091,7 +1151,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__16__tile_y_in = 0U;
@@ -1145,32 +1205,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__15__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__15__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__15__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__15__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__15__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__15__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__15__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__15__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__15__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__15__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__15__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__21__tile_y_in = 0U;
     __Vfunc_tb_all__DOT__make_meta__21__tile_x_in = 1U;
@@ -1223,39 +1305,61 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__20__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__20__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__20__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__20__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__20__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__20__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__20__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__20__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__20__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__20__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__20__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         94);
+                                                         124);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__26__tile_y_in = 1U;
     __Vfunc_tb_all__DOT__make_meta__26__tile_x_in = 0U;
@@ -1308,39 +1412,61 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__25__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__25__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__25__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__25__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__25__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__25__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__25__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__25__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__25__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__25__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__25__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         104);
+                                                         134);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__30__j = 5U;
     __Vtask_tb_all__DOT__flush__30__i = 5U;
@@ -1397,58 +1523,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__31__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__31__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__31__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__31__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__31__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__31__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__31__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__31__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__31__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__31__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__31__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -1456,7 +1612,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__39__tile_y_in = 0U;
@@ -1510,32 +1666,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__38__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__38__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__38__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__38__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__38__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__38__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__38__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__38__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__38__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__38__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__38__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__44__tile_y_in = 0U;
     __Vfunc_tb_all__DOT__make_meta__44__tile_x_in = 0U;
@@ -1588,32 +1766,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__43__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__43__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__43__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__43__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__43__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__43__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__43__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__43__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__43__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__43__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__43__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__48__j = 5U;
     __Vtask_tb_all__DOT__flush__48__i = 5U;
@@ -1670,58 +1870,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__49__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__49__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__49__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__49__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__49__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__49__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__49__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__49__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__49__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__49__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__49__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -1729,7 +1959,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__57__tile_y_in = 0U;
@@ -1783,32 +2013,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__56__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__56__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__56__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__56__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__56__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__56__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__56__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__56__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__56__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__56__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__56__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__62__tile_y_in = 0U;
     __Vfunc_tb_all__DOT__make_meta__62__tile_x_in = 0U;
@@ -1861,32 +2113,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__61__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__61__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__61__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__61__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__61__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__61__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__61__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__61__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__61__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__61__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__61__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__66__j = 5U;
     __Vtask_tb_all__DOT__flush__66__i = 5U;
@@ -1943,58 +2217,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__67__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__67__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__67__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__67__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__67__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__67__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__67__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__67__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__67__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__67__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__67__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -2002,7 +2306,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__75__tile_y_in = 0U;
@@ -2056,32 +2360,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__74__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__74__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__74__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__74__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__74__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__74__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__74__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__74__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__74__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__74__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__74__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__80__tile_y_in = 0U;
     __Vfunc_tb_all__DOT__make_meta__80__tile_x_in = 1U;
@@ -2134,39 +2460,61 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__79__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__79__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__79__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__79__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__79__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__79__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__79__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__79__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__79__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__79__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__79__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         171);
+                                                         201);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__85__tile_y_in = 1U;
     __Vfunc_tb_all__DOT__make_meta__85__tile_x_in = 0U;
@@ -2219,39 +2567,61 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__84__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__84__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__84__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__84__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__84__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__84__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__84__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__84__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__84__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__84__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__84__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         181);
+                                                         211);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__90__tile_y_in = 1U;
     __Vfunc_tb_all__DOT__make_meta__90__tile_x_in = 1U;
@@ -2304,32 +2674,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__89__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__89__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__89__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__89__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__89__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__89__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__89__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__89__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__89__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__89__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__89__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__94__j = 5U;
     __Vtask_tb_all__DOT__flush__94__i = 5U;
@@ -2386,58 +2778,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__95__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__95__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__95__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__95__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__95__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__95__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__95__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__95__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__95__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__95__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__95__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -2445,7 +2867,7 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
     __Vfunc_tb_all__DOT__make_meta__103__tile_y_in = 0U;
@@ -2502,32 +2924,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__102__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__102__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__102__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__102__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__102__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__102__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__102__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__102__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__102__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__102__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__102__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vfunc_tb_all__DOT__make_meta__108__tile_y_in = 0U;
     __Vfunc_tb_all__DOT__make_meta__108__tile_x_in = 0U;
@@ -2583,32 +3027,54 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__107__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__107__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__107__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__107__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__107__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__107__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__107__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__107__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__107__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__107__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__107__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     __Vtask_tb_all__DOT__flush__112__j = 5U;
     __Vtask_tb_all__DOT__flush__112__i = 5U;
@@ -2668,58 +3134,88 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             225);
+                                                             255);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    vlSelfRef.tb_all__DOT__v0 = __Vtask_tb_all__DOT__run_triangle_test__113__tv0;
-    vlSelfRef.tb_all__DOT__v1 = __Vtask_tb_all__DOT__run_triangle_test__113__tv1;
-    vlSelfRef.tb_all__DOT__v2 = __Vtask_tb_all__DOT__run_triangle_test__113__tv2;
-    vlSelfRef.tb_all__DOT__metadata = __Vtask_tb_all__DOT__run_triangle_test__113__tmeta;
+    vlSelfRef.tb_all__DOT__v0_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv0 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v0_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv0 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v0_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__113__tv0));
+    vlSelfRef.tb_all__DOT__v1_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv1 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v1_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv1 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v1_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__113__tv1));
+    vlSelfRef.tb_all__DOT__v2_x = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv2 
+                                                      >> 0x20U)));
+    vlSelfRef.tb_all__DOT__v2_y = (0xffffU & (IData)(
+                                                     (__Vtask_tb_all__DOT__run_triangle_test__113__tv2 
+                                                      >> 0x10U)));
+    vlSelfRef.tb_all__DOT__v2_z = (0xffffU & (IData)(__Vtask_tb_all__DOT__run_triangle_test__113__tv2));
+    vlSelfRef.tb_all__DOT__color = (0xffU & (__Vtask_tb_all__DOT__run_triangle_test__113__tmeta 
+                                             >> 0xbU));
+    vlSelfRef.tb_all__DOT__tile_x = (0x3fU & (__Vtask_tb_all__DOT__run_triangle_test__113__tmeta 
+                                              >> 5U));
+    vlSelfRef.tb_all__DOT__tile_y = (0x1fU & __Vtask_tb_all__DOT__run_triangle_test__113__tmeta);
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         234);
+                                                         264);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         236);
+                                                         266);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfe53__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         238);
+                                                         268);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rdy_out = 1U;
     co_await vlSelfRef.__VtrigSched_hcca24acd__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(negedge tb_all.vld_out)", 
                                                          "tb_all.sv", 
-                                                         254);
+                                                         284);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 0U;
     vlSelfRef.tb_all__DOT__rdy_out = 0U;
     vlSelfRef.tb_all__DOT__vld_in = 0U;
-    vlSelfRef.tb_all__DOT__v0 = 0ULL;
-    vlSelfRef.tb_all__DOT__v1 = 0ULL;
-    vlSelfRef.tb_all__DOT__v2 = 0ULL;
-    vlSelfRef.tb_all__DOT__metadata = 0U;
+    vlSelfRef.tb_all__DOT__v0_x = 0U;
+    vlSelfRef.tb_all__DOT__v0_y = 0U;
+    vlSelfRef.tb_all__DOT__v0_z = 0U;
+    vlSelfRef.tb_all__DOT__v1_x = 0U;
+    vlSelfRef.tb_all__DOT__v1_y = 0U;
+    vlSelfRef.tb_all__DOT__v1_z = 0U;
+    vlSelfRef.tb_all__DOT__v2_x = 0U;
+    vlSelfRef.tb_all__DOT__v2_y = 0U;
+    vlSelfRef.tb_all__DOT__v2_z = 0U;
+    vlSelfRef.tb_all__DOT__color = 0U;
+    vlSelfRef.tb_all__DOT__tile_x = 0U;
+    vlSelfRef.tb_all__DOT__tile_y = 0U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     co_await vlSelfRef.__VtrigSched_h5cfcfd92__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_all.clk)", 
                                                          "tb_all.sv", 
-                                                         279);
+                                                         309);
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
     vlSelfRef.tb_all__DOT__rst_n = 1U;
     while ((1U & (~ (IData)(vlSelfRef.tb_all__DOT__rdy_in)))) {
@@ -2727,10 +3223,10 @@ VL_INLINE_OPT VlCoroutine Vtb_all___024root___eval_initial__TOP__Vtiming__1(Vtb_
                                                              nullptr, 
                                                              "@( tb_all.rdy_in)", 
                                                              "tb_all.sv", 
-                                                             283);
+                                                             313);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    VL_FINISH_MT("tb_all.sv", 58, "");
+    VL_FINISH_MT("tb_all.sv", 88, "");
     vlSelfRef.__Vm_traceActivity[2U] = 1U;
 }
 
@@ -2752,8 +3248,12 @@ VL_INLINE_OPT void Vtb_all___024root___act_comb__TOP__0(Vtb_all___024root* vlSel
     Vtb_all__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    IData/*18:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in;
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in = 0;
+    CData/*5:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x = 0;
+    CData/*4:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y = 0;
+    QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out = 0;
     QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a = 0;
     QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__b;
@@ -2789,50 +3289,33 @@ VL_INLINE_OPT void Vtb_all___024root___act_comb__TOP__0(Vtb_all___024root* vlSel
                                                     ? 0U
                                                     : 5U)
                                                    : 0U))))));
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-        = vlSelfRef.tb_all__DOT__metadata;
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out) 
-           | ((QData)((IData)((0x3f00U & (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-                                          << 3U)))) 
-              << 0x20U));
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out) 
-           | ((QData)((IData)((0x1f00U & (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-                                          << 8U)))) 
-              << 0x10U));
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = (0xffffffff0000ULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out);
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y 
+        = vlSelfRef.tb_all__DOT__tile_y;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x 
+        = vlSelfRef.tb_all__DOT__tile_x;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
+        = (((QData)((IData)(((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x) 
+                             << 8U))) << 0x20U) | (QData)((IData)(
+                                                                  ((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y) 
+                                                                   << 0x18U))));
     vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
-        = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
-        = vlSelfRef.tb_all__DOT__v1;
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
-        = vlSelfRef.tb_all__DOT__v2;
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out 
-        = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out) 
-           | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
-                                          >> 0x20U)) 
-                                 - (IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
-                                            >> 0x20U))) 
-                                << 0x10U) | (0xffffU 
-                                             & ((IData)(
-                                                        (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
-                                                         >> 0x10U)) 
-                                                - (IData)(
-                                                          (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
-                                                           >> 0x10U))))))) 
-              << 0x10U));
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out 
-        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out) 
-           | (IData)((IData)((0xffffU & ((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a) 
-                                         - (IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b))))));
-    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1 
-        = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out;
+        = __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v0_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v0_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v0_z)));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v1_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v1_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v1_z)));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v2_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v2_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v2_z)));
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__b 
-        = vlSelfRef.tb_all__DOT__v0;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a 
-        = vlSelfRef.tb_all__DOT__v1;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1;
     vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out 
         = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out) 
            | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a 
@@ -2853,10 +3336,34 @@ VL_INLINE_OPT void Vtb_all___024root___act_comb__TOP__0(Vtb_all___024root* vlSel
                                          - (IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__b))))));
     vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0 
         = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2;
+    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out 
+        = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out) 
+           | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
+                                          >> 0x20U)) 
+                                 - (IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
+                                            >> 0x20U))) 
+                                << 0x10U) | (0xffffU 
+                                             & ((IData)(
+                                                        (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
+                                                         >> 0x10U)) 
+                                                - (IData)(
+                                                          (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
+                                                           >> 0x10U))))))) 
+              << 0x10U));
+    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out 
+        = ((0xffffffff0000ULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out) 
+           | (IData)((IData)((0xffffU & ((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a) 
+                                         - (IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b))))));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1 
+        = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__b 
-        = vlSelfRef.tb_all__DOT__v2;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__a 
-        = vlSelfRef.tb_all__DOT__v0;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
     vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__out 
         = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__out) 
            | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__a 
@@ -3818,7 +4325,12 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
                 vlSelfRef.tb_all__DOT__color_out = 
                     vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__color_buffer
                     [vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_rel_pos];
-                vlSelfRef.tb_all__DOT__pixel_out = vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__out_coord;
+                vlSelfRef.tb_all__DOT__pixel_out_x 
+                    = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
+                                          >> 0x20U)));
+                vlSelfRef.tb_all__DOT__pixel_out_y 
+                    = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
+                                          >> 0x10U)));
                 __VdlyDim0__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_buffer__v1 
                     = vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_rel_pos;
                 vlSelfRef.__VdlyCommitQueuetb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_buffer.enqueue(0x7fffffffU, (IData)(__VdlyDim0__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_buffer__v1));
@@ -3917,6 +4429,8 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
         = __Vdly__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__dzdy;
     vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_current 
         = __Vdly__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__z_current;
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
+        = __Vdly__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos;
     if (vlSelfRef.tb_all__DOT__rst_n) {
         if ((0U == vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state)) {
             vlSelfRef.tb_all__DOT__rdy_in = ((~ (IData)(vlSelfRef.tb_all__DOT__vld_in)) 
@@ -3924,7 +4438,9 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__123__delta_i 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0;
             __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
-                = vlSelfRef.tb_all__DOT__metadata;
+                = (((IData)(vlSelfRef.tb_all__DOT__color) 
+                    << 0xbU) | (((IData)(vlSelfRef.tb_all__DOT__tile_x) 
+                                 << 5U) | (IData)(vlSelfRef.tb_all__DOT__tile_y)));
             __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start;
             __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0 
@@ -3934,7 +4450,7 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
             __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_2;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__123__v_i 
-                = vlSelfRef.tb_all__DOT__v0;
+                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__123__start 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__123__temp_x_sub 
@@ -3972,7 +4488,7 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__124__delta_i 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__124__v_i 
-                = vlSelfRef.tb_all__DOT__v1;
+                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__124__start 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__124__temp_x_sub 
@@ -4010,7 +4526,7 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__125__delta_i 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_2;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__125__v_i 
-                = vlSelfRef.tb_all__DOT__v2;
+                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__125__start 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_edge__125__temp_x_sub 
@@ -4172,7 +4688,7 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__131__abs_pos 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__131__v_0 
-                = vlSelfRef.tb_all__DOT__v0;
+                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
             __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__131__delta_x 
                 = (0xffffU & ((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_z__131__v_0 
                                        >> 0x20U)) - (IData)(
@@ -4204,31 +4720,61 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_z;
         } else if ((4U == vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state)) {
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_0 = 1U;
-            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
-                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos;
-            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
-                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0;
-            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 
-                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1;
-            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 
-                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2;
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_x 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos 
+                                      >> 0x20U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0 
+                                      >> 0x20U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1 
+                                      >> 0x20U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2 
+                                      >> 0x20U)));
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_0 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges
                 [0U];
-            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 
-                = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata;
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_color_0 
+                = (0xffU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
+                            >> 0xbU));
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdx_0 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdx;
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdy_0 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdy;
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_z_current_0 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__z_current;
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_y 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos 
+                                      >> 0x10U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0 
+                                      >> 0x10U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1 
+                                      >> 0x10U)));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y 
+                = (0xffffU & (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2 
+                                      >> 0x10U)));
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_1 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges
                 [1U];
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_x_0 
+                = (0x3fU & (vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata 
+                            >> 5U));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_z 
+                = (0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__abs_pos));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z 
+                = (0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_0));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z 
+                = (0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_1));
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_z 
+                = (0xffffU & (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__delta_2));
             vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_2 
                 = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__edges
                 [2U];
+            vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_y_0 
+                = (0x1fU & vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__metadata);
         } else if ((5U == vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state)) {
             if ((4U > (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count))) {
                 vlSelfRef.tb_all__DOT__rdy_in = 1U;
@@ -4250,14 +4796,24 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
         __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__dzdy = 0U;
         __Vdly__tb_all__DOT__rastafarian__DOT__tile_proc__DOT__z_current = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_0 = 0U;
-        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 = 0ULL;
-        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 = 0ULL;
-        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 = 0ULL;
-        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 = 0ULL;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_x = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_y = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_z = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_z = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_0 = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_1 = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_2 = 0U;
-        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0 = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_color_0 = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_x_0 = 0U;
+        vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_y_0 = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdx_0 = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdy_0 = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_z_current_0 = 0U;
@@ -4274,8 +4830,6 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
         vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state = 0U;
         vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__present_state = 0U;
     }
-    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
-        = __Vdly__tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos;
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0U] 
         = __Vdly__tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U] 
@@ -4349,9 +4903,10 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
     }
     vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count 
         = __Vdly__tb_all__DOT__rastafarian__DOT__axel_f__DOT__count;
-    vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__out_coord 
-        = (IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__flush_abs_pos 
-                   >> 0x10U));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_1 
+        = (0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_rdy_0 
+        = (4U > (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0U] 
         = (IData)((((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdx_0) 
                                       << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_dzdy_0)))) 
@@ -4363,7 +4918,9 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
                    >> 0x20U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[2U] 
         = ((0xfff80000U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[2U]) 
-           | vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_metadata_0);
+           | (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_color_0) 
+               << 0xbU) | (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_x_0) 
+                            << 5U) | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_tile_y_0))));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[2U] 
         = ((0x7ffffU & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[2U]) 
            | (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_2 
@@ -4382,60 +4939,99 @@ VL_INLINE_OPT void Vtb_all___024root___nba_sequent__TOP__0(Vtb_all___024root* vl
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[5U] 
         = (((IData)(((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_0)) 
                        << 0x20U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_edges_0_1))) 
-                     >> 0x20U)) >> 0xdU) | ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2) 
+                     >> 0x20U)) >> 0xdU) | ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_z) 
                                             << 0x13U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[6U] 
-        = (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2) 
-            >> 0xdU) | ((IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 
-                                 >> 0x20U)) << 0x13U));
-    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[7U] 
-        = ((0xfffffff8U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[7U]) 
-           | ((IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2 
-                       >> 0x20U)) >> 0xdU));
-    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[7U] 
-        = ((7U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[7U]) 
-           | ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1) 
+        = ((0xfffffff8U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[6U]) 
+           | ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_z) 
+              >> 0xdU));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[6U] 
+        = ((7U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[6U]) 
+           | ((IData)((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y)) 
+                        << 0x30U) | (((QData)((IData)(
+                                                      (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z) 
+                                                        << 0x10U) 
+                                                       | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x)))) 
+                                      << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y))))) 
               << 3U));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[7U] 
+        = (((IData)((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y)) 
+                      << 0x30U) | (((QData)((IData)(
+                                                    (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z) 
+                                                      << 0x10U) 
+                                                     | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x)))) 
+                                    << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y))))) 
+            >> 0x1dU) | ((IData)(((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y)) 
+                                    << 0x30U) | (((QData)((IData)(
+                                                                  (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z) 
+                                                                    << 0x10U) 
+                                                                   | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x)))) 
+                                                  << 0x10U) 
+                                                 | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y)))) 
+                                  >> 0x20U)) << 3U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[8U] 
-        = (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1) 
-            >> 0x1dU) | (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0) 
-                          << 0x13U) | ((IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 
-                                                >> 0x20U)) 
-                                       << 3U)));
+        = ((0xfffffff8U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[8U]) 
+           | ((IData)(((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_y)) 
+                         << 0x30U) | (((QData)((IData)(
+                                                       (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_z) 
+                                                         << 0x10U) 
+                                                        | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_x)))) 
+                                       << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_2_y)))) 
+                       >> 0x20U)) >> 0x1dU));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[8U] 
+        = ((7U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[8U]) 
+           | ((IData)((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x)) 
+                        << 0x30U) | (((QData)((IData)(
+                                                      (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y) 
+                                                        << 0x10U) 
+                                                       | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z)))) 
+                                      << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x))))) 
+              << 3U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[9U] 
-        = (((7U & ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0) 
-                   >> 0xdU)) | ((IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1 
-                                         >> 0x20U)) 
-                                >> 0x1dU)) | ((0x7fff8U 
-                                               & ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0) 
-                                                  >> 0xdU)) 
-                                              | ((IData)(
-                                                         (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
-                                                          >> 0x20U)) 
-                                                 << 0x13U)));
+        = (((IData)((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x)) 
+                      << 0x30U) | (((QData)((IData)(
+                                                    (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y) 
+                                                      << 0x10U) 
+                                                     | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z)))) 
+                                    << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x))))) 
+            >> 0x1dU) | ((IData)(((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x)) 
+                                    << 0x30U) | (((QData)((IData)(
+                                                                  (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y) 
+                                                                    << 0x10U) 
+                                                                   | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z)))) 
+                                                  << 0x10U) 
+                                                 | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x)))) 
+                                  >> 0x20U)) << 3U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0xaU] 
-        = ((7U & ((IData)((vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
-                           >> 0x20U)) >> 0xdU)) | (
-                                                   (0x7fff8U 
-                                                    & (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0) 
-                                                        << 3U) 
-                                                       | ((IData)(
-                                                                  (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0 
-                                                                   >> 0x20U)) 
-                                                          >> 0xdU))) 
-                                                   | (0xfff80000U 
-                                                      & ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0) 
-                                                         << 3U))));
+        = ((0xfffffff8U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0xaU]) 
+           | ((IData)(((((QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_x)) 
+                         << 0x30U) | (((QData)((IData)(
+                                                       (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_y) 
+                                                         << 0x10U) 
+                                                        | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_0_z)))) 
+                                       << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_deltas_0_1_x)))) 
+                       >> 0x20U)) >> 0x1dU));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0xaU] 
+        = ((7U & vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0xaU]) 
+           | ((IData)((((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_x) 
+                                          << 0x10U) 
+                                         | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_y)))) 
+                        << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_z)))) 
+              << 3U));
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellinp__axel_f__data_in[0xbU] 
-        = (0x7ffffU & (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0) 
-                        >> 0x1dU) | (0x7fff8U & ((IData)(
-                                                         (vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0 
-                                                          >> 0x20U)) 
-                                                 << 3U))));
-    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_vld_1 
-        = (0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count));
-    vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_rdy_0 
-        = (4U > (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count));
+        = (0x7ffffU & (((IData)((((QData)((IData)((
+                                                   ((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_x) 
+                                                    << 0x10U) 
+                                                   | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_y)))) 
+                                  << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_z)))) 
+                        >> 0x1dU) | ((IData)(((((QData)((IData)(
+                                                                (((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_x) 
+                                                                  << 0x10U) 
+                                                                 | (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_y)))) 
+                                                << 0x10U) 
+                                               | (QData)((IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__inter_abs_pos_0_z))) 
+                                              >> 0x20U)) 
+                                     << 3U)));
     vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__next_state 
         = ((0U == (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__pixel_proc__DOT__present_state))
             ? ((0U != (IData)(vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count))
@@ -4464,8 +5060,12 @@ VL_INLINE_OPT void Vtb_all___024root___nba_comb__TOP__0(Vtb_all___024root* vlSel
     Vtb_all__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    IData/*18:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in;
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in = 0;
+    CData/*5:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x = 0;
+    CData/*4:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y = 0;
+    QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out = 0;
     QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a = 0;
     QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__b;
@@ -4479,26 +5079,33 @@ VL_INLINE_OPT void Vtb_all___024root___nba_comb__TOP__0(Vtb_all___024root* vlSel
     QData/*47:0*/ __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__b;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__b = 0;
     // Body
-    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-        = vlSelfRef.tb_all__DOT__metadata;
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = ((0xffffffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out) 
-           | ((QData)((IData)((0x3f00U & (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-                                          << 3U)))) 
-              << 0x20U));
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = ((0xffff0000ffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out) 
-           | ((QData)((IData)((0x1f00U & (__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__in 
-                                          << 8U)))) 
-              << 0x10U));
-    vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
-        = (0xffffffff0000ULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out);
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y 
+        = vlSelfRef.tb_all__DOT__tile_y;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x 
+        = vlSelfRef.tb_all__DOT__tile_x;
+    __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out 
+        = (((QData)((IData)(((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_x) 
+                             << 8U))) << 0x20U) | (QData)((IData)(
+                                                                  ((IData)(__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__tile_y) 
+                                                                   << 0x18U))));
     vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_start 
-        = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
+        = __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__tile_to_coord__119__out;
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v0_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v0_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v0_z)));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v1_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v1_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v1_z)));
+    vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2 
+        = (((QData)((IData)((((IData)(vlSelfRef.tb_all__DOT__v2_x) 
+                              << 0x10U) | (IData)(vlSelfRef.tb_all__DOT__v2_y)))) 
+            << 0x10U) | (QData)((IData)(vlSelfRef.tb_all__DOT__v2_z)));
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__b 
-        = vlSelfRef.tb_all__DOT__v0;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a 
-        = vlSelfRef.tb_all__DOT__v1;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1;
     vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out 
         = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out) 
            | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__a 
@@ -4520,9 +5127,9 @@ VL_INLINE_OPT void Vtb_all___024root___nba_comb__TOP__0(Vtb_all___024root* vlSel
     vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_0 
         = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__120__out;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__b 
-        = vlSelfRef.tb_all__DOT__v1;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v1;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
-        = vlSelfRef.tb_all__DOT__v2;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2;
     vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out 
         = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out) 
            | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__a 
@@ -4544,9 +5151,9 @@ VL_INLINE_OPT void Vtb_all___024root___nba_comb__TOP__0(Vtb_all___024root* vlSel
     vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__temp_delta_1 
         = vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__121__out;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__b 
-        = vlSelfRef.tb_all__DOT__v2;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v2;
     __Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__a 
-        = vlSelfRef.tb_all__DOT__v0;
+        = vlSelfRef.tb_all__DOT__rastafarian__DOT__tile_proc__DOT__v0;
     vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__out 
         = ((0xffffULL & vlSelfRef.__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__out) 
            | ((QData)((IData)(((((IData)((__Vtask_tb_all__DOT__rastafarian__DOT__tile_proc__DOT__compute_delta__122__a 

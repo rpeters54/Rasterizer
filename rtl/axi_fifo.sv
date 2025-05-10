@@ -28,7 +28,7 @@ initial begin
     write_ptr    = '0;
     read_ptr     = '0;
     count        = '0;
-    data_out     = buffer[0];
+    data_out     = '0;
 
     // Display error if WIDTH is 0 or less.
     if (WIDTH <= 0) begin

@@ -4,24 +4,54 @@
 
 module tb_all;
 
-// Declare test variables
-logic                                   clk;
-logic                                   rst_n;
-logic                                   rdy_out;
-logic                                   vld_in;
-coord_3d_t                              v0;
-coord_3d_t                              v1;
-coord_3d_t                              v2;
-metadata_t                              metadata;
+// Clock and Reset
+logic clk;
+logic rst_n;
 
-logic                                   rdy_in;
-logic                                   vld_out;
-logic [`COLOR_BITS-1:0]                 color_out;
-coord_2d_t                              pixel_out;
+// Handshake signals
+logic vld_in;
+logic rdy_out;
+logic rdy_in;
+logic vld_out;
 
-// Instantiate Design 
+// Vertex inputs
+logic signed [`FX_TOTAL_BITS-1:0] v0_x, v0_y, v0_z;
+logic signed [`FX_TOTAL_BITS-1:0] v1_x, v1_y, v1_z;
+logic signed [`FX_TOTAL_BITS-1:0] v2_x, v2_y, v2_z;
+
+// Tile info and color
+logic [`COLOR_BITS-1:0] color;
+logic [`TILE_COLUMNS_BITS-1:0] tile_x;
+logic [`TILE_ROWS_BITS-1:0] tile_y;
+
+logic signed [`FX_TOTAL_BITS*2-1:0] out_edge_0, out_edge_1, out_edge_2;
+logic [`COLOR_BITS-1:0] color_out;
+logic signed [`FX_TOTAL_BITS-1:0] pixel_out_x, pixel_out_y;
+
+// DUT instantiation
 raster rastafarian (
-    .*
+    .clk(clk),
+    .rst_n(rst_n),
+    .rdy_out(rdy_out),
+    .vld_in(vld_in),
+    .v0_x(v0_x),
+    .v0_y(v0_y),
+    .v0_z(v0_z),
+    .v1_x(v1_x),
+    .v1_y(v1_y),
+    .v1_z(v1_z),
+    .v2_x(v2_x),
+    .v2_y(v2_y),
+    .v2_z(v2_z),
+    .color(color),
+    .tile_x(tile_x),
+    .tile_y(tile_y),
+
+    .rdy_in(rdy_in),
+    .vld_out(vld_out),
+    .color_out(color_out),
+    .pixel_out_x(pixel_out_x),
+    .pixel_out_y(pixel_out_y)
 );
 
 // Sample to drive clock
@@ -225,10 +255,10 @@ task automatic run_triangle_test(
     wait(rdy_in == 1);
 
     // Apply inputs
-    v0 = tv0;
-    v1 = tv1;
-    v2 = tv2;
-    metadata = tmeta;
+    v0_x = tv0.x; v0_y = tv0.y; v0_z = tv0.z;
+    v1_x = tv1.x; v1_y = tv1.y; v1_z = tv1.z;
+    v2_x = tv2.x; v2_y = tv2.y; v2_z = tv2.z;
+    color = tmeta.color; tile_x = tmeta.tile_x; tile_y = tmeta.tile_y;
 
     // Start transaction
     @(negedge clk);
@@ -262,18 +292,18 @@ task automatic reset();
     rst_n       = 0;
     rdy_out     = 0;
     vld_in      = 0;
-    v0.x        = 0;
-    v0.y        = 0;
-    v0.z        = 0;
-    v1.x        = 0;
-    v1.y        = 0;
-    v1.z        = 0;
-    v2.x        = 0;
-    v2.y        = 0;
-    v2.z        = 0;
-    metadata.color   = 0;
-    metadata.tile_x  = 0;
-    metadata.tile_y  = 0;
+    v0_x        = 0;
+    v0_y        = 0;
+    v0_z        = 0;
+    v1_x        = 0;
+    v1_y        = 0;
+    v1_z        = 0;
+    v2_x        = 0;
+    v2_y        = 0;
+    v2_z        = 0;
+    color   = 0;
+    tile_x  = 0;
+    tile_y  = 0;
 
     // Release reset after a few cycles
     repeat (2) @(posedge clk);

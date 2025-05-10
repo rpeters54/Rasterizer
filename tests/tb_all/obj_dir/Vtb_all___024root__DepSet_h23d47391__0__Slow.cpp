@@ -6,6 +6,8 @@
 #include "Vtb_all__Syms.h"
 #include "Vtb_all___024root.h"
 
+extern const VlWide<12>/*383:0*/ Vtb_all__ConstPool__CONST_h3c5fcb02_0;
+
 VL_ATTR_COLD void Vtb_all___024root___eval_initial__TOP(Vtb_all___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_all___024root___eval_initial__TOP\n"); );
     Vtb_all__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -22,41 +24,29 @@ VL_ATTR_COLD void Vtb_all___024root___eval_initial__TOP(Vtb_all___024root* vlSel
     vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__read_ptr = 0U;
     vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__count = 0U;
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][0U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[0U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[1U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][1U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[1U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[2U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][2U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[2U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[3U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][3U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[3U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[4U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][4U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[4U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[5U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][5U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[5U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[6U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][6U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[6U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[7U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][7U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[7U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[8U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][8U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[8U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[9U] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][9U];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[9U];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0xaU] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][0xaU];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[0xaU];
     vlSelfRef.tb_all__DOT__rastafarian__DOT____Vcellout__axel_f__data_out[0xbU] 
-        = vlSelfRef.tb_all__DOT__rastafarian__DOT__axel_f__DOT__buffer
-        [0U][0xbU];
+        = Vtb_all__ConstPool__CONST_h3c5fcb02_0[0xbU];
 }
 
 #ifdef VL_DEBUG

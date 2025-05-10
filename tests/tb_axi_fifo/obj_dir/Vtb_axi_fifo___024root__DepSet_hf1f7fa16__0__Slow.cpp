@@ -25,18 +25,15 @@ VL_ATTR_COLD void Vtb_axi_fifo___024root___eval_initial__TOP(Vtb_axi_fifo___024r
     vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__read_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__count = 0U;
-    vlSelfRef.tb_axi_fifo__DOT__data_out1 = vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__buffer
-        [0U];
+    vlSelfRef.tb_axi_fifo__DOT__data_out1 = 0ULL;
     vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__read_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__count = 0U;
-    vlSelfRef.tb_axi_fifo__DOT__data_out2 = vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__buffer
-        [0U];
+    vlSelfRef.tb_axi_fifo__DOT__data_out2 = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__read_ptr = 0U;
     vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__count = 0U;
-    vlSelfRef.tb_axi_fifo__DOT__data_out3 = vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__buffer
-        [0U];
+    vlSelfRef.tb_axi_fifo__DOT__data_out3 = 0U;
 }
 
 #ifdef VL_DEBUG

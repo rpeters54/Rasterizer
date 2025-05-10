@@ -1,0 +1,131 @@
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:281:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  281 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:37: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+                    ... For warning description see https://verilator.org/warn/VARHIDDEN?v=5.034
+                    ... Use "/* verilator lint_off VARHIDDEN */" and lint_on around source to disable this message.
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:282:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  282 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:55: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:297:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  297 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:37: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:298:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  298 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:55: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:313:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  313 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:37: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:314:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  314 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:110:55: ... Location of original declaration
+  110 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:347:39: Declaration of signal hides declaration in upper scope: 'abs_pos'
+  347 |     input coord_3d_t                  abs_pos,
+      |                                       ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:109:37: ... Location of original declaration
+  109 | coord_3d_t                          abs_pos;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:348:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  348 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:114:35: ... Location of original declaration
+  114 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:349:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  349 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:114:41: ... Location of original declaration
+  114 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:308:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  308 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:64:35: ... Location of original declaration
+   64 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:309:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  309 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:64:41: ... Location of original declaration
+   64 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Error: /home/asic/workspace/lab3/rtl/raster.sv:9:12: Cannot find file containing interface: 'coord_3d_t'
+    9 |     input  coord_3d_t v0,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/raster.sv:10:12: Cannot find file containing interface: 'coord_3d_t'
+   10 |     input  coord_3d_t v1,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/raster.sv:11:12: Cannot find file containing interface: 'coord_3d_t'
+   11 |     input  coord_3d_t v2,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/raster.sv:12:12: Cannot find file containing interface: 'metadata_t'
+   12 |     input  metadata_t metadata,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/raster.sv:17:12: Cannot find file containing interface: 'coord_2d_t'
+   17 |     output coord_2d_t   pixel_out
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:9:12: Cannot find file containing interface: 'coord_3d_t'
+    9 |     input  coord_3d_t v0,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:10:12: Cannot find file containing interface: 'coord_3d_t'
+   10 |     input  coord_3d_t v1,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:11:12: Cannot find file containing interface: 'coord_3d_t'
+   11 |     input  coord_3d_t v2,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:12:12: Cannot find file containing interface: 'metadata_t'
+   12 |     input  metadata_t in_metadata,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:16:12: Cannot find file containing interface: 'coord_3d_t'
+   16 |     output coord_3d_t                           out_abs_pos,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:17:12: Cannot find file containing interface: 'coord_3d_t'
+   17 |     output coord_3d_t                           out_delta_0,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:18:12: Cannot find file containing interface: 'coord_3d_t'
+   18 |     output coord_3d_t                           out_delta_1,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:19:12: Cannot find file containing interface: 'coord_3d_t'
+   19 |     output coord_3d_t                           out_delta_2,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:23:12: Cannot find file containing interface: 'metadata_t'
+   23 |     output metadata_t                           out_metadata,
+      |            ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:10:11: Cannot find file containing interface: 'coord_3d_t'
+   10 |     input coord_3d_t                          in_abs_pos,
+      |           ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:11:11: Cannot find file containing interface: 'coord_3d_t'
+   11 |     input coord_3d_t                          in_delta_0,
+      |           ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:12:11: Cannot find file containing interface: 'coord_3d_t'
+   12 |     input coord_3d_t                          in_delta_1,
+      |           ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:13:11: Cannot find file containing interface: 'coord_3d_t'
+   13 |     input coord_3d_t                          in_delta_2,
+      |           ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:17:11: Cannot find file containing interface: 'metadata_t'
+   17 |     input metadata_t                          in_metadata,
+      |           ^~~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:25:12: Cannot find file containing interface: 'coord_2d_t'
+   25 |     output coord_2d_t               pixel_out
+      |            ^~~~~~~~~~
+%Error: Internal Error: /home/asic/workspace/lab3/rtl/tile_processor.sv:12:12: ../V3LinkDot.cpp:3058: Unlinked interface
+   12 |     input  metadata_t in_metadata,
+      |            ^~~~~~~~~~

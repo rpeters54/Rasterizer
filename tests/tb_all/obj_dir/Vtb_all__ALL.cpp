@@ -5,6 +5,7 @@
 #include "Vtb_all___024root__DepSet_h2523f0b1__0.cpp"
 #include "Vtb_all__main.cpp"
 #include "Vtb_all__Trace__0.cpp"
+#include "Vtb_all__ConstPool_0.cpp"
 #include "Vtb_all___024root__Slow.cpp"
 #include "Vtb_all___024root__DepSet_h23d47391__0__Slow.cpp"
 #include "Vtb_all___024root__DepSet_h2523f0b1__0__Slow.cpp"

@@ -1,6 +1,5 @@
 
 `include "raster_defines.svh"
-`include "struct_defines.svh"
 
 module pixel_processor(
     input             clk,
@@ -8,23 +7,51 @@ module pixel_processor(
     input             rdy_out,
     input             vld_in,
 
-    input coord_3d_t                          in_abs_pos,
-    input coord_3d_t                          in_delta_0,
-    input coord_3d_t                          in_delta_1,
-    input coord_3d_t                          in_delta_2,
-    input logic signed [`FX_TOTAL_BITS*2-1:0] in_edge_0,
-    input logic signed [`FX_TOTAL_BITS*2-1:0] in_edge_1,
-    input logic signed [`FX_TOTAL_BITS*2-1:0] in_edge_2,
-    input metadata_t                          in_metadata,
-    input logic signed [`FX_TOTAL_BITS-1:0]   in_dzdx,
-    input logic signed [`FX_TOTAL_BITS-1:0]   in_dzdy,
-    input logic signed [`FX_TOTAL_BITS*2-1:0] in_z_current,
+    input signed [`FX_TOTAL_BITS-1:0]   in_abs_pos_x,
+    input signed [`FX_TOTAL_BITS-1:0]   in_abs_pos_y,
+    input signed [`FX_TOTAL_BITS-1:0]   in_abs_pos_z,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_0_x,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_0_y,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_0_z,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_1_x,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_1_y,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_1_z,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_2_x,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_2_y,
+    input signed [`FX_TOTAL_BITS-1:0]   in_delta_2_z,
+    input signed [`FX_TOTAL_BITS*2-1:0] in_edge_0,
+    input signed [`FX_TOTAL_BITS*2-1:0] in_edge_1,
+    input signed [`FX_TOTAL_BITS*2-1:0] in_edge_2,
+    input        [`COLOR_BITS-1:0]      in_color,
+    input        [`TILE_COLUMNS_BITS-1:0] in_tile_x,
+    input        [`TILE_ROWS_BITS-1:0]    in_tile_y,  
+    input signed [`FX_TOTAL_BITS-1:0]   in_dzdx,
+    input signed [`FX_TOTAL_BITS-1:0]   in_dzdy,
+    input signed [`FX_TOTAL_BITS*2-1:0] in_z_current,
 
-    output logic                    rdy_in,
-    output logic                    vld_out,
-    output logic [`COLOR_BITS-1:0]  color_out,
-    output coord_2d_t               pixel_out
+    output logic                               rdy_in,
+    output logic                               vld_out,
+    output logic [`COLOR_BITS-1:0]             color_out,
+    output logic signed [`FX_TOTAL_BITS-1:0]   pixel_out_x,
+    output logic signed [`FX_TOTAL_BITS-1:0]   pixel_out_y
 );
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+    logic signed [`FX_TOTAL_BITS-1:0] z;
+} coord_3d_t;
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+} coord_2d_t;
+
+typedef struct packed {
+    logic [`COLOR_BITS-1:0]         color;
+    logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
+    logic [`TILE_ROWS_BITS-1:0]     tile_y;  
+} metadata_t;
 
 typedef enum logic [1:0] {
     IDLE      = 2'd0,
@@ -49,18 +76,11 @@ logic signed [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
 logic signed [`FX_TOTAL_BITS*2-1:0] z_current;
 
 // temps needed to get iverilog working :(
-coord_2d_t out_coord;
 logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] current_tile_coord;
 logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] new_tile_coord;
-coord_3d_t zero;
-assign zero.x = 0;
-assign zero.y = 0;
-assign zero.z = 0;
 
-assign out_coord.x = flush_abs_pos.x;
-assign out_coord.y = flush_abs_pos.y;
 assign current_tile_coord = {metadata.tile_y, metadata.tile_x};
-assign new_tile_coord = {in_metadata.tile_y, in_metadata.tile_x};
+assign new_tile_coord = {in_tile_y, in_tile_x};
 
 // temporaries
 coord_3d_t temp_coord;
@@ -120,9 +140,9 @@ always_ff @(posedge clk) begin
         edge_0  <= '0;
         edge_1  <= '0;
         edge_2  <= '0;
-        delta_0 <= zero;
-        delta_1 <= zero;
-        delta_2 <= zero;
+        delta_0.x <= 0; delta_0.y <= 0; delta_0.z <= 0;
+        delta_1.x <= 0; delta_1.y <= 0; delta_1.z <= 0;
+        delta_2.x <= 0; delta_2.y <= 0; delta_2.z <= 0;
         metadata.color   <= '0;
         metadata.tile_x  <= '0;
         metadata.tile_y  <= '0;
@@ -147,18 +167,28 @@ always_ff @(posedge clk) begin
                 if (vld_in) begin
                     rdy_in       <= '0;
 
-                    abs_pos       <= in_abs_pos;
+                    abs_pos.x       <= in_abs_pos_x;
+                    abs_pos.y       <= in_abs_pos_y;
+                    abs_pos.z       <= in_abs_pos_z;
                     tile_to_coord(metadata, temp_coord);
                     flush_abs_pos <= temp_coord;
                     rel_pos       <= '0;
                     flush_rel_pos <= '0;
-                    delta_0     <= in_delta_0;
-                    delta_1     <= in_delta_1;
-                    delta_2     <= in_delta_2;
+                    delta_0.x     <= in_delta_0_x;
+                    delta_0.y     <= in_delta_0_y;
+                    delta_0.z     <= in_delta_0_z;
+                    delta_1.x     <= in_delta_1_x;
+                    delta_1.y     <= in_delta_1_y;
+                    delta_1.z     <= in_delta_1_z;
+                    delta_2.x     <= in_delta_2_x;
+                    delta_2.y     <= in_delta_2_y;
+                    delta_2.z     <= in_delta_2_z;
                     edge_0      <= in_edge_0;
                     edge_1      <= in_edge_1;
                     edge_2      <= in_edge_2;
-                    metadata      <= in_metadata;
+                    metadata.color  <= in_color;
+                    metadata.tile_x  <= in_tile_x;
+                    metadata.tile_y  <= in_tile_y;
                     dzdx          <= in_dzdx;
                     dzdy          <= in_dzdy;
                     z_current     <= in_z_current;
@@ -225,7 +255,8 @@ always_ff @(posedge clk) begin
                     
                     // Output the color and pixel coordinates
                     color_out <= color_buffer[flush_rel_pos];
-                    pixel_out <= out_coord;
+                    pixel_out_x <= flush_abs_pos.x;
+                    pixel_out_y <= flush_abs_pos.y;
                     
                     // Clear the buffers at this position
                     z_buffer[flush_rel_pos]     <= {1'b0, {2*`FX_TOTAL_BITS-1{1'b1}}};

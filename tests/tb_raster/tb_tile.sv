@@ -3,54 +3,82 @@
 
 module tb_tile;
 
-// Declare test variables
-logic                                   clk;
-logic                                   rst_n;
-logic                                   rdy_out;
-logic                                   vld_in;
-coord_3d_t                              v0;
-coord_3d_t                              v1;
-coord_3d_t                              v2;
-metadata_t                              in_metadata;
+// Clock and Reset
+  logic clk;
+  logic rst_n;
 
-logic                                   rdy_in;
-logic                                   vld_out;
-coord_3d_t                              out_abs_pos;
-coord_3d_t                              out_delta_0;
-coord_3d_t                              out_delta_1;
-coord_3d_t                              out_delta_2;
-logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_0;
-logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_1;
-logic signed [`FX_TOTAL_BITS*2-1:0]     out_edge_2;
-metadata_t                              out_metadata;
-logic        [`FX_TOTAL_BITS-1:0]       out_dzdx;
-logic        [`FX_TOTAL_BITS-1:0]       out_dzdy;
-logic        [`FX_TOTAL_BITS*2-1:0]     out_z_current;
+  // Handshake signals
+  logic vld_in;
+  logic rdy_out;
+  logic rdy_in;
+  logic vld_out;
 
-// Instantiate Design 
-tile_processor tile_proc (
+  // Vertex inputs
+  logic signed [`FX_TOTAL_BITS-1:0] v0_x, v0_y, v0_z;
+  logic signed [`FX_TOTAL_BITS-1:0] v1_x, v1_y, v1_z;
+  logic signed [`FX_TOTAL_BITS-1:0] v2_x, v2_y, v2_z;
+
+  // Tile info and color
+  logic [`COLOR_BITS-1:0] in_color;
+  logic [`TILE_COLUMNS_BITS-1:0] in_tile_x;
+  logic [`TILE_ROWS_BITS-1:0] in_tile_y;
+
+  // Outputs from tile_processor
+  logic signed [`FX_TOTAL_BITS-1:0] out_abs_pos_x, out_abs_pos_y, out_abs_pos_z;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_0_x, out_delta_0_y, out_delta_0_z;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_1_x, out_delta_1_y, out_delta_1_z;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_2_x, out_delta_2_y, out_delta_2_z;
+  logic signed [`FX_TOTAL_BITS*2-1:0] out_edge_0, out_edge_1, out_edge_2;
+  logic [`COLOR_BITS-1:0] out_color;
+  logic [`TILE_COLUMNS_BITS-1:0] out_tile_x;
+  logic [`TILE_ROWS_BITS-1:0] out_tile_y;
+  logic signed [`FX_TOTAL_BITS-1:0] out_dzdx, out_dzdy;
+  logic signed [`FX_TOTAL_BITS*2-1:0] out_z_current;
+
+
+  // DUT instantiation
+  tile_processor u_tile_processor (
     .clk(clk),
     .rst_n(rst_n),
     .rdy_out(rdy_out),
     .vld_in(vld_in),
-    .v0(v0),
-    .v1(v1),
-    .v2(v2),
-    .in_metadata(in_metadata),
+    .v0_x(v0_x),
+    .v0_y(v0_y),
+    .v0_z(v0_z),
+    .v1_x(v1_x),
+    .v1_y(v1_y),
+    .v1_z(v1_z),
+    .v2_x(v2_x),
+    .v2_y(v2_y),
+    .v2_z(v2_z),
+    .in_color(in_color),
+    .in_tile_x(in_tile_x),
+    .in_tile_y(in_tile_y),
     .rdy_in(rdy_in),
     .vld_out(vld_out),
-    .out_abs_pos(out_abs_pos),
-    .out_delta_0(out_delta_0),
-    .out_delta_1(out_delta_1),
-    .out_delta_2(out_delta_2),
+    .out_abs_pos_x(out_abs_pos_x),
+    .out_abs_pos_y(out_abs_pos_y),
+    .out_abs_pos_z(out_abs_pos_z),
+    .out_delta_0_x(out_delta_0_x),
+    .out_delta_0_y(out_delta_0_y),
+    .out_delta_0_z(out_delta_0_z),
+    .out_delta_1_x(out_delta_1_x),
+    .out_delta_1_y(out_delta_1_y),
+    .out_delta_1_z(out_delta_1_z),
+    .out_delta_2_x(out_delta_2_x),
+    .out_delta_2_y(out_delta_2_y),
+    .out_delta_2_z(out_delta_2_z),
     .out_edge_0(out_edge_0),
     .out_edge_1(out_edge_1),
     .out_edge_2(out_edge_2),
-    .out_metadata(out_metadata),
+    .out_color(out_color),
+    .out_tile_x(out_tile_x),
+    .out_tile_y(out_tile_y),
     .out_dzdx(out_dzdx),
     .out_dzdy(out_dzdy),
     .out_z_current(out_z_current)
-);
+  );
+
 
 // Sample to drive clock
 localparam PERIOD = 10;
@@ -72,18 +100,18 @@ end
     rst_n       = 0;
     rdy_out     = 0;
     vld_in      = 0;
-    v0.x        = 0;
-    v0.y        = 0;
-    v0.z        = 0;
-    v1.x        = 0;
-    v1.y        = 0;
-    v1.z        = 0;
-    v2.x        = 0;
-    v2.y        = 0;
-    v2.z        = 0;
-    in_metadata.color   = 0;
-    in_metadata.tile_x  = 0;
-    in_metadata.tile_y  = 0;
+    v0_x        = 0;
+    v0_y        = 0;
+    v0_z        = 0;
+    v1_x        = 0;
+    v1_y        = 0;
+    v1_z        = 0;
+    v2_x        = 0;
+    v2_y        = 0;
+    v2_z        = 0;
+    in_color   = 0;
+    in_tile_x  = 0;
+    in_tile_y  = 0;
 
     // Release reset after a few cycles
     repeat (2) @(posedge clk);
@@ -313,10 +341,10 @@ task automatic run_triangle_test(
     wait(rdy_in == 1);
 
     // Apply inputs
-    v0 = tv0;
-    v1 = tv1;
-    v2 = tv2;
-    in_metadata = tmeta;
+    v0_x = tv0.x; v0_y = tv0.y; v0_z = tv0.z;
+    v1_x = tv1.x; v1_y = tv1.y; v1_z = tv1.z;
+    v2_x = tv2.x; v2_y = tv2.y; v2_z = tv2.z;
+    in_color   = tmeta.color; in_tile_x   = tmeta.tile_x; in_tile_y   = tmeta.tile_y;
 
     // Start transaction
     @(negedge clk);
@@ -345,12 +373,12 @@ task automatic run_triangle_test(
 
     // Print out real values
     $display("--- Real Values ---");
-    $display("abs_pos: x=%0d, y=%0d, z=%0d", out_abs_pos.x >>> 4, out_abs_pos.y >>> 4, out_abs_pos.z >>> 4);
+    $display("abs_pos: x=%0d, y=%0d, z=%0d", out_abs_pos_x >>> 4, out_abs_pos_y >>> 4, out_abs_pos_z >>> 4);
     $display("dzdx: %0d, dzdy: %0d", out_dzdx >>> 4, out_dzdy >>> 4);
     $display("z_current: %0d", out_z_current >>> 8);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 0, out_delta_0.x >>> 4, out_delta_0.y >>> 4, out_delta_0.z >>> 4);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 1, out_delta_1.x >>> 4, out_delta_1.y >>> 4, out_delta_1.z >>> 4);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 2, out_delta_2.x >>> 4, out_delta_2.y >>> 4, out_delta_2.z >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 0, out_delta_0_x >>> 4, out_delta_0_y >>> 4, out_delta_0_z >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 1, out_delta_1_x >>> 4, out_delta_1_y >>> 4, out_delta_1_z >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 2, out_delta_2_x >>> 4, out_delta_2_y >>> 4, out_delta_2_z >>> 4);
     $display("edge_%0d: %0d", 0, out_edge_0  >>> 8);
     $display("edge_%0d: %0d", 1, out_edge_1 >>> 8);
     $display("edge_%0d: %0d", 2, out_edge_2 >>> 8);
@@ -359,39 +387,47 @@ task automatic run_triangle_test(
     // Assertions for all outputs
 
     temp_delta = exp_deltas[0];
-    assert (out_abs_pos == exp_abs_pos)
-        else $error("abs_pos mismatch: %p vs %p", out_abs_pos, exp_abs_pos);
-    assert (out_delta_0.x == temp_delta.x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 0, out_delta_0.x, temp_delta.x);
-    assert (out_delta_0.y == temp_delta.y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 0, out_delta_0.y, temp_delta.y);
-    assert (out_delta_0.z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 0, out_delta_0.z, temp_delta.z);
+    assert (out_abs_pos_x == exp_abs_pos.x)
+        else $error("abs_pos mismatch: %p vs %p", out_abs_pos_x, exp_abs_pos.x);
+    assert (out_abs_pos_y == exp_abs_pos.y)
+        else $error("abs_pos mismatch: %p vs %p", out_abs_pos_y, exp_abs_pos.y);
+    assert (out_abs_pos_z == exp_abs_pos.z)
+        else $error("abs_pos mismatch: %p vs %p", out_abs_pos_z, exp_abs_pos.z);
+    assert (out_delta_0_x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 0, out_delta_0_x, temp_delta.x);
+    assert (out_delta_0_y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 0, out_delta_0_y, temp_delta.y);
+    assert (out_delta_0_z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 0, out_delta_0_z, temp_delta.z);
     assert (out_edge_0 == exp_edges[0])
         else $error("edge_%0d mismatch: %0d vs %0d", 0, out_edge_0, temp_delta);
 
     temp_delta = exp_deltas[1];
-    assert (out_delta_1.x == temp_delta.x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 1, out_delta_1.x, temp_delta.x);
-    assert (out_delta_1.y == temp_delta.y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 1, out_delta_1.y, temp_delta.y);
-    assert (out_delta_1.z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 1, out_delta_1.z, temp_delta.z);
+    assert (out_delta_1_x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 1, out_delta_1_x, temp_delta.x);
+    assert (out_delta_1_y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 1, out_delta_1_y, temp_delta.y);
+    assert (out_delta_1_z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 1, out_delta_1_z, temp_delta.z);
     assert (out_edge_1 == exp_edges[1])
         else $error("edge_%0d mismatch: %0d vs %0d", 1, out_edge_1, exp_edges[1]);
 
     temp_delta = exp_deltas[2];
-    assert (out_delta_2.x == temp_delta.x)
-        else $error("delta_%0d.x mismatch: %p vs %p", 2, out_delta_2.x, temp_delta.x);
-    assert (out_delta_2.y == temp_delta.y)
-        else $error("delta_%0d.y mismatch: %p vs %p", 2, out_delta_2.y, temp_delta.y);
-    assert (out_delta_2.z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 2, out_delta_2.z, temp_delta.z);
+    assert (out_delta_2_x == temp_delta.x)
+        else $error("delta_%0d.x mismatch: %p vs %p", 2, out_delta_2_x, temp_delta.x);
+    assert (out_delta_2_y == temp_delta.y)
+        else $error("delta_%0d.y mismatch: %p vs %p", 2, out_delta_2_y, temp_delta.y);
+    assert (out_delta_2_z == temp_delta.z)
+        else $error("delta_%0d.z mismatch: %p vs %p", 2, out_delta_2_z, temp_delta.z);
     assert (out_edge_2 == exp_edges[2])
         else $error("edge_%0d mismatch: %0d vs %0d", 2, out_edge_2, exp_edges[2]);        
 
-    assert (out_metadata == exp_metadata)
-        else $error("metadata mismatch");
+    assert (out_color == exp_metadata.color)
+        else $error("color mismatch");
+    assert (out_tile_x == exp_metadata.tile_x)
+        else $error("tile_x mismatch");
+    assert (out_tile_y == exp_metadata.tile_y)
+        else $error("tile_y mismatch");
     assert (out_dzdx == exp_dzdx)
         else $error("dzdx mismatch: %0d vs %0d", out_dzdx, exp_dzdx);
     assert (out_dzdy == exp_dzdy)

@@ -1,31 +1,65 @@
 
 `include "raster_defines.svh"
-`include "struct_defines.svh"
 
 module tile_processor(
-    input             clk,
-    input             rst_n,
-    input             rdy_out,
-    input             vld_in,
-    input  coord_3d_t v0,
-    input  coord_3d_t v1,
-    input  coord_3d_t v2,
-    input  metadata_t in_metadata,
+    input                               clk,
+    input                               rst_n,
+    input                               rdy_out,
+    input                               vld_in,
+    input signed [`FX_TOTAL_BITS-1:0]   v0_x,
+    input signed [`FX_TOTAL_BITS-1:0]   v0_y,
+    input signed [`FX_TOTAL_BITS-1:0]   v0_z,
+    input signed [`FX_TOTAL_BITS-1:0]   v1_x,
+    input signed [`FX_TOTAL_BITS-1:0]   v1_y,
+    input signed [`FX_TOTAL_BITS-1:0]   v1_z,
+    input signed [`FX_TOTAL_BITS-1:0]   v2_x,
+    input signed [`FX_TOTAL_BITS-1:0]   v2_y,
+    input signed [`FX_TOTAL_BITS-1:0]   v2_z,
+    input        [`COLOR_BITS-1:0]              in_color,
+    input        [`TILE_COLUMNS_BITS-1:0]       in_tile_x,
+    input        [`TILE_ROWS_BITS-1:0]          in_tile_y,
 
     output logic                                rdy_in,
     output logic                                vld_out,
-    output coord_3d_t                           out_abs_pos,
-    output coord_3d_t                           out_delta_0,
-    output coord_3d_t                           out_delta_1,
-    output coord_3d_t                           out_delta_2,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_x,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_y,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_z,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_x,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_y,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_z,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_x,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_y,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_z,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_x,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_y,
+    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_z,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_0,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_1,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_2,
-    output metadata_t                           out_metadata,
+    output logic [`COLOR_BITS-1:0]              out_color,
+    output logic [`TILE_COLUMNS_BITS-1:0]       out_tile_x,
+    output logic [`TILE_ROWS_BITS-1:0]          out_tile_y, 
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdx,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdy,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_z_current
 );
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+    logic signed [`FX_TOTAL_BITS-1:0] z;
+} coord_3d_t;
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+} coord_2d_t;
+
+typedef struct packed {
+    logic [`COLOR_BITS-1:0]         color;
+    logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
+    logic [`TILE_ROWS_BITS-1:0]     tile_y;  
+} metadata_t;
 
 typedef enum {
     INPUT,
@@ -44,14 +78,17 @@ logic signed [`FX_TOTAL_BITS*2-1:0] temp_edge_i;
 logic signed [`FX_TOTAL_BITS*2-1:0] temp_coeff_a, temp_coeff_b, temp_coeff_c;
 logic signed [`FX_TOTAL_BITS*2-1:0] temp_z;
 logic signed [`FX_TOTAL_BITS-1:0] temp_dzdx, temp_dzdy;
-coord_3d_t zero;
-assign zero.x = 0;
-assign zero.y = 0;
-assign zero.z = 0;
+coord_3d_t                          v0, v1, v2;
+coord_3d_t                          zero;
+
 
 always_comb begin
+    zero.x = 0; zero.y = 0; zero.z = 0;
+    v0.x = v0_x; v0.y = v0_y; v0.z = v0_z;
+    v1.x = v1_x; v1.y = v1_y; v1.z = v1_z;
+    v2.x = v2_x; v2.y = v2_y; v2.z = v2_z;
     // convert from tile number to pixel coordinates
-    tile_to_coord(in_metadata, temp_start);
+    tile_to_coord(in_tile_x, in_tile_y, temp_start);
     // compute the deltas between all vertices in clockwise order
     compute_delta(v1, v0, temp_delta_0);   
     compute_delta(v2, v1, temp_delta_1);   
@@ -120,18 +157,18 @@ always_ff @(posedge clk) begin
         dzdy            <= '0;
         z_current       <= '0;
 
-        rdy_in       <= '1;
-        vld_out <= 0;
-        out_abs_pos <= 0;
-        out_delta_0 <= zero;
-        out_delta_1 <= zero;
-        out_delta_2 <= zero;
+        rdy_in          <= '1;
+        vld_out         <= 0;
+        out_abs_pos_x <= 0; out_abs_pos_y <= 0; out_abs_pos_z <= 0;
+        out_delta_0_x <= 0; out_delta_0_y <= 0; out_delta_0_z <= 0;
+        out_delta_1_x <= 0; out_delta_1_y <= 0; out_delta_1_z <= 0;
+        out_delta_2_x <= 0; out_delta_2_y <= 0; out_delta_2_z <= 0;
         out_edge_0 <= 0;
         out_edge_1 <= 0;
         out_edge_2 <= 0;
-        out_metadata.color   <= 0;
-        out_metadata.tile_x  <= 0;
-        out_metadata.tile_y  <= 0;
+        out_color   <= 0;
+        out_tile_x  <= 0;
+        out_tile_y  <= 0;
         out_dzdx <= 0;
         out_dzdy <= 0;
         out_z_current <= 0;
@@ -146,7 +183,9 @@ always_ff @(posedge clk) begin
                 rdy_in <= vld_in ? '0 : rdy_in;
 
                 // Store the metadata
-                metadata <= in_metadata;
+                metadata.color <= in_color;
+                metadata.tile_x <= in_tile_x;
+                metadata.tile_y <= in_tile_y;
             
                 // Store the start position for the next cycle
                 abs_pos <= temp_start;
@@ -190,14 +229,16 @@ always_ff @(posedge clk) begin
                 // if output is open, write the data to the output
                 vld_out <= '1;
 
-                out_abs_pos   <= abs_pos;
-                out_delta_0   <= delta_0;
-                out_delta_1   <= delta_1;
-                out_delta_2   <= delta_2;
+                out_abs_pos_x <= abs_pos.x; out_abs_pos_y <= abs_pos.y; out_abs_pos_z <= abs_pos.z;
+                out_delta_0_x <= delta_0.x; out_delta_0_y <= delta_0.y; out_delta_0_z <= delta_0.z;
+                out_delta_1_x <= delta_1.x; out_delta_1_y <= delta_1.y; out_delta_1_z <= delta_1.z;
+                out_delta_2_x <= delta_2.x; out_delta_2_y <= delta_2.y; out_delta_2_z <= delta_2.z;
                 out_edge_0    <= edges[0];
                 out_edge_1    <= edges[1];
                 out_edge_2    <= edges[2];
-                out_metadata  <= metadata;
+                out_color     <= metadata.color; 
+                out_tile_x    <= metadata.tile_x; 
+                out_tile_y    <= metadata.tile_y;
                 out_dzdx      <= dzdx;
                 out_dzdy      <= dzdy;
                 out_z_current <= z_current;
@@ -218,12 +259,13 @@ end
 
 
 task automatic tile_to_coord(
-    input metadata_t in,
+    input  [`TILE_COLUMNS_BITS-1:0] tile_x,
+    input  [`TILE_ROWS_BITS-1:0]    tile_y,
     output coord_3d_t out
     );
 
-    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, in.tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
-    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, in.tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+    out.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+    out.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
     out.z = 0;
 
 endtask
