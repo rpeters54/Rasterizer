@@ -15,9 +15,9 @@ module pixel_processor(
     input logic signed [`FX_TOTAL_BITS*2-1:0] in_edge_1,
     input logic signed [`FX_TOTAL_BITS*2-1:0] in_edge_2,
     input metadata_t                          in_metadata,
-    input logic        [`FX_TOTAL_BITS-1:0]   in_dzdx,
-    input logic        [`FX_TOTAL_BITS-1:0]   in_dzdy,
-    input logic        [`FX_TOTAL_BITS*2-1:0] in_z_current,
+    input logic signed [`FX_TOTAL_BITS-1:0]   in_dzdx,
+    input logic signed [`FX_TOTAL_BITS-1:0]   in_dzdy,
+    input logic signed [`FX_TOTAL_BITS*2-1:0] in_z_current,
 
     output logic                    rdy_in,
     output logic                    vld_out,
@@ -38,8 +38,8 @@ logic        [`TILE_AREA_BITS-1:0]  flush_rel_pos;
 coord_3d_t                          deltas  [0:`NUM_VERTICES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] edges   [0:`NUM_VERTICES-1];
 metadata_t                          metadata;
-logic        [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
-logic        [`FX_TOTAL_BITS*2-1:0] z_current;
+logic signed [`FX_TOTAL_BITS-1:0]   dzdx, dzdy;
+logic signed [`FX_TOTAL_BITS*2-1:0] z_current;
 
 // temps needed to get iverilog working :(
 coord_2d_t out_coord;
@@ -111,7 +111,7 @@ always_ff @(posedge clk) begin
         metadata.tile_x  <= '0;
         metadata.tile_y  <= '0;
         for (int i = 0; i < `TILE_AREA; i++) begin
-            z_buffer[i]     <= {2*`FX_TOTAL_BITS{1'b1}};
+            z_buffer[i]     <= {1'b0, {2*`FX_TOTAL_BITS-1{1'b1}}};
             color_buffer[i] <= '0;
         end
 
@@ -126,10 +126,11 @@ always_ff @(posedge clk) begin
 
         case (present_state)
             IDLE: begin
-                rdy_in       <= '0;
                 vld_out       <= '0;
                 // Get tile-scale data if available
                 if (vld_in) begin
+                    rdy_in       <= '0;
+
                     abs_pos       <= in_abs_pos;
                     flush_abs_pos <= tile_to_coord(metadata);
                     rel_pos       <= '0;
@@ -151,7 +152,7 @@ always_ff @(posedge clk) begin
                 vld_out      <= '0;
 
                 // edge and depth check
-                if ((edges[0] > 0) && (edges[1] > 0) &&  (edges[2] > 0) && (z_current < z_buffer[rel_pos])) begin
+                if ((edges[0] >= 0) && (edges[1] >= 0) && (edges[2] >= 0) && (z_current < z_buffer[rel_pos])) begin
                     z_buffer[rel_pos]     <= z_current;
                     color_buffer[rel_pos] <= metadata.color;
                 end 
@@ -162,11 +163,15 @@ always_ff @(posedge clk) begin
                     abs_pos.y <= abs_pos.y + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
-                    z_current <= z_current + sext_f16_f32(dzdy) - (sext_f16_f32(dzdx) << `TILE_WIDTH_BITS);
+                    begin
+                    z_current <= z_current + z_row_offset(dzdx, dzdy);
+                    end
 
                     // Update the edge values
                     for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        edges[i] <= edges[i] - edge_row_offset(deltas[i]);
+                        logic signed [`FX_TOTAL_BITS*2-1:0] row_off;
+                        edge_row_offset(deltas[i], row_off);
+                        edges[i] <= edges[i] + row_off;
                     end
 
                 end else begin
@@ -174,11 +179,17 @@ always_ff @(posedge clk) begin
                     abs_pos.x <= abs_pos.x + (1 << `FX_FRAC_BITS);
 
                     // Update the z-value
-                    z_current <= z_current + sext_f16_f32(dzdx);
+                    begin
+                        logic signed [`FX_TOTAL_BITS*2-1:0] dzdx_ext;
+                        sext_f16_f32(dzdx, dzdx_ext);
+                        z_current <= z_current + dzdx_ext;
+                    end
 
                     // Update the edge values
                     for (int i = 0; i < `NUM_VERTICES; i++) begin
-                        edges[i] <= edges[i] + edge_column_offset(deltas[i]);
+                        logic signed [`FX_TOTAL_BITS*2-1:0] col_off;
+                        edge_column_offset(deltas[i], col_off)
+                        edges[i] <= edges[i] + col_off;
                     end
                 end
 
@@ -202,7 +213,7 @@ always_ff @(posedge clk) begin
                     pixel_out <= out_coord;
                     
                     // Clear the buffers at this position
-                    z_buffer[flush_rel_pos]     <= {2*`FX_TOTAL_BITS{1'b1}}; 
+                    z_buffer[flush_rel_pos]     <= {1'b0, {2*`FX_TOTAL_BITS-1{1'b1}}};
                     color_buffer[flush_rel_pos] <= '0;
                 
                     // Update the absolute position
@@ -230,38 +241,55 @@ always_ff @(posedge clk) begin
 end
 
 // sign extend a 16-bit fixed-point number to 32 bits
-function [`FX_TOTAL_BITS*2-1:0] sext_f16_f32(
-    input [`FX_TOTAL_BITS-1:0] in
+task sext_f16_f32(
+    input [`FX_TOTAL_BITS-1:0] in,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
 
-return {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
+out = {{`FX_INT_BITS{in[`FX_TOTAL_BITS-1]}}, in, {`FX_FRAC_BITS{1'b0}}};
     
-endfunction
+endtask
 
-function [`FX_TOTAL_BITS*2-1:0] edge_row_offset(
-    input coord_3d_t delta_i
+task edge_row_offset(
+    input coord_3d_t delta_i,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
 
 logic [`FX_TOTAL_BITS*2-1:0] s_dy, s_dx;
 
-s_dy = sext_f16_f32(delta_i.y);
-s_dx = sext_f16_f32(delta_i.x);
+sext_f16_f32(delta_i.y, s_dy);
+sext_f16_f32(delta_i.x, s_dx);
 
-return (s_dy << `TILE_WIDTH_BITS) + s_dx;
+out = -((s_dy << `TILE_WIDTH_BITS) - s_dy + s_dx);
 
-endfunction
+endtask
 
-function [`FX_TOTAL_BITS*2-1:0] edge_column_offset(
-    input coord_3d_t delta_i
+task edge_column_offset(
+    input coord_3d_t delta_i,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] out
 );
 
-logic [`FX_TOTAL_BITS*2-1:0] s_dy;
+sext_f16_f32(delta_i.y, out);
 
-s_dy = sext_f16_f32(delta_i.y);
+endtask
 
-return s_dy;
+task z_row_offset(
+    input signed [`FX_TOTAL_BITS-1:0] dzdx,
+    input signed [`FX_TOTAL_BITS-1:0] dzdy,
+    output logic signed [`FX_TOTAL_BITS*2-1:0] out
+);
 
-endfunction
+logic signed [`FX_TOTAL_BITS*2-1:0] dzdx_ext;
+logic signed [`FX_TOTAL_BITS*2-1:0] dzdy_ext;
+
+sext_f16_f32(dzdx, dzdx_ext);
+sext_f16_f32(dzdy, dzdy_ext);
+
+out = dzdy_ext - (dzdx_ext << `TILE_WIDTH_BITS) + dzdx_ext;
+
+endtask
+
+
 
 function coord_3d_t tile_to_coord(
     input metadata_t in

@@ -1,0 +1,14 @@
+Subprocess had a non-zero exit.
+Last 10 line(s):
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor2_1'.
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor2_2'.
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor2_4'.
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor3_1'.
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor3_2'.
+Generating RTLIL representation for module `\sky130_fd_sc_hd__xor3_4'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /home/asic/workspace/lab3/rtl/axi_fifo.sv
+/home/asic/workspace/lab3/rtl/axi_fifo.sv:76: ERROR: syntax error, unexpected TOK_CONSTVAL
+
+Full log file: 'runs/RUN_2025-05-10_05-21-15/05-yosys-jsonheader/yosys-jsonheader.log'

@@ -1,0 +1,19 @@
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:234:6: syntax error, unexpected signed
+  234 | task signed [((12) + (4))*2-1:0] sext_f16_f32(
+      |      ^~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:248:6: syntax error, unexpected '=', expecting IDENTIFIER or randomize
+  248 | s_dy = sext_f16_f32(delta_i.y);
+      |      ^
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:261:1: syntax error, unexpected return
+  261 | return sext_f16_f32(delta_i.y);
+      | ^~~~~~
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:282:11: syntax error, unexpected '=', expecting IDENTIFIER or randomize
+  282 |     out.x = {{((12) - ($clog2(((640)/(16)))) - ($clog2((16)))){1'b0}}, in.tile_x, {($clog2((16))){1'b0}}, {(4){1'b0}}};
+      |           ^
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:283:11: syntax error, unexpected '=', expecting IDENTIFIER or randomize
+  283 |     out.y = {{((12) - ($clog2(((480)/(16))))    - ($clog2((16)))){1'b0}}, in.tile_y, {($clog2((16))){1'b0}}, {(4){1'b0}}};
+      |           ^
+%Error: /home/asic/workspace/lab3/rtl/pixel_processor.sv:284:11: syntax error, unexpected '=', expecting IDENTIFIER or randomize
+  284 |     out.z = 0;
+      |           ^
+%Error: Cannot continue

@@ -23,7 +23,7 @@ module tile_processor(
     output metadata_t                           out_metadata,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdx,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_dzdy,
-    output logic        [`FX_TOTAL_BITS*2-1:0]  out_z_current
+    output logic signed [`FX_TOTAL_BITS*2-1:0]  out_z_current
 );
 
 tile_state_t present_state, next_state;
@@ -93,9 +93,9 @@ coord_3d_t                          abs_pos;
 coord_3d_t                          deltas  [0:`NUM_VERTICES-1];
 logic signed [`FX_TOTAL_BITS*2-1:0] edges   [0:`NUM_VERTICES-1];
 metadata_t                          metadata;
-logic [`FX_TOTAL_BITS*2-1:0]        coeff_A, coeff_B, coeff_C;  
-logic [`FX_TOTAL_BITS-1:0]          dzdx, dzdy;
-logic [`FX_TOTAL_BITS*2-1:0]        z_current;
+logic signed [`FX_TOTAL_BITS*2-1:0]        coeff_A, coeff_B, coeff_C;  
+logic signed [`FX_TOTAL_BITS-1:0]          dzdx, dzdy;
+logic signed [`FX_TOTAL_BITS*2-1:0]        z_current;
 
 always_ff @(posedge clk) begin 
     if (!rst_n) begin

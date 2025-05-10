@@ -101,23 +101,27 @@ void Vtb_pixel___024root__trace_chg_0_sub_0(Vtb_pixel___024root* vlSelf, Verilat
         bufp->chgIData(oldp+35,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy),32);
         bufp->chgIData(oldp+36,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx),32);
         bufp->chgIData(oldp+37,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy),32);
-        bufp->chgSData(oldp+38,((0xffffU & (IData)(
+        bufp->chgIData(oldp+38,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext),32);
+        bufp->chgIData(oldp+39,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdy_ext),32);
+        bufp->chgSData(oldp+40,((0xffffU & (IData)(
                                                    (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out 
                                                     >> 0x20U)))),16);
-        bufp->chgSData(oldp+39,((0xffffU & (IData)(
+        bufp->chgSData(oldp+41,((0xffffU & (IData)(
                                                    (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out 
                                                     >> 0x10U)))),16);
-        bufp->chgSData(oldp+40,((0xffffU & (IData)(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out))),16);
-        bufp->chgIData(oldp+41,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk1__DOT__i),32);
-        bufp->chgIData(oldp+42,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i),32);
-        bufp->chgIData(oldp+43,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__i),32);
-        bufp->chgIData(oldp+44,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk4__DOT__i),32);
+        bufp->chgSData(oldp+42,((0xffffU & (IData)(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out))),16);
+        bufp->chgIData(oldp+43,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk1__DOT__i),32);
+        bufp->chgIData(oldp+44,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i),32);
+        bufp->chgIData(oldp+45,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__i),32);
+        bufp->chgIData(oldp+46,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off),32);
+        bufp->chgIData(oldp+47,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk5__DOT__dzdx_ext),32);
+        bufp->chgIData(oldp+48,(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk6__DOT__i),32);
     }
-    bufp->chgBit(oldp+45,(vlSelfRef.tb_pixel__DOT__clk));
-    bufp->chgBit(oldp+46,(vlSelfRef.tb_pixel__DOT__rst_n));
-    bufp->chgBit(oldp+47,(vlSelfRef.tb_pixel__DOT__rdy_out));
-    bufp->chgBit(oldp+48,(vlSelfRef.tb_pixel__DOT__vld_in));
-    bufp->chgIData(oldp+49,(((0U == vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__present_state)
+    bufp->chgBit(oldp+49,(vlSelfRef.tb_pixel__DOT__clk));
+    bufp->chgBit(oldp+50,(vlSelfRef.tb_pixel__DOT__rst_n));
+    bufp->chgBit(oldp+51,(vlSelfRef.tb_pixel__DOT__rdy_out));
+    bufp->chgBit(oldp+52,(vlSelfRef.tb_pixel__DOT__vld_in));
+    bufp->chgIData(oldp+53,(((0U == vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__present_state)
                               ? ((IData)(vlSelfRef.tb_pixel__DOT__vld_in)
                                   ? ((((0x7c0U & (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__metadata 
                                                   << 6U)) 

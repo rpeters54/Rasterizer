@@ -49,12 +49,16 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_pixel___024root final : public VerilatedM
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdy_ext;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__i;
-    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk4__DOT__i;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk5__DOT__dzdx_ext;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk6__DOT__i;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i;
     IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0;
-    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0;
+    IData/*31:0*/ tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0;
     IData/*31:0*/ __VactIterCount;
     QData/*47:0*/ tb_pixel__DOT__in_abs_pos;
     QData/*47:0*/ tb_pixel__DOT__in_delta_0;

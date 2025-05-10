@@ -43,7 +43,7 @@ Vtb_axi_fifo__Syms::Vtb_axi_fifo__Syms(VerilatedContext* contextp, const char* n
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(338);
+        Verilated::stackCheck(314);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-9);
     _vm_contextp__->timeprecision(-12);

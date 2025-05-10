@@ -94,32 +94,34 @@ end
     // Triangle 1: flat plane, expect zero gradients
     run_triangle_test(
         make_coord(1, 14, 512),
-        make_coord(7, 2, 512),
         make_coord(12, 15, 512),
+        make_coord(7, 2, 512),
         make_meta(1, 0, 0)
     );
 
     // Triangle 2: skewed in x direction, expect large dzdx and small dzdy
     run_triangle_test(
         make_coord(1, 1, 256),
-        make_coord(20, 1, 1024),
         make_coord(1, 2, 256),
-        make_meta(1, 0, 0)
+        make_coord(20, 1, 1024),
+        make_meta(2, 0, 0)
     );
 
     // Triangle 3: skewed in y direction, expect large dzdy and small dzdx
     run_triangle_test(
         make_coord(1, 1, 256),
-        make_coord(2, 1, 256),
         make_coord(1, 20, 1024),
-        make_meta(1, 0, 0)
+        make_coord(2, 1, 256),
+        make_meta(3, 0, 0)
     );
+
+    // try to flush them all
 
     run_triangle_test(
         make_coord(1, 1, 256),
-        make_coord(2, 1, 256),
         make_coord(1, 20, 1024),
-        make_meta(1, 0, 0)
+        make_coord(2, 1, 256),
+        make_meta(4, 2, 0)
     );
 
     $finish;
@@ -437,19 +439,6 @@ return meta;
 
 endfunction
 
-task automatic check_sub_overflow(
-    input signed [`FX_TOTAL_BITS-1:0] a,
-    input signed [`FX_TOTAL_BITS-1:0] b,
-    input signed [`FX_TOTAL_BITS-1:0] res,
-    input string msg
-);
-
-if ((a < 0 && b > 0 && res > 0) ||
-    (a > 0 && b < 0 && res < 0)) begin
-    $warning("Potential overflow in subtraction %s", msg);
-end
-
-endtask
 
 
 

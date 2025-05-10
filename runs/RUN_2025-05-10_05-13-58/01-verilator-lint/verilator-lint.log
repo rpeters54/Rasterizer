@@ -1,0 +1,19 @@
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:6:5: syntax error, unexpected ')', expecting IDENTIFIER or randomize
+    6 |     )
+      |     ^
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:14:5: syntax error, unexpected output, expecting IDENTIFIER or do or final or randomize
+   14 |     output logic                    rdy_in,
+      |     ^~~~~~
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:15:5: syntax error, unexpected output, expecting IDENTIFIER or do or final or randomize
+   15 |     output logic                    vld_out
+      |     ^~~~~~
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:27:1: syntax error, unexpected initial
+   27 | initial begin
+      | ^~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:52:1: syntax error, unexpected always_ff
+   52 | always_ff @(posedge clk) begin
+      | ^~~~~~~~~
+%Error: /home/asic/workspace/lab3/rtl/axi_fifo.sv:94:1: syntax error, unexpected endmodule
+   94 | endmodule
+      | ^~~~~~~~~
+%Error: Exiting due to 6 error(s)

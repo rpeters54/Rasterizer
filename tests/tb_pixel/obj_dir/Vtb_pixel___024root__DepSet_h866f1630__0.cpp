@@ -138,38 +138,44 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
     __Vfunc_tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__0__Vfuncout = 0;
     IData/*18:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__0__in;
     __Vfunc_tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__0__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout = 0;
-    QData/*47:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout = 0;
-    QData/*47:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i = 0;
-    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in;
-    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in = 0;
+    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__Vfuncout;
+    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__Vfuncout = 0;
+    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdx;
+    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdx = 0;
+    SData/*15:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdy;
+    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdy = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__out = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__out = 0;
+    QData/*47:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__out = 0;
+    IData/*31:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout;
+    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout = 0;
+    QData/*47:0*/ __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i;
+    __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i = 0;
+    SData/*15:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in = 0;
+    IData/*31:0*/ __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out;
+    __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out = 0;
     QData/*47:0*/ __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos;
     __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos = 0;
     CData/*7:0*/ __Vdly__tb_pixel__DOT__pixel_proc__DOT__rel_pos;
@@ -276,11 +282,11 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
     __VdlySet__tb_pixel__DOT__pixel_proc__DOT__deltas__v4 = 0U;
     if (vlSelfRef.tb_pixel__DOT__rst_n) {
         if ((0U == vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__present_state)) {
-            vlSelfRef.tb_pixel__DOT__rdy_in = 0U;
             vlSelfRef.tb_pixel__DOT__vld_out = 0U;
             if (vlSelfRef.tb_pixel__DOT__vld_in) {
                 __Vfunc_tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__0__in 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__metadata;
+                vlSelfRef.tb_pixel__DOT__rdy_in = 0U;
                 __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos 
                     = vlSelfRef.tb_pixel__DOT__in_abs_pos;
                 vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__tile_to_coord__Vstatic__out 
@@ -330,14 +336,14 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
         } else if ((2U == vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__present_state)) {
             vlSelfRef.tb_pixel__DOT__rdy_in = 0U;
             vlSelfRef.tb_pixel__DOT__vld_out = 0U;
-            if ((((VL_LTS_III(32, 0U, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                              [0U]) & VL_LTS_III(32, 0U, 
-                                                 vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                                                 [1U])) 
-                  & VL_LTS_III(32, 0U, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                               [2U])) & (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current 
-                                         < vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_buffer
-                                         [vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__rel_pos]))) {
+            if ((((VL_LTES_III(32, 0U, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
+                               [0U]) & VL_LTES_III(32, 0U, 
+                                                   vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
+                                                   [1U])) 
+                  & VL_LTES_III(32, 0U, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
+                                [2U])) & VL_LTS_III(32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current, 
+                                                    vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_buffer
+                                                    [vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__rel_pos]))) {
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v0 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current;
                 __VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v0 
@@ -352,31 +358,40 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
             }
             if ((0xfU == (0xfU & (IData)(vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__rel_pos)))) {
                 __Vdly__tb_pixel__DOT__pixel_proc__DOT__z_current 
-                    = ((vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current 
-                        + ([&]() {
-                                __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__in 
-                                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdy;
-                                __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__Vfuncout 
-                                    = (((- (IData)(
-                                                   (1U 
-                                                    & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__in) 
-                                                       >> 0xfU)))) 
-                                        << 0x14U) | 
-                                       ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__in) 
-                                        << 4U));
-                            }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__1__Vfuncout)) 
-                       - VL_SHIFTL_III(32,32,32, ([&]() {
-                                __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in 
-                                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdx;
-                                __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__Vfuncout 
-                                    = (((- (IData)(
-                                                   (1U 
-                                                    & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in) 
-                                                       >> 0xfU)))) 
-                                        << 0x14U) | 
-                                       ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in) 
-                                        << 4U));
-                            }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__Vfuncout), 4U));
+                    = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current 
+                       + ([&]() {
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdy 
+                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdy;
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdx 
+                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdx;
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in 
+                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdx;
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__out 
+                                = (((- (IData)((1U 
+                                                & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in) 
+                                                   >> 0xfU)))) 
+                                    << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__in) 
+                                                 << 4U));
+                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext 
+                                = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__2__out;
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__in 
+                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__dzdy;
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__out 
+                                = (((- (IData)((1U 
+                                                & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__in) 
+                                                   >> 0xfU)))) 
+                                    << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__in) 
+                                                 << 4U));
+                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdy_ext 
+                                = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__3__out;
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__Vfuncout 
+                                = ((vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdy_ext 
+                                    - VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext, 4U)) 
+                                   + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_row_offset__Vstatic__dzdx_ext);
+                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__z_row_offset__1__Vfuncout));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
+                    [0U];
                 vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__i = 3U;
                 __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos 
                     = ((0xffffffffULL & __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos) 
@@ -388,40 +403,9 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
                                                                         >> 0x20U)))) 
                                               - (IData)(0xf0U))))) 
                           << 0x20U));
-                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0 
-                    = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                       [0U] - ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
-                                [0U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x20U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout 
-                                = (VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
-                                   + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx);
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x10U)));
                 __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos 
                     = ((0xffff0000ffffULL & __Vdly__tb_pixel__DOT__pixel_proc__DOT__abs_pos) 
                        | ((QData)((IData)((0xffffU 
@@ -432,80 +416,102 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
                                                                          (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__abs_pos 
                                                                           >> 0x10U)))))))) 
                           << 0x10U));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x20U)));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out 
+                    = (- ((VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
+                           - vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy) 
+                          + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out;
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0 
+                    = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
+                       [0U] + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off);
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v3 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v3 = 1U;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
+                    [1U];
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x10U)));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x20U)));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out 
+                    = (- ((VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
+                           - vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy) 
+                          + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out;
                 vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0 
                     = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                       [1U] - ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
-                                [1U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x20U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout 
-                                = (VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
-                                   + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx);
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout));
+                       [1U] + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off);
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v4 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v4 = 1U;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
+                    [2U];
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x10U)));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in 
+                    = (0xffffU & (IData)((__Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__delta_i 
+                                          >> 0x20U)));
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__out;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out 
+                    = (- ((VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
+                           - vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy) 
+                          + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__4__out;
                 vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0 
                     = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
-                       [2U] - ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
-                                [2U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__4__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in 
-                                = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__delta_i 
-                                                      >> 0x20U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__in) 
-                                                 << 4U));
-                            vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__5__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout 
-                                = (VL_SHIFTL_III(32,32,32, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dy, 4U) 
-                                   + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__Vstatic__s_dx);
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_row_offset__3__Vfuncout));
+                       [2U] + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk3__DOT__unnamedblk4__DOT__row_off);
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v5 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h8d56d838__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v5 = 1U;
@@ -520,90 +526,90 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
                                                                          (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__abs_pos 
                                                                           >> 0x20U)))))))) 
                           << 0x20U));
-                __Vdly__tb_pixel__DOT__pixel_proc__DOT__z_current 
-                    = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current 
-                       + ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in 
-                                = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdx;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__Vfuncout 
-                                = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
-                                                   >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__in) 
-                                                 << 4U));
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__6__Vfuncout));
-                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk4__DOT__i = 3U;
-                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0 
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__in 
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__dzdx;
+                __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__out 
+                    = (((- (IData)((1U & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__in) 
+                                          >> 0xfU)))) 
+                        << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__in) 
+                                     << 4U));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0 
                     = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
                        [0U] + ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
                                 [0U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in 
                                 = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                                       >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out 
                                 = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                                & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                    >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                    << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                  << 4U));
                             vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout 
+                                = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out;
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy;
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout));
+                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout));
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk6__DOT__i = 3U;
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk5__DOT__dzdx_ext 
+                    = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__7__out;
+                __Vdly__tb_pixel__DOT__pixel_proc__DOT__z_current 
+                    = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__z_current 
+                       + vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk5__DOT__dzdx_ext);
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v6 
-                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0;
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v6 = 1U;
-                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0 
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0 
                     = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
                        [1U] + ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
                                 [1U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in 
                                 = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                                       >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out 
                                 = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                                & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                    >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                    << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                  << 4U));
                             vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout 
+                                = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out;
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy;
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout));
+                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout));
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v7 
-                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0;
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v7 = 1U;
-                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0 
+                vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0 
                     = (vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edges
                        [2U] + ([&]() {
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__deltas
                                 [2U];
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in 
                                 = (0xffffU & (IData)(
-                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__delta_i 
+                                                     (__Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__delta_i 
                                                       >> 0x10U)));
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout 
+                            __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out 
                                 = (((- (IData)((1U 
-                                                & ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                                & ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                    >> 0xfU)))) 
-                                    << 0x14U) | ((IData)(__Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__in) 
+                                    << 0x14U) | ((IData)(__Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__in) 
                                                  << 4U));
                             vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy 
-                                = __Vfunc_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__8__Vfuncout;
-                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout 
+                                = __Vtask_tb_pixel__DOT__pixel_proc__DOT__sext_f16_f32__9__out;
+                            __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout 
                                 = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__Vstatic__s_dy;
-                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__7__Vfuncout));
+                        }(), __Vfunc_tb_pixel__DOT__pixel_proc__DOT__edge_column_offset__8__Vfuncout));
                 __VdlyVal__tb_pixel__DOT__pixel_proc__DOT__edges__v8 
-                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_h19821f78__0;
+                    = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT____Vlvbound_hb9924031__0;
                 __VdlySet__tb_pixel__DOT__pixel_proc__DOT__edges__v8 = 1U;
             }
             __Vdly__tb_pixel__DOT__pixel_proc__DOT__rel_pos 
@@ -622,7 +628,7 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__out_coord;
                 __VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v1 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__flush_rel_pos;
-                vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__z_buffer.enqueue(0xffffffffU, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v1));
+                vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__z_buffer.enqueue(0x7fffffffU, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v1));
                 __VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__color_buffer__v1 
                     = vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__flush_rel_pos;
                 vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__color_buffer.enqueue(0U, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__color_buffer__v1));
@@ -684,7 +690,7 @@ VL_INLINE_OPT void Vtb_pixel___024root___nba_sequent__TOP__0(Vtb_pixel___024root
         while (VL_GTS_III(32, 0x100U, vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i)) {
             __VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v2 
                 = (0xffU & vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i);
-            vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__z_buffer.enqueue(0xffffffffU, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v2));
+            vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__z_buffer.enqueue(0x7fffffffU, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__z_buffer__v2));
             __VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__color_buffer__v2 
                 = (0xffU & vlSelfRef.tb_pixel__DOT__pixel_proc__DOT__unnamedblk2__DOT__i);
             vlSelfRef.__VdlyCommitQueuetb_pixel__DOT__pixel_proc__DOT__color_buffer.enqueue(0U, (IData)(__VdlyDim0__tb_pixel__DOT__pixel_proc__DOT__color_buffer__v2));

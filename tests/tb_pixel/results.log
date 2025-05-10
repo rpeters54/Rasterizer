@@ -1,4 +1,4 @@
 - tb_pixel.sv:73: Verilog $finish
 - S i m u l a t i o n   R e p o r t: Verilator 5.034 2025-02-24
-- Verilator: $finish at 20ns; walltime 0.003 s; speed 4.892 us/s
-- Verilator: cpu 0.004 s on 1 threads; alloced 89 MB
+- Verilator: $finish at 20ns; walltime 0.002 s; speed 8.361 us/s
+- Verilator: cpu 0.002 s on 1 threads; alloced 89 MB

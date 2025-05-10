@@ -64,30 +64,6 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
     Vtb_axi_fifo__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__Vfuncout = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__ptr = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__Vfuncout = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__ptr = 0;
-    CData/*2:0*/ __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__Vfuncout = 0;
-    CData/*2:0*/ __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__ptr = 0;
-    CData/*2:0*/ __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__Vfuncout = 0;
-    CData/*2:0*/ __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__ptr = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__Vfuncout = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__ptr = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__Vfuncout;
-    __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__Vfuncout = 0;
-    CData/*3:0*/ __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__ptr;
-    __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__ptr = 0;
     CData/*3:0*/ __Vdly__tb_axi_fifo__DOT__fifo1__DOT__count;
     __Vdly__tb_axi_fifo__DOT__fifo1__DOT__count = 0;
     CData/*3:0*/ __Vdly__tb_axi_fifo__DOT__fifo2__DOT__count;
@@ -127,13 +103,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
             __VdlyDim0__tb_axi_fifo__DOT__fifo2__DOT__buffer__v0 
                 = (3U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr));
             __VdlySet__tb_axi_fifo__DOT__fifo2__DOT__buffer__v0 = 1U;
-            __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__Vfuncout 
-                = ((3U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__ptr))
-                    ? 0U : (7U & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__14__Vfuncout;
+                = ((3U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr))
+                    ? 0U : (7U & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__write_ptr))));
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_in3) 
              & (8U > (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__count)))) {
@@ -142,13 +114,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
             __VdlyDim0__tb_axi_fifo__DOT__fifo3__DOT__buffer__v0 
                 = (7U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr));
             __VdlySet__tb_axi_fifo__DOT__fifo3__DOT__buffer__v0 = 1U;
-            __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__Vfuncout 
-                = ((7U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__ptr))
-                    ? 0U : (0xfU & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__16__Vfuncout;
+                = ((7U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr))
+                    ? 0U : (0xfU & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__write_ptr))));
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_in1) 
              & (5U > (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__count)))) {
@@ -161,13 +129,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
                     = (7U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr));
                 __VdlySet__tb_axi_fifo__DOT__fifo1__DOT__buffer__v0 = 1U;
             }
-            __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__Vfuncout 
-                = ((4U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__ptr))
-                    ? 0U : (0xfU & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__12__Vfuncout;
+                = ((4U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr))
+                    ? 0U : (0xfU & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__write_ptr))));
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_in1) 
              & (IData)(vlSelfRef.tb_axi_fifo__DOT__rdy_in1))) {
@@ -178,13 +142,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_out1) 
              & (IData)(vlSelfRef.tb_axi_fifo__DOT__rdy_out1))) {
-            __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__read_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__Vfuncout 
-                = ((4U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__ptr))
-                    ? 0U : (0xfU & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__next_read_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo1__DOT__next_ptr_index__13__Vfuncout;
+                = ((4U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__read_ptr))
+                    ? 0U : (0xfU & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__read_ptr))));
             vlSelfRef.tb_axi_fifo__DOT__data_out1 = 
                 ((4U >= (7U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__next_read_ptr)))
                   ? vlSelfRef.tb_axi_fifo__DOT__fifo1__DOT__buffer
@@ -218,13 +178,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_out2) 
              & (IData)(vlSelfRef.tb_axi_fifo__DOT__rdy_out2))) {
-            __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__read_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__Vfuncout 
-                = ((3U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__ptr))
-                    ? 0U : (7U & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__next_read_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo2__DOT__next_ptr_index__15__Vfuncout;
+                = ((3U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__read_ptr))
+                    ? 0U : (7U & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__read_ptr))));
             vlSelfRef.tb_axi_fifo__DOT__data_out2 = 
                 vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__buffer
                 [(3U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo2__DOT__next_read_ptr))];
@@ -256,13 +212,9 @@ VL_INLINE_OPT void Vtb_axi_fifo___024root___nba_sequent__TOP__0(Vtb_axi_fifo___0
         }
         if (((IData)(vlSelfRef.tb_axi_fifo__DOT__vld_out3) 
              & (IData)(vlSelfRef.tb_axi_fifo__DOT__rdy_out3))) {
-            __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__ptr 
-                = vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__read_ptr;
-            __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__Vfuncout 
-                = ((7U <= (IData)(__Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__ptr))
-                    ? 0U : (0xfU & ((IData)(1U) + (IData)(__Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__ptr))));
             vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__next_read_ptr 
-                = __Vfunc_tb_axi_fifo__DOT__fifo3__DOT__next_ptr_index__17__Vfuncout;
+                = ((7U <= (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__read_ptr))
+                    ? 0U : (0xfU & ((IData)(1U) + (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__read_ptr))));
             vlSelfRef.tb_axi_fifo__DOT__data_out3 = 
                 vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__buffer
                 [(7U & (IData)(vlSelfRef.tb_axi_fifo__DOT__fifo3__DOT__next_read_ptr))];
