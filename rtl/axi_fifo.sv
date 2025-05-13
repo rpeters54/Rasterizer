@@ -2,9 +2,8 @@
 module axi_fifo 
 #(
     parameter WIDTH=64, 
-    parameter DEPTH=5,
-    parameter PTR_WIDTH = $clog2(DEPTH)
-    )
+    parameter MIN_DEPTH=4
+)
 (
     input                           clk,
     input                           rst_n,
@@ -16,19 +15,20 @@ module axi_fifo
     output logic                    vld_out
 );
 
-parameter COUNT_WIDTH = ($clog2(DEPTH)-1 > 3) ? $clog2(DEPTH)-1 : 3;
+parameter DEPTH = 2**$clog2(MIN_DEPTH);
+parameter PTR_WIDTH = $clog2(DEPTH);
 
 logic [WIDTH-1:0]    buffer [0:DEPTH-1];
 logic [PTR_WIDTH:0]  write_ptr;
 logic [PTR_WIDTH:0]  read_ptr;
 
-logic [COUNT_WIDTH:0]  count;
-
 initial begin
     write_ptr    = '0;
     read_ptr     = '0;
-    count        = '0;
     data_out     = '0;
+    for (int i = 0; i < DEPTH; i++) begin
+        buffer[i] = 0;
+    end
 
     // Display error if WIDTH is 0 or less.
     if (WIDTH <= 0) begin
@@ -39,12 +39,12 @@ initial begin
         $error("%m ** Illegal condition **, you used %d DEPTH", DEPTH);
     end
 
-end // end initial
+end
 
 
 always_comb begin
-    vld_out        = !(count == 0);
-    rdy_in         =  (count < DEPTH);
+    vld_out        = write_ptr != read_ptr;
+    rdy_in         = !(write_ptr[PTR_WIDTH] != read_ptr[PTR_WIDTH] && write_ptr[PTR_WIDTH-1:0] == read_ptr[PTR_WIDTH-1:0]);
 end
 
 logic [PTR_WIDTH:0] next_read_ptr;
@@ -53,35 +53,21 @@ always_ff @(posedge clk) begin
     if (!rst_n) begin
         write_ptr    <= '0;
         read_ptr     <= '0;
-        count        <= '0;
-        data_out     <= buffer[0];
+        data_out     <= '0;
     end else begin 
+
         if (vld_in && rdy_in) begin
             buffer[write_ptr[PTR_WIDTH-1:0]] <= data_in;
-            if (count == 0) begin
-                data_out <= data_in;
-            end
-            if (write_ptr >= (DEPTH-1)) begin
-                write_ptr <= 0;
-            end else begin
-                write_ptr <= write_ptr + 1;
+            write_ptr <= write_ptr + 1;
+            if (!vld_out) begin
+                data_out  <= data_in;
             end
         end
+
         if (vld_out && rdy_out) begin
-            if (read_ptr >= (DEPTH-1)) begin
-                next_read_ptr = 0;
-            end else begin
-                next_read_ptr = read_ptr + 1;
-            end
+            next_read_ptr = read_ptr + 1;
             data_out  <= buffer[next_read_ptr[PTR_WIDTH-1:0]];
             read_ptr  <= next_read_ptr;
-        end
-        if (vld_in && rdy_in && vld_out && rdy_out) begin
-            count <= count; 
-        end else if (vld_in && rdy_in) begin
-            count <= count + 1; 
-        end else if (vld_out && rdy_out) begin
-            count <= count - 1;
         end
     end
 end

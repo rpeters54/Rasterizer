@@ -1,6 +1,6 @@
 VCD info: dumpfile tb_tile.vcd opened for output.
 --- Expected Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 0, dzdy: 0
 z_current: 512
 coeff_A: 0
@@ -13,17 +13,17 @@ edge_0: 153
 edge_1: 81
 edge_2: -96
 --- Real Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 0, dzdy: 0
 z_current: 512
-delta_0: x= 11, y=1, z=0
-delta_1: x= -5, y=-13, z=0
-delta_2: x= -6, y=12, z=0
+delta_0: x= 11, y=1
+delta_1: x= -5, y=-13
+delta_2: x= -6, y=12
 edge_0: 153
 edge_1: 81
 edge_2: -96
 --- Expected Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 40, dzdy: 0
 z_current: 215
 coeff_A: -768
@@ -36,17 +36,17 @@ edge_0: -1
 edge_1: 39
 edge_2: -19
 --- Real Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 40, dzdy: 0
 z_current: 215
-delta_0: x= 0, y=1, z=0
-delta_1: x= 19, y=-1, z=768
-delta_2: x= -19, y=0, z=-768
+delta_0: x= 0, y=1
+delta_1: x= 19, y=-1
+delta_2: x= -19, y=0
 edge_0: -1
 edge_1: 39
 edge_2: -19
 --- Expected Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 0, dzdy: 40
 z_current: 215
 coeff_A: 0
@@ -59,17 +59,17 @@ edge_0: -19
 edge_1: 39
 edge_2: -1
 --- Real Values ---
-abs_pos: x=0, y=0, z=0
+abs_pos: x=0, y=0
 dzdx: 0, dzdy: 40
 z_current: 215
-delta_0: x= 0, y=19, z=768
-delta_1: x= 1, y=-19, z=-768
-delta_2: x= -1, y=0, z=0
+delta_0: x= 0, y=19
+delta_1: x= 1, y=-19
+delta_2: x= -1, y=0
 edge_0: -19
 edge_1: 39
 edge_2: -1
 --- Expected Values ---
-abs_pos: x=32, y=0, z=0
+abs_pos: x=32, y=0
 dzdx: 0, dzdy: 40
 z_current: 215
 coeff_A: 0
@@ -82,13 +82,13 @@ edge_0: 589
 edge_1: -569
 edge_2: -1
 --- Real Values ---
-abs_pos: x=32, y=0, z=0
+abs_pos: x=32, y=0
 dzdx: 0, dzdy: 40
 z_current: 215
-delta_0: x= 0, y=19, z=768
-delta_1: x= 1, y=-19, z=-768
-delta_2: x= -1, y=0, z=0
+delta_0: x= 0, y=19
+delta_1: x= 1, y=-19
+delta_2: x= -1, y=0
 edge_0: 589
 edge_1: -569
 edge_2: -1
-tb_tile.sv:156: $finish called at 290 (1s)
+tb_tile.sv:152: $finish called at 290 (1s)

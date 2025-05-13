@@ -1,0 +1,143 @@
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:303:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  303 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:37: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+                    ... For warning description see https://verilator.org/warn/VARHIDDEN?v=5.034
+                    ... Use "/* verilator lint_off VARHIDDEN */" and lint_on around source to disable this message.
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:304:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  304 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:55: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:319:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  319 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:37: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:320:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  320 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:55: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:335:22: Declaration of signal hides declaration in upper scope: 'delta_0'
+  335 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:37: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:336:22: Declaration of signal hides declaration in upper scope: 'delta_2'
+  336 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:127:55: ... Location of original declaration
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:369:39: Declaration of signal hides declaration in upper scope: 'abs_pos'
+  369 |     input coord_3d_t                  abs_pos,
+      |                                       ^~~~~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:126:37: ... Location of original declaration
+  126 | coord_3d_t                          abs_pos;
+      |                                     ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:370:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  370 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:131:35: ... Location of original declaration
+  131 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:371:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  371 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/tile_processor.sv:131:41: ... Location of original declaration
+  131 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:372:37: Declaration of signal hides declaration in upper scope: 'dzdx'
+  372 |     input signed [((12) + (4))-1:0] dzdx,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:80:35: ... Location of original declaration
+   80 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                   ^~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/pixel_processor.sv:373:37: Declaration of signal hides declaration in upper scope: 'dzdy'
+  373 |     input signed [((12) + (4))-1:0] dzdy,
+      |                                     ^~~~
+                    /home/asic/workspace/lab3/rtl/pixel_processor.sv:80:41: ... Location of original declaration
+   80 | logic signed [((12) + (4))-1:0]   dzdx, dzdy;
+      |                                         ^~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/pixel_processor.sv:362:22: Bits of signal are not used: 'delta_i'[31:16]
+                                                                              : ... note: In instance 'raster.pixel_proc'
+  362 |     input coord_2d_t delta_i,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/pixel_processor.sv:388:22: Bits of signal are not used: 'in'[18:11]
+                                                                              : ... note: In instance 'raster.pixel_proc'
+  388 |     input metadata_t in,
+      |                      ^~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:127:46: Bits of signal are not used: 'delta_1'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  127 | coord_3d_t                          delta_0, delta_1, delta_2;
+      |                                              ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:284:22: Bits of signal are not used: 'start'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  284 |     input coord_3d_t start,
+      |                      ^~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:285:22: Bits of signal are not used: 'v_i'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  285 |     input coord_3d_t v_i,
+      |                      ^~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:286:22: Bits of signal are not used: 'delta_i'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  286 |     input coord_3d_t delta_i,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:303:22: Bits of signal are not used: 'delta_0'[47:32]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  303 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:304:22: Bits of signal are not used: 'delta_2'[47:32]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  304 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:319:22: Bits of signal are not used: 'delta_0'[31:16]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  319 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:320:22: Bits of signal are not used: 'delta_2'[31:16]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  320 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:335:22: Bits of signal are not used: 'delta_0'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  335 |     input coord_3d_t delta_0,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:336:22: Bits of signal are not used: 'delta_2'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  336 |     input coord_3d_t delta_2,
+      |                      ^~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:358:35: Bits of signal are not used: 'div_result_dz'[31:20,3:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  358 | logic signed [((12) + (4))*2-1:0] div_result_dz;
+      |                                   ^~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL: /home/asic/workspace/lab3/rtl/tile_processor.sv:369:39: Bits of signal are not used: 'abs_pos'[15:0]
+                                                                             : ... note: In instance 'raster.tile_proc'
+  369 |     input coord_3d_t                  abs_pos,
+      |                                       ^~~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:258:41: Declaration of signal hides declaration in upper scope: 'tile_x'
+  258 |     input  [($clog2(((640)/(16))))-1:0] tile_x,
+      |                                         ^~~~~~
+                    /home/asic/workspace/lab3/rtl/raster.sv:19:47: ... Location of original declaration
+   19 |     input        [($clog2(((640)/(16))))-1:0] tile_x,
+      |                                               ^~~~~~
+%Warning-VARHIDDEN: /home/asic/workspace/lab3/rtl/tile_processor.sv:259:44: Declaration of signal hides declaration in upper scope: 'tile_y'
+  259 |     input  [($clog2(((480)/(16))))-1:0]    tile_y,
+      |                                            ^~~~~~
+                    /home/asic/workspace/lab3/rtl/raster.sv:20:50: ... Location of original declaration
+   20 |     input        [($clog2(((480)/(16))))-1:0]    tile_y, 
+      |                                                  ^~~~~~
+%Warning-BLKSEQ: /home/asic/workspace/lab3/rtl/axi_fifo.sv:68:27: Blocking assignment '=' in sequential logic process
+                                                                : ... Suggest using delayed assignment '<='
+   68 |             next_read_ptr = read_ptr + 1;
+      |                           ^
+- V e r i l a t i o n   R e p o r t: Verilator 5.034 2025-02-24 rev v5.034
+- Verilator: Built from 1.195 MB sources in 447 modules, into 0.111 MB in 5 C++ files needing 0.000 MB
+- Verilator: Walltime 0.176 s (elab=0.030, cvt=0.053, bld=0.000); cpu 0.167 s on 1 threads; alloced 19.055 MB

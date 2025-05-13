@@ -24,10 +24,10 @@ module tb_tile;
   logic [`TILE_ROWS_BITS-1:0] in_tile_y;
 
   // Outputs from tile_processor
-  logic signed [`FX_TOTAL_BITS-1:0] out_abs_pos_x, out_abs_pos_y, out_abs_pos_z;
-  logic signed [`FX_TOTAL_BITS-1:0] out_delta_0_x, out_delta_0_y, out_delta_0_z;
-  logic signed [`FX_TOTAL_BITS-1:0] out_delta_1_x, out_delta_1_y, out_delta_1_z;
-  logic signed [`FX_TOTAL_BITS-1:0] out_delta_2_x, out_delta_2_y, out_delta_2_z;
+  logic signed [`FX_TOTAL_BITS-1:0] out_abs_pos_x, out_abs_pos_y;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_0_x, out_delta_0_y;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_1_x, out_delta_1_y;
+  logic signed [`FX_TOTAL_BITS-1:0] out_delta_2_x, out_delta_2_y;
   logic signed [`FX_TOTAL_BITS*2-1:0] out_edge_0, out_edge_1, out_edge_2;
   logic [`COLOR_BITS-1:0] out_color;
   logic [`TILE_COLUMNS_BITS-1:0] out_tile_x;
@@ -58,16 +58,12 @@ module tb_tile;
     .vld_out(vld_out),
     .out_abs_pos_x(out_abs_pos_x),
     .out_abs_pos_y(out_abs_pos_y),
-    .out_abs_pos_z(out_abs_pos_z),
     .out_delta_0_x(out_delta_0_x),
     .out_delta_0_y(out_delta_0_y),
-    .out_delta_0_z(out_delta_0_z),
     .out_delta_1_x(out_delta_1_x),
     .out_delta_1_y(out_delta_1_y),
-    .out_delta_1_z(out_delta_1_z),
     .out_delta_2_x(out_delta_2_x),
     .out_delta_2_y(out_delta_2_y),
-    .out_delta_2_z(out_delta_2_z),
     .out_edge_0(out_edge_0),
     .out_edge_1(out_edge_1),
     .out_edge_2(out_edge_2),
@@ -356,7 +352,7 @@ task automatic run_triangle_test(
 
     // Print out key calculated values for debugging
     $display("--- Expected Values ---");
-    $display("abs_pos: x=%0d, y=%0d, z=%0d", exp_abs_pos.x >>> 4, exp_abs_pos.y >>> 4, exp_abs_pos.z >>> 4);
+    $display("abs_pos: x=%0d, y=%0d", exp_abs_pos.x >>> 4, exp_abs_pos.y >>> 4);
     $display("dzdx: %0d, dzdy: %0d", exp_dzdx >>> 4, exp_dzdy >>> 4);
     $display("z_current: %0d", exp_z_current >>> 8);
     $display("coeff_A: %0d", exp_coeff_A >>> 8);
@@ -373,12 +369,12 @@ task automatic run_triangle_test(
 
     // Print out real values
     $display("--- Real Values ---");
-    $display("abs_pos: x=%0d, y=%0d, z=%0d", out_abs_pos_x >>> 4, out_abs_pos_y >>> 4, out_abs_pos_z >>> 4);
+    $display("abs_pos: x=%0d, y=%0d", out_abs_pos_x >>> 4, out_abs_pos_y >>> 4);
     $display("dzdx: %0d, dzdy: %0d", out_dzdx >>> 4, out_dzdy >>> 4);
     $display("z_current: %0d", out_z_current >>> 8);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 0, out_delta_0_x >>> 4, out_delta_0_y >>> 4, out_delta_0_z >>> 4);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 1, out_delta_1_x >>> 4, out_delta_1_y >>> 4, out_delta_1_z >>> 4);
-    $display("delta_%0d: x= %0d, y=%0d, z=%0d", 2, out_delta_2_x >>> 4, out_delta_2_y >>> 4, out_delta_2_z >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d", 0, out_delta_0_x >>> 4, out_delta_0_y >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d", 1, out_delta_1_x >>> 4, out_delta_1_y >>> 4);
+    $display("delta_%0d: x= %0d, y=%0d", 2, out_delta_2_x >>> 4, out_delta_2_y >>> 4);
     $display("edge_%0d: %0d", 0, out_edge_0  >>> 8);
     $display("edge_%0d: %0d", 1, out_edge_1 >>> 8);
     $display("edge_%0d: %0d", 2, out_edge_2 >>> 8);
@@ -391,14 +387,10 @@ task automatic run_triangle_test(
         else $error("abs_pos mismatch: %p vs %p", out_abs_pos_x, exp_abs_pos.x);
     assert (out_abs_pos_y == exp_abs_pos.y)
         else $error("abs_pos mismatch: %p vs %p", out_abs_pos_y, exp_abs_pos.y);
-    assert (out_abs_pos_z == exp_abs_pos.z)
-        else $error("abs_pos mismatch: %p vs %p", out_abs_pos_z, exp_abs_pos.z);
     assert (out_delta_0_x == temp_delta.x)
         else $error("delta_%0d.x mismatch: %p vs %p", 0, out_delta_0_x, temp_delta.x);
     assert (out_delta_0_y == temp_delta.y)
         else $error("delta_%0d.y mismatch: %p vs %p", 0, out_delta_0_y, temp_delta.y);
-    assert (out_delta_0_z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 0, out_delta_0_z, temp_delta.z);
     assert (out_edge_0 == exp_edges[0])
         else $error("edge_%0d mismatch: %0d vs %0d", 0, out_edge_0, temp_delta);
 
@@ -407,8 +399,6 @@ task automatic run_triangle_test(
         else $error("delta_%0d.x mismatch: %p vs %p", 1, out_delta_1_x, temp_delta.x);
     assert (out_delta_1_y == temp_delta.y)
         else $error("delta_%0d.y mismatch: %p vs %p", 1, out_delta_1_y, temp_delta.y);
-    assert (out_delta_1_z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 1, out_delta_1_z, temp_delta.z);
     assert (out_edge_1 == exp_edges[1])
         else $error("edge_%0d mismatch: %0d vs %0d", 1, out_edge_1, exp_edges[1]);
 
@@ -417,8 +407,6 @@ task automatic run_triangle_test(
         else $error("delta_%0d.x mismatch: %p vs %p", 2, out_delta_2_x, temp_delta.x);
     assert (out_delta_2_y == temp_delta.y)
         else $error("delta_%0d.y mismatch: %p vs %p", 2, out_delta_2_y, temp_delta.y);
-    assert (out_delta_2_z == temp_delta.z)
-        else $error("delta_%0d.z mismatch: %p vs %p", 2, out_delta_2_z, temp_delta.z);
     assert (out_edge_2 == exp_edges[2])
         else $error("edge_%0d mismatch: %0d vs %0d", 2, out_edge_2, exp_edges[2]);        
 

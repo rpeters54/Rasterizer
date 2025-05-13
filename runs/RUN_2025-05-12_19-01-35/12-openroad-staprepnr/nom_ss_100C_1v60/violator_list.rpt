@@ -1,0 +1,36 @@
+
+===========================================================================
+Violator List
+============================================================================
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[15]_sky130_fd_sc_hd__dfxtp_2_Q/D : -78.207329
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[14]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.753334
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[14]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.712067
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[15]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.699196
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[13]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.581726
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[11]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.500809
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[9]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.481514
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[8]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.352097
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[6]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.317131
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[13]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.266144
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[12]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.248123
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[12]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.204132
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[10]_sky130_fd_sc_hd__dfxtp_2_Q/D : -77.202484
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[7]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.988838
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[10]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.875587
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[11]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.849464
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[9]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.825966
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[5]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.761620
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[4]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.719025
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[7]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.714851
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[8]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.565636
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[3]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.525124
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[5]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.496887
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[6]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.382568
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[4]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.234398
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[3]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.229507
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[2]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.210396
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[1]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.199181
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdy[0]_sky130_fd_sc_hd__dfxtp_2_Q/D : -76.143036
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[2]_sky130_fd_sc_hd__dfxtp_2_Q/D : -75.772385
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[1]_sky130_fd_sc_hd__dfxtp_2_Q/D : -75.727623
+[setup reg-reg] tile_proc.coeff_C[0]_sky130_fd_sc_hd__dfxtp_2_Q/Q -> tile_proc.dzdx[0]_sky130_fd_sc_hd__dfxtp_2_Q/D : -75.705551

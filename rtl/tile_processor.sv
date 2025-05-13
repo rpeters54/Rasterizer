@@ -23,16 +23,12 @@ module tile_processor(
     output logic                                vld_out,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_x,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_y,
-    output logic signed [`FX_TOTAL_BITS-1:0]    out_abs_pos_z,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_x,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_y,
-    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_0_z,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_x,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_y,
-    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_1_z,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_x,
     output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_y,
-    output logic signed [`FX_TOTAL_BITS-1:0]    out_delta_2_z,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_0,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_1,
     output logic signed [`FX_TOTAL_BITS*2-1:0]  out_edge_2,
@@ -159,10 +155,10 @@ always_ff @(posedge clk) begin
 
         rdy_in          <= '1;
         vld_out         <= 0;
-        out_abs_pos_x <= 0; out_abs_pos_y <= 0; out_abs_pos_z <= 0;
-        out_delta_0_x <= 0; out_delta_0_y <= 0; out_delta_0_z <= 0;
-        out_delta_1_x <= 0; out_delta_1_y <= 0; out_delta_1_z <= 0;
-        out_delta_2_x <= 0; out_delta_2_y <= 0; out_delta_2_z <= 0;
+        out_abs_pos_x <= 0; out_abs_pos_y <= 0; 
+        out_delta_0_x <= 0; out_delta_0_y <= 0; 
+        out_delta_1_x <= 0; out_delta_1_y <= 0; 
+        out_delta_2_x <= 0; out_delta_2_y <= 0;
         out_edge_0 <= 0;
         out_edge_1 <= 0;
         out_edge_2 <= 0;
@@ -229,10 +225,10 @@ always_ff @(posedge clk) begin
                 // if output is open, write the data to the output
                 vld_out <= '1;
 
-                out_abs_pos_x <= abs_pos.x; out_abs_pos_y <= abs_pos.y; out_abs_pos_z <= abs_pos.z;
-                out_delta_0_x <= delta_0.x; out_delta_0_y <= delta_0.y; out_delta_0_z <= delta_0.z;
-                out_delta_1_x <= delta_1.x; out_delta_1_y <= delta_1.y; out_delta_1_z <= delta_1.z;
-                out_delta_2_x <= delta_2.x; out_delta_2_y <= delta_2.y; out_delta_2_z <= delta_2.z;
+                out_abs_pos_x <= abs_pos.x; out_abs_pos_y <= abs_pos.y; 
+                out_delta_0_x <= delta_0.x; out_delta_0_y <= delta_0.y;
+                out_delta_1_x <= delta_1.x; out_delta_1_y <= delta_1.y;
+                out_delta_2_x <= delta_2.x; out_delta_2_y <= delta_2.y;
                 out_edge_0    <= edges[0];
                 out_edge_1    <= edges[1];
                 out_edge_2    <= edges[2];

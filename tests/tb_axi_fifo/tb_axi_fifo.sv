@@ -40,7 +40,7 @@ $dumpvars(0);
 end
 
 // Instantiate FIFO #1: default parameters
-axi_fifo #() fifo1 (
+axi_fifo #(.WIDTH(64), .MIN_DEPTH(16)) fifo1 (
 .clk      (clk),
 .rst_n    (rst_n),
 .rdy_out  (rdy_out1),
@@ -52,7 +52,7 @@ axi_fifo #() fifo1 (
 );
 
 // Instantiate FIFO #2: WIDTH=8, DEPTH=4
-axi_fifo #( .WIDTH(8), .DEPTH(4) ) fifo2 (
+axi_fifo #( .WIDTH(8), .MIN_DEPTH(4) ) fifo2 (
 .clk      (clk),
 .rst_n    (rst_n),
 .rdy_out  (rdy_out2),
@@ -64,7 +64,7 @@ axi_fifo #( .WIDTH(8), .DEPTH(4) ) fifo2 (
 );
 
 // Instantiate FIFO #3: WIDTH=16, DEPTH=8
-axi_fifo #( .WIDTH(16), .DEPTH(8) ) fifo3 (
+axi_fifo #( .WIDTH(16), .MIN_DEPTH(8) ) fifo3 (
 .clk      (clk),
 .rst_n    (rst_n),
 .rdy_out  (rdy_out3),
@@ -204,8 +204,8 @@ end
     @(negedge clk);
 
     // Test 1: Fill then drain each FIFO fully
-    push_words(1, 5);     // FIFO1 depth=5
-    pop_and_check(1, 5);
+    push_words(1, 16);     // FIFO1 depth=16
+    pop_and_check(1, 16);
 
     push_words(2, 4);     // FIFO2 depth=4
     pop_and_check(2, 4);

@@ -28,6 +28,18 @@ logic signed [`FX_TOTAL_BITS*2-1:0] out_edge_0, out_edge_1, out_edge_2;
 logic [`COLOR_BITS-1:0] color_out;
 logic signed [`FX_TOTAL_BITS-1:0] pixel_out_x, pixel_out_y;
 
+logic signed [`FX_TOTAL_BITS*2-1:0]  z_buffer_data_in; 
+logic                                z_buffer_write_en;
+logic signed [`FX_TOTAL_BITS*2-1:0]  z_buffer_data_out; 
+logic signed [`TILE_AREA_BITS-1:0]   z_buffer_read_addr; 
+logic signed [`TILE_AREA_BITS-1:0]   z_buffer_write_addr; 
+
+logic [`COLOR_BITS-1:0]      color_buffer_data_in;
+logic                        color_buffer_write_en;
+logic [`COLOR_BITS-1:0]      color_buffer_data_out;
+logic [`TILE_AREA_BITS-1:0]  color_buffer_read_addr;
+logic [`TILE_AREA_BITS-1:0]  color_buffer_write_addr;
+
 // DUT instantiation
 raster rastafarian (
     .clk(clk),
@@ -47,11 +59,51 @@ raster rastafarian (
     .tile_x(tile_x),
     .tile_y(tile_y),
 
+    .color_buffer_data_in(color_buffer_data_in),
+    .color_buffer_write_en(color_buffer_write_en),
+    .color_buffer_data_out(color_buffer_data_out),
+    .color_buffer_read_addr(color_buffer_read_addr),
+    .color_buffer_write_addr(color_buffer_write_addr),
+
+    .z_buffer_data_in(z_buffer_data_in), 
+    .z_buffer_write_en(z_buffer_write_en),
+    .z_buffer_data_out(z_buffer_data_out), 
+    .z_buffer_read_addr(z_buffer_read_addr), 
+    .z_buffer_write_addr(z_buffer_write_addr), 
+
     .rdy_in(rdy_in),
     .vld_out(vld_out),
     .color_out(color_out),
     .pixel_out_x(pixel_out_x),
     .pixel_out_y(pixel_out_y)
+);
+
+sim_mem #(
+    .ADDR_SIZE(`TILE_AREA_BITS), 
+    .DATA_SIZE(`COLOR_BITS), 
+    .INITIAL_VALUE(0)
+) color_buffer (
+    .clk(clk),
+    .rst_n(rst_n),
+    .read_addr(color_buffer_read_addr), 
+    .write_addr(color_buffer_write_addr),
+    .write_en(color_buffer_write_en),
+    .data_in(color_buffer_data_out), 
+    .data_out(color_buffer_data_in)
+);
+
+sim_mem #(
+    .ADDR_SIZE(`TILE_AREA_BITS), 
+    .DATA_SIZE(`FX_TOTAL_BITS*2), 
+    .INITIAL_VALUE({1'b0, {2*`FX_TOTAL_BITS-1{1'b1}}})
+) z_buffer (
+    .clk(clk),
+    .rst_n(rst_n),
+    .read_addr(z_buffer_read_addr), 
+    .write_addr(z_buffer_write_addr),
+    .write_en(z_buffer_write_en),
+    .data_in(z_buffer_data_out), 
+    .data_out(z_buffer_data_in)
 );
 
 // Sample to drive clock

@@ -19,6 +19,18 @@ module raster(
     input        [`TILE_COLUMNS_BITS-1:0] tile_x,
     input        [`TILE_ROWS_BITS-1:0]    tile_y, 
 
+    input        signed [`FX_TOTAL_BITS*2-1:0]  z_buffer_data_in, 
+    output logic                                z_buffer_write_en,
+    output logic signed [`FX_TOTAL_BITS*2-1:0]  z_buffer_data_out, 
+    output logic signed [`TILE_AREA_BITS-1:0]   z_buffer_read_addr, 
+    output logic signed [`TILE_AREA_BITS-1:0]   z_buffer_write_addr, 
+
+    input        [`COLOR_BITS-1:0]      color_buffer_data_in,
+    output logic                        color_buffer_write_en,
+    output logic [`COLOR_BITS-1:0]      color_buffer_data_out,
+    output logic [`TILE_AREA_BITS-1:0]  color_buffer_read_addr,
+    output logic [`TILE_AREA_BITS-1:0]  color_buffer_write_addr,
+
     output logic                                rdy_in,
     output logic                                vld_out,
     output logic        [`COLOR_BITS-1:0]       color_out,
@@ -46,17 +58,17 @@ typedef struct packed {
 
 // Tile Processor Outputs -> FIFO Inputs
 logic inter_vld_0, inter_rdy_0;
-logic signed [`FX_TOTAL_BITS-1:0] inter_abs_pos_0_x, inter_abs_pos_0_y, inter_abs_pos_0_z;
+logic signed [`FX_TOTAL_BITS-1:0] inter_abs_pos_0_x, inter_abs_pos_0_y;
 
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_0_x, inter_deltas_0_0_y, inter_deltas_0_0_z;
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_1_x, inter_deltas_0_1_y, inter_deltas_0_1_z;
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_2_x, inter_deltas_0_2_y, inter_deltas_0_2_z;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_0_x, inter_deltas_0_0_y;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_1_x, inter_deltas_0_1_y;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_0_2_x, inter_deltas_0_2_y;
 
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_0_0;
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_0_1;
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_0_2;
 
-logic [`COLOR_BITS-1:0] inter_color_0;
+logic [`COLOR_BITS-1:0]        inter_color_0;
 logic [`TILE_COLUMNS_BITS-1:0] inter_tile_x_0;
 logic [`TILE_ROWS_BITS-1:0]    inter_tile_y_0;
 
@@ -66,11 +78,11 @@ logic signed [`FX_TOTAL_BITS*2-1:0] inter_z_current_0;
 
 // FIFO Outputs -> Pixel Processor Inputs
 logic inter_vld_1, inter_rdy_1;
-logic signed [`FX_TOTAL_BITS-1:0] inter_abs_pos_1_x, inter_abs_pos_1_y, inter_abs_pos_1_z;
+logic signed [`FX_TOTAL_BITS-1:0] inter_abs_pos_1_x, inter_abs_pos_1_y;
 
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_0_x, inter_deltas_1_0_y, inter_deltas_1_0_z;
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_1_x, inter_deltas_1_1_y, inter_deltas_1_1_z;
-logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_2_x, inter_deltas_1_2_y, inter_deltas_1_2_z;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_0_x, inter_deltas_1_0_y;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_1_x, inter_deltas_1_1_y;
+logic signed [`FX_TOTAL_BITS-1:0] inter_deltas_1_2_x, inter_deltas_1_2_y;
 
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_1_0;
 logic signed [`FX_TOTAL_BITS*2-1:0] inter_edges_1_1;
@@ -107,12 +119,11 @@ tile_processor tile_proc (
     // Output position
     .out_abs_pos_x(inter_abs_pos_0_x),
     .out_abs_pos_y(inter_abs_pos_0_y),
-    .out_abs_pos_z(inter_abs_pos_0_z),
 
     // Output deltas
-    .out_delta_0_x(inter_deltas_0_0_x), .out_delta_0_y(inter_deltas_0_0_y), .out_delta_0_z(inter_deltas_0_0_z),
-    .out_delta_1_x(inter_deltas_0_1_x), .out_delta_1_y(inter_deltas_0_1_y), .out_delta_1_z(inter_deltas_0_1_z),
-    .out_delta_2_x(inter_deltas_0_2_x), .out_delta_2_y(inter_deltas_0_2_y), .out_delta_2_z(inter_deltas_0_2_z),
+    .out_delta_0_x(inter_deltas_0_0_x), .out_delta_0_y(inter_deltas_0_0_y),
+    .out_delta_1_x(inter_deltas_0_1_x), .out_delta_1_y(inter_deltas_0_1_y),
+    .out_delta_2_x(inter_deltas_0_2_x), .out_delta_2_y(inter_deltas_0_2_y),
 
     // Output edges
     .out_edge_0(inter_edges_0_0),
@@ -129,7 +140,7 @@ tile_processor tile_proc (
     .out_z_current(inter_z_current_0)
 );
 
-axi_fifo #(.WIDTH(371), .DEPTH(4)) axel_f (
+axi_fifo #(.WIDTH(307), .MIN_DEPTH(4)) axel_f (
     .clk(clk),
     .rst_n(rst_n),
     .rdy_out(inter_rdy_1),
@@ -137,11 +148,10 @@ axi_fifo #(.WIDTH(371), .DEPTH(4)) axel_f (
     .data_in({
         inter_abs_pos_0_x,
         inter_abs_pos_0_y,
-        inter_abs_pos_0_z,
 
-        inter_deltas_0_0_x, inter_deltas_0_0_y, inter_deltas_0_0_z,
-        inter_deltas_0_1_x, inter_deltas_0_1_y, inter_deltas_0_1_z,
-        inter_deltas_0_2_x, inter_deltas_0_2_y, inter_deltas_0_2_z,
+        inter_deltas_0_0_x, inter_deltas_0_0_y,
+        inter_deltas_0_1_x, inter_deltas_0_1_y,
+        inter_deltas_0_2_x, inter_deltas_0_2_y,
 
         inter_edges_0_0,
         inter_edges_0_1,
@@ -158,11 +168,10 @@ axi_fifo #(.WIDTH(371), .DEPTH(4)) axel_f (
     .data_out({
         inter_abs_pos_1_x,
         inter_abs_pos_1_y,
-        inter_abs_pos_1_z,
 
-        inter_deltas_1_0_x, inter_deltas_1_0_y, inter_deltas_1_0_z,
-        inter_deltas_1_1_x, inter_deltas_1_1_y, inter_deltas_1_1_z,
-        inter_deltas_1_2_x, inter_deltas_1_2_y, inter_deltas_1_2_z,
+        inter_deltas_1_0_x, inter_deltas_1_0_y,
+        inter_deltas_1_1_x, inter_deltas_1_1_y,
+        inter_deltas_1_2_x, inter_deltas_1_2_y,
 
         inter_edges_1_0,
         inter_edges_1_1,
@@ -180,6 +189,8 @@ axi_fifo #(.WIDTH(371), .DEPTH(4)) axel_f (
     .vld_out(inter_vld_1)
 );
 
+//openlane config.json -T openroad.staprepnr --flow Classic
+
 pixel_processor pixel_proc (
     .clk(clk),
     .rst_n(rst_n),
@@ -188,11 +199,10 @@ pixel_processor pixel_proc (
 
     .in_abs_pos_x(inter_abs_pos_1_x),
     .in_abs_pos_y(inter_abs_pos_1_y),
-    .in_abs_pos_z(inter_abs_pos_1_z),
 
-    .in_delta_0_x(inter_deltas_1_0_x), .in_delta_0_y(inter_deltas_1_0_y), .in_delta_0_z(inter_deltas_1_0_z),
-    .in_delta_1_x(inter_deltas_1_1_x), .in_delta_1_y(inter_deltas_1_1_y), .in_delta_1_z(inter_deltas_1_1_z),
-    .in_delta_2_x(inter_deltas_1_2_x), .in_delta_2_y(inter_deltas_1_2_y), .in_delta_2_z(inter_deltas_1_2_z),
+    .in_delta_0_x(inter_deltas_1_0_x), .in_delta_0_y(inter_deltas_1_0_y),
+    .in_delta_1_x(inter_deltas_1_1_x), .in_delta_1_y(inter_deltas_1_1_y),
+    .in_delta_2_x(inter_deltas_1_2_x), .in_delta_2_y(inter_deltas_1_2_y),
 
     .in_edge_0(inter_edges_1_0),
     .in_edge_1(inter_edges_1_1),
@@ -205,6 +215,18 @@ pixel_processor pixel_proc (
     .in_dzdx(inter_dzdx_1),
     .in_dzdy(inter_dzdy_1),
     .in_z_current(inter_z_current_1),
+
+    .color_buffer_data_in(color_buffer_data_in),
+    .color_buffer_write_en(color_buffer_write_en),
+    .color_buffer_data_out(color_buffer_data_out),
+    .color_buffer_read_addr(color_buffer_read_addr),
+    .color_buffer_write_addr(color_buffer_write_addr),
+
+    .z_buffer_data_in(z_buffer_data_in), 
+    .z_buffer_write_en(z_buffer_write_en),
+    .z_buffer_data_out(z_buffer_data_out), 
+    .z_buffer_read_addr(z_buffer_read_addr), 
+    .z_buffer_write_addr(z_buffer_write_addr), 
 
     .rdy_in(inter_rdy_1),
     .vld_out(vld_out),
