@@ -4,41 +4,19 @@
 // Author: Riley Peters
 //
 // Description:
-// This module implements a low-resource multiplier, suitable for scenarios where
-// hardware resources (like dedicated DSP blocks) are limited or when a multi-cycle
-// operation is acceptable. It performs multiplication of two input numbers
-// (`left_i` and `right_i`) over several clock cycles using an iterative
-// shift-and-add algorithm.
+// This module implements a low-resource Radix-4 iterative multiplier. It is
+// suitable for scenarios where hardware resources are limited (e.g., ASICs where
+// a full parallel multiplier is too large) and a multi-cycle operation is
+// acceptable. It performs multiplication of two input numbers (`left_i` and
+// `right_i`) by processing two bits of the multiplier per cycle.
 //
 // The module supports both signed and unsigned multiplication, configurable via
-// the `SIGNED` parameter.
-//
-// Operation:
-// 1. When `vld_i` is asserted and the module is `IDLE` or `DONE` with a previous
-//    operation, it latches the inputs.
-// 2. If `SIGNED` is true, it converts the inputs to their absolute values and
-//    determines the sign of the final product.
-// 3. The multiplication is performed iteratively:
-//    - A `mask` register (initialized with `abs_left`) is shifted right each cycle.
-//    - An `offset` register (initialized with `abs_right` in the lower bits and
-//      zeros in the upper bits) is shifted left each cycle.
-//    - If the LSB of the `mask` is '1', the current `offset` value is added to
-//      the `abs_product` accumulator.
-// 4. This process continues for `DATA_WIDTH` cycles (until `mask` becomes zero
-//    after all bits have been checked).
-// 5. Once complete, the state transitions to `DONE`, `vld_o` is asserted, and
-//    `product_o` holds the result. If `SIGNED` is true, the `abs_product` is
-//    negated if the original inputs had opposite signs.
-// 6. The module signals `rdy_in_o` when it's ready to accept a new multiplication.
-//
-// State Machine:
-//   - IDLE: Waiting for valid input.
-//   - MULTIPLYING: Performing the iterative multiplication steps.
-//   - DONE: Multiplication is complete, output is valid.
+// the `SIGNED` parameter. An assertion checks that DATA_WIDTH is >= 2.
 //
 // Parameters:
 //   DATA_WIDTH: Specifies the bit width of the input operands (`left_i`, `right_i`).
 //               The product (`product_o`) will be `DATA_WIDTH*2` bits.
+//               An assertion ensures DATA_WIDTH >= 2.
 //   SIGNED:     A boolean-like parameter (1 for signed, 0 for unsigned) that
 //               determines whether the multiplication handles signed numbers.
 //
@@ -46,14 +24,12 @@
 //   clk_i:      Clock signal.
 //   rst_n_i:    Synchronous reset, active low.
 //   vld_i:      Valid signal indicating that `left_i` and `right_i` are valid.
-//   left_i:     The first operand for multiplication.
-//   right_i:    The second operand for multiplication.
+//   left_i:     The first operand for multiplication (multiplicand).
+//   right_i:    The second operand for multiplication (multiplier).
 //
 // Outputs:
 //   rdy_in_o:   Ready signal, asserted when the module can accept new inputs.
-//               It is high in IDLE or DONE states.
 //   vld_o:      Valid signal, asserted when `product_o` holds a valid result.
-//               It is high in the DONE state.
 //   product_o:  The result of `left_i * right_i`. This output is `DATA_WIDTH*2` bits wide.
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -75,16 +51,6 @@ module lp_mul
     output logic [DATA_WIDTH*2-1:0] product_o
 );
 
-
-// State machine states
-typedef enum logic [1:0] {
-    IDLE        = 2'b00,
-    MULTIPLYING = 2'b01,
-    DONE        = 2'b10
-} state_t;
-
-state_t state, next_state;
-
 // Internal registers
 logic [DATA_WIDTH-1:0]     mask;
 logic [DATA_WIDTH*2-1:0]   offset;
@@ -96,40 +62,54 @@ logic [DATA_WIDTH*2-1:0] abs_product;
 
 /////////////////////////////////////////////////////////////////////////////
 
-// assign outputs 
-assign rdy_in_o  = (state == IDLE || state == DONE);
-assign vld_o     = (state == DONE);
+// assertions to check parameter formatting
+initial begin
+    assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
+        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 multiplication, DATA_WIDTH: %d", DATA_WIDTH);
+end
+
 
 /////////////////////////////////////////////////////////////////////////////
+
+// State machine states
+typedef enum logic [1:0] {
+    IDLE        = 2'b00,
+    MULTIPLYING = 2'b01,
+    DONE        = 2'b10
+} state_t;
+
+state_t present_state, next_state;
 
 // State machine
 always_ff @(posedge clk_i) begin
     if (!rst_n_i) begin
-        state <= IDLE;
+        present_state <= IDLE;
     end else begin
-        state <= next_state;
+        present_state <= next_state;
     end
 end
 
 always_comb begin
-    next_state = state;
-    case (state)
+    next_state = present_state;
+    case (present_state)
         IDLE : begin
             // begin dividing if input is valid
             if (vld_i) begin
                 next_state = MULTIPLYING;
             end
         end
-        MULTIPLYING : begin
-            // if the bit_counter reached bit width, next state is done
-            if ((mask >> 1) == 0) begin
-                next_state = DONE;
-            end
-        end
+
         DONE : begin
             // back go back to multiplying on next valid input
             if (vld_i) begin
                 next_state = MULTIPLYING;
+            end
+        end
+
+        MULTIPLYING : begin
+            // if the bit_counter reached bit width, next state is done
+            if ((mask >> 2) == 0) begin
+                next_state = DONE;
             end
         end
         default : begin
@@ -164,7 +144,40 @@ endgenerate
 
 /////////////////////////////////////////////////////////////////////////////
 
-// Division logic for fixed-point numbers
+// assign outputs 
+assign rdy_in_o  = (present_state == IDLE || present_state == DONE);
+assign vld_o     = (present_state == DONE);
+
+/////////////////////////////////////////////////////////////////////////////
+
+logic [DATA_WIDTH*2-1:0] next_offset;
+
+// Combinational logic for handling what is added each cycle
+always_comb begin
+    if (present_state == MULTIPLYING) begin
+        case (mask[1:0])
+            2'b11 : begin
+                next_offset = (offset << 1) + offset;
+            end
+            2'b10 : begin
+                next_offset = offset << 1;
+            end
+            2'b01 : begin
+                next_offset = offset;
+            end
+            2'b00 : begin
+                next_offset = 0;
+            end
+        endcase
+    end else begin
+        next_offset = 0;
+    end
+end
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Latching logic for each iteration
 always_ff @(posedge clk_i) begin
     if (!rst_n_i) begin
         product_sign   <= '0; 
@@ -172,43 +185,20 @@ always_ff @(posedge clk_i) begin
         offset         <= '0;
         abs_product    <= '0;
     end else begin
-        case (state)
-            IDLE : begin
-                if (vld_i) begin
-                    // Initialize for new division using absolute values
-                    product_sign <= left_negative ^ right_negative;
-                    mask         <= abs_left;
-                    offset       <= {{DATA_WIDTH{1'b0}}, abs_right};
-                    abs_product  <= '0;
-                end
-            end
+        if ((present_state == IDLE || present_state == DONE) && next_state == MULTIPLYING) begin
+            // Initialize for new multiplication using absolute values
+            product_sign <= left_negative ^ right_negative;
+            mask         <= abs_left;
+            offset       <= {{DATA_WIDTH{1'b0}}, abs_right};
+            abs_product  <= '0;
+        end else if (present_state == MULTIPLYING) begin
 
-            DONE : begin
-                if (vld_i) begin
-                    // Initialize for new division using absolute values
-                    product_sign <= left_negative ^ right_negative;
-                    mask         <= abs_left;
-                    offset       <= {{DATA_WIDTH{1'b0}}, abs_right};
-                    abs_product  <= '0;
-                end
-            end
-            
-            MULTIPLYING : begin
-
-                // check mask bit for potential add
-                if (mask[0] && 1'b1) begin
-                    abs_product <= abs_product + offset;
-                end
-                
-                // update offset and mask
-                offset <= offset << 1;
-                mask   <= mask >> 1;
-            end
-            
-            default : begin
-                // Do nothing otherwise
-            end
-        endcase
+            // add combinationally computed offset to the result
+            abs_product <= abs_product + next_offset;
+            // update offset and mask by two spaces
+            offset <= offset << 2;
+            mask   <= mask >> 2;
+        end
     end
 end
 

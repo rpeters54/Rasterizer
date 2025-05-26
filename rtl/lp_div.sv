@@ -79,7 +79,7 @@ logic [DATA_WIDTH-1:0] abs_numer, abs_denom, abs_quot;
 // assertions to check parameter formatting
 initial begin
     assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
-        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
+        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 division, DATA_WIDTH: %d", DATA_WIDTH);
     assert (FRAC_BITS >= 2 || FRAC_BITS % 2 == 0) else 
         $error ("FRAC_BITS must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
 end
@@ -173,11 +173,6 @@ logic [REG_WIDTH-1:0] remainder_after_sub;
 logic [1:0]           current_quot_bits; 
 
 always_comb begin
-    // Defaults for combinational signals
-    current_partial_remainder = '0;
-    remainder_after_sub       = '0;
-    current_quot_bits         = 2'b00;
-
     if (present_state == DIVIDING) begin
         // Current Partial Remainder: Shift remainder_reg left by 2, bring in 2 MSBs from extended_numer_reg
         current_partial_remainder = {remainder[REG_WIDTH-1-2 : 0], extended_numer[REG_WIDTH-1], extended_numer[REG_WIDTH-2]};
@@ -197,9 +192,9 @@ always_comb begin
             current_quot_bits   = 2'b00; 
         end
     end else begin
-        // Default values when not in DIVIDING state for these intermediate signals
-        current_partial_remainder = remainder; 
-        remainder_after_sub       = remainder;
+        // Defaults for combinational signals
+        current_partial_remainder = '0;
+        remainder_after_sub       = '0;
         current_quot_bits         = 2'b00;
     end
 end
@@ -229,8 +224,7 @@ always_ff @(posedge clk_i) begin
             remainder      <= '0;
             abs_quot       <= '0;
             bit_counter    <= '0;
-        end
-        if (present_state == DIVIDING) begin
+        end else if (present_state == DIVIDING) begin
             remainder      <= remainder_after_sub;
             extended_numer <= extended_numer << 2;
             abs_quot       <= (abs_quot << 2) | {{DATA_WIDTH-2{1'b0}}, current_quot_bits};
