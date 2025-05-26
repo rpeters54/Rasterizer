@@ -4,58 +4,24 @@
 // Author: Riley Peters
 //
 // Description:
-// This module implements a low-resource divider, suitable for scenarios where
-// dedicated hardware dividers are unavailable or when a multi-cycle operation
-// is acceptable. It performs division of a numerator (`numer_i`) by a
-// denominator (`denom_i`) over several clock cycles using an iterative
-// restoring division algorithm.
+// This module implements a low-resource Radix-4 restoring divider.
+// It performs division of a numerator (`numer_i`) by a denominator (`denom_i`)
+// over several clock cycles, determining two quotient bits per iteration.
 //
 // The module supports fixed-point arithmetic, where the number of fractional
 // bits is defined by the `FRAC_BITS` parameter. It also supports both signed
 // and unsigned division, configurable via the `SIGNED` parameter.
 //
-// Operation:
-// 1. When `vld_i` is asserted, the module is `IDLE` (or `DONE` with a previous
-//    operation), and `denom_i` is non-zero, it latches the inputs.
-// 2. If `SIGNED` is true, it converts the numerator and denominator to their
-//    absolute values and determines the sign of the final quotient.
-// 3. For fixed-point division (to maintain precision when dividing two numbers
-//    assumed to be in QX.FRAC_BITS format), the absolute numerator is effectively
-//    shifted left by `FRAC_BITS` to form an `extended_numer`. The `divisor` is
-//    the absolute denominator, appropriately aligned.
-// 4. The division is performed iteratively using a restoring algorithm:
-//    - A `remainder` register is initialized to zero.
-//    - An `abs_quot` register (for the quotient) is initialized to zero.
-//    - A `bit_counter` tracks the progress.
-//    - In each cycle of the `DIVIDING` state:
-//        a. The `remainder` is shifted left by one bit, and the next bit from
-//           `extended_numer` is shifted into the LSB of `remainder`.
-//        b. `extended_numer` is also shifted left.
-//        c. If the current `remainder` is greater than or equal to the `divisor`:
-//           i.  The `divisor` is subtracted from `remainder`.
-//           ii. The LSB of `abs_quot` is set to '1'.
-//        d. Else (if `remainder` is less than `divisor`):
-//           i.  The LSB of `abs_quot` is set to '0'.
-//        e. `abs_quot` is shifted left (prior to setting the LSB, effectively making space for the new bit).
-// 5. This process continues for `DATA_WIDTH + FRAC_BITS` cycles.
-// 6. Once complete, the state transitions to `DONE`, `vld_o` is asserted, and
-//    `quot_o` holds the result. If `SIGNED` is true, `abs_quot` is negated if
-//    the original inputs had opposite signs.
-// 7. The module signals `rdy_in_o` when it's ready to accept a new division.
-//    Division by zero is handled by remaining in/returning to the `IDLE` state
-//    without starting the division process if `denom_i` is zero.
-//
-// State Machine:
-//   - IDLE: Waiting for valid input and a non-zero denominator.
-//   - DIVIDING: Performing the iterative division steps.
-//   - DONE: Division is complete, output is valid.
+// Assertions are included to check that DATA_WIDTH and FRAC_BITS are >= 2,
+// which is important for the Radix-4 logic.
 //
 // Parameters:
 //   DATA_WIDTH: Specifies the bit width of the input operands (`numer_i`, `denom_i`)
-//               and the output quotient (`quot_o`).
+//               and the output quotient (`quot_o`). Assumed to be >= 2.
 //   FRAC_BITS:  Specifies the number of fractional bits for fixed-point arithmetic.
-//               The inputs are assumed to have `FRAC_BITS` fractional bits, and
-//               the output quotient will also have `FRAC_BITS` fractional bits.
+//               The inputs are assumed to have `FRAC_BITS` fractional bits.
+//               Assumed to be >= 2 for this Radix-4 implementation to ensure
+//               multiples of the divisor (2*D, 3*D) fit correctly.
 //   SIGNED:     A boolean-like parameter (1 for signed, 0 for unsigned) that
 //               determines whether the division handles signed numbers.
 //
@@ -68,14 +34,10 @@
 //
 // Outputs:
 //   rdy_in_o:   Ready signal, asserted when the module can accept new inputs.
-//               It is high in IDLE or DONE states.
 //   vld_o:      Valid signal, asserted when `quot_o` holds a valid result.
-//               It is high in the DONE state.
-//   quot_o:     The result of `numer_i / denom_i`.
+//   quot_o:     The result of `numer_i / denom_i` (DATA_WIDTH bits).
 //
 //----------------------------------------------------------------------------------------------------------------------
-
-
 
 module lp_div 
 #(
@@ -95,24 +57,17 @@ module lp_div
     output logic [DATA_WIDTH-1:0] quot_o
 );
 
-
-// State machine states
-typedef enum logic [1:0] {
-    IDLE     = 2'b00,
-    DIVIDING = 2'b01,
-    DONE     = 2'b10
-} state_t;
-
-state_t state, next_state;
+localparam REG_WIDTH  = DATA_WIDTH + FRAC_BITS;
+localparam NUM_CYCLES = (DATA_WIDTH + FRAC_BITS) / 2;
 
 // Internal registers
-logic [DATA_WIDTH+FRAC_BITS-1:0]   divisor;
-logic [DATA_WIDTH+FRAC_BITS-1:0]   remainder;
-logic [$clog2(DATA_WIDTH+FRAC_BITS):0] bit_counter;
+logic [REG_WIDTH-1:0]   divisor_1, divisor_2, divisor_3;
+logic [REG_WIDTH-1:0]   remainder;
+logic [$clog2(REG_WIDTH):0] bit_counter;
 
 // For fixed-point division A/B where both are in QX.FRAC_BITS format,
 // we need to shift numerator left by FRAC_BITS to maintain precision
-logic [DATA_WIDTH+FRAC_BITS-1:0] extended_numer;
+logic [REG_WIDTH-1:0] extended_numer;
 
 // Sign handling for signed division
 logic result_sign;
@@ -121,24 +76,37 @@ logic [DATA_WIDTH-1:0] abs_numer, abs_denom, abs_quot;
 
 /////////////////////////////////////////////////////////////////////////////
 
-// assign outputs 
-assign rdy_in_o  = (state == IDLE || state == DONE);
-assign vld_o     = (state == DONE);
+// assertions to check parameter formatting
+initial begin
+    assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
+        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
+    assert (FRAC_BITS >= 2 || FRAC_BITS % 2 == 0) else 
+        $error ("FRAC_BITS must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
+end
 
 /////////////////////////////////////////////////////////////////////////////
+
+// State machine states
+typedef enum logic [1:0] {
+    IDLE     = 2'b00,
+    DIVIDING = 2'b01,
+    DONE     = 2'b10
+} state_t;
+
+state_t present_state, next_state;
 
 // State machine
 always_ff @(posedge clk_i) begin
     if (!rst_n_i) begin
-        state <= IDLE;
+        present_state <= IDLE;
     end else begin
-        state <= next_state;
+        present_state <= next_state;
     end
 end
 
 always_comb begin
-    next_state = state;
-    case (state)
+    next_state = present_state;
+    case (present_state)
         IDLE : begin
             // begin dividing if input is valid and denominator is nonzero
             if (vld_i && |denom_i) begin
@@ -155,7 +123,7 @@ always_comb begin
 
         DIVIDING : begin
             // if the bit_counter reached bit width, next state is done
-            if (bit_counter >= DATA_WIDTH + FRAC_BITS - 1) begin
+            if (bit_counter >= NUM_CYCLES - 1) begin
                 next_state = DONE;
             end
         end
@@ -164,6 +132,12 @@ always_comb begin
         end
     endcase
 end
+
+/////////////////////////////////////////////////////////////////////////////
+
+// assign outputs 
+assign rdy_in_o  = (present_state == IDLE || present_state == DONE);
+assign vld_o     = (present_state == DONE);
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -192,63 +166,79 @@ endgenerate
 
 /////////////////////////////////////////////////////////////////////////////
 
+// combinationally compute all divisors for the current state
+
+logic [REG_WIDTH-1:0] current_partial_remainder; 
+logic [REG_WIDTH-1:0] remainder_after_sub; 
+logic [1:0]           current_quot_bits; 
+
+always_comb begin
+    // Defaults for combinational signals
+    current_partial_remainder = '0;
+    remainder_after_sub       = '0;
+    current_quot_bits         = 2'b00;
+
+    if (present_state == DIVIDING) begin
+        // Current Partial Remainder: Shift remainder_reg left by 2, bring in 2 MSBs from extended_numer_reg
+        current_partial_remainder = {remainder[REG_WIDTH-1-2 : 0], extended_numer[REG_WIDTH-1], extended_numer[REG_WIDTH-2]};
+
+        // Radix-4 Quotient Digit Selection (Restoring)
+        if (current_partial_remainder >= divisor_3) begin
+            remainder_after_sub = current_partial_remainder - divisor_3;
+            current_quot_bits   = 2'b11;
+        end else if (current_partial_remainder >= divisor_2) begin
+            remainder_after_sub = current_partial_remainder - divisor_2;
+            current_quot_bits   = 2'b10;
+        end else if (current_partial_remainder >= divisor_1) begin
+            remainder_after_sub = current_partial_remainder - divisor_1;
+            current_quot_bits   = 2'b01; 
+        end else begin
+            remainder_after_sub = current_partial_remainder; 
+            current_quot_bits   = 2'b00; 
+        end
+    end else begin
+        // Default values when not in DIVIDING state for these intermediate signals
+        current_partial_remainder = remainder; 
+        remainder_after_sub       = remainder;
+        current_quot_bits         = 2'b00;
+    end
+end
+
+/////////////////////////////////////////////////////////////////////////////
+
+
 // Division logic for fixed-point numbers
 always_ff @(posedge clk_i) begin
     if (!rst_n_i) begin
         result_sign    <= '0; 
-        divisor        <= '0;
+        divisor_1      <= '0;
+        divisor_2      <= '0;
+        divisor_3      <= '0;
         remainder      <= '0;
         abs_quot       <= '0;
         bit_counter    <= '0;
         extended_numer <= '0;
     end else begin
-        case (state)
-            IDLE : begin
-                if (vld_i && |denom_i) begin
-                    // Initialize for new division using absolute values
-                    result_sign    <= numer_negative ^ denom_negative;
-                    divisor        <= {{FRAC_BITS{1'b0}}, abs_denom};
-                    extended_numer <= {abs_numer, {FRAC_BITS{1'b0}}};
-                    remainder      <= '0;
-                    abs_quot       <= '0;
-                    bit_counter    <= '0;
-                end
-            end
+        if ((present_state == IDLE || present_state == DONE) && next_state == DIVIDING) begin
+            // Initialize for new division using absolute values
+            result_sign    <= numer_negative ^ denom_negative;
+            divisor_1      <= {{FRAC_BITS{1'b0}}, abs_denom};
+            divisor_2      <= ({{FRAC_BITS{1'b0}}, abs_denom} << 1);
+            divisor_3      <= ({{FRAC_BITS{1'b0}}, abs_denom} << 1) + {{FRAC_BITS{1'b0}}, abs_denom};
+            extended_numer <= {abs_numer, {FRAC_BITS{1'b0}}};
+            remainder      <= '0;
+            abs_quot       <= '0;
+            bit_counter    <= '0;
+        end
+        if (present_state == DIVIDING) begin
+            remainder      <= remainder_after_sub;
+            extended_numer <= extended_numer << 2;
+            abs_quot       <= (abs_quot << 2) | {{DATA_WIDTH-2{1'b0}}, current_quot_bits};
 
-            DONE : begin
-                if (vld_i && |denom_i) begin
-                    // Initialize for new division using absolute values
-                    result_sign    <= numer_negative ^ denom_negative;
-                    divisor        <= {{FRAC_BITS{1'b0}}, abs_denom};
-                    extended_numer <= {abs_numer, {FRAC_BITS{1'b0}}};
-                    remainder      <= '0;
-                    abs_quot       <= '0;
-                    bit_counter    <= '0;
-                end
+            if (next_state == DIVIDING) begin // Only increment if we are staying in DIVIDING
+                bit_counter <= bit_counter + 1'b1;
             end
-            
-            DIVIDING : begin
-                // Shift remainder and bring in next bit from extended numerator
-                remainder <= {remainder[DATA_WIDTH+FRAC_BITS-2:0], extended_numer[DATA_WIDTH+FRAC_BITS-1]};
-                extended_numer <= extended_numer << 1;
-                
-                // Check if we can subtract divisor from remainder
-                if ({remainder[DATA_WIDTH+FRAC_BITS-2:0], extended_numer[DATA_WIDTH+FRAC_BITS-1]} >= divisor) begin
-                    // Subtract divisor and set quotient bit
-                    remainder <= {remainder[DATA_WIDTH+FRAC_BITS-2:0], extended_numer[DATA_WIDTH+FRAC_BITS-1]} - divisor;
-                    abs_quot  <= (abs_quot << 1) | {{DATA_WIDTH-1{1'b0}},1'b1};
-                end else begin
-                    // Can't subtract, just shift quotient
-                    abs_quot <= abs_quot << 1;
-                end
-                
-                bit_counter <= bit_counter + 1;
-            end
-            
-            default : begin
-                // Do nothing otherwise
-            end
-        endcase
+        end
     end
 end
 
