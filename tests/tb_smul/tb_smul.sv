@@ -43,7 +43,7 @@ initial begin
     reset();
 
     $display("Testing Multiplications");
-    for (int i = 0; i < 100; i++) begin
+    for (int i = 0; i < 1000; i++) begin
 	    test_smul();
     end
 

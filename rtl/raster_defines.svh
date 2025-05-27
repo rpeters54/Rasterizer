@@ -37,10 +37,4 @@ typedef struct packed {
     logic [`TILE_ROWS_BITS-1:0]     tile_y;  
 } metadata_t;
 
-typedef enum logic [1:0] {
-    IDLE      = 2'd0,
-    FLUSHING  = 2'd1,
-    PROCESS   = 2'd2
-} pixel_state_t;
-
 `endif

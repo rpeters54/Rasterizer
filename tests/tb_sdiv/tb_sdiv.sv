@@ -44,7 +44,7 @@ initial begin
     reset();
 
     $display("Testing Divisions");
-    for (int i = 0; i < 100; i++) begin
+    for (int i = 0; i < 1000; i++) begin
 	    test_sdiv();
     end
 
