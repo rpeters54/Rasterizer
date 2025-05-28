@@ -39,6 +39,8 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+
 module lp_div 
 #(
     parameter DATA_WIDTH = 32,
@@ -46,14 +48,14 @@ module lp_div
     parameter SIGNED     = 1 
 )
 (
-    input                         clk_i,
-    input                         rst_n_i,
-    input                         vld_i,
-    input        [DATA_WIDTH-1:0] numer_i,
-    input        [DATA_WIDTH-1:0] denom_i,
+    input  wire                   clk_i,
+    input  wire                   rst_n_i,
+    input  wire                   vld_i,
+    input  wire  [DATA_WIDTH-1:0] numer_i,
+    input  wire  [DATA_WIDTH-1:0] denom_i,
 
-    output logic                  rdy_in_o,
-    output logic                  vld_o,
+    output reg                    rdy_in_o,
+    output reg                    vld_o,
     output logic [DATA_WIDTH-1:0] quot_o
 );
 
@@ -163,6 +165,7 @@ generate
         end
     end
 endgenerate
+
 
 /////////////////////////////////////////////////////////////////////////////
 
