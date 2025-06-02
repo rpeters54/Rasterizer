@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1748016079" />
-    <testcase name="async_fifo_test" classname="test_template" file="/home/asic/workspace/lab4/cocotests/test_template/test_template.py" lineno="314" time="0.11909198760986328" sim_time_ns="1911.001" ratio_time="16046.427961722335" />
-  </testsuite>
-</testsuites>

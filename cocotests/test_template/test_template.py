@@ -1,332 +1,1370 @@
+# import cocotb
+# from cocotb.clock import Clock
+# from cocotb.triggers import RisingEdge, FallingEdge, ClockCycles
+# from cocotb.types import LogicArray
+# import random
+# from dataclasses import dataclass
+# from typing import List, Tuple
+
+
+# @dataclass
+# class Coord3D:
+#     """Represents a 3D coordinate with fixed-point values"""
+#     x: int
+#     y: int
+#     z: int
+
+
+# @dataclass
+# class Metadata:
+#     """Represents triangle metadata"""
+#     color: int
+#     tile_x: int
+#     tile_y: int
+
+
+# @dataclass
+# class LongCoord3D:
+#     """Long precision coordinate for calculations"""
+#     x: int
+#     y: int
+#     z: int
+
+
+# # Constants (these should match your raster_defines.svh)
+# FX_FRAC_BITS = 4  # Adjust based on your defines
+# FX_INT_BITS = 12  # Adjust based on your defines
+# FX_TOTAL_BITS = FX_FRAC_BITS + FX_INT_BITS
+# COLOR_BITS = 8  # Adjust based on your defines
+# TILE_COLUMNS_BITS = 6  # Adjust based on your defines
+# TILE_ROWS_BITS = 5  # Adjust based on your defines
+# TILE_WIDTH_BITS = 4  # Adjust based on your defines
+# NUM_VERTICES = 3
+
+
+# class PixelTestbench:
+#     """CocoTB testbench for pixel processor"""
+    
+#     def __init__(self, dut):
+#         self.dut = dut
+        
+#     async def reset(self):
+#         """Reset the DUT and initialize signals"""
+#         # Initialize signals
+#         self.dut.rst_n_i.value = 0
+#         self.dut.rdy_out_i.value = 0
+#         self.dut.vld_i.value = 0
+#         self.dut.abs_pos_x_i.value = 0
+#         self.dut.abs_pos_y_i.value = 0
+#         self.dut.delta_0_x_i.value = 0
+#         self.dut.delta_0_y_i.value = 0
+#         self.dut.delta_1_x_i.value = 0
+#         self.dut.delta_1_y_i.value = 0
+#         self.dut.delta_2_x_i.value = 0
+#         self.dut.delta_2_y_i.value = 0
+#         self.dut.edge_0_i.value = 0
+#         self.dut.edge_1_i.value = 0
+#         self.dut.edge_2_i.value = 0
+#         self.dut.color_i.value = 0
+#         self.dut.tile_x_i.value = 0
+#         self.dut.tile_y_i.value = 0
+#         self.dut.dzdx_i.value = 0
+#         self.dut.dzdy_i.value = 0
+#         self.dut.z_i.value = 0
+        
+#         # Wait 2 clock cycles
+#         await RisingEdge(self.dut.clk_i)
+#         await RisingEdge(self.dut.clk_i)
+        
+#         # Release reset
+#         self.dut.rst_n_i.value = 1
+        
+#         # Wait for DUT ready
+#         while self.dut.rdy_in_o.value != 1:
+#             await RisingEdge(self.dut.clk_i)
+    
+#     async def test_simple_triangle(self):
+#         """Test visualizing a single triangle"""
+#         cocotb.log.info("Running simple triangle test")
+        
+#         await self.run_triangle_test(
+#             self.make_coord(1, 1, 256),
+#             self.make_coord(1, 5, 256),
+#             self.make_coord(5, 1, 256),
+#             self.make_meta(4, 0, 0)
+#         )
+        
+#         await self.flush(5, 5)
+    
+#     async def test_multi_tile(self):
+#         """Test triangles over multiple tiles"""
+#         cocotb.log.info("Running multi-tile test")
+        
+#         # Triangle 1
+#         await self.run_triangle_test(
+#             self.make_coord(1, 1, 256),
+#             self.make_coord(1, 5, 256),
+#             self.make_coord(5, 1, 256),
+#             self.make_meta(4, 0, 0)
+#         )
+        
+#         # Triangle 2
+#         await self.run_triangle_test(
+#             self.make_coord(17, 1, 256),
+#             self.make_coord(17, 5, 1024),
+#             self.make_coord(22, 1, 256),
+#             self.make_meta(4, 1, 0)
+#         )
+        
+#         # Triangle 3
+#         await self.run_triangle_test(
+#             self.make_coord(1, 17, 256),
+#             self.make_coord(1, 22, 1024),
+#             self.make_coord(5, 17, 256),
+#             self.make_meta(4, 0, 1)
+#         )
+        
+#         await self.flush(5, 5)
+    
+#     async def test_nested(self):
+#         """Test nested triangles"""
+#         cocotb.log.info("Running nested triangle test")
+        
+#         # Outer triangle
+#         await self.run_triangle_test(
+#             self.make_coord(1, 1, 256),
+#             self.make_coord(1, 15, 256),
+#             self.make_coord(15, 1, 256),
+#             self.make_meta(4, 0, 0)
+#         )
+        
+#         # Inner triangle
+#         await self.run_triangle_test(
+#             self.make_coord(2, 2, 128),
+#             self.make_coord(2, 8, 128),
+#             self.make_coord(8, 2, 128),
+#             self.make_meta(3, 0, 0)
+#         )
+        
+#         await self.flush(5, 5)
+    
+#     async def test_nested_backwards(self):
+#         """Test nested triangles, make sure doesn't overwrite"""
+#         cocotb.log.info("Running nested backwards test")
+        
+#         # Inner triangle first
+#         await self.run_triangle_test(
+#             self.make_coord(2, 2, 128),
+#             self.make_coord(2, 8, 128),
+#             self.make_coord(8, 2, 128),
+#             self.make_meta(3, 0, 0)
+#         )
+        
+#         # Outer triangle
+#         await self.run_triangle_test(
+#             self.make_coord(1, 1, 256),
+#             self.make_coord(1, 15, 256),
+#             self.make_coord(15, 1, 256),
+#             self.make_meta(4, 0, 0)
+#         )
+        
+#         await self.flush(5, 5)
+    
+#     async def test_cross_tile_triangle(self):
+#         """Test cross-tile triangle"""
+#         cocotb.log.info("Running cross-tile triangle test")
+        
+#         # Same triangle across different tiles
+#         triangles = [
+#             (1, 0, 0),
+#             (2, 1, 0),
+#             (3, 0, 1),
+#             (4, 1, 1)
+#         ]
+        
+#         for color, tile_x, tile_y in triangles:
+#             await self.run_triangle_test(
+#                 self.make_coord(0, 0, 256),
+#                 self.make_coord(0, 31, 256),
+#                 self.make_coord(31, 0, 256),
+#                 self.make_meta(color, tile_x, tile_y)
+#             )
+        
+#         await self.flush(5, 5)
+    
+#     async def test_star_of_david(self):
+#         """Test two interlaced triangles"""
+#         cocotb.log.info("Running star of David test")
+        
+#         # First triangle
+#         await self.run_triangle_test(
+#             self.make_coord(0, 0, 256),
+#             self.make_coord(0, 15, 256),
+#             self.make_coord(15, 7, 0),
+#             self.make_meta(1, 0, 0)
+#         )
+        
+#         # Second triangle
+#         await self.run_triangle_test(
+#             self.make_coord(15, 0, 256),
+#             self.make_coord(0, 7, 0),
+#             self.make_coord(15, 15, 256),
+#             self.make_meta(2, 0, 0)
+#         )
+        
+#         await self.flush(5, 5)
+    
+#     async def flush(self, i: int, j: int):
+#         """Flush the pipeline"""
+#         await self.run_triangle_test(
+#             self.make_coord(0, 0, 128),
+#             self.make_coord(0, 1, 128),
+#             self.make_coord(1, 0, 128),
+#             self.make_meta(0, i & 0x3F, j & 0x1F)
+#         )
+    
+#     async def run_triangle_test(self, tv0: Coord3D, tv1: Coord3D, tv2: Coord3D, tmeta: Metadata):
+#         """Run a triangle test with the given vertices and metadata"""
+        
+#         cocotb.log.info("-" * 50)
+#         cocotb.log.info("Testing Points:")
+#         cocotb.log.info(f"v0: x={tv0.x >> 4}, y={tv0.y >> 4}, z={tv0.z >> 4}")
+#         cocotb.log.info(f"v1: x={tv1.x >> 4}, y={tv1.y >> 4}, z={tv1.z >> 4}")
+#         cocotb.log.info(f"v2: x={tv2.x >> 4}, y={tv2.y >> 4}, z={tv2.z >> 4}")
+#         cocotb.log.info(f"metadata: color={tmeta.color}, tile_x={tmeta.tile_x}, tile_y={tmeta.tile_y}")
+#         cocotb.log.info("-" * 50)
+        
+#         # Compute expected outputs
+#         expected = self.simulate_expected_output(tv0, tv1, tv2, tmeta)
+        
+#         # Wait until DUT is ready
+#         while self.dut.rdy_in_o.value != 1:
+#             await RisingEdge(self.dut.clk_i)
+        
+#         # Set input values
+#         self.dut.abs_pos_x_i.value = expected['abs_pos'].x
+#         self.dut.abs_pos_y_i.value = expected['abs_pos'].y
+#         self.dut.delta_0_x_i.value = expected['deltas'][0].x
+#         self.dut.delta_0_y_i.value = expected['deltas'][0].y
+#         self.dut.delta_1_x_i.value = expected['deltas'][1].x
+#         self.dut.delta_1_y_i.value = expected['deltas'][1].y
+#         self.dut.delta_2_x_i.value = expected['deltas'][2].x
+#         self.dut.delta_2_y_i.value = expected['deltas'][2].y
+#         self.dut.edge_0_i.value = expected['edges'][0]
+#         self.dut.edge_1_i.value = expected['edges'][1]
+#         self.dut.edge_2_i.value = expected['edges'][2]
+#         self.dut.color_i.value = expected['metadata'].color
+#         self.dut.tile_x_i.value = expected['metadata'].tile_x
+#         self.dut.tile_y_i.value = expected['metadata'].tile_y
+#         self.dut.dzdx_i.value = expected['dzdx']
+#         self.dut.dzdy_i.value = expected['dzdy']
+#         self.dut.z_i.value = expected['z_current']
+        
+#         # Start transaction
+#         await FallingEdge(self.dut.clk_i)
+#         self.dut.vld_i.value = 1
+#         self.dut.rdy_out_i.value = 1
+#         await FallingEdge(self.dut.clk_i)
+#         self.dut.vld_i.value = 0
+#         await FallingEdge(self.dut.clk_i)
+        
+#         # Wait for ready signal
+#         while self.dut.rdy_in_o.value != 1:
+#             await RisingEdge(self.dut.clk_i)
+        
+#         # Wait for valid output if present
+#         if self.dut.vld_o.value == 1:
+#             while self.dut.vld_o.value == 1:
+#                 await RisingEdge(self.dut.clk_i)
+        
+#         self.dut.rdy_out_i.value = 0
+        
+#         # Wait a few cycles
+#         for _ in range(5):
+#             await RisingEdge(self.dut.clk_i)
+    
+#     def make_coord(self, x: int, y: int, z: int) -> Coord3D:
+#         """Create a coordinate with fixed-point scaling"""
+#         return Coord3D(
+#             x=x << FX_FRAC_BITS,
+#             y=y << FX_FRAC_BITS,
+#             z=z << FX_FRAC_BITS
+#         )
+    
+#     def make_meta(self, color: int, tile_x: int, tile_y: int) -> Metadata:
+#         """Create metadata tuple"""
+#         return Metadata(color=color, tile_x=tile_x, tile_y=tile_y)
+    
+#     def coord3d_to_long_coords(self, coord: Coord3D) -> LongCoord3D:
+#         """Convert coordinate to long precision with sign extension"""
+#         def sign_extend(value, bits):
+#             sign_bit = 1 << (bits - 1)
+#             if value & sign_bit:
+#                 return value | (-1 << bits)
+#             return value
+        
+#         x_extended = sign_extend(coord.x, FX_TOTAL_BITS)
+#         y_extended = sign_extend(coord.y, FX_TOTAL_BITS)
+#         z_extended = sign_extend(coord.z, FX_TOTAL_BITS)
+        
+#         return LongCoord3D(x=x_extended, y=y_extended, z=z_extended)
+    
+#     def simulate_expected_output(self, gv0: Coord3D, gv1: Coord3D, gv2: Coord3D, gmeta: Metadata) -> dict:
+#         """Compute all expected outputs for a triangle"""
+        
+#         # Convert to long coordinates
+#         v = [
+#             self.coord3d_to_long_coords(gv0),
+#             self.coord3d_to_long_coords(gv1),
+#             self.coord3d_to_long_coords(gv2)
+#         ]
+        
+#         # Rotated vertices (v1, v2, v0)
+#         rotated_v = [v[1], v[2], v[0]]
+        
+#         # Step 1: Calculate absolute position (tile to pixel coordinates)
+#         abs_pos_x = (gmeta.tile_x << (TILE_WIDTH_BITS + FX_FRAC_BITS))
+#         abs_pos_y = (gmeta.tile_y << (TILE_WIDTH_BITS + FX_FRAC_BITS))
+#         abs_pos = Coord3D(x=abs_pos_x, y=abs_pos_y, z=0)
+        
+#         abs_pos_long = LongCoord3D(x=abs_pos_x, y=abs_pos_y, z=0)
+        
+#         # Step 2: Compute deltas between vertices (in clockwise order)
+#         deltas = []
+#         for i in range(NUM_VERTICES):
+#             delta_x = rotated_v[i].x - v[i].x
+#             delta_y = rotated_v[i].y - v[i].y
+#             delta_z = rotated_v[i].z - v[i].z
+#             deltas.append(Coord3D(
+#                 x=delta_x & ((1 << FX_TOTAL_BITS) - 1),
+#                 y=delta_y & ((1 << FX_TOTAL_BITS) - 1),
+#                 z=delta_z & ((1 << FX_TOTAL_BITS) - 1)
+#             ))
+        
+#         # Step 3: Compute edge values
+#         edges = []
+#         for i in range(NUM_VERTICES):
+#             delta = LongCoord3D(
+#                 x=deltas[i].x if deltas[i].x < (1 << (FX_TOTAL_BITS-1)) else deltas[i].x - (1 << FX_TOTAL_BITS),
+#                 y=deltas[i].y if deltas[i].y < (1 << (FX_TOTAL_BITS-1)) else deltas[i].y - (1 << FX_TOTAL_BITS),
+#                 z=deltas[i].z if deltas[i].z < (1 << (FX_TOTAL_BITS-1)) else deltas[i].z - (1 << FX_TOTAL_BITS)
+#             )
+            
+#             x_sub = abs_pos_long.x - v[i].x
+#             y_sub = abs_pos_long.y - v[i].y
+            
+#             x_mult = x_sub * delta.y
+#             y_mult = y_sub * delta.x
+            
+#             edge = x_mult - y_mult
+#             edges.append(edge & ((1 << (FX_TOTAL_BITS * 2)) - 1))
+        
+#         # Step 4: Compute plane coefficients
+#         delta0 = LongCoord3D(
+#             x=deltas[0].x if deltas[0].x < (1 << (FX_TOTAL_BITS-1)) else deltas[0].x - (1 << FX_TOTAL_BITS),
+#             y=deltas[0].y if deltas[0].y < (1 << (FX_TOTAL_BITS-1)) else deltas[0].y - (1 << FX_TOTAL_BITS),
+#             z=deltas[0].z if deltas[0].z < (1 << (FX_TOTAL_BITS-1)) else deltas[0].z - (1 << FX_TOTAL_BITS)
+#         )
+        
+#         delta2 = LongCoord3D(
+#             x=deltas[2].x if deltas[2].x < (1 << (FX_TOTAL_BITS-1)) else deltas[2].x - (1 << FX_TOTAL_BITS),
+#             y=deltas[2].y if deltas[2].y < (1 << (FX_TOTAL_BITS-1)) else deltas[2].y - (1 << FX_TOTAL_BITS),
+#             z=deltas[2].z if deltas[2].z < (1 << (FX_TOTAL_BITS-1)) else deltas[2].z - (1 << FX_TOTAL_BITS)
+#         )
+        
+#         # Coefficient A = y0*z2 - z0*y2
+#         coeff_A = delta0.y * delta2.z - delta0.z * delta2.y
+        
+#         # Coefficient B = z0*x2 - x0*z2  
+#         coeff_B = delta0.z * delta2.x - delta0.x * delta2.z
+        
+#         # Coefficient C = x0*y2 - y0*x2
+#         coeff_C = delta0.x * delta2.y - delta0.y * delta2.x
+        
+#         # Step 5: Calculate dz/dx and dz/dy
+#         if coeff_C != 0:
+#             dzdx = -(coeff_A << (FX_FRAC_BITS * 2)) // coeff_C
+#             dzdy = -(coeff_B << (FX_FRAC_BITS * 2)) // coeff_C
+#         else:
+#             dzdx = 0
+#             dzdy = 0
+        
+#         # Step 6: Compute initial z value
+#         delta_x = v[0].x - abs_pos_long.x
+#         delta_y = v[0].y - abs_pos_long.y
+        
+#         cocotb.log.info(f"delta_x_abs_to_v0: {delta_x >> 4}, delta_y_abs_to_v0: {delta_y >> 4}")
+#         cocotb.log.info(f"exp_dzdx: {dzdx >> 8}, exp_dzdy: {dzdy >> 8}")
+        
+#         x_component = (delta_x << FX_FRAC_BITS) * dzdx
+#         y_component = (delta_y << FX_FRAC_BITS) * dzdy
+        
+#         cocotb.log.info(f"x_component: {x_component >> 16}, y_component: {y_component >> 16}")
+        
+#         z_component = v[0].z << (FX_FRAC_BITS * 3)
+        
+#         cocotb.log.info(f"z_component: {z_component >> 16}")
+        
+#         temp_z = z_component - x_component - y_component
+#         z_current = (temp_z >> (FX_FRAC_BITS * 2)) & ((1 << (FX_TOTAL_BITS * 2)) - 1)
+        
+#         return {
+#             'abs_pos': abs_pos,
+#             'deltas': deltas,
+#             'edges': edges,
+#             'metadata': gmeta,
+#             'dzdx': dzdx & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+#             'dzdy': dzdy & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+#             'z_current': z_current,
+#             'coeff_A': coeff_A & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+#             'coeff_B': coeff_B & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+#             'coeff_C': coeff_C & ((1 << (FX_TOTAL_BITS * 2)) - 1)
+#         }
+
+
+# @cocotb.test()
+# async def test_pixel_processor(dut):
+#     """Main test function"""
+    
+#     # Start clock
+#     clock = Clock(dut.clk_i, 10, units="ns")
+#     cocotb.start_soon(clock.start())
+    
+#     # Create testbench instance
+#     tb = PixelTestbench(dut)
+    
+#     try:
+#         # Run all tests
+#         await tb.reset()
+#         await tb.test_simple_triangle()
+        
+#         await tb.reset()
+#         await tb.test_multi_tile()
+        
+#         await tb.reset()
+#         await tb.test_nested()
+        
+#         await tb.reset()
+#         await tb.test_nested_backwards()
+        
+#         await tb.reset()
+#         await tb.test_cross_tile_triangle()
+        
+#         await tb.reset()
+#         await tb.test_star_of_david()
+        
+#         cocotb.log.info("All tests completed successfully!")
+        
+#     except Exception as e:
+#         cocotb.log.error(f"Test failed with exception: {e}")
+#         raise
+
 import cocotb
-import random
 from cocotb.clock import Clock
-from cocotb.triggers import (
-    RisingEdge, FallingEdge,
-    Timer, Join, Event
-)
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Callable,
-    Deque,
-    Dict,
-    Generic,
-    List,
-    Optional,
-    Sequence,
-    Tuple,
-    TypeVar,
-    Union,
-)
-import logging
+from cocotb.triggers import RisingEdge, FallingEdge, ClockCycles
+from cocotb.types import LogicArray
+import random
+from dataclasses import dataclass
+from typing import List, Tuple
+import matplotlib.pyplot as plt
+import numpy as np
+from collections import defaultdict
 
 
+@dataclass
+class Coord3D:
+    """Represents a 3D coordinate with fixed-point values"""
+    x: int
+    y: int
+    z: int
 
 
-class AsyncFIFO_Testbench:
+@dataclass
+class Metadata:
+    """Represents triangle metadata"""
+    color: int
+    tile_x: int
+    tile_y: int
 
-    def __init__(self, dut: Any, rclk_ns: int = 13, wclk_ns: int = 7) -> None:
+
+@dataclass
+class LongCoord3D:
+    """Long precision coordinate for calculations"""
+    x: int
+    y: int
+    z: int
+
+
+@dataclass
+class PixelOutput:
+    """Represents a pixel output from the DUT"""
+    x: int
+    y: int
+    color: int
+    z: int = 0  # Optional z-buffer value if available
+
+
+# Constants (these should match your raster_defines.svh)
+FX_FRAC_BITS = 4  # Adjust based on your defines
+FX_INT_BITS = 12  # Adjust based on your defines
+FX_TOTAL_BITS = FX_FRAC_BITS + FX_INT_BITS
+COLOR_BITS = 8  # Adjust based on your defines
+TILE_COLUMNS_BITS = 6  # Adjust based on your defines
+TILE_ROWS_BITS = 5  # Adjust based on your defines
+TILE_WIDTH_BITS = 4  # Adjust based on your defines
+NUM_VERTICES = 3
+
+
+class PixelTestbench:
+    """CocoTB testbench for pixel processor"""
+    
+    def __init__(self, dut):
         self.dut = dut
-        self.name = type(self).__qualname__
-        self.log = logging.getLogger(self.name)
-        self.log.setLevel(logging.INFO)
-        self.max_delay_ns = max(rclk_ns, wclk_ns)
-        self.rclk_ns = rclk_ns
-        self.wclk_ns = wclk_ns
-
-        cocotb.start_soon(Clock(self.dut.rclk_i, rclk_ns, units='ns').start())
-        cocotb.start_soon(Clock(self.dut.wclk_i, wclk_ns, units='ns').start())
-
+        self.captured_pixels = []  # Store all captured pixels
+        self.current_test_pixels = []  # Store pixels for current test
+        
     async def reset(self):
-        """Reset the DUT"""
-        self.dut.wr_i.value = 0
-        self.dut.rd_i.value = 0
-        self.dut.wdata_i.value = 0
-
-        self.dut.rrst_n_i.value = 1
-        self.dut.wrst_n_i.value = 1
-
-        await Timer(self.max_delay_ns, units='ns')
-
-        self.dut.rrst_n_i.value = 0
-        self.dut.wrst_n_i.value = 0
-
-        await Timer(self.max_delay_ns, units='ns')
-
-        self.dut.rrst_n_i.value = 1
-        self.dut.wrst_n_i.value = 1
-
-        await Timer(self.max_delay_ns, units='ns')
-
-
-    # write data to the DUT
-    async def write_data(self, data: List[int], check_full: bool = True):
-        for datum in data:
-            assert isinstance(datum, int), "Data must be an integer"
-            if check_full:
-                assert self.dut.wfull_o.value == 0, "FIFO is full"
-            self.dut.wr_i.value    = 1
-            self.dut.wdata_i.value = datum
-            await RisingEdge(self.dut.wclk_i)
-            self.dut.wr_i.value    = 0
-            await RisingEdge(self.dut.wclk_i)
-
-
-    # read data from the DUT
-    async def read_data(self, expected_data: List[int], check_empty: bool = True):
-        read_values = []
-        for expected_datum in expected_data:
-            assert isinstance(expected_datum, int), "Data must be an integer"
-            if check_empty:
-                assert self.dut.rempty_o.value == 0, "FIFO is empty"
-            self.dut.rd_i.value = 1
-            comp = int(self.dut.rdata_o.value)
-            read_values.append(comp)
-            await RisingEdge(self.dut.rclk_i)
-            self.dut.rd_i.value = 0
-            await RisingEdge(self.dut.rclk_i)
-            assert comp == expected_datum, f"Expected {expected_datum}, got {comp}"
-        return read_values
-
-    # Write a single data word to the FIFO
-    async def write_one(self, data: int, check_full: bool = True):
-        if check_full:
-            assert self.dut.wfull_o.value == 0, f"FIFO is full upon starting write_one. wfull_o={self.dut.wfull_o.value}"
-        self.dut.wr_i.value = 1
-        self.dut.wdata_i.value = data
-        await RisingEdge(self.dut.wclk_i)
-        self.dut.wr_i.value = 0
-        await RisingEdge(self.dut.wclk_i)
-
-    # Read a single data word from the FIFO
-    async def read_one(self, check_empty: bool = True):
-        if check_empty:
-            assert self.dut.rempty_o.value == 0, f"FIFO is empty upon starting read_one. rempty_o={self.dut.rempty_o.value}"
-        self.dut.rd_i.value = 1
-        data = int(self.dut.rdata_o.value)
-        await RisingEdge(self.dut.rclk_i)
-        self.dut.rd_i.value = 0
-        await RisingEdge(self.dut.rclk_i)
-        return data
-
-
-async def test_simple_rw(tb: AsyncFIFO_Testbench):
-    """Test the DUT with simple sequential read/write operations"""
-
-    tb.log.info("Starting test_simple_rw: Simple sequential read/write operations.")
-
-    # Reset the DUT
-    tb.log.info("Resetting the DUT...")
-    await tb.reset()
-    tb.log.info("DUT reset complete.")
-    tb.log.info(f"Initial FIFO state: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-
-    fifo_depth = 1 << tb.dut.ADDRESS_SIZE.value 
-    rand_list = random.sample(range(0, 2**int(tb.dut.DATA_SIZE.value)-1), fifo_depth)
-    tb.log.info(f"Generated {len(rand_list)} random data items to write.")
-
-    # Write data to the DUT
-    tb.log.info(f"Starting to write {len(rand_list)} items to the FIFO...")
-    await tb.write_data(rand_list)
-    tb.log.info("Finished writing all items.")
-    tb.log.info(f"After write_data: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-    # Check if FIFO is full
-    tb.log.info(f"Checking if FIFO is full. Expected wfull_o=1, Got wfull_o={tb.dut.wfull_o.value}")
-    assert tb.dut.wfull_o.value == 1, f"FIFO should be full after writing {len(rand_list)} items. wfull_o is {tb.dut.wfull_o.value}"
-    tb.log.info("FIFO is full as expected.")
-
-    # Read data from the DUT
-    tb.log.info(f"Starting to read {len(rand_list)} items from the FIFO...")
-
-    read_items = await tb.read_data(rand_list)
-    tb.log.info(f"Finished reading items. Expected {len(rand_list)}, Got {len(read_items) if read_items else 'N/A'}.")
-
-    # The assert comp == expected_datum inside read_data handles individual checks.
-    tb.log.info(f"After read_data: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-
-    # Check if FIFO is empty
-    tb.log.info(f"Checking if FIFO is empty. Expected rempty_o=1, Got rempty_o={tb.dut.rempty_o.value}")
-    assert tb.dut.rempty_o.value == 1, f"FIFO should be empty after reading all items. rempty_o is {tb.dut.rempty_o.value}"
-    tb.log.info("FIFO is empty as expected.")
-
-    tb.log.info("test_simple_rw completed successfully.")
-
-
-
-async def test_interleaved_rw(tb: AsyncFIFO_Testbench):
-    """Test the DUT with interleaved read/write operations"""
-    await tb.reset()
-
-    # Consider a smaller list for quicker debugging initially
-    rand_list = [random.randint(0, 2**32 - 1) for _ in range(5)]
-
-    for i, sample in enumerate(rand_list):
-        tb.log.info(f"--- Interleaved Test: Iteration {i+1}/{len(rand_list)}, Value: {sample} ---")
-
-        # Write data to the DUT
-        tb.log.info(f"[{i+1}] Calling write_one({sample})")
-        await tb.write_one(sample)
-        tb.log.info(f"[{i+1}] After write_one({sample}): wfull_o={tb.dut.wfull_o.value}, rempty_o={tb.dut.rempty_o.value}")
-
-        # FIFO should not be full after a single write (assuming depth > 1)
-        assert tb.dut.wfull_o.value == 0, f"FIFO should not be full after one write. wfull_o={tb.dut.wfull_o.value}"
-
-        # Crucial: Wait for rempty_o to go low (not empty)
-        # This signal is in the read clock domain (rclk_i).
-        tb.log.info(f"[{i+1}] Waiting for rempty_o to go low. Current rempty_o={tb.dut.rempty_o.value}")
-        max_rclk_wait_cycles = 20  # Adjust if needed, but typical CDC latency is a few cycles
-        cycles_waited = 0
-        while tb.dut.rempty_o.value == 1 and cycles_waited < max_rclk_wait_cycles:
-            await RisingEdge(tb.dut.rclk_i)
-            cycles_waited += 1
-            # tb.log.debug(f"[{i+1}] Waited {cycles_waited} rclk. rempty_o={tb.dut.rempty_o.value}") # Use if needed
-
-        tb.log.info(f"[{i+1}] After polling for not empty: rempty_o={tb.dut.rempty_o.value} (waited {cycles_waited} rclk cycles)")
+        """Reset the DUT and initialize signals"""
+        # Initialize signals
+        self.dut.rst_n_i.value = 0
+        self.dut.rdy_out_i.value = 0
+        self.dut.vld_i.value = 0
+        self.dut.abs_pos_x_i.value = 0
+        self.dut.abs_pos_y_i.value = 0
+        self.dut.delta_0_x_i.value = 0
+        self.dut.delta_0_y_i.value = 0
+        self.dut.delta_1_x_i.value = 0
+        self.dut.delta_1_y_i.value = 0
+        self.dut.delta_2_x_i.value = 0
+        self.dut.delta_2_y_i.value = 0
+        self.dut.edge_0_i.value = 0
+        self.dut.edge_1_i.value = 0
+        self.dut.edge_2_i.value = 0
+        self.dut.color_i.value = 0
+        self.dut.tile_x_i.value = 0
+        self.dut.tile_y_i.value = 0
+        self.dut.dzdx_i.value = 0
+        self.dut.dzdy_i.value = 0
+        self.dut.z_i.value = 0
         
-        # If rempty_o is still 1, the FIFO hasn't updated its status correctly or in time.
-        # This assert now happens *before* calling read_one's internal assert.
-        assert tb.dut.rempty_o.value == 0, \
-            f"Timeout or error: FIFO is still empty after write and polling (waited {cycles_waited} rclks). Cannot proceed to read_one."
-
-        # Read data from the DUT
-        tb.log.info(f"[{i+1}] Calling read_one expecting to read {sample}")
-        read_value = await tb.read_one() # Passing `sample` here was incorrect for your `read_one` signature
-        tb.log.info(f"[{i+1}] After read_one(): read_val={read_value}, current rempty_o={tb.dut.rempty_o.value}")
+        # Wait 2 clock cycles
+        await RisingEdge(self.dut.clk_i)
+        await RisingEdge(self.dut.clk_i)
         
-        # Assert that the read data is correct
-        assert read_value == sample, f"[{i+1}] Data mismatch: Expected {sample}, got {read_value}"
-
-        # After reading the only item, FIFO should become empty.
-        tb.log.info(f"[{i+1}] Waiting for rempty_o to go high (empty). Current rempty_o={tb.dut.rempty_o.value}")
-        cycles_waited_for_empty = 0
-
-        # The refined read_one already waits one rclk cycle. If not empty yet, wait more.
-        while tb.dut.rempty_o.value == 0 and cycles_waited_for_empty < max_rclk_wait_cycles:
-            await RisingEdge(tb.dut.rclk_i)
-            cycles_waited_for_empty += 1
-
-        tb.log.info(f"[{i+1}] After polling for empty: rempty_o={tb.dut.rempty_o.value} (waited {cycles_waited_for_empty} rclk cycles)")
-        assert tb.dut.rempty_o.value == 1, \
-            f"FIFO should be empty after read. rempty_o={tb.dut.rempty_o.value} (waited {cycles_waited_for_empty} rclks for empty)"
+        # Release reset
+        self.dut.rst_n_i.value = 1
         
-        tb.log.info(f"--- Interleaved Test: Iteration {i+1} for value {sample} PASSED ---")
-
-
-async def test_invalid_states(tb: AsyncFIFO_Testbench):
-    """Test FIFO behavior on invalid operations: read from empty, write to full."""
-    tb.log.info("Starting test_invalid_states.")
-
-    fifo_depth = 1 << tb.dut.ADDRESS_SIZE.value
-    tb.log.info(f"Determined FIFO depth: {fifo_depth} items.")
-    dummy_data_value = 0xDEADBEEF # A dummy value for writes
-
-    # --- Part 1: Attempt to Read from an Empty FIFO ---
-    tb.log.info("Part 1: Testing read from empty FIFO.")
-    await tb.reset()
-    tb.log.info(f"FIFO reset. Initial state: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-    assert tb.dut.rempty_o.value == 1, "FIFO should be empty after reset."
-
-    tb.log.info("Attempting to read from empty FIFO (check_empty=False)...")
-    # The read_one method samples rdata_o, then clocks.
-    # The DUT's rempty_o should prevent rbin from changing.
-    # The value read is not strictly defined here, focus is on flags and state.
-    read_val_when_empty = await tb.read_one(check_empty=False)
-    tb.log.info(f"Attempted read from empty. rempty_o={tb.dut.rempty_o.value}. Read value (undefined): {hex(read_val_when_empty)}")
-
-    assert tb.dut.rempty_o.value == 1, "FIFO should still be empty after an attempted read from empty."
-    tb.log.info("rempty_o correctly remained 1.")
-
-    # Verify FIFO is still usable: write one item, then read it.
-    tb.log.info("Verifying FIFO usability: Writing one item (0xCAFE)...")
-    item_to_write = 0xCAFE
-    await tb.write_one(item_to_write)
-    tb.log.info(f"After writing 0xCAFE: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-    # Wait for rempty_o to de-assert (standard practice before a valid read)
-    cycles_waited = 0
-    max_wait_cycles = 10
-    while tb.dut.rempty_o.value == 1 and cycles_waited < max_wait_cycles:
-        await RisingEdge(tb.dut.rclk_i)
-        cycles_waited += 1
-    assert tb.dut.rempty_o.value == 0, "FIFO should not be empty after writing one item."
-
-    tb.log.info("Reading back the item 0xCAFE...")
-    read_back_item = await tb.read_one()
-    assert read_back_item == item_to_write, f"Read back item mismatch. Expected {hex(item_to_write)}, got {hex(read_back_item)}"
-    tb.log.info(f"Successfully wrote and read {hex(item_to_write)}. FIFO is operational after empty read attempt.")
-
-    # Wait for rempty_o to assert again
-    cycles_waited = 0
-    while tb.dut.rempty_o.value == 0 and cycles_waited < max_wait_cycles:
-        await RisingEdge(tb.dut.rclk_i)
-        cycles_waited += 1
-    assert tb.dut.rempty_o.value == 1, "FIFO should be empty after reading the item."
-    tb.log.info("Part 1 (read from empty) complete.")
-
-    # --- Part 2: Attempt to Write to a Full FIFO ---
-    tb.log.info("Part 2: Testing write to full FIFO.")
-    await tb.reset()
-    tb.log.info("FIFO reset for Part 2.")
-
-    tb.log.info(f"Filling FIFO with {fifo_depth} items...")
-    full_data_list = [i for i in range(fifo_depth)]
-    await tb.write_data(full_data_list) # Assumes write_data can fill it completely
-    tb.log.info(f"FIFO filled. Current state: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-    # Wait for wfull_o to assert if it has latency (unlikely for wfull_o if write_data is synchronous enough)
-    # but good to be sure. Typically wfull_o is more immediate in the write domain.
-    if tb.dut.wfull_o.value != 1:
-        tb.log.info("wfull_o not 1 immediately, waiting a few wclk cycles...")
-        for _ in range(5): # Wait a few write clock cycles
-            if tb.dut.wfull_o.value == 1: break
-            await RisingEdge(tb.dut.wclk_i)
-    assert tb.dut.wfull_o.value == 1, "FIFO should be full after writing {fifo_depth} items."
-    tb.log.info("FIFO is full as expected.")
-
-    tb.log.info(f"Attempting to write to full FIFO (value: {hex(dummy_data_value)}, check_full=False)...")
-    # The DUT's wfull_o should prevent wbin from changing.
-    await tb.write_one(dummy_data_value, check_full=False)
-    tb.log.info(f"Attempted write to full. wfull_o={tb.dut.wfull_o.value}")
-
-    assert tb.dut.wfull_o.value == 1, "FIFO should still be full after an attempted write to full."
-    tb.log.info("wfull_o correctly remained 1.")
-
-    # Verify FIFO data integrity: read back all original items.
-    tb.log.info(f"Verifying FIFO data integrity by reading back {fifo_depth} original items...")
-    read_back_full_data = await tb.read_data(full_data_list)
-
-    # read_data internally asserts data. If it passes, data is good.
-    tb.log.info(f"Successfully read back and verified all {len(read_back_full_data)} original items.")
-    tb.log.info(f"Final state after reading all: rempty_o={tb.dut.rempty_o.value}, wfull_o={tb.dut.wfull_o.value}")
-
-    assert tb.dut.rempty_o.value == 1, "FIFO should be empty after reading all items."
-    assert tb.dut.wfull_o.value == 0, "FIFO should not be full after reading all items." # wfull should also go low
-    tb.log.info("Part 2 (write to full) complete.")
-
-    tb.log.info("test_invalid_states completed successfully.")
+        # Wait for DUT ready
+        while self.dut.rdy_in_o.value != 1:
+            await RisingEdge(self.dut.clk_i)
+    
+    async def capture_pixel_outputs(self):
+        """Background task to capture pixel outputs when vld_o is high"""
+        while True:
+            await RisingEdge(self.dut.clk_i)
+            
+            # Check if valid output is present
+            if hasattr(self.dut, 'vld_o') and self.dut.vld_o.value == 1:
+                # Extract pixel data
+                pixel_x = int(self.dut.pixel_x_o.value) if hasattr(self.dut, 'pixel_x_o') else 0
+                pixel_y = int(self.dut.pixel_y_o.value) if hasattr(self.dut, 'pixel_y_o') else 0
+                color = int(self.dut.color_o.value) if hasattr(self.dut, 'color_o') else 0
+                
+                # Optional z-buffer value if available
+                z_value = 0
+                if hasattr(self.dut, 'z_o'):
+                    z_value = int(self.dut.z_o.value)
+                
+                pixel = PixelOutput(x=pixel_x, y=pixel_y, color=color, z=z_value)
+                self.captured_pixels.append(pixel)
+                self.current_test_pixels.append(pixel)
+                
+                cocotb.log.info(f"Captured pixel: x={pixel_x}, y={pixel_y}, color={color}, z={z_value}")
+    
+    def clear_current_test_pixels(self):
+        """Clear pixels captured for current test"""
+        self.current_test_pixels = []
+    
+    def plot_pixels(self, pixels: List[PixelOutput], title: str = "Pixel Output", save_path: str = None):
+        """Create a visualization plot of the captured pixels"""
+        if not pixels:
+            cocotb.log.info("No pixels to plot")
+            return
+        
+        # Extract coordinates and colors
+        x_coords = [p.x for p in pixels]
+        y_coords = [p.y for p in pixels]
+        colors = [p.color for p in pixels]
+        
+        # Create figure
+        plt.figure(figsize=(12, 8))
+        
+        # Create scatter plot
+        if len(set(colors)) > 1:
+            # Multiple colors - use colormap
+            scatter = plt.scatter(x_coords, y_coords, c=colors, cmap='tab10', s=50, alpha=0.7)
+            plt.colorbar(scatter, label='Color Value')
+        else:
+            # Single color
+            plt.scatter(x_coords, y_coords, c='blue', s=50, alpha=0.7)
+        
+        # Set up the plot
+        plt.xlabel('Pixel X')
+        plt.ylabel('Pixel Y')
+        plt.title(title)
+        plt.grid(True, alpha=0.3)
+        
+        # Invert Y axis to match typical screen coordinates
+        plt.gca().invert_yaxis()
+        
+        # Add pixel count info
+        plt.text(0.02, 0.98, f'Total pixels: {len(pixels)}', 
+                transform=plt.gca().transAxes, verticalalignment='top',
+                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+        
+        # Show pixel coordinates as text for small datasets
+        if len(pixels) <= 50:
+            for i, pixel in enumerate(pixels):
+                plt.annotate(f'({pixel.x},{pixel.y})', 
+                           (pixel.x, pixel.y), 
+                           xytext=(5, 5), textcoords='offset points',
+                           fontsize=8, alpha=0.7)
+        
+        plt.tight_layout()
+        
+        if save_path:
+            plt.savefig(save_path, dpi=150, bbox_inches='tight')
+            cocotb.log.info(f"Plot saved to {save_path}")
+        
+        plt.show()
+    
+    def plot_current_test(self, test_name: str = "Current Test"):
+        """Plot pixels from the current test"""
+        self.plot_pixels(self.current_test_pixels, f"Pixels from {test_name}")
+    
+    def plot_all_pixels(self):
+        """Plot all captured pixels"""
+        self.plot_pixels(self.captured_pixels, "All Captured Pixels")
+    
+    def create_pixel_grid_plot(self, pixels: List[PixelOutput], title: str = "Pixel Grid", grid_size: Tuple[int, int] = None):
+        """Create a grid-based visualization showing pixels as colored squares"""
+        if not pixels:
+            cocotb.log.info("No pixels to plot in grid")
+            return
+        
+        # Determine grid size if not provided
+        if grid_size is None:
+            max_x = max(p.x for p in pixels) + 1
+            max_y = max(p.y for p in pixels) + 1
+            grid_size = (max_x, max_y)
+        
+        # Create grid
+        grid = np.zeros((grid_size[1], grid_size[0]))
+        
+        # Fill grid with pixel colors
+        for pixel in pixels:
+            if 0 <= pixel.x < grid_size[0] and 0 <= pixel.y < grid_size[1]:
+                grid[pixel.y, pixel.x] = pixel.color
+        
+        # Create plot
+        plt.figure(figsize=(12, 8))
+        plt.imshow(grid, cmap='tab10', interpolation='nearest', aspect='equal')
+        plt.colorbar(label='Color Value')
+        plt.title(title)
+        plt.xlabel('Pixel X')
+        plt.ylabel('Pixel Y')
+        
+        # Add grid lines
+        plt.grid(True, color='gray', linewidth=0.5, alpha=0.5)
+        
+        # Set tick marks
+        plt.xticks(range(0, grid_size[0], max(1, grid_size[0]//20)))
+        plt.yticks(range(0, grid_size[1], max(1, grid_size[1]//20)))
+        
+        plt.tight_layout()
+        plt.show()
+    
+    def generate_summary_report(self):
+        """Generate a summary report of all captured pixels"""
+        if not self.captured_pixels:
+            cocotb.log.info("No pixels captured for summary report")
+            return
+        
+        # Basic statistics
+        total_pixels = len(self.captured_pixels)
+        unique_colors = len(set(p.color for p in self.captured_pixels))
+        
+        # Pixel distribution by color
+        color_counts = defaultdict(int)
+        for pixel in self.captured_pixels:
+            color_counts[pixel.color] += 1
+        
+        # Coordinate ranges
+        x_coords = [p.x for p in self.captured_pixels]
+        y_coords = [p.y for p in self.captured_pixels]
+        
+        min_x, max_x = min(x_coords), max(x_coords)
+        min_y, max_y = min(y_coords), max(y_coords)
+        
+        # Print summary
+        cocotb.log.info("="*60)
+        cocotb.log.info("PIXEL CAPTURE SUMMARY REPORT")
+        cocotb.log.info("="*60)
+        cocotb.log.info(f"Total pixels captured: {total_pixels}")
+        cocotb.log.info(f"Unique colors used: {unique_colors}")
+        cocotb.log.info(f"X coordinate range: {min_x} to {max_x} (span: {max_x - min_x + 1})")
+        cocotb.log.info(f"Y coordinate range: {min_y} to {max_y} (span: {max_y - min_y + 1})")
+        cocotb.log.info("")
+        cocotb.log.info("Pixels per color:")
+        for color in sorted(color_counts.keys()):
+            cocotb.log.info(f"  Color {color}: {color_counts[color]} pixels")
+        
+        # Create summary visualization
+        self.create_summary_plots()
+        
+        cocotb.log.info("="*60)
+    
+    def create_summary_plots(self):
+        """Create comprehensive summary plots"""
+        if not self.captured_pixels:
+            return
+        
+        # Create a 2x2 subplot figure
+        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16, 12))
+        
+        # Plot 1: Scatter plot of all pixels
+        x_coords = [p.x for p in self.captured_pixels]
+        y_coords = [p.y for p in self.captured_pixels]
+        colors = [p.color for p in self.captured_pixels]
+        
+        scatter = ax1.scatter(x_coords, y_coords, c=colors, cmap='tab10', s=20, alpha=0.7)
+        ax1.set_xlabel('Pixel X')
+        ax1.set_ylabel('Pixel Y')
+        ax1.set_title('All Captured Pixels')
+        ax1.grid(True, alpha=0.3)
+        ax1.invert_yaxis()
+        
+        # Plot 2: Color distribution histogram
+        color_counts = defaultdict(int)
+        for pixel in self.captured_pixels:
+            color_counts[pixel.color] += 1
+        
+        colors_list = list(color_counts.keys())
+        counts_list = list(color_counts.values())
+        
+        bars = ax2.bar(colors_list, counts_list, color=plt.cm.tab10(np.linspace(0, 1, len(colors_list))))
+        ax2.set_xlabel('Color Value')
+        ax2.set_ylabel('Pixel Count')
+        ax2.set_title('Pixel Count by Color')
+        ax2.grid(True, alpha=0.3)
+        
+        # Add count labels on bars
+        for bar, count in zip(bars, counts_list):
+            ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, 
+                    str(count), ha='center', va='bottom')
+        
+        # Plot 3: X-coordinate distribution
+        ax3.hist(x_coords, bins=min(50, len(set(x_coords))), alpha=0.7, color='skyblue', edgecolor='black')
+        ax3.set_xlabel('Pixel X Coordinate')
+        ax3.set_ylabel('Frequency')
+        ax3.set_title('X-Coordinate Distribution')
+        ax3.grid(True, alpha=0.3)
+        
+        # Plot 4: Y-coordinate distribution
+        ax4.hist(y_coords, bins=min(50, len(set(y_coords))), alpha=0.7, color='lightcoral', edgecolor='black')
+        ax4.set_xlabel('Pixel Y Coordinate')
+        ax4.set_ylabel('Frequency')
+        ax4.set_title('Y-Coordinate Distribution')
+        ax4.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        plt.suptitle('Pixel Processor Test Summary', fontsize=16, y=1.02)
+        plt.show()
+    
+    def save_pixel_data_to_file(self, filename: str = "captured_pixels.txt"):
+        """Save captured pixel data to a text file"""
+        try:
+            with open(filename, 'w') as f:
+                f.write("# Pixel Processor Test Results\n")
+                f.write("# Format: x, y, color, z\n")
+                f.write(f"# Total pixels: {len(self.captured_pixels)}\n")
+                f.write("#" + "="*50 + "\n")
+                
+                for i, pixel in enumerate(self.captured_pixels):
+                    f.write(f"{pixel.x}, {pixel.y}, {pixel.color}, {pixel.z}\n")
+                
+                f.write("#" + "="*50 + "\n")
+                f.write("# End of data\n")
+            
+            cocotb.log.info(f"Pixel data saved to {filename}")
+            
+        except Exception as e:
+            cocotb.log.error(f"Failed to save pixel data: {e}")
+    
+    def compare_expected_vs_actual(self, expected_pixels: List[PixelOutput], test_name: str = "Test"):
+        """Compare expected vs actual pixel outputs"""
+        actual_pixels = self.current_test_pixels
+        
+        # Convert to sets for comparison
+        expected_set = set((p.x, p.y, p.color) for p in expected_pixels)
+        actual_set = set((p.x, p.y, p.color) for p in actual_pixels)
+        
+        # Find differences
+        missing_pixels = expected_set - actual_set
+        extra_pixels = actual_set - expected_set
+        common_pixels = expected_set & actual_set
+        
+        # Print comparison results
+        cocotb.log.info(f"\n{test_name} - Expected vs Actual Comparison:")
+        cocotb.log.info(f"Expected pixels: {len(expected_pixels)}")
+        cocotb.log.info(f"Actual pixels: {len(actual_pixels)}")
+        cocotb.log.info(f"Common pixels: {len(common_pixels)}")
+        cocotb.log.info(f"Missing pixels: {len(missing_pixels)}")
+        cocotb.log.info(f"Extra pixels: {len(extra_pixels)}")
+        
+        if missing_pixels:
+            cocotb.log.info("Missing pixels (expected but not found):")
+            for x, y, color in list(missing_pixels)[:10]:  # Show first 10
+                cocotb.log.info(f"  ({x}, {y}, color={color})")
+            if len(missing_pixels) > 10:
+                cocotb.log.info(f"  ... and {len(missing_pixels) - 10} more")
+        
+        if extra_pixels:
+            cocotb.log.info("Extra pixels (found but not expected):")
+            for x, y, color in list(extra_pixels)[:10]:  # Show first 10
+                cocotb.log.info(f"  ({x}, {y}, color={color})")
+            if len(extra_pixels) > 10:
+                cocotb.log.info(f"  ... and {len(extra_pixels) - 10} more")
+        
+        # Create comparison plot if there are differences
+        if missing_pixels or extra_pixels:
+            self.plot_pixel_comparison(expected_pixels, actual_pixels, test_name)
+        
+        return len(missing_pixels) == 0 and len(extra_pixels) == 0
+    
+    def plot_pixel_comparison(self, expected_pixels: List[PixelOutput], actual_pixels: List[PixelOutput], test_name: str):
+        """Create a visual comparison plot of expected vs actual pixels"""
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6))
+        
+        # Expected pixels
+        if expected_pixels:
+            exp_x = [p.x for p in expected_pixels]
+            exp_y = [p.y for p in expected_pixels]
+            exp_colors = [p.color for p in expected_pixels]
+            ax1.scatter(exp_x, exp_y, c=exp_colors, cmap='tab10', s=50, alpha=0.7, marker='s')
+        ax1.set_title(f'{test_name} - Expected Pixels')
+        ax1.set_xlabel('X')
+        ax1.set_ylabel('Y')
+        ax1.grid(True, alpha=0.3)
+        ax1.invert_yaxis()
+        
+        # Actual pixels
+        if actual_pixels:
+            act_x = [p.x for p in actual_pixels]
+            act_y = [p.y for p in actual_pixels]
+            act_colors = [p.color for p in actual_pixels]
+            ax2.scatter(act_x, act_y, c=act_colors, cmap='tab10', s=50, alpha=0.7, marker='o')
+        ax2.set_title(f'{test_name} - Actual Pixels')
+        ax2.set_xlabel('X')
+        ax2.set_ylabel('Y')
+        ax2.grid(True, alpha=0.3)
+        ax2.invert_yaxis()
+        
+        # Overlay comparison
+        if expected_pixels:
+            ax3.scatter(exp_x, exp_y, c='red', s=100, alpha=0.5, marker='s', label='Expected')
+        if actual_pixels:
+            ax3.scatter(act_x, act_y, c='blue', s=50, alpha=0.7, marker='o', label='Actual')
+        ax3.set_title(f'{test_name} - Overlay Comparison')
+        ax3.set_xlabel('X')
+        ax3.set_ylabel('Y')
+        ax3.grid(True, alpha=0.3)
+        ax3.legend()
+        ax3.invert_yaxis()
+        
+        plt.tight_layout()
+        plt.show()
+    
+    async def test_simple_triangle(self):
+        """Test visualizing a single triangle"""
+        cocotb.log.info("Running simple triangle test")
+        self.clear_current_test_pixels()
+        
+        await self.run_triangle_test(
+            self.make_coord(1, 1, 256),
+            self.make_coord(1, 5, 256),
+            self.make_coord(5, 1, 256),
+            self.make_meta(4, 0, 0)
+        )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Simple Triangle")
+    
+    async def test_multi_tile(self):
+        """Test triangles over multiple tiles"""
+        cocotb.log.info("Running multi-tile test")
+        self.clear_current_test_pixels()
+        
+        # Triangle 1
+        await self.run_triangle_test(
+            self.make_coord(1, 1, 256),
+            self.make_coord(1, 5, 256),
+            self.make_coord(5, 1, 256),
+            self.make_meta(4, 0, 0)
+        )
+        
+        # Triangle 2
+        await self.run_triangle_test(
+            self.make_coord(17, 1, 256),
+            self.make_coord(17, 5, 1024),
+            self.make_coord(22, 1, 256),
+            self.make_meta(4, 1, 0)
+        )
+        
+        # Triangle 3
+        await self.run_triangle_test(
+            self.make_coord(1, 17, 256),
+            self.make_coord(1, 22, 1024),
+            self.make_coord(5, 17, 256),
+            self.make_meta(4, 0, 1)
+        )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Multi-tile Triangles")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Multi-tile Grid View")
+    
+    async def test_nested(self):
+        """Test nested triangles"""
+        cocotb.log.info("Running nested triangle test")
+        self.clear_current_test_pixels()
+        
+        # Outer triangle
+        await self.run_triangle_test(
+            self.make_coord(1, 1, 256),
+            self.make_coord(1, 15, 256),
+            self.make_coord(15, 1, 256),
+            self.make_meta(4, 0, 0)
+        )
+        
+        # Inner triangle
+        await self.run_triangle_test(
+            self.make_coord(2, 2, 128),
+            self.make_coord(2, 8, 128),
+            self.make_coord(8, 2, 128),
+            self.make_meta(3, 0, 0)
+        )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Nested Triangles")
+    
+    async def test_nested_backwards(self):
+        """Test nested triangles, make sure doesn't overwrite"""
+        cocotb.log.info("Running nested backwards test")
+        self.clear_current_test_pixels()
+        
+        # Inner triangle first
+        await self.run_triangle_test(
+            self.make_coord(2, 2, 128),
+            self.make_coord(2, 8, 128),
+            self.make_coord(8, 2, 128),
+            self.make_meta(3, 0, 0)
+        )
+        
+        # Outer triangle
+        await self.run_triangle_test(
+            self.make_coord(1, 1, 256),
+            self.make_coord(1, 15, 256),
+            self.make_coord(15, 1, 256),
+            self.make_meta(4, 0, 0)
+        )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Nested Backwards")
+    
+    async def test_cross_tile_triangle(self):
+        """Test cross-tile triangle"""
+        cocotb.log.info("Running cross-tile triangle test")
+        self.clear_current_test_pixels()
+        
+        # Same triangle across different tiles
+        triangles = [
+            (1, 0, 0),
+            (2, 1, 0),
+            (3, 0, 1),
+            (4, 1, 1)
+        ]
+        
+        for color, tile_x, tile_y in triangles:
+            await self.run_triangle_test(
+                self.make_coord(0, 0, 256),
+                self.make_coord(0, 31, 256),
+                self.make_coord(31, 0, 256),
+                self.make_meta(color, tile_x, tile_y)
+            )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Cross-tile Triangles")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Cross-tile Grid View", (64, 48))
+    
+    async def test_star_of_david(self):
+        """Test two interlaced triangles"""
+        cocotb.log.info("Running star of David test")
+        self.clear_current_test_pixels()
+        
+        # First triangle
+        await self.run_triangle_test(
+            self.make_coord(0, 0, 256),
+            self.make_coord(0, 15, 256),
+            self.make_coord(15, 7, 0),
+            self.make_meta(1, 0, 0)
+        )
+        
+        # Second triangle
+        await self.run_triangle_test(
+            self.make_coord(15, 0, 256),
+            self.make_coord(0, 7, 0),
+            self.make_coord(15, 15, 256),
+            self.make_meta(2, 0, 0)
+        )
+        
+        await self.flush(5, 5)
+        
+        # Plot the results
+        self.plot_current_test("Star of David")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Star of David Grid View")
+    
+    async def flush(self, i: int, j: int):
+        """Flush the pipeline"""
+        await self.run_triangle_test(
+            self.make_coord(0, 0, 128),
+            self.make_coord(0, 1, 128),
+            self.make_coord(1, 0, 128),
+            self.make_meta(0, i & 0x3F, j & 0x1F)
+        )
+    
+    async def run_triangle_test(self, tv0: Coord3D, tv1: Coord3D, tv2: Coord3D, tmeta: Metadata):
+        """Run a triangle test with the given vertices and metadata"""
+        
+        cocotb.log.info("-" * 50)
+        cocotb.log.info("Testing Points:")
+        cocotb.log.info(f"v0: x={tv0.x >> 4}, y={tv0.y >> 4}, z={tv0.z >> 4}")
+        cocotb.log.info(f"v1: x={tv1.x >> 4}, y={tv1.y >> 4}, z={tv1.z >> 4}")
+        cocotb.log.info(f"v2: x={tv2.x >> 4}, y={tv2.y >> 4}, z={tv2.z >> 4}")
+        cocotb.log.info(f"metadata: color={tmeta.color}, tile_x={tmeta.tile_x}, tile_y={tmeta.tile_y}")
+        cocotb.log.info("-" * 50)
+        
+        # Compute expected outputs
+        expected = self.simulate_expected_output(tv0, tv1, tv2, tmeta)
+        
+        # Wait until DUT is ready
+        while self.dut.rdy_in_o.value != 1:
+            await RisingEdge(self.dut.clk_i)
+        
+        # Set input values
+        self.dut.abs_pos_x_i.value = expected['abs_pos'].x
+        self.dut.abs_pos_y_i.value = expected['abs_pos'].y
+        self.dut.delta_0_x_i.value = expected['deltas'][0].x
+        self.dut.delta_0_y_i.value = expected['deltas'][0].y
+        self.dut.delta_1_x_i.value = expected['deltas'][1].x
+        self.dut.delta_1_y_i.value = expected['deltas'][1].y
+        self.dut.delta_2_x_i.value = expected['deltas'][2].x
+        self.dut.delta_2_y_i.value = expected['deltas'][2].y
+        self.dut.edge_0_i.value = expected['edges'][0]
+        self.dut.edge_1_i.value = expected['edges'][1]
+        self.dut.edge_2_i.value = expected['edges'][2]
+        self.dut.color_i.value = expected['metadata'].color
+        self.dut.tile_x_i.value = expected['metadata'].tile_x
+        self.dut.tile_y_i.value = expected['metadata'].tile_y
+        self.dut.dzdx_i.value = expected['dzdx']
+        self.dut.dzdy_i.value = expected['dzdy']
+        self.dut.z_i.value = expected['z_current']
+        
+        # Start transaction
+        await FallingEdge(self.dut.clk_i)
+        self.dut.vld_i.value = 1
+        self.dut.rdy_out_i.value = 1
+        await FallingEdge(self.dut.clk_i)
+        self.dut.vld_i.value = 0
+        await FallingEdge(self.dut.clk_i)
+        
+        # Wait for ready signal
+        while self.dut.rdy_in_o.value != 1:
+            await RisingEdge(self.dut.clk_i)
+        
+        # Wait for valid output if present
+        if hasattr(self.dut, 'vld_o') and self.dut.vld_o.value == 1:
+            while self.dut.vld_o.value == 1:
+                await RisingEdge(self.dut.clk_i)
+        
+        self.dut.rdy_out_i.value = 0
+        
+        # Wait a few cycles
+        for _ in range(5):
+            await RisingEdge(self.dut.clk_i)
+    
+    def make_coord(self, x: int, y: int, z: int) -> Coord3D:
+        """Create a coordinate with fixed-point scaling"""
+        return Coord3D(
+            x=x << FX_FRAC_BITS,
+            y=y << FX_FRAC_BITS,
+            z=z << FX_FRAC_BITS
+        )
+    
+    def make_meta(self, color: int, tile_x: int, tile_y: int) -> Metadata:
+        """Create metadata tuple"""
+        return Metadata(color=color, tile_x=tile_x, tile_y=tile_y)
+    
+    def coord3d_to_long_coords(self, coord: Coord3D) -> LongCoord3D:
+        """Convert coordinate to long precision with sign extension"""
+        def sign_extend(value, bits):
+            sign_bit = 1 << (bits - 1)
+            if value & sign_bit:
+                return value | (-1 << bits)
+            return value
+        
+        x_extended = sign_extend(coord.x, FX_TOTAL_BITS)
+        y_extended = sign_extend(coord.y, FX_TOTAL_BITS)
+        z_extended = sign_extend(coord.z, FX_TOTAL_BITS)
+        
+        return LongCoord3D(x=x_extended, y=y_extended, z=z_extended)
+    
+    def simulate_expected_output(self, gv0: Coord3D, gv1: Coord3D, gv2: Coord3D, gmeta: Metadata) -> dict:
+        """Compute all expected outputs for a triangle"""
+        
+        # Convert to long coordinates
+        v = [
+            self.coord3d_to_long_coords(gv0),
+            self.coord3d_to_long_coords(gv1),
+            self.coord3d_to_long_coords(gv2)
+        ]
+        
+        # Rotated vertices (v1, v2, v0)
+        rotated_v = [v[1], v[2], v[0]]
+        
+        # Step 1: Calculate absolute position (tile to pixel coordinates)
+        abs_pos_x = (gmeta.tile_x << (TILE_WIDTH_BITS + FX_FRAC_BITS))
+        abs_pos_y = (gmeta.tile_y << (TILE_WIDTH_BITS + FX_FRAC_BITS))
+        abs_pos = Coord3D(x=abs_pos_x, y=abs_pos_y, z=0)
+        
+        abs_pos_long = LongCoord3D(x=abs_pos_x, y=abs_pos_y, z=0)
+        
+        # Step 2: Compute deltas between vertices (in clockwise order)
+        deltas = []
+        for i in range(NUM_VERTICES):
+            delta_x = rotated_v[i].x - v[i].x
+            delta_y = rotated_v[i].y - v[i].y
+            delta_z = rotated_v[i].z - v[i].z
+            deltas.append(Coord3D(
+                x=delta_x & ((1 << FX_TOTAL_BITS) - 1),
+                y=delta_y & ((1 << FX_TOTAL_BITS) - 1),
+                z=delta_z & ((1 << FX_TOTAL_BITS) - 1)
+            ))
+        
+        # Step 3: Compute edge values
+        edges = []
+        for i in range(NUM_VERTICES):
+            delta = LongCoord3D(
+                x=deltas[i].x if deltas[i].x < (1 << (FX_TOTAL_BITS-1)) else deltas[i].x - (1 << FX_TOTAL_BITS),
+                y=deltas[i].y if deltas[i].y < (1 << (FX_TOTAL_BITS-1)) else deltas[i].y - (1 << FX_TOTAL_BITS),
+                z=deltas[i].z if deltas[i].z < (1 << (FX_TOTAL_BITS-1)) else deltas[i].z - (1 << FX_TOTAL_BITS)
+            )
+            
+            x_sub = abs_pos_long.x - v[i].x
+            y_sub = abs_pos_long.y - v[i].y
+            
+            x_mult = x_sub * delta.y
+            y_mult = y_sub * delta.x
+            
+            edge = x_mult - y_mult
+            edges.append(edge & ((1 << (FX_TOTAL_BITS * 2)) - 1))
+        
+        # Step 4: Compute plane coefficients
+        delta0 = LongCoord3D(
+            x=deltas[0].x if deltas[0].x < (1 << (FX_TOTAL_BITS-1)) else deltas[0].x - (1 << FX_TOTAL_BITS),
+            y=deltas[0].y if deltas[0].y < (1 << (FX_TOTAL_BITS-1)) else deltas[0].y - (1 << FX_TOTAL_BITS),
+            z=deltas[0].z if deltas[0].z < (1 << (FX_TOTAL_BITS-1)) else deltas[0].z - (1 << FX_TOTAL_BITS)
+        )
+        
+        delta2 = LongCoord3D(
+            x=deltas[2].x if deltas[2].x < (1 << (FX_TOTAL_BITS-1)) else deltas[2].x - (1 << FX_TOTAL_BITS),
+            y=deltas[2].y if deltas[2].y < (1 << (FX_TOTAL_BITS-1)) else deltas[2].y - (1 << FX_TOTAL_BITS),
+            z=deltas[2].z if deltas[2].z < (1 << (FX_TOTAL_BITS-1)) else deltas[2].z - (1 << FX_TOTAL_BITS)
+        )
+        
+        # Coefficient A = y0*z2 - z0*y2
+        coeff_A = delta0.y * delta2.z - delta0.z * delta2.y
+        
+        # Coefficient B = z0*x2 - x0*z2  
+        coeff_B = delta0.z * delta2.x - delta0.x * delta2.z
+        
+        # Coefficient C = x0*y2 - y0*x2
+        coeff_C = delta0.x * delta2.y - delta0.y * delta2.x
+        
+        # Step 5: Calculate dz/dx and dz/dy
+        if coeff_C != 0:
+            dzdx = -(coeff_A << (FX_FRAC_BITS * 2)) // coeff_C
+            dzdy = -(coeff_B << (FX_FRAC_BITS * 2)) // coeff_C
+        else:
+            dzdx = 0
+            dzdy = 0
+        
+        # Step 6: Compute initial z value
+        delta_x = v[0].x - abs_pos_long.x
+        delta_y = v[0].y - abs_pos_long.y
+        
+        cocotb.log.info(f"delta_x_abs_to_v0: {delta_x >> 4}, delta_y_abs_to_v0: {delta_y >> 4}")
+        cocotb.log.info(f"exp_dzdx: {dzdx >> 8}, exp_dzdy: {dzdy >> 8}")
+        
+        x_component = (delta_x << FX_FRAC_BITS) * dzdx
+        y_component = (delta_y << FX_FRAC_BITS) * dzdy
+        
+        cocotb.log.info(f"x_component: {x_component >> 16}, y_component: {y_component >> 16}")
+        
+        z_component = v[0].z << (FX_FRAC_BITS * 3)
+        
+        cocotb.log.info(f"z_component: {z_component >> 16}")
+        
+        temp_z = z_component - x_component - y_component
+        z_current = (temp_z >> (FX_FRAC_BITS * 2)) & ((1 << (FX_TOTAL_BITS * 2)) - 1)
+        
+        return {
+            'abs_pos': abs_pos,
+            'deltas': deltas,
+            'edges': edges,
+            'metadata': gmeta,
+            'dzdx': dzdx & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+            'dzdy': dzdy & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+            'z_current': z_current,
+            'coeff_A': coeff_A & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+            'coeff_B': coeff_B & ((1 << (FX_TOTAL_BITS * 2)) - 1),
+            'coeff_C': coeff_C & ((1 << (FX_TOTAL_BITS * 2)) - 1)
+        }
 
 
 @cocotb.test()
-async def async_fifo_test(dut):
-    """Test the asynchronous FIFO with various test cases"""
-    tb = AsyncFIFO_Testbench(dut)
-    tb.log.info("Starting FIFO tests")
-
-    # Simple sequential read/write test
-    tb.log.info("Running simple sequential read/write test")
-    await test_simple_rw(tb)
-
-    # Interleaved read/write test
-    tb.log.info("Running interleaved read/write test")
-    await test_interleaved_rw(tb)
-
-    # Test for invalid states
-    tb.log.info("Running invalid states test")
-    await test_invalid_states(tb) # Add this call
+async def test_pixel_processor(dut):
+    """Main test function"""
     
-    tb.log.info("All tests completed successfully")
+    # Start clock
+    clock = Clock(dut.clk_i, 10, units="ns")
+    cocotb.start_soon(clock.start())
+    
+    # Create testbench instance
+    tb = PixelTestbench(dut)
+    
+    # Start pixel capture task
+    cocotb.start_soon(tb.capture_pixel_outputs())
+    
+    try:
+        # Run all tests
+        await tb.reset()
+        await tb.test_simple_triangle()
+        
+        await tb.reset()
+        await tb.test_multi_tile()
+        
+        await tb.reset()
+        await tb.test_nested()
+        
+        await tb.reset()
+        await tb.test_nested_backwards()
+        
+        await tb.reset()
+        await tb.test_cross_tile_triangle()
+        
+        await tb.reset()
+        await tb.test_star_of_david()
+        
+        # Create final summary plot of all captured pixels
+        cocotb.log.info(f"Total pixels captured across all tests: {len(tb.captured_pixels)}")
+        tb.plot_all_pixels()
+        
+        # Generate summary report
+        tb.generate_summary_report()
+        
+        cocotb.log.info("All tests completed successfully!")
+        
+    except Exception as e:
+        cocotb.log.error(f"Test failed with exception: {e}")
+        raise
+
+
+@cocotb.test()
+async def test_individual_triangle_visualization(dut):
+    """Test function focused on visualization of individual triangles"""
+    
+    # Start clock
+    clock = Clock(dut.clk_i, 10, units="ns")
+    cocotb.start_soon(clock.start())
+    
+    # Create testbench instance
+    tb = PixelTestbench(dut)
+    
+    # Start pixel capture task
+    cocotb.start_soon(tb.capture_pixel_outputs())
+    
+    try:
+        # Test 1: Simple right triangle
+        await tb.reset()
+        tb.clear_current_test_pixels()
+        
+        await tb.run_triangle_test(
+            tb.make_coord(2, 2, 256),
+            tb.make_coord(2, 8, 256),
+            tb.make_coord(8, 2, 256),
+            tb.make_meta(1, 0, 0)
+        )
+        await tb.flush(5, 5)
+        
+        tb.plot_current_test("Right Triangle")
+        tb.create_pixel_grid_plot(tb.current_test_pixels, "Right Triangle Grid", (16, 16))
+        
+        # Test 2: Isosceles triangle
+        await tb.reset()
+        tb.clear_current_test_pixels()
+        
+        await tb.run_triangle_test(
+            tb.make_coord(8, 2, 256),
+            tb.make_coord(4, 10, 256),
+            tb.make_coord(12, 10, 256),
+            tb.make_meta(2, 0, 0)
+        )
+        await tb.flush(5, 5)
+        
+        tb.plot_current_test("Isosceles Triangle")
+        tb.create_pixel_grid_plot(tb.current_test_pixels, "Isosceles Triangle Grid", (16, 16))
+        
+        # Test 3: Large triangle spanning multiple tiles
+        await tb.reset()
+        tb.clear_current_test_pixels()
+        
+        # Triangle spanning 4 tiles
+        for tile_x in range(2):
+            for tile_y in range(2):
+                await tb.run_triangle_test(
+                    tb.make_coord(0, 0, 256),
+                    tb.make_coord(0, 31, 256),
+                    tb.make_coord(31, 31, 256),
+                    tb.make_meta(3 + tile_x + tile_y, tile_x, tile_y)
+                )
+        
+        await tb.flush(5, 5)
+        
+        tb.plot_current_test("Large Multi-tile Triangle")
+        tb.create_pixel_grid_plot(tb.current_test_pixels, "Large Triangle Grid", (64, 64))
+        
+        cocotb.log.info("Visualization tests completed successfully!")
+        
+    except Exception as e:
+        cocotb.log.error(f"Visualization test failed with exception: {e}")
+        raise

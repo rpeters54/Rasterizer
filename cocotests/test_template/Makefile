@@ -33,7 +33,7 @@ SIM ?= icarus
 VERILOG_SOURCES = $(shell make -sC ../.. VERILOG_SOURCES) # List of Source Files
 VERILOG_INCLUDE_DIRS = ../../rtl
 
-COCOTB_TOPLEVEL     := async_fifo
+COCOTB_TOPLEVEL     := pixel_processor
 TOPLEVEL := $(COCOTB_TOPLEVEL)		# CocoTB Version 1
 COCOTB_TEST_MODULES := test_template	# CocoTB Version 2
 MODULE := $(COCOTB_TEST_MODULES)	# CocoTB Version 1

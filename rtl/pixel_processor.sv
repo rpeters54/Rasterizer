@@ -73,26 +73,10 @@ metadata_t                                         metadata;
 logic signed [`FX_TOTAL_BITS*2-1:0]                dzdx, dzdy, z;
 
 // temps needed to get iverilog working :(
-logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] current_tile_coord;
+logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] prev_tile_coord;
 logic [(`TILE_ROWS_BITS + `TILE_COLUMNS_BITS)-1:0] new_tile_coord;
-assign current_tile_coord = {metadata.tile_y, metadata.tile_x};
+assign prev_tile_coord = {metadata.tile_y, metadata.tile_x};
 assign new_tile_coord = {tile_y_i, tile_x_i};
-
-
-// Set up read and write addresses for pipelining
-always_comb begin
-    logic [`TILE_AREA_BITS-1:0] addr_position_plus_1;
-    addr_position_plus_1 = addr_position + 1;
-
-    dffram_read_sel               = addr_position[0];
-    dffram_write_sel              = ~dffram_read_sel;
-    dffram_addr[dffram_read_sel]  = addr_position_plus_1[`TILE_AREA_BITS-1:1];
-    dffram_addr[dffram_write_sel] = addr_position[`TILE_AREA_BITS-1:1];
-    dffram_en[dffram_read_sel]    = (present_state == PROCESS || present_state == FLUSHING || present_state == FORWARDING_0 || present_state == FORWARDING_1);
-    dffram_en[dffram_write_sel]   = (present_state == PROCESS || present_state == FLUSHING);
-    dffram_we[dffram_read_sel]    = 4'd0;
-    dffram_we[dffram_write_sel]   = {4{present_state == PROCESS || present_state == FLUSHING}};
-end
 
 // Output the color and pixel coordinates
 assign color_o   = vld_o ? dffram_data_out[dffram_read_sel][`COLOR_BITS-1:0] : 0;
@@ -124,7 +108,7 @@ always_comb begin
     case (present_state)
         IDLE: begin
             if (vld_i) begin
-                if (current_tile_coord >= new_tile_coord || dirty_bit) begin
+                if (prev_tile_coord == new_tile_coord || dirty_bit) begin
                     next_state = FORWARDING_0;
                 end else begin
                     next_state = FORWARDING_1;
@@ -163,8 +147,8 @@ end
 
 // temp coord used to determine what coord the previous tile started at
 coord_2d_t temp_coord;
-assign temp_coord.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, tile_x_i, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
-assign temp_coord.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, tile_y_i, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+assign temp_coord.x = {{(`FX_INT_BITS - `TILE_COLUMNS_BITS - `TILE_WIDTH_BITS){1'b0}}, metadata.tile_x, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
+assign temp_coord.y = {{(`FX_INT_BITS - `TILE_ROWS_BITS    - `TILE_WIDTH_BITS){1'b0}}, metadata.tile_y, {`TILE_WIDTH_BITS{1'b0}}, {`FX_FRAC_BITS{1'b0}}};
 
 
 // compute edge offset
@@ -189,16 +173,30 @@ always_comb begin
     temp_z_col_off = dzdx;
 end
 
+// Set up read and write addresses for pipelining
+always_comb begin
+    logic [`TILE_AREA_BITS-1:0] addr_position_plus_1;
+    addr_position_plus_1 = addr_position + 1;
+
+    dffram_read_sel               = addr_position[0];
+    dffram_write_sel              = ~dffram_read_sel;
+    dffram_addr[dffram_read_sel]  = addr_position_plus_1[`TILE_AREA_BITS-1:1];
+    dffram_addr[dffram_write_sel] = addr_position[`TILE_AREA_BITS-1:1];
+    dffram_en[dffram_read_sel]    = (present_state == PROCESS || present_state == FLUSHING || present_state == FORWARDING_0 || present_state == FORWARDING_1);
+    dffram_en[dffram_write_sel]   = (present_state == PROCESS || present_state == FLUSHING);
+    dffram_we[dffram_read_sel]    = 4'd0;
+    dffram_we[dffram_write_sel]   = {4{present_state == PROCESS || present_state == FLUSHING}};
+end
+
 // z/color buffer writes
 always_comb begin
-    logic [`FX_TOTAL_BITS*2-1:0]                mem_z;
+    logic [`FX_TOTAL_BITS*2-1:0]                  mem_z;
     logic [`FX_TOTAL_BITS*2-`FX_TOTAL_BITS/2-1:0] compacted_z;
-
-    dffram_data_in = '{0, 0};
-    dffram_we      = '{0, 0};
 
     extract_expand_z(dffram_data_out[dffram_read_sel], mem_z);
     compact_z(z, compacted_z);
+
+    dffram_data_in = '{0, 0};
 
     if (present_state == PROCESS) begin
 

@@ -63,8 +63,8 @@ initial begin
     $dumpvars(0);
 end
 
-  // Reset and stimulus
-  initial begin
+// Reset and stimulus
+initial begin
     // Initialize signals
     rst_n_i       = 0;
     rdy_out_i     = 0;
@@ -345,8 +345,6 @@ task automatic simulate_expected_output(
 
         exp_z_current = temp_z[`FX_TOTAL_BITS*2+`FX_FRAC_BITS*2-1:`FX_FRAC_BITS*2];
     end
-
-
 endtask
 
 // General-purpose task for driving a triangle and checking results
