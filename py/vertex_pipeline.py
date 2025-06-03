@@ -1,17 +1,20 @@
 import pywavefront
 import numpy as np
 
+# Screen dimensions
+screen_width = 640
+screen_height = 480
+tile_width = 16
+tile_height = 16
+max_z = 1024
+
+assets_path = '../assets/'
+
+fb = np.empty((screen_height,screen_width,3),dtype=np.uint8)
+
 def main():
-    assets_path = '../assets/'
     scene = pywavefront.Wavefront(assets_path + 'monkey.obj', collect_faces=True)
     object_vertices = get_vertices(scene)
-
-    # Screen dimensions
-    screen_width = 640
-    screen_height = 480
-    tile_width = 16
-    tile_height = 16
-    max_z = 1024
 
     # Camera setup
     camera_position = np.array([0, 0, 10])
@@ -44,6 +47,20 @@ def main():
     #             for f in tile_bins[x,y]:
     #                 print(f)
     # print(tile_bins)
+
+def generate_img(filename, framebuffer):
+    height, width, channels = framebuffer.shape
+
+    with open(filename, 'w') as f:
+        f.write(f'P3\n')
+        f.write(f'{width} {height}\n')
+        f.write(f'255\n')  # Max color value
+
+        for y in range(height):
+            for x in range(width):
+                r, g, b = framebuffer[y, x]
+                f.write(f'{r} {g} {b} ')
+            f.write('\n')
 
 def get_vertices(scene):
     if len(scene.mesh_list) != 1:

@@ -321,8 +321,8 @@ always_ff @(posedge clk_i) begin
                 end
 
                 // Update the relative position
-                addr_position <= addr_position + 1;
                 if (next_state == PROCESS) begin
+                    addr_position <= addr_position + 1;
                     rdy_in_o  <= 0;
                 end else begin
                     addr_position <= -1;
@@ -343,8 +343,8 @@ always_ff @(posedge clk_i) begin
                     end
 
                     // Update the relative position
-                    addr_position <= addr_position + 1;
                     if (next_state == FLUSHING) begin
+                        addr_position <= addr_position + 1;
                         vld_o         <= 1;
                     end else begin
                         addr_position <= -1;
