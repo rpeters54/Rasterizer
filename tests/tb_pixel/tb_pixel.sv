@@ -346,7 +346,7 @@ task automatic run_triangle_test(
 );
     coord_3d_t temp_delta;
     coord_3d_t exp_abs_pos;
-    coord_3d_t exp_deltas [0:2];
+    coord_3d_t exp_delta_0, exp_delta_1, exp_delta_2;
     logic signed [`FX_TOTAL_BITS*2-1:0] exp_edges [0:2];
     metadata_t exp_metadata;
     logic signed [`FX_TOTAL_BITS*2-1:0] exp_dzdx;
@@ -363,7 +363,7 @@ task automatic run_triangle_test(
 
     // Compute expected outputs
     simulate_expected_output(tv0, tv1, tv2, tmeta,
-                 exp_abs_pos, exp_deltas[0], exp_deltas[1], exp_deltas[2],
+                 exp_abs_pos, exp_delta_0, exp_delta_1, exp_delta_2,
                  exp_edges[0], exp_edges[1], exp_edges[2],
                  exp_metadata, exp_dzdx, exp_dzdy, exp_z_current,
                  exp_coeff_A, exp_coeff_B, exp_coeff_C);
@@ -371,14 +371,14 @@ task automatic run_triangle_test(
     // Wait until DUT is ready
     wait(rdy_in_o == 1);
 
-    abs_pos_x_i = exp_abs_pos.x; 
+    abs_pos_x_i = exp_abs_pos.x;  
     abs_pos_y_i = exp_abs_pos.y;
-    delta_0_x_i = exp_deltas[0].x;
-    delta_0_y_i = exp_deltas[0].y;
-    delta_1_x_i = exp_deltas[1].x;
-    delta_1_y_i = exp_deltas[1].y;
-    delta_2_x_i = exp_deltas[2].x;
-    delta_2_y_i = exp_deltas[2].y;
+    delta_0_x_i = exp_delta_0.x;
+    delta_0_y_i = exp_delta_0.y;
+    delta_1_x_i = exp_delta_1.x;
+    delta_1_y_i = exp_delta_1.y;
+    delta_2_x_i = exp_delta_2.x;
+    delta_2_y_i = exp_delta_2.y;
     edge_0_i    = exp_edges[0];
     edge_1_i    = exp_edges[1];
     edge_2_i    = exp_edges[2];

@@ -41,7 +41,7 @@ logic        [`TILE_COLUMNS_BITS-1:0] tile_x_o;
 logic        [`TILE_ROWS_BITS-1:0]    tile_y_o; 
 logic signed [`FX_TOTAL_BITS*2-1:0]   dzdx_o;
 logic signed [`FX_TOTAL_BITS*2-1:0]   dzdy_o;
-logic signed [`FX_TOTAL_BITS*2-1:0]   z_current_o;
+logic signed [`FX_TOTAL_BITS*2-1:0]   z_o;
 
 
 // DUT instantiation
@@ -420,7 +420,7 @@ task automatic run_triangle_test(
     $display("--- Real Values ---");
     $display("abs_pos: x=%0d, y=%0d", abs_pos_x_o >>> 4, abs_pos_y_o >>> 4);
     $display("dzdx: %0d, dzdy: %0d", dzdx_o >>> 8, dzdy_o >>> 8);
-    $display("z_current: %0d", z_current_o >>> 8);
+    $display("z_current: %0d", z_o >>> 8);
     $display("delta_%0d: x= %0d, y=%0d", 0, delta_0_x_o >>> 4, delta_0_y_o >>> 4);
     $display("delta_%0d: x= %0d, y=%0d", 1, delta_1_x_o >>> 4, delta_1_y_o >>> 4);
     $display("delta_%0d: x= %0d, y=%0d", 2, delta_2_x_o >>> 4, delta_2_y_o >>> 4);
@@ -472,8 +472,8 @@ task automatic run_triangle_test(
         else $error("dzdx mismatch: %0d vs %0d (diff: %0d)", dzdx_o, exp_dzdx, dzdx_o - exp_dzdx);
     assert (`WITHIN_TOL(dzdy_o, exp_dzdy, `DOUBLE_FX_TOLERANCE))
         else $error("dzdy mismatch: %0d vs %0d (diff: %0d)", dzdy_o, exp_dzdy, dzdy_o - exp_dzdy);
-    assert (`WITHIN_TOL(z_current_o, exp_z_current, `DOUBLE_FX_TOLERANCE))
-        else $error("z_current mismatch: %0d vs %0d (diff: %0d)", z_current_o, exp_z_current, z_current_o - exp_z_current);
+    assert (`WITHIN_TOL(z_o, exp_z_current, `DOUBLE_FX_TOLERANCE))
+        else $error("z_current mismatch: %0d vs %0d (diff: %0d)", z_o, exp_z_current, z_o - exp_z_current);
 
     // Handshake to clear output
     rdy_out_i = 1;

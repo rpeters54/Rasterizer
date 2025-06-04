@@ -62,6 +62,16 @@ DFFRAM128x32 ram1 (
 
 ////////////////////////////////////////////////////////////////////
 
+typedef enum logic [2:0] {
+    IDLE         = 3'd0,
+    FORWARDING_0 = 3'd1,
+    FORWARDING_1 = 3'd2,
+    FLUSHING     = 3'd3,
+    PROCESS      = 3'd4
+} pixel_state_t;
+
+pixel_state_t present_state, next_state;
+
 coord_2d_t                                         prev_coord_position;
 coord_2d_t                                         coord_position;
 logic        [`TILE_AREA_BITS-1:0]                 addr_position;
@@ -79,21 +89,13 @@ assign prev_tile_coord = {metadata.tile_y, metadata.tile_x};
 assign new_tile_coord = {tile_y_i, tile_x_i};
 
 // Output the color and pixel coordinates
-assign color_o   = vld_o ? dffram_data_out[dffram_read_sel][`COLOR_BITS-1:0] : 0;
-assign pixel_x_o = vld_o ? prev_coord_position.x                             : 0;
-assign pixel_y_o = vld_o ? prev_coord_position.y                             : 0;
+assign vld_o     = (present_state == FLUSHING);
+assign color_o   = vld_o ? dffram_data_out[dffram_write_sel][`COLOR_BITS-1:0]      : 0;
+assign pixel_x_o = vld_o ? `FX_TOTAL_BITS'(prev_coord_position.x >> `FX_FRAC_BITS) : 0;
+assign pixel_y_o = vld_o ? `FX_TOTAL_BITS'(prev_coord_position.y >> `FX_FRAC_BITS) : 0;
+
 
 ////////////////////////////////////////////////////////////////////
-
-typedef enum logic [2:0] {
-    IDLE         = 3'd0,
-    FORWARDING_0 = 3'd1,
-    FORWARDING_1 = 3'd2,
-    FLUSHING     = 3'd3,
-    PROCESS      = 3'd4
-} pixel_state_t;
-
-pixel_state_t present_state, next_state;
 
 // State machine
 always_ff @(posedge clk_i) begin
@@ -193,7 +195,7 @@ always_comb begin
     logic [`FX_TOTAL_BITS*2-1:0]                  mem_z;
     logic [`FX_TOTAL_BITS*2-`FX_TOTAL_BITS/2-1:0] compacted_z;
 
-    extract_expand_z(dffram_data_out[dffram_read_sel], mem_z);
+    extract_expand_z(dffram_data_out[dffram_write_sel], mem_z);
     compact_z(z, compacted_z);
 
     dffram_data_in = '{0, 0};
@@ -207,14 +209,14 @@ always_comb begin
             if ((z < mem_z || dirty_bit)) begin
                 dffram_data_in[dffram_write_sel] = {compacted_z, metadata.color};
             end else begin
-                dffram_data_in[dffram_write_sel] = dffram_data_out[dffram_read_sel];
+                dffram_data_in[dffram_write_sel] = dffram_data_out[dffram_write_sel];
             end 
         end else begin
             // write the base value if the memory is still dirty
             if (dirty_bit) begin
                 dffram_data_in[dffram_write_sel] = {{1'b0, {2*`FX_TOTAL_BITS-`FX_TOTAL_BITS/2-1{1'b1}}}, {`COLOR_BITS{1'b0}}};
             end else begin
-                dffram_data_in[dffram_write_sel] = dffram_data_out[dffram_read_sel];
+                dffram_data_in[dffram_write_sel] = dffram_data_out[dffram_write_sel];
             end
         end
     end else if (present_state == FLUSHING) begin
@@ -248,8 +250,6 @@ always_ff @(posedge clk_i) begin
 
         // Reset Outputs
         rdy_in_o   <= '1;
-        vld_o      <= '0;
-
     end else begin
 
         case (present_state)
@@ -326,8 +326,9 @@ always_ff @(posedge clk_i) begin
                     rdy_in_o  <= 0;
                 end else begin
                     addr_position <= -1;
+                    rdy_in_o  <= 1;      
+
                     dirty_bit <= 0;
-                    rdy_in_o  <= 1;                    
                 end
             end
             FLUSHING: begin
@@ -345,10 +346,8 @@ always_ff @(posedge clk_i) begin
                     // Update the relative position
                     if (next_state == FLUSHING) begin
                         addr_position <= addr_position + 1;
-                        vld_o         <= 1;
                     end else begin
                         addr_position <= -1;
-                        vld_o         <= 0; 
                     end
                 end 
             end

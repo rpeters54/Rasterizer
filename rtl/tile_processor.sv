@@ -64,7 +64,7 @@
 //   tile_y_o:      Y-coordinate of the current tile (passed through).
 //   dzdx_o:        Partial derivative of Z with respect to X (18.6 fixed-point).
 //   dzdy_o:        Partial derivative of Z with respect to Y (18.6 fixed-point).
-//   z_current_o:   Interpolated Z value at the tile's origin (18.6 fixed-point).
+//   z_o:           Interpolated Z value at the tile's origin (18.6 fixed-point).
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ module tile_processor(
     output wire        [`TILE_ROWS_BITS-1:0]    tile_y_o,
     output wire signed [`FX_TOTAL_BITS*2-1:0]   dzdx_o,
     output wire signed [`FX_TOTAL_BITS*2-1:0]   dzdy_o,
-    output wire signed [`FX_TOTAL_BITS*2-1:0]   z_current_o
+    output wire signed [`FX_TOTAL_BITS*2-1:0]   z_o
 );
 
 ////////////////////////////////////////////////////////////////////
@@ -331,7 +331,7 @@ assign tile_x_o    = vld_o ? metadata.tile_x :  0;
 assign tile_y_o    = vld_o ? metadata.tile_y :  0;
 assign dzdx_o      = vld_o ? dzdx            :  0;
 assign dzdy_o      = vld_o ? dzdy            :  0;
-assign z_current_o = vld_o ? z_current       :  0;
+assign z_o         = vld_o ? z_current       :  0;
 
 
 /////////////////////////////////////////////////////////////////////////////
