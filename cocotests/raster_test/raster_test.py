@@ -473,7 +473,86 @@ class RasterTestbench:
         # Plot the results
         self.plot_current_test("Star of David")
         self.create_pixel_grid_plot(self.current_test_pixels, "Star of David Grid View")
+        
+
+    async def test_diamond_pattern(self):
+        """Test diamond pattern made from 4 triangles across multiple tiles"""
+        cocotb.log.info("Running diamond pattern test")
+        self.clear_current_test_pixels()
+        
+        center_x, center_y = 31, 31  # Center at tile boundary
+        size = 20
+        
+        # Top triangle
+        await self.run_triangle_test(
+            self.make_coord(center_x, center_y - size, 256),
+            self.make_coord(center_x - size//2, center_y, 256),
+            self.make_coord(center_x + size//2, center_y, 256),
+            self.make_meta(1, 1, 0)
+        )
+        await self.run_triangle_test(
+            self.make_coord(center_x, center_y - size, 256),
+            self.make_coord(center_x - size//2, center_y, 256),
+            self.make_coord(center_x + size//2, center_y, 256),
+            self.make_meta(1, 1, 1)
+        )
+        await self.run_triangle_test(
+            self.make_coord(center_x, center_y - size, 256),
+            self.make_coord(center_x - size//2, center_y, 256),
+            self.make_coord(center_x + size//2, center_y, 256),
+            self.make_meta(1, 2, 0)
+        )
+        await self.run_triangle_test(
+            self.make_coord(center_x, center_y - size, 256),
+            self.make_coord(center_x - size//2, center_y, 256),
+            self.make_coord(center_x + size//2, center_y, 256),
+            self.make_meta(1, 2, 1)
+        )
+        
+        await self.flush(5, 5)
+        
+        self.plot_current_test("Diamond Pattern")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Diamond Pattern Grid", (80, 80))
+
+
+    async def test_checkerboard(self):
+        """Test diamond pattern made from 4 triangles across multiple tiles"""
+        cocotb.log.info("Running diamond pattern test")
+        self.clear_current_test_pixels()
+
+        start_x = 0
+        start_y = 0
+        
+        for column in range(40):
+            for row in range(30):
+                start_x = column * 16
+                start_y = row * 16
+
+                row_parity = row % 2 == 0
+                column_parity = column % 2 == 0
+
+                color = 1 if row_parity ^ column_parity else 2
+
+                # Top triangle
+                await self.run_triangle_test(
+                    self.make_coord(start_x, start_y, 256),
+                    self.make_coord(start_x, start_y + 15, 256),
+                    self.make_coord(start_x + 15, start_y, 256),
+                    self.make_meta(color, column, row)
+                )
+                await self.run_triangle_test(
+                    self.make_coord(start_x + 15, start_y + 15, 256),
+                    self.make_coord(start_x + 15, start_y, 256),
+                    self.make_coord(start_x, start_y + 15, 256),
+                    self.make_meta(color, column, row)
+                )
+        
+        await self.flush(5, 5)
+        
+        self.plot_current_test("Checkerboard Pattern")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Checkerboard Pattern Grid", (640, 480))
     
+
     async def flush(self, i: int, j: int):
         """Flush the pipeline"""
         await self.run_triangle_test(
@@ -493,6 +572,7 @@ class RasterTestbench:
         for _ in range(5):
             await RisingEdge(self.dut.clk_i)
     
+
     async def run_triangle_test(self, tv0: Coord3D, tv1: Coord3D, tv2: Coord3D, tmeta: Metadata):
         """Run a triangle test with the given vertices and metadata"""
         
@@ -580,7 +660,9 @@ async def test_raster(dut):
         
         await tb.reset()
         await tb.test_star_of_david()
-        
+
+        await tb.reset()
+        await tb.test_checkerboard()
         
         cocotb.log.info("All tests completed successfully!")
         
