@@ -1,7 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1749010050" />
-    <testcase name="test_pixel_processor" classname="pixel_test" file="/home/asic/workspace/final/cocotests/pixel_test/pixel_test.py" lineno="698" time="10.57426404953003" sim_time_ns="81180.001" ratio_time="7677.130117022946" />
-    <testcase name="test_individual_triangle_visualization" classname="pixel_test" file="/home/asic/workspace/final/cocotests/pixel_test/pixel_test.py" lineno="740" time="5.848012208938599" sim_time_ns="39240.00099999999" ratio_time="6709.972482619349" />
+    <property name="random_seed" value="1749070310" />
+    <testcase name="test_pixel_processor" classname="pixel_test" file="/home/asic/workspace/final/cocotests/pixel_test/pixel_test.py" lineno="794" time="1.8320837020874023" sim_time_ns="14240.001" ratio_time="7772.5711897199435" />
   </testsuite>
 </testsuites>

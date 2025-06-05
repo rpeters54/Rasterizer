@@ -467,17 +467,17 @@ class PixelTestbench:
         
         # First triangle
         await self.run_triangle_test(
-            self.make_coord(0, 0, 256),
-            self.make_coord(0, 15, 256),
+            self.make_coord(2, 0, 256),
+            self.make_coord(2, 15, 256),
             self.make_coord(15, 7, 0),
             self.make_meta(1, 0, 0)
         )
         
         # Second triangle
         await self.run_triangle_test(
-            self.make_coord(15, 0, 256),
+            self.make_coord(13, 0, 256),
             self.make_coord(0, 7, 0),
-            self.make_coord(15, 15, 256),
+            self.make_coord(13, 15, 256),
             self.make_meta(2, 0, 0)
         )
         
@@ -486,7 +486,41 @@ class PixelTestbench:
         # Plot the results
         self.plot_current_test("Star of David")
         self.create_pixel_grid_plot(self.current_test_pixels, "Star of David Grid View")
+
+
+    async def test_star_of_david_with_stalls(self):
+        """Test two interlaced triangles"""
+        cocotb.log.info("Running star of David test")
+        self.clear_current_test_pixels()
+        
+        # First triangle
+        await self.run_triangle_test_with_stalls(
+            self.make_coord(2, 0, 256),
+            self.make_coord(2, 15, 256),
+            self.make_coord(15, 7, 0),
+            self.make_meta(1, 0, 0)
+        )
+        
+        # Second triangle
+        await self.run_triangle_test_with_stalls(
+            self.make_coord(13, 0, 256),
+            self.make_coord(0, 7, 0),
+            self.make_coord(13, 15, 256),
+            self.make_meta(2, 0, 0)
+        )
+        
+        await self.run_triangle_test_with_stalls(
+            self.make_coord(0, 0, 128),
+            self.make_coord(0, 1, 128),
+            self.make_coord(1, 0, 128),
+            self.make_meta(0, 5, 5)
+        )
+        
+        # Plot the results
+        self.plot_current_test("Star of David with Stalls")
+        self.create_pixel_grid_plot(self.current_test_pixels, "Star of David with Stalls Grid View")
     
+
     async def flush(self, i: int, j: int):
         """Flush the pipeline"""
         await self.run_triangle_test(
@@ -556,6 +590,68 @@ class PixelTestbench:
         for _ in range(5):
             await RisingEdge(self.dut.clk_i)
     
+
+    async def run_triangle_test_with_stalls(self, tv0: Coord3D, tv1: Coord3D, tv2: Coord3D, tmeta: Metadata):
+        """Run a triangle test with the given vertices and metadata"""
+        
+        cocotb.log.info("-" * 50)
+        cocotb.log.info("Testing Points:")
+        cocotb.log.info(f"v0: x={tv0.x >> 4}, y={tv0.y >> 4}, z={tv0.z >> 4}")
+        cocotb.log.info(f"v1: x={tv1.x >> 4}, y={tv1.y >> 4}, z={tv1.z >> 4}")
+        cocotb.log.info(f"v2: x={tv2.x >> 4}, y={tv2.y >> 4}, z={tv2.z >> 4}")
+        cocotb.log.info(f"metadata: color={tmeta.color}, tile_x={tmeta.tile_x}, tile_y={tmeta.tile_y}")
+        cocotb.log.info("-" * 50)
+        
+        # Compute expected outputs
+        expected = self.simulate_expected_output(tv0, tv1, tv2, tmeta)
+        
+        # Wait until DUT is ready
+        while self.dut.rdy_in_o.value != 1:
+            await RisingEdge(self.dut.clk_i)
+        
+        # Set input values
+        self.dut.abs_pos_x_i.value = expected['abs_pos'].x
+        self.dut.abs_pos_y_i.value = expected['abs_pos'].y
+        self.dut.delta_0_x_i.value = expected['deltas'][0].x
+        self.dut.delta_0_y_i.value = expected['deltas'][0].y
+        self.dut.delta_1_x_i.value = expected['deltas'][1].x
+        self.dut.delta_1_y_i.value = expected['deltas'][1].y
+        self.dut.delta_2_x_i.value = expected['deltas'][2].x
+        self.dut.delta_2_y_i.value = expected['deltas'][2].y
+        self.dut.edge_0_i.value = expected['edges'][0]
+        self.dut.edge_1_i.value = expected['edges'][1]
+        self.dut.edge_2_i.value = expected['edges'][2]
+        self.dut.color_i.value = expected['metadata'].color
+        self.dut.tile_x_i.value = expected['metadata'].tile_x
+        self.dut.tile_y_i.value = expected['metadata'].tile_y
+        self.dut.dzdx_i.value = expected['dzdx']
+        self.dut.dzdy_i.value = expected['dzdy']
+        self.dut.z_i.value = expected['z_current']
+        
+        # Start transaction
+        await FallingEdge(self.dut.clk_i)
+        self.dut.vld_i.value = 1
+        self.dut.rdy_out_i.value = 1
+        await FallingEdge(self.dut.clk_i)
+        self.dut.vld_i.value = 0
+        await FallingEdge(self.dut.clk_i)
+        
+        # Wait for valid output if present
+        if hasattr(self.dut, 'vld_o') and self.dut.vld_o.value == 1:
+            i = 0
+            while self.dut.rdy_in_o.value != 1:
+                if i % 5 == 0:
+                    self.dut.rdy_out_i.value = 1 if self.dut.rdy_out_i.value == 0 else 0
+                i += 1
+                await RisingEdge(self.dut.clk_i)
+        
+        self.dut.rdy_out_i.value = 0
+        
+        # Wait a few cycles
+        for _ in range(5):
+            await RisingEdge(self.dut.clk_i)
+
+
     def make_coord(self, x: int, y: int, z: int) -> Coord3D:
         """Create a coordinate with fixed-point scaling"""
         return Coord3D(
@@ -728,8 +824,11 @@ async def test_pixel_processor(dut):
         
         await tb.reset()
         await tb.test_star_of_david()
+
+        await tb.reset()
+        await tb.test_star_of_david_with_stalls()
         
-        
+    
         cocotb.log.info("All tests completed successfully!")
         
     except Exception as e:

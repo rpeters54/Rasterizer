@@ -67,7 +67,8 @@ typedef enum logic [2:0] {
     FORWARDING_0 = 3'd1,
     FORWARDING_1 = 3'd2,
     FLUSHING     = 3'd3,
-    PROCESS      = 3'd4
+    PROCESS      = 3'd4,
+    STALL_OUT    = 3'd5
 } pixel_state_t;
 
 pixel_state_t present_state, next_state;
@@ -126,7 +127,9 @@ always_comb begin
             next_state = FLUSHING;
         end       
         FLUSHING : begin
-            if (addr_position < `TILE_AREA-1) begin
+            if (!rdy_out_i) begin
+                next_state = STALL_OUT;
+            end else if (addr_position < `TILE_AREA-1) begin
                 next_state = FLUSHING;
             end else begin
                 next_state = FORWARDING_0;
@@ -137,6 +140,13 @@ always_comb begin
                 next_state = PROCESS;
             end else begin
                 next_state = IDLE;
+            end
+        end
+        STALL_OUT : begin
+            if (!rdy_out_i) begin
+                next_state = STALL_OUT;
+            end else begin
+                next_state = FLUSHING;
             end
         end
         default: begin
@@ -184,10 +194,10 @@ always_comb begin
     dffram_write_sel              = ~dffram_read_sel;
     dffram_addr[dffram_read_sel]  = addr_position_plus_1[`TILE_AREA_BITS-1:1];
     dffram_addr[dffram_write_sel] = addr_position[`TILE_AREA_BITS-1:1];
-    dffram_en[dffram_read_sel]    = (present_state == PROCESS || present_state == FLUSHING || present_state == FORWARDING_0 || present_state == FORWARDING_1);
-    dffram_en[dffram_write_sel]   = (present_state == PROCESS || present_state == FLUSHING);
+    dffram_en[dffram_read_sel]    = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT || present_state == FORWARDING_0 || present_state == FORWARDING_1);
+    dffram_en[dffram_write_sel]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT);
     dffram_we[dffram_read_sel]    = 4'd0;
-    dffram_we[dffram_write_sel]   = {4{present_state == PROCESS || present_state == FLUSHING}};
+    dffram_we[dffram_write_sel]   = {4{present_state == PROCESS || (present_state == FLUSHING && next_state != STALL_OUT)}};
 end
 
 // z/color buffer writes
@@ -219,7 +229,7 @@ always_comb begin
                 dffram_data_in[dffram_write_sel] = dffram_data_out[dffram_write_sel];
             end
         end
-    end else if (present_state == FLUSHING) begin
+    end else if ((present_state == FLUSHING && next_state != STALL_OUT)) begin
         // reset the values in the ram
         dffram_data_in[dffram_write_sel] = {{1'b0, {2*`FX_TOTAL_BITS-`FX_TOTAL_BITS/2-1{1'b1}}}, {`COLOR_BITS{1'b0}}};
     end
@@ -333,7 +343,7 @@ always_ff @(posedge clk_i) begin
             end
             FLUSHING: begin
                 // Flush the buffers to output
-                if (rdy_out_i) begin
+                if (next_state != STALL_OUT) begin
 
                     // Update the absolute position
                     if ((addr_position & (`TILE_WIDTH-1)) == (`TILE_WIDTH-1)) begin
@@ -349,7 +359,16 @@ always_ff @(posedge clk_i) begin
                     end else begin
                         addr_position <= -1;
                     end
-                end 
+                end else begin
+                    // Revert the addr position so the value can be reread
+                    addr_position <= addr_position - 1;
+                end
+            end
+            STALL_OUT : begin
+                // Update the addr_position once we get back to flushing
+                if (next_state == FLUSHING) begin
+                    addr_position <= addr_position + 1;
+                end
             end
             default : begin
             end

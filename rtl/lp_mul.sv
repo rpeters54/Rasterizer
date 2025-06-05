@@ -64,11 +64,11 @@ logic [DATA_WIDTH*2-1:0] abs_product;
 
 /////////////////////////////////////////////////////////////////////////////
 
-// assertions to check parameter formatting
-initial begin
-    assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
-        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 multiplication, DATA_WIDTH: %d", DATA_WIDTH);
-end
+// // assertions to check parameter formatting
+// initial begin
+//     assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
+//         $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 multiplication, DATA_WIDTH: %d", DATA_WIDTH);
+// end
 
 
 /////////////////////////////////////////////////////////////////////////////

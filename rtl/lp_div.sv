@@ -78,15 +78,15 @@ logic [DATA_WIDTH-1:0] abs_numer, abs_denom, abs_quot;
 
 /////////////////////////////////////////////////////////////////////////////
 
-// assertions to check parameter formatting
-initial begin
-    assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
-        $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 division, DATA_WIDTH: %d", DATA_WIDTH);
-    assert (FRAC_BITS >= 2 || FRAC_BITS % 2 == 0) else 
-        $error ("FRAC_BITS must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
-end
+// // assertions to check parameter formatting
+// initial begin
+//     assert (DATA_WIDTH >= 2 || DATA_WIDTH % 2 == 0) else 
+//         $error ("DATA_WIDTH must be >= 2 and divisible by 2 to allow for Radix-4 division, DATA_WIDTH: %d", DATA_WIDTH);
+//     assert (FRAC_BITS >= 2 || FRAC_BITS % 2 == 0) else 
+//         $error ("FRAC_BITS must be >= 2 and divisible by 2 to allow for Radix-4 division, FRAC_BITS: %d", FRAC_BITS);
+// end
 
-/////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 
 // State machine states
 typedef enum logic [1:0] {

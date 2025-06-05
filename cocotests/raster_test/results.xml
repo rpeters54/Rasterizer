@@ -1,6 +1,7 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1749013711" />
-    <testcase name="test_raster" classname="raster_test" file="/home/asic/workspace/final/cocotests/raster_test/raster_test.py" lineno="630" time="429.254111289978" sim_time_ns="9279100.001" ratio_time="21616.79936649833" />
+    <property name="random_seed" value="1749070322" />
+    <testcase name="test_raster" classname="raster_test" file="/home/asic/workspace/final/cocotests/raster_test/raster_test.py" lineno="630" time="436.7007808685303" sim_time_ns="9362380.001" ratio_time="21438.889993234443" />
+    <testcase name="test_individual_triangle_visualization" classname="raster_test" file="/home/asic/workspace/final/cocotests/raster_test/raster_test.py" lineno="674" time="5.395191669464111" sim_time_ns="40400.001000000164" ratio_time="7488.14935133027" />
   </testsuite>
 </testsuites>
