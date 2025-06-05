@@ -1,26 +1,28 @@
 import pywavefront
 import numpy as np
 
-# Screen dimensions
-screen_width = 640
-screen_height = 480
-tile_width = 16
-tile_height = 16
-max_z = 1024
+assets_path = '../../assets/'
 
-assets_path = '../assets/'
 
-fb = np.empty((screen_height,screen_width,3),dtype=np.uint8)
+# FB = np.empty((screen_height,screen_width,3),dtype=np.uint8)
 
-def main():
+
+def create_tile_bin():
+    SCREEN_WIDTH = 640
+    SCREEN_HEIGHT = 480
+    TILE_WIDTH = 16
+    TILE_HEIGHT = 16
+    Z_MAX = 1024
+
+    CAM_POS = np.array([0, 0, 10])
+    CAM_TARGET = np.array([0, 0, 0])
+    CAM_UP = np.array([0, 1, 0])
+    
     scene = pywavefront.Wavefront(assets_path + 'monkey.obj', collect_faces=True)
     object_vertices = get_vertices(scene)
 
     # Camera setup
-    camera_position = np.array([0, 0, 10])
-    camera_target = np.array([0, 0, 0])
-    up_vector = np.array([0, 1, 0])
-    view_matrix = create_view_matrix(camera_position, camera_target, up_vector)
+    view_matrix = create_view_matrix(CAM_POS, CAM_TARGET, CAM_UP)
     # print(view_matrix)
     
     ortho_left = -2
@@ -32,21 +34,10 @@ def main():
     projection_matrix = create_orthographic_projection_matrix(ortho_left, ortho_right, ortho_bottom, ortho_top, ortho_near, ortho_far)
 
     # Convert to screen space
-    vertex_screen = object_to_screen(object_vertices, view_matrix, projection_matrix, screen_width, screen_height, max_z)
-    # print(vertex_screen)
-    # vertex_screen_fx = np.array([[float_to_12_4(c) for c in v] for v in vertex_screen])
-    # print(vertex_screen_fx)
+    vertex_screen = object_to_screen(object_vertices, view_matrix, projection_matrix, SCREEN_WIDTH, SCREEN_HEIGHT, Z_MAX)
     
-    tile_bins = bin_vertices(vertex_screen, screen_width, screen_height, tile_width, tile_height)
-    # for x in range(tile_bins.shape[0]):
-    #     for y in range(tile_bins.shape[1]):
-    #         if len(tile_bins[x,y]) == 0:
-    #             continue
-    #         else:
-    #             print(f"x: {x}, y: {y}")
-    #             for f in tile_bins[x,y]:
-    #                 print(f)
-    # print(tile_bins)
+    tile_bin = bin_vertices(vertex_screen, SCREEN_WIDTH, SCREEN_HEIGHT, TILE_WIDTH, TILE_HEIGHT)
+    return tile_bin
 
 def generate_img(filename, framebuffer):
     height, width, channels = framebuffer.shape
@@ -127,8 +118,8 @@ def create_orthographic_projection_matrix(left, right, bottom, top, near, far):
 def object_to_screen(vertices_object, view_matrix, projection_matrix, screen_width, screen_height, z_max):
     world_matrix = np.identity(4) # Identity world matrix
 
-    vertex_world = world_matrix @ vertices_object
-    vertex_view = view_matrix @ vertex_world
+    vertex_world = world_matrix     @ vertices_object
+    vertex_view = view_matrix       @ vertex_world
     vertex_clip = projection_matrix @ vertex_view
     
     # NDC to VGA space
@@ -150,18 +141,18 @@ def bin_vertices(vertex_screen, screen_width, screen_height, tile_width, tile_he
     num_tiles_x = int(screen_width/tile_width)
     num_tiles_y = int(screen_height/tile_height)
     
-    tile_bins = np.empty((num_tiles_x, num_tiles_y), dtype=object)
-    for i in range(num_tiles_x):
-        for j in range(num_tiles_y):
-            tile_bins[i, j] = []
+    tile_bins = np.empty((num_tiles_y, num_tiles_x), dtype=object)
+    for j in range(num_tiles_y):
+        for i in range(num_tiles_x):
+            tile_bins[j, i] = []
 
     for i in range(0,vertex_screen.shape[0],3):
         f = vertex_screen[i:i+3]
         min_tile_x, max_tile_x, min_tile_y, max_tile_y = get_tiles(f.T, screen_width, screen_height, tile_width, tile_height)
         
-        for x in range(min_tile_x, max_tile_x+1):
-            for y in range(min_tile_y, max_tile_y+1):
-                tile_bins[x,y].append(np.array([[float_to_12_4(c) for c in v] for v in f]))
+        for y in range(min_tile_y, max_tile_y+1):
+            for x in range(min_tile_x, max_tile_x+1):
+                tile_bins[y,x].append(np.array([[float_to_12_4(c) for c in v] for v in f]))
     
     return tile_bins
 
