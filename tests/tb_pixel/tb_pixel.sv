@@ -1,5 +1,7 @@
 `timescale 1ns/1ps
 `include "raster_defines.svh"
+`include "../../rtl/struct_defines.svh"
+
 
 module tb_pixel;
 

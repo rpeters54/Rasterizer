@@ -1,13 +1,13 @@
 {
     "DESIGN_NAME": "raster",
     "VERILOG_FILES": "dir::rtl/*.sv",
-    "CLOCK_PERIOD": 20,
+    "CLOCK_PERIOD": 25,
     "CLOCK_PORT": "clk_i",
     "FP_PDN_SKIPTRIM": true,
     "RUN_POST_GRT_RESIZER_TIMING": true,
     
     "FP_SIZING": "absolute",
-    "DIE_AREA": [0, 0, 2000, 2000],
+    "DIE_AREA": [0, 0, 1750, 1000],
 
     "VDD_NETS": [
         "VPWR"
@@ -19,13 +19,13 @@
     "MACROS": {
         "DFFRAM128x32": {
             "instances": {
-                "ram0": {
+                "ppu.ram0": {
                     "location": [100, 100],
                     "orientation": "N"
                 },
-                "ram1": {
-                    "location": [100, 900],
-                    "orientation": "N"
+                "ppu.ram1": {
+                    "location": [1096, 100],
+                    "orientation": "FN"
                 }
             },
             "gds": [
@@ -55,8 +55,8 @@
     },
 
     "PDN_MACRO_CONNECTIONS": [
-        "ram0 VPWR VGND VPWR VGND",
-        "ram1 VPWR VGND VPWR VGND"
+        "ppu.ram0 VPWR VGND VPWR VGND",
+        "ppu.ram1 VPWR VGND VPWR VGND"
     ],
 
     "FP_PDN_VOFFSET": 5,
@@ -67,14 +67,6 @@
     "FP_PDN_HSPACING": 15.5,
     "FP_PDN_VPITCH": 100,
     "FP_PDN_HPITCH": 100,
-
-    "FP_PDN_CORE_RING": true,
-    "FP_PDN_CORE_RING_VWIDTH": 3.1,
-    "FP_PDN_CORE_RING_HWIDTH": 3.1,
-    "FP_PDN_CORE_RING_VOFFSET": 12.45,
-    "FP_PDN_CORE_RING_HOFFSET": 12.45,
-    "FP_PDN_CORE_RING_VSPACING": 1.7,
-    "FP_PDN_CORE_RING_HSPACING": 1.7,
 
     "PL_RESIZER_ALLOW_SETUP_VIOS": true,
     "GRT_RESIZER_ALLOW_SETUP_VIOS": true,

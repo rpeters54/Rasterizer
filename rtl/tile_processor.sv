@@ -109,6 +109,28 @@ module tile_processor(
 
 ////////////////////////////////////////////////////////////////////
 
+// structs needed to be defined locally because of openlane
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+    logic signed [`FX_TOTAL_BITS-1:0] z;
+} coord_3d_t;
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+} coord_2d_t;
+
+typedef struct packed {
+    logic [`COLOR_BITS-1:0]         color;
+    logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
+    logic [`TILE_ROWS_BITS-1:0]     tile_y;  
+} metadata_t;
+
+
+////////////////////////////////////////////////////////////////////
+
 // multi-cycle multipliers
 
 logic                               fw_mul_vld_i     [0:1];
@@ -394,17 +416,17 @@ always_comb begin
         sext_f12p4_f24p8(delta_0.x, temp_fw_mul_right_i[1]);
 
         // place edge 0 and 1 related computation values in the multiplier
-        fw_mul_left_i  = '{temp_fw_mul_left_i[0], temp_fw_mul_left_i[1]};
-        fw_mul_right_i = '{temp_fw_mul_right_i[0], temp_fw_mul_right_i[1]};
-        fw_mul_vld_i   = '{1, 1};
+        fw_mul_left_i[0]  = temp_fw_mul_left_i[0];  fw_mul_left_i[1]  = temp_fw_mul_left_i[1];
+        fw_mul_right_i[0] = temp_fw_mul_right_i[0]; fw_mul_right_i[1] = temp_fw_mul_right_i[1];
+        fw_mul_vld_i[0]   = 1;                      fw_mul_vld_i[1]   = 1;
 
-        hw_mul_left_i  = '{(abs_pos.x - v1.x), (abs_pos.y - v1.y)};
-        hw_mul_right_i = '{delta_1.y, delta_1.x};
-        hw_mul_vld_i   = '{1, 1};
+        hw_mul_left_i[0]  = (abs_pos.x - v1.x); hw_mul_left_i[1]  = (abs_pos.y - v1.y);
+        hw_mul_right_i[0] = delta_1.y;          hw_mul_right_i[1] = delta_1.x;
+        hw_mul_vld_i[0]   = 1;                  hw_mul_vld_i[1]   = 1;
 
-        div_numer_i = '{0, 0};
-        div_denom_i = '{0, 0};
-        div_vld_i   = '{0, 0};
+        div_numer_i[0] = 0; div_numer_i[1] = 0;
+        div_denom_i[0] = 0; div_denom_i[1] = 0;
+        div_vld_i[0]   = 0; div_vld_i[1]   = 0;
     end else if (present_state == COMPUTE_EDGE_0_EDGE_1 && next_state == COMPUTE_EDGE_2_COEFF_A 
         || prev_state == COMPUTE_EDGE_0_EDGE_1 && present_state == COMPUTE_EDGE_2_COEFF_A) begin
 
@@ -414,17 +436,17 @@ always_comb begin
         sext_f12p4_f24p8(delta_2.x, temp_fw_mul_right_i[1]);
 
         // place edge 2 and coeff A related computation values in the multiplier
-        fw_mul_left_i  = '{temp_fw_mul_left_i[0], temp_fw_mul_left_i[1]};
-        fw_mul_right_i = '{temp_fw_mul_right_i[0], temp_fw_mul_right_i[1]};
-        fw_mul_vld_i   = '{1, 1};
+        fw_mul_left_i[0]  = temp_fw_mul_left_i[0];  fw_mul_left_i[1]  = temp_fw_mul_left_i[1];
+        fw_mul_right_i[0] = temp_fw_mul_right_i[0]; fw_mul_right_i[1] = temp_fw_mul_right_i[1];
+        fw_mul_vld_i[0]   = 1;                      fw_mul_vld_i[1]   = 1;
 
-        hw_mul_left_i  = '{delta_0.y, delta_0.z};
-        hw_mul_right_i = '{delta_2.z, delta_2.y};
-        hw_mul_vld_i   = '{1, 1};
+        hw_mul_left_i[0]  = delta_0.y; hw_mul_left_i[1]  = delta_0.z;
+        hw_mul_right_i[0] = delta_2.z; hw_mul_right_i[1] = delta_2.y;
+        hw_mul_vld_i[0]   = 1;         hw_mul_vld_i[1]   = 1;
 
-        div_numer_i = '{0, 0};
-        div_denom_i = '{0, 0};
-        div_vld_i   = '{0, 0};
+        div_numer_i[0] = 0; div_numer_i[1] = 0;
+        div_denom_i[0] = 0; div_denom_i[1] = 0;
+        div_vld_i[0]   = 0; div_vld_i[1]   = 0;
     end else if (present_state == COMPUTE_EDGE_2_COEFF_A && next_state == COMPUTE_COEFF_B_COEFF_C 
         || prev_state == COMPUTE_EDGE_2_COEFF_A && present_state == COMPUTE_COEFF_B_COEFF_C) begin
 
@@ -434,32 +456,32 @@ always_comb begin
         sext_f12p4_f24p8(delta_2.z, temp_fw_mul_right_i[1]);
 
         // place coeff B and C related computation values in the multiplier
-        fw_mul_left_i  = '{temp_fw_mul_left_i[0], temp_fw_mul_left_i[1]};
-        fw_mul_right_i = '{temp_fw_mul_right_i[0], temp_fw_mul_right_i[1]};
-        fw_mul_vld_i   = '{1, 1};
+        fw_mul_left_i[0]  = temp_fw_mul_left_i[0];  fw_mul_left_i[1]  = temp_fw_mul_left_i[1];
+        fw_mul_right_i[0] = temp_fw_mul_right_i[0]; fw_mul_right_i[1] = temp_fw_mul_right_i[1];
+        fw_mul_vld_i[0]   = 1;                      fw_mul_vld_i[1]   = 1;
 
-        hw_mul_left_i  = '{delta_0.x, delta_0.y};
-        hw_mul_right_i = '{delta_2.y, delta_2.x};
-        hw_mul_vld_i   = '{1, 1};
+        hw_mul_left_i[0]  = delta_0.x; hw_mul_left_i[1]  = delta_0.y;
+        hw_mul_right_i[0] = delta_2.y; hw_mul_right_i[1] = delta_2.x;
+        hw_mul_vld_i[0]   = 1;         hw_mul_vld_i[1]   = 1;
 
-        div_numer_i = '{0, 0};
-        div_denom_i = '{0, 0};
-        div_vld_i   = '{0, 0};
+        div_numer_i[0] = 0; div_numer_i[1] = 0;
+        div_denom_i[0] = 0; div_denom_i[1] = 0;
+        div_vld_i[0]   = 0; div_vld_i[1]   = 0;
     end else if (present_state == FORWARDNG_2 && next_state == COMPUTE_PARTIALS 
         || prev_state == FORWARDNG_2 && present_state == COMPUTE_PARTIALS) begin
         
         // when moving to computing the partial diffs, place coefficients in dividers
-        fw_mul_left_i  = '{0, 0};
-        fw_mul_right_i = '{0, 0};
-        fw_mul_vld_i   = '{0, 0};
+        fw_mul_left_i[0]  = 0;  fw_mul_left_i[1]  = 0;
+        fw_mul_right_i[0] = 0;  fw_mul_right_i[1] = 0;
+        fw_mul_vld_i[0]   = 0;  fw_mul_vld_i[1]   = 0;
 
-        hw_mul_left_i  = '{0, 0};
-        hw_mul_right_i = '{0, 0};
-        hw_mul_vld_i   = '{0, 0};
+        hw_mul_left_i[0]  = 0; hw_mul_left_i[1]  = 0;
+        hw_mul_right_i[0] = 0; hw_mul_right_i[1] = 0;
+        hw_mul_vld_i[0]   = 0; hw_mul_vld_i[1]   = 0;
 
-        div_numer_i = '{-coeff_A, -coeff_B};
-        div_denom_i = '{coeff_C, coeff_C};
-        div_vld_i   = '{1, 1};
+        div_numer_i[0] = -coeff_A; div_numer_i[1] = -coeff_B;
+        div_denom_i[0] = coeff_C;  div_denom_i[1] = coeff_C;
+        div_vld_i[0]   = 1;        div_vld_i[1]   = 1;
     end else if (present_state == FORWARDNG_3 && next_state == COMPUTE_Z 
         || prev_state == FORWARDNG_3 && present_state == COMPUTE_Z) begin
 
@@ -467,30 +489,30 @@ always_comb begin
         sext_f12p4_f24p8((v0.y - abs_pos.y), temp_fw_mul_left_i[1]);
 
         // if transition to compute z, place z related values into multipliers
-        fw_mul_left_i  = '{temp_fw_mul_left_i[0], temp_fw_mul_left_i[1]};
-        fw_mul_right_i = '{dzdx, dzdy};
-        fw_mul_vld_i   = '{1, 1};
+        fw_mul_left_i[0]  = temp_fw_mul_left_i[0];  fw_mul_left_i[1]  = temp_fw_mul_left_i[1];
+        fw_mul_right_i[0] = dzdx;                   fw_mul_right_i[1] = dzdy;
+        fw_mul_vld_i[0]   = 1;                      fw_mul_vld_i[1]   = 1;
 
-        hw_mul_left_i  = '{0, 0};
-        hw_mul_right_i = '{0, 0};
-        hw_mul_vld_i   = '{0, 0};
+        hw_mul_left_i[0]  = 0; hw_mul_left_i[1]  = 0;
+        hw_mul_right_i[0] = 0; hw_mul_right_i[1] = 0;
+        hw_mul_vld_i[0]   = 0; hw_mul_vld_i[1]   = 0;
 
-        div_numer_i = '{0, 0};
-        div_denom_i = '{0, 0};
-        div_vld_i   = '{0, 0};
+        div_numer_i[0] = 0; div_numer_i[1] = 0;
+        div_denom_i[0] = 0; div_denom_i[1] = 0;
+        div_vld_i[0]   = 0; div_vld_i[1]   = 0;
     end else begin
         // Default signal values
-        fw_mul_left_i  = '{0, 0};
-        fw_mul_right_i = '{0, 0};
-        fw_mul_vld_i   = '{0, 0};
+        fw_mul_left_i[0]  = 0;  fw_mul_left_i[1]  = 0;
+        fw_mul_right_i[0] = 0;  fw_mul_right_i[1] = 0;
+        fw_mul_vld_i[0]   = 0;  fw_mul_vld_i[1]   = 0;
 
-        hw_mul_left_i  = '{0, 0};
-        hw_mul_right_i = '{0, 0};
-        hw_mul_vld_i   = '{0, 0};
+        hw_mul_left_i[0]  = 0; hw_mul_left_i[1]  = 0;
+        hw_mul_right_i[0] = 0; hw_mul_right_i[1] = 0;
+        hw_mul_vld_i[0]   = 0; hw_mul_vld_i[1]   = 0;
 
-        div_numer_i = '{0, 0};
-        div_denom_i = '{0, 0};
-        div_vld_i   = '{0, 0};
+        div_numer_i[0] = 0; div_numer_i[1] = 0;
+        div_denom_i[0] = 0; div_denom_i[1] = 0;
+        div_vld_i[0]   = 0; div_vld_i[1]   = 0;
     end
 end
 

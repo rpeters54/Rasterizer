@@ -34,6 +34,27 @@ module pixel_processor(
 
 ////////////////////////////////////////////////////////////////////
 
+// structs needed to be defined locally because of openlane
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+    logic signed [`FX_TOTAL_BITS-1:0] z;
+} coord_3d_t;
+
+typedef struct packed {
+    logic signed [`FX_TOTAL_BITS-1:0] x;
+    logic signed [`FX_TOTAL_BITS-1:0] y;
+} coord_2d_t;
+
+typedef struct packed {
+    logic [`COLOR_BITS-1:0]         color;
+    logic [`TILE_COLUMNS_BITS-1:0]  tile_x;
+    logic [`TILE_ROWS_BITS-1:0]     tile_y;  
+} metadata_t;
+
+////////////////////////////////////////////////////////////////////
+
 // dffram modules for color and z buffer
 logic [`FX_TOTAL_BITS*2-1:0] dffram_data_out [0:1];
 logic                        dffram_en       [0:1];
@@ -190,14 +211,25 @@ always_comb begin
     logic [`TILE_AREA_BITS-1:0] addr_position_plus_1;
     addr_position_plus_1 = addr_position + 1;
 
-    dffram_read_sel               = addr_position[0];
-    dffram_write_sel              = ~dffram_read_sel;
-    dffram_addr[dffram_read_sel]  = addr_position_plus_1[`TILE_AREA_BITS-1:1];
-    dffram_addr[dffram_write_sel] = addr_position[`TILE_AREA_BITS-1:1];
-    dffram_en[dffram_read_sel]    = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT || present_state == FORWARDING_0 || present_state == FORWARDING_1);
-    dffram_en[dffram_write_sel]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT);
-    dffram_we[dffram_read_sel]    = 4'd0;
-    dffram_we[dffram_write_sel]   = {4{present_state == PROCESS || (present_state == FLUSHING && next_state != STALL_OUT)}};
+    dffram_read_sel  = addr_position[0];
+    dffram_write_sel = ~dffram_read_sel;
+    
+    // Explicit conditional assignments instead of variable array indexing
+    if (dffram_read_sel) begin
+        dffram_addr[1] = addr_position_plus_1[`TILE_AREA_BITS-1:1];
+        dffram_addr[0] = addr_position[`TILE_AREA_BITS-1:1];
+        dffram_en[1]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT || present_state == FORWARDING_0 || present_state == FORWARDING_1);
+        dffram_en[0]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT);
+        dffram_we[1]   = 4'd0;
+        dffram_we[0]   = {4{present_state == PROCESS || (present_state == FLUSHING && next_state != STALL_OUT)}};
+    end else begin
+        dffram_addr[0] = addr_position_plus_1[`TILE_AREA_BITS-1:1];
+        dffram_addr[1] = addr_position[`TILE_AREA_BITS-1:1];
+        dffram_en[0]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT || present_state == FORWARDING_0 || present_state == FORWARDING_1);
+        dffram_en[1]   = (present_state == PROCESS || present_state == FLUSHING || present_state == STALL_OUT);
+        dffram_we[0]   = 4'd0;
+        dffram_we[1]   = {4{present_state == PROCESS || (present_state == FLUSHING && next_state != STALL_OUT)}};
+    end
 end
 
 // z/color buffer writes
@@ -208,7 +240,7 @@ always_comb begin
     extract_expand_z(dffram_data_out[dffram_write_sel], mem_z);
     compact_z(z, compacted_z);
 
-    dffram_data_in = '{0, 0};
+    dffram_data_in[0] = 0; dffram_data_in[1] = 0;
 
     if (present_state == PROCESS) begin
 
