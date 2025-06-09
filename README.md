@@ -9,9 +9,9 @@ A simple IC that determines the shading of pixels on a 640x480 VGA monitor with 
 To minimize the memory footprint, polygons are rasterized in groups of 16x16 screen tiles.
 This requires the host processor to send polygons repeatedly for each region they overlap.
 
-<figure>
+<figure align="center">
   <img style="display:block;margin:auto" src="docs/chip.png" alt="Alt text">
-  <figcaption align="center">Final IC Layout</figcaption>
+  <figcaption>Final IC Layout</figcaption>
 </figure>
 
 ## Components
@@ -27,9 +27,9 @@ Key Features:
 - Computes the intial value of the edge function E(x,y) at the top-left corner of the tile
 - Computes the partial derivatives dz/dx and dz/dy, as well as the value of z at the top-left corner of the tile
 
-<figure>
+<figure align="center">
   <img style="display:block;margin:auto" src="docs/tile-rendering.webp" alt="Alt text">
-  <figcaption align="center">Diagram of our Tile-based Rasterization Process</figcaption>
+  <figcaption>Diagram of our Tile-based Rasterization Process</figcaption>
 </figure>
 
 ### Pixel Processor
@@ -75,9 +75,9 @@ Run CocoTB Tests contained in the /cocotests directory to visualize polygons usi
 Intermediate files created while testing can be cleaned with the command:
 > make clean
 
-<figure>
+<figure align="center">
   <img style="display:block;margin:auto;width:70%" src="docs/monkey.png" alt="Alt text">
-  <figcaption align="center">Output of Rasterizing the Blender Monkey. Produced by CocoTB Tests.</figcaption>
+  <figcaption>Output of Rasterizing the Blender Monkey. Produced by CocoTB Tests.</figcaption>
 </figure>
 
 ## Openlane Chip Synth
